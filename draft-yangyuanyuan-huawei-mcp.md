@@ -64,8 +64,23 @@ informative:
 
 在当今复杂的网络环境中，跨厂商网络设备的统一管理面临着模型多样、配置复杂等诸多挑战。传统网管协议如Netconf和Restconf在管理过程中难以统一，效率低下。MCP（Model Context Protocol）技术结合了LLM技术，为跨厂商网络设备的批量管理带来了新的思路和解决方案，有望显著提升网络管理的效率和灵活性。
 
+# Terminology & Notation Conventions
 
-# Conventions and Definitions
+The following terms are used throughout this document:
+
+## MCP
+
+* Host
+* Client
+* CLI
+* MCP Server
+* MCP protocol
+* LLM
+* NCE equipment
+* 自然语言指令
+* Netconf
+* Restconf
+* SNMP
 
 ## Netconf协议
 
@@ -89,7 +104,7 @@ MCP技术通过引入自然语言指令、LLM等先进技术，实现了对跨�
 
 ## 提升协议兼容性
 
- MCP通过统一的数据建模和转换机制，能够适配不同厂商对Netconf和Restconf协议的实现差异。它可以将用户的自然语言指令转化为符合不同厂商设备要求的Netconf或Restconf操作，从而在不改变设备原有协议支持的前提下，实现跨厂商设备的统一管理。
+MCP通过统一的数据建模和转换机制，能够适配不同厂商对Netconf和Restconf协议的实现差异。它可以将用户的自然语言指令转化为符合不同厂商设备要求的Netconf或Restconf操作，从而在不改变设备原有协议支持的前提下，实现跨厂商设备的统一管理。
 
 ## 简化操作流程
 
@@ -98,6 +113,10 @@ MCP技术通过引入自然语言指令、LLM等先进技术，实现了对跨�
 ## 增强批量管理能力
 
 MCP能够对多个不同厂商的设备同时执行批量操作，通过优化的任务调度和并发控制机制，充分利用Netconf和Restconf协议的优势，提高管理效率。例如，在进行设备配置升级时，MCP可以同时向多个设备发送经过转换和优化的Netconf配置指令，确保操作的一致性和高效性。
+
+# 解决方案
+
+# 价值
 
 # MCP工作流程图及差异分析
 
@@ -108,6 +127,12 @@ MCP能够对多个不同厂商的设备同时执行批量操作，通过优化�
 ## 流程图二
 
 与流程图一的主要流程相似，区别在于MCP server与网络设备的交互方式。流程图二中MCP server通过CLI（命令行界面）与网络设备进行交互，而不是Netconf和SNMP协议。这种差异体现了MCP在与网络设备交互时的灵活性，可根据不同设备的特点和管理需求选择合适的交互方式。
+
+## 性能
+
+## 开销
+
+## 安全性
 
 # 五、实施计划
 
@@ -123,10 +148,24 @@ MCP能够对多个不同厂商的设备同时执行批量操作，通过优化�
 
 在测试通过后，选择部分试点网络进行MCP系统的部署，观察其在实际生产环境中的运行情况，收集用户反馈并及时进行优化调整。根据试点效果，逐步推广到整个网络环境，实现跨厂商网络设备的高效批量管理。
 
+### MCP工作流程图及差异分析
+
+#### 流程图一
+
+用户发出自然语言指令，经运维控制台接收后传递给MCP client，再由LLM进行处理，通过调用工具传递给MCP server，最后MCP server通过Netconf和SNMP协议与网络设备交互。
+
+#### 流程图二
+
+与流程图一的主要流程相似，区别在于MCP server与网络设备的交互方式。流程图二中MCP server通过CLI（命令行界面）与网络设备进行交互，而不是Netconf和SNMP协议。这种差异体现了MCP在与网络设备交互时的灵活性，可根据不同设备的特点和管理需求选择合适的交互方式。
+
+#### 性能
+
+#### 开销
+
+#### 安全性
 
 # Security Considerations
 
-TODO Security
 
 
 # IANA Considerations
