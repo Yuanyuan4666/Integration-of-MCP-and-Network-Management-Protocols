@@ -79,6 +79,7 @@ Table of Contents
      2.2.  Netconf协议
      2.3.  Restconf协议
    3.  MCP对传统网管协议的影响
+     3.1.  提升协议兼容性
    4.  Security Considerations
    5.  IANA Considerations
    Acknowledgments
@@ -154,6 +155,11 @@ Table of Contents
 
    MCP技术通过引入自然语言指令、LLM等先进技术，实现了对跨厂商网络设备的智能化、自动化批量管理。用户通过自然语言指令向系统下达管理任务，
    系统通过一系列处理将指令转化为对网络设备的具体操作。
+
+3.1.  提升协议兼容性
+
+   MCP通过统一的数据建模和转换机制，能够适配不同厂商对Netconf和Restconf协议的实现差异。它可以将用户的自然语言指令转化为符合
+   不同厂商设备要求的Netconf或Restconf操作，从而在不改变设备原有协议支持的前提下，实现跨厂商设备的统一管理。
 
 4.  Security Considerations
 
