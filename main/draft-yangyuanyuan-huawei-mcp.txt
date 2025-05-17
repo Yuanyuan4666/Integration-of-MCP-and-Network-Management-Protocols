@@ -13,7 +13,8 @@ Expires: 18 November 2025
 
 Abstract
 
-   TODO Abstract
+   在当今复杂的网络环境中，跨厂商网络设备的统一管理面临诸多挑战。传统网管协议如Netconf和Restconf在管理过程中存在一定局限性。M
+   CP（[具体含义需补充]）技术的出现，为跨厂商网络设备的批量管理带来了新的思路和解决方案，有望显著提升网络管理的效率和灵活性。
 
 About This Document
 
