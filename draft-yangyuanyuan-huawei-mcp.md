@@ -22,7 +22,7 @@
 title: "MCP"
 category: info
 
-docname: draft-yangyuanyuan-huawei-mcp.md
+docname: draft-yangyuanyuan-huawei-mcp
 submissiontype: IETF 
 number:
 date:
