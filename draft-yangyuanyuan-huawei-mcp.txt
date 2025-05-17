@@ -78,8 +78,9 @@ Table of Contents
      2.1.  MCP
      2.2.  Netconf协议
      2.3.  Restconf协议
-   3.  Security Considerations
-   4.  IANA Considerations
+   3.  MCP对传统网管协议的影响
+   4.  Security Considerations
+   5.  IANA Considerations
    Acknowledgments
    Author's Address
 
@@ -149,11 +150,16 @@ Table of Contents
 
    *  功能支持不完整：部分厂商仅实现基础RESTCONF功能，缺少高级操作（如事务回滚）。
 
-3.  Security Considerations
+3.  MCP对传统网管协议的影响
+
+   MCP技术通过引入自然语言指令、LLM等先进技术，实现了对跨厂商网络设备的智能化、自动化批量管理。用户通过自然语言指令向系统下达管理任务，
+   系统通过一系列处理将指令转化为对网络设备的具体操作。
+
+4.  Security Considerations
 
    TODO Security
 
-4.  IANA Considerations
+5.  IANA Considerations
 
    This document has no IANA actions.
 
