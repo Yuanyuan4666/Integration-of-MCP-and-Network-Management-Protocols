@@ -117,11 +117,41 @@ MCP能够对多个不同厂商的设备同时执行批量操作，通过优化�
 
 # 解决方案
 
-TODO solution
+dasofhdafadufhpaufdsiau
 
-# 应用价值
+# value
 
-TODO value
+ashdoudsahfduos
+
+# plan
+
+## Preliminary Research
+
+Conduct a detailed survey of the existing multi-vendor network device environment, analyzing the support status of NETCONF and RESTCONF protocols across different vendors' equipment, as well as identifying data model variations. This will provide foundational data for subsequent MCP adaptation and development.
+
+## Development and Test
+
+Based on the research findings, develop MCP system modules compatible with NETCONF and RESTCONF protocols to achieve accurate conversion from natural language commands to protocol operations. Conduct comprehensive testing in a lab environment to validate MCP’s functionality and performance in multi-vendor device batch management, with a focus on protocol compatibility and operational accuracy.
+
+## Deployment
+
+After successful testing, deploy the MCP system in selected pilot networks to observe its performance in real production environments. Collect user feedback and promptly implement optimizations. Based on the pilot results, gradually expand the deployment across the entire network environment to achieve efficient batch management of multi-vendor network devices.
+
+### MCP Workflow Diagram and Gap Analysis
+
+#### Diagram 1
+
+The user issues a natural language command, which is received by the operations and maintenance (O&M) console and forwarded to the MCP client. The LLM (Large Language Model) then processes the command, invokes the appropriate tools to pass instructions to the MCP server, which finally interacts with network devices using NETCONF and SNMP protocols.
+
+#### Diagram 2
+
+The main workflow is similar to Diagram 1, with the key difference being the interaction method between the MCP server and network devices. In Diagram 2, the MCP server interacts with network devices via CLI (Command Line Interface) instead of NETCONF and SNMP protocols. This variation demonstrates MCP's flexibility in device interaction, allowing selection of the most appropriate communication method based on each device's characteristics and management requirements.
+
+#### Gap Analysis
+
+- Performance
+- Cose
+- Security
 
 # Security Considerations
 
@@ -134,6 +164,11 @@ This document has no IANA actions.
 
 
 --- back
+
+# Conclusion
+
+MCP技术为跨厂商网络设备的批量管理提供了创新的解决方案，通过对传统网管协议Netconf和Restconf的优化和扩展，能够有效解决跨厂商设备管理中的难题，提升网络管理的效率和质量。随着技术的不断发展和完善，MCP有望在网络管理领域得到更广泛的应用。
+
 
 # Acknowledgments
 {:numbered="false"}
