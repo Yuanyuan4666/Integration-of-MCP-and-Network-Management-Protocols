@@ -74,26 +74,53 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-   2.  Conventions and Definitions
+   2.  Terminology & Notation Conventions
+     2.1.  MCP
    3.  Security Considerations
    4.  IANA Considerations
-   5.  Normative References
    Acknowledgments
    Author's Address
 
 1.  Introduction
 
-   在当今复杂的网络环境中，跨厂商网络设备的统一管理面临着模型多样、配置复杂等诸多挑战。传统网管协议如Netconf和Restconf在管理过
-   程中难以统一，效率低下。MCP（Model Context
-   Protocol）技术结合了LLM技术，为跨厂商网络设备的批量管理带来了新的思路和解决方案，有望显著提升网络管理的效率和灵活性。
+   In today's complex network environment, the unified management of
+   multi-vendor network devices faces numerous challenges, such as
+   diverse models and complex configurations.  Traditional network
+   management protocols like Netconf and Restconf are difficult to
+   standardize during the management process, resulting in low
+   efficiency.  MCP (Model Context Protocol) technology, combined with
+   LLM technology, brings new ideas and solutions for the batch
+   management of multi-vendor network devices, and is expected to
+   significantly improve the efficiency and flexibility of network
+   management.
 
-2.  Conventions and Definitions
+2.  Terminology & Notation Conventions
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
+   The following terms are used throughout this document:
+
+2.1.  MCP
+
+   *  Host
+
+   *  Client
+
+   *  CLI
+
+   *  MCP Server
+
+   *  MCP protocol
+
+   *  LLM
+
+   *  NCE equipment
+
+   *  自然语言指令
+
+   *  Netconf
+
+   *  Restconf
+
+   *  SNMP
 
 3.  Security Considerations
 
@@ -102,17 +129,6 @@ Table of Contents
 4.  IANA Considerations
 
    This document has no IANA actions.
-
-5.  Normative References
-
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/rfc/rfc2119>.
-
-   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
-              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
 Acknowledgments
 
