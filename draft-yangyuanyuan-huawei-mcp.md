@@ -115,11 +115,11 @@ MCP通过统一的数据建模和转换机制，能够适配不同厂商对Netco
 
 MCP能够对多个不同厂商的设备同时执行批量操作，通过优化的任务调度和并发控制机制，充分利用Netconf和Restconf协议的优势，提高管理效率。例如，在进行设备配置升级时，MCP可以同时向多个设备发送经过转换和优化的Netconf配置指令，确保操作的一致性和高效性。
 
-# Security Considerations
+# 解决方案
 
 TODO solution
 
-# Security Considerations
+# 应用价值
 
 TODO value
 
