@@ -55,7 +55,7 @@ informative:
 
 --- abstract
 
-在当今复杂的网络环境中，跨厂商网络设备的统一管理面临着模型多样、配置复杂等诸多挑战。传统网管协议如Netconf和Restconf在管理过程中难以统一，效率低下。MCP（Model Context Protocol）技术结合了LLM技术，为跨厂商网络设备的批量管理带来了新的思路和解决方案，有望显著提升网络管理的效率和灵活性。
+In today's complex network environment, the unified management of multi-vendor network devices faces numerous challenges, such as diverse models and complex configurations. Traditional network management protocols like Netconf and Restconf are difficult to standardize during the management process, resulting in low efficiency. MCP (Model Context Protocol) technology, combined with LLM technology, brings new ideas and solutions for the batch management of multi-vendor network devices, and is expected to significantly improve the efficiency and flexibility of network management.
 
 
 --- middle
@@ -84,11 +84,5 @@ This document has no IANA actions.
 
 # Acknowledgments
 {:numbered="false"}
-
-TODO acknowledge.
-
-MCP技术为跨厂商网络设备的批量管理提供了创新的解决方案，通过对传统网管协议Netconf和Restconf的优化和扩展，能够有效解决跨厂商设备管理中的难题，提升网络管理的效率和质量。随着技术的不断发展和完善，MCP有望在网络管理领域得到更广泛的应用。
-
-# Acknowledgments
 
 TODO acknowledge.
