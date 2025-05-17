@@ -80,7 +80,9 @@ Table of Contents
      2.3.  Restconf协议
    3.  MCP对传统网管协议的影响
    4.  Security Considerations
-   5.  IANA Considerations
+   5.  Security Considerations
+   6.  Security Considerations
+   7.  IANA Considerations
    Acknowledgments
    Author's Address
 
@@ -172,9 +174,17 @@ Table of Contents
 
 4.  Security Considerations
 
+   TODO solution
+
+5.  Security Considerations
+
+   TODO value
+
+6.  Security Considerations
+
    TODO Security
 
-5.  IANA Considerations
+7.  IANA Considerations
 
    This document has no IANA actions.
 
