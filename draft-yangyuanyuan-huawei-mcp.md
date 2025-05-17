@@ -141,6 +141,5 @@ This document has no IANA actions.
 MCP技术为跨厂商网络设备的批量管理提供了创新的解决方案，通过对传统网管协议Netconf和Restconf的优化和扩展，能够有效解决跨厂商设备管理中的难题，提升网络管理的效率和质量。随着技术的不断发展和完善，MCP有望在网络管理领域得到更广泛的应用。
 
 # Acknowledgments
-{:numbered="false"}
 
 TODO acknowledge.
