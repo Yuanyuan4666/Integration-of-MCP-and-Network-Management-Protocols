@@ -1296,6 +1296,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
       </ul>
 <p id="section-3-5">MCP通过统一的数据建模和转换机制，能够适配不同厂商对Netconf和Restconf协议的实现差异。它可以将用户的自然语言指令转化为符合不同厂商设备要求的Netconf或Restconf操作，从而在不改变设备原有协议支持的前提下，实现跨厂商设备的统一管理。<a href="#section-3-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-6.1">
+          <p id="section-3-6.1.1">增强批量管理能力<a href="#section-3-6.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-3-7">MCP能够对多个不同厂商的设备同时执行批量操作，通过优化的任务调度和并发控制机制，充分利用Netconf和Restconf协议的优势，提高管理效率。例如，在进行设备配置升级时，MCP可以同时向多个设备发送经过转换和优化的Netconf配置指令，确保操作的一致性和高效性。<a href="#section-3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
