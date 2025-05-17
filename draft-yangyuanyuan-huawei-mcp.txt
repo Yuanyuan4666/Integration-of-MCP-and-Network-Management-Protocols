@@ -8,12 +8,21 @@ Intended status: Informational                               17 May 2025
 Expires: 18 November 2025
 
 
-                           TODO - Your title
-                  draft-todo-yourname-protocol-latest
+                                  MCP
+                  draft-yangyuanyuan-huawei-mcp-latest
 
 Abstract
 
-   TODO Abstract
+   In today's complex network environment, the unified management of
+   multi-vendor network devices faces numerous challenges, such as
+   diverse models and complex configurations.  Traditional network
+   management protocols like Netconf and Restconf are difficult to
+   standardize during the management process, resulting in low
+   efficiency.  MCP (Model Context Protocol) technology, combined with
+   LLM technology, brings new ideas and solutions for the batch
+   management of multi-vendor network devices, and is expected to
+   significantly improve the efficiency and flexibility of network
+   management.
 
 About This Document
 
@@ -21,8 +30,8 @@ About This Document
 
    The latest revision of this draft can be found at
    https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-todo-yourname-
-   protocol/.
+   be found at https://datatracker.ietf.org/doc/draft-yangyuanyuan-
+   huawei-mcp/.
 
    Discussion of this document takes place on the WG Working Group
    mailing list (mailto:WG@example.com), which is archived at
