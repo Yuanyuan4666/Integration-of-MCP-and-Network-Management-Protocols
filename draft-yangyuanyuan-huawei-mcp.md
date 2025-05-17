@@ -19,7 +19,7 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "MCP”
+title: "MCP"
 category: info
 
 docname: draft-yangyuanyuan-huawei-mcp-latest
