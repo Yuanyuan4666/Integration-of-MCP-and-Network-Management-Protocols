@@ -2,8 +2,8 @@
 
 
 
-WG Working Group                                              Y. N. Here
-Internet-Draft                                    Your Organization Here
+HuaWei                                                       Y. Yuanyuan
+Internet-Draft                                                    HuaWei
 Intended status: Informational                               18 May 2025
 Expires: 19 November 2025
 
@@ -16,8 +16,11 @@ Abstract
    With the emergence of various LLM models, enterprises face different
    frameworks or systems during deployment.  For each LLM model, a
    corresponding toolchain needs to be developed, causing significant
-   inconvenience.  This paper introduces MCP, a technology that can
-   effectively manage different LLM models.
+   inconvenience.  This document introduces MCP(Model Context Protocol),
+   a technology that can effectively manage different LLM models.
+   Further, this document discusses the application of MCP in cross-
+   vendor network equipment batch management and proposes corresponding
+   deployment strategies.
 
 About This Document
 
@@ -28,8 +31,8 @@ About This Document
    be found at https://datatracker.ietf.org/doc/draft-yangyuanyuan-
    huawei-mcp/.
 
-   Discussion of this document takes place on the WG Working Group
-   mailing list (mailto:WG@example.com), which is archived at
+   Discussion of this document takes place on the HW Working Group
+   mailing list (mailto:yangyuanyuan55@huawei.com), which is archived at
    https://example.com/WG.
 
    Source for this draft and an issue tracker can be found at
@@ -84,10 +87,10 @@ Table of Contents
        5.3.1.  MCP within Local NCE
        5.3.2.  MCP in Remote Device
        5.3.3.  Gap Analysis
-   6.  Security Considerations
-   7.  IANA Considerations
+   6.  IANA Considerations
+   7.  Security Considerations
    Appendix A.  Conclusion
-   Acknowledgments
+   Appendix B.  Reference
    Author's Address
 
 1.  Introduction
@@ -106,7 +109,7 @@ Table of Contents
    draft analyzes the market demand in the scenario of cross-vendor
    network equipment batch management, the advantages of MCP, and the
    deployment plan, while also evaluating the pros and cons of two
-   deployment models.
+   deployment strategies.
 
 2.  Terminology & Notation Conventions
 
@@ -114,32 +117,32 @@ Table of Contents
 
 2.1.  MCP
 
-   *  Host: The entity initiating the LLM request
+   *  *Host*: The entity initiating the LLM request
 
-   *  Client: A built-in module within a host, specifically designed for
-      interaction with the MCP server.
+   *  *Client*: A built-in module within a host, specifically designed
+      for interaction with the MCP server.
 
-   *  CLI: Command Line Interface
+   *  *CLI*: Command Line Interface
 
-   *  MCP Server: A dedicated server that interacts with MCP clients and
-      provides MCP services.
+   *  *MCP Server*: A dedicated server that interacts with MCP clients
+      and provides MCP services.
 
-   *  MCP protocol: The whole MCP framework
+   *  *MCP protocol*: The whole MCP framework
 
 2.2.  Others
 
-   *  LLM: Large Language Model
+   *  *LLM*: Large Language Model
 
-   *  Netconf: Network Configuration Protocol
+   *  *Netconf*: Network Configuration Protocol
 
-   *  Restconf: RESTful Network Configuration Protocol
+   *  *Restconf*: RESTful Network Configuration Protocol
 
-   *  SNMP: Simple Network Management Protocol
+   *  *SNMP*: Simple Network Management Protocol
 
 3.  Market Demand
 
-   In the scenario of batch management of cross-vendor network devices,
-   a large number of devices from different vendors need to be uniformly
+   In the scenario of cross-vendor network equipment batch management, a
+   large number of devices from different vendors need to be uniformly
    managed, which can lead to the following issues:
 
 3.1.  Inconsistent YANG Model Support
@@ -167,7 +170,7 @@ Table of Contents
 
    The LLM model, with its ability to comprehend diverse complex
    requirements and deliver corresponding functionalities, is well-
-   suited for sophisticated batch network management scenarios,
+   suited for cross-vendor network equipment batch management,
    effectively addressing the aforementioned challenges.  Therefore, we
    have introduced the MCP protocol to standardize the management of
    different LLM models, serving as the foundation for building an
@@ -227,10 +230,9 @@ Table of Contents
 
    The user issues a natural language command, which is received by the
    operations and maintenance (O&M) console and forwarded to the MCP
-   client.  The LLM (Large Language Model) then processes the command,
-   invokes the appropriate tools to pass instructions to the MCP server,
-   which finally interacts with network devices using NETCONF and SNMP
-   protocols.
+   client.  The LLM then processes the command, invokes the appropriate
+   tools to pass instructions to the MCP server, which finally interacts
+   with network devices using NETCONF and SNMP protocols.
 
 5.3.2.  MCP in Remote Device
 
@@ -238,8 +240,7 @@ Table of Contents
    difference being the integration method of the MCP server.  In this
    solution, the MCP server is integrated in the network devices.
    Within the network device, the MCP server interacts with network
-   devices via CLI (Command Line Interface) instead of NETCONF and SNMP
-   protocols.
+   devices via CLI instead of NETCONF and SNMP protocols.
 
 5.3.3.  Gap Analysis
 
@@ -258,13 +259,22 @@ Table of Contents
       integration, resulting in significantly higher deployment and
       operational expenditures.
 
-6.  Security Considerations
-
-   TODO Security
-
-7.  IANA Considerations
+6.  IANA Considerations
 
    This document has no IANA actions.
+
+7.  Security Considerations
+
+   This document analyzes the application of MCP in sophisticated batch
+   network management and proposes two deployment schemes, which may
+   introduce certain security risks.  Since MCP's internal instructions
+   are invisible to users and only accessible to the LLM model,
+   attackers could potentially inject malicious instructions, leading to
+   information leakage or workflow errors.
+
+   To address such security risks, measures like version locking
+   mechanisms, enhanced visibility, and context isolation can provide a
+   certain level of protection.
 
 Appendix A.  Conclusion
 
@@ -276,12 +286,10 @@ Appendix A.  Conclusion
    quality.  As the technology matures, MCP is positioned for widespread
    adoption in network management domains.
 
-Acknowledgments
-
-   TODO acknowledge.
+Appendix B.  Reference
 
 Author's Address
 
-   Your Name Here
-   Your Organization Here
-   Email: your.email@example.com
+   Yang Yuanyuan
+   HuaWei
+   Email: yangyuanyuan55@huawei.com
