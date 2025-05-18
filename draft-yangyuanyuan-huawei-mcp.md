@@ -29,24 +29,23 @@ date:
 consensus: true
 v: 3
 area: AREA
-workgroup: WG Working Group
+workgroup: HuaWei
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - large language model
+ - model context protocol
 venue:
-  group: WG
+  group: HW
   type: Working Group
-  mail: WG@example.com
+  mail: yangyuanyuan55@huawei.com
   arch: https://example.com/WG
   github: USER/REPO
   latest: https://example.com/LATEST
 
 author:
  -
-    fullname: Your Name Here
-    organization: Your Organization Here
-    email: your.email@example.com
+    fullname: Yang Yuanyuan
+    organization: HuaWei
+    email: yangyuanyuan55@huawei.com
 
 normative:
 
@@ -55,8 +54,7 @@ informative:
 
 --- abstract
 
-With the emergence of various LLM models, enterprises face different frameworks or systems during deployment. For each LLM model, a corresponding toolchain needs to be developed, causing significant inconvenience. This paper introduces MCP, a technology that can effectively manage different LLM models.
-
+With the emergence of various LLM models, enterprises face different frameworks or systems during deployment. For each LLM model, a corresponding toolchain needs to be developed, causing significant inconvenience. This document introduces MCP(Model Context Protocol), a technology that can effectively manage different LLM models. Further, this document discusses the application of MCP in cross-vendor network equipment batch management and proposes corresponding deployment strategies.
 
 --- middle
 
@@ -64,7 +62,7 @@ With the emergence of various LLM models, enterprises face different frameworks 
 
 With the emergence of various LLM models, enterprises face different frameworks and systems during deployment, such as ChatGPT's plugin mechanism and agent frameworks. Adapting to these mechanisms requires developing distinct toolchains, which increases development costs. Additionally, LLMs rely on contextual data, but various agents retrieve local and remote data in a fragmented manner, lacking a unified management approach.
 
-In this context, MCP provides a universal, open standard that offers LLMs a standardized way to transmit contextual information, simplifying the integration of AI models with data and tools. This draft analyzes the market demand in the scenario of cross-vendor network equipment batch management, the advantages of MCP, and the deployment plan, while also evaluating the pros and cons of two deployment models.
+In this context, MCP provides a universal, open standard that offers LLMs a standardized way to transmit contextual information, simplifying the integration of AI models with data and tools. This draft analyzes the market demand in the scenario of cross-vendor network equipment batch management, the advantages of MCP, and the deployment plan, while also evaluating the pros and cons of two deployment strategies.
 
 # Terminology & Notation Conventions
 
@@ -72,22 +70,22 @@ The following terms are used throughout this document:
 
 ## MCP
 
-- Host: The entity initiating the LLM request
-- Client: A built-in module within a host, specifically designed for interaction with the MCP server.
-- CLI: Command Line Interface
-- MCP Server: A dedicated server that interacts with MCP clients and provides MCP services.
-- MCP protocol: The whole MCP framework
+- **Host**: The entity initiating the LLM request
+- **Client**: A built-in module within a host, specifically designed for interaction with the MCP server.
+- **CLI**: Command Line Interface
+- **MCP Server**: A dedicated server that interacts with MCP clients and provides MCP services.
+- **MCP protocol**: The whole MCP framework
 
 ## Others
 
-- LLM: Large Language Model
-- Netconf: Network Configuration Protocol
-- Restconf: RESTful Network Configuration Protocol
-- SNMP: Simple Network Management Protocol
+- **LLM**: Large Language Model
+- **Netconf**: Network Configuration Protocol
+- **Restconf**: RESTful Network Configuration Protocol
+- **SNMP**: Simple Network Management Protocol
 
 # Market Demand
 
-In the scenario of batch management of cross-vendor network devices, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues:
+In the scenario of cross-vendor network equipment batch management, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues:
 
 ## Inconsistent YANG Model Support
 
@@ -106,7 +104,7 @@ When managing cross-vendor devices in bulk, NETCONF can be slower than RESTCONF 
 
 # Solution
 
-The LLM model, with its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for sophisticated batch network management scenarios, effectively addressing the aforementioned challenges. Therefore, we have introduced the MCP protocol to standardize the management of different LLM models, serving as the foundation for building an intelligent network control platform.
+The LLM model, with its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for cross-vendor network equipment batch management, effectively addressing the aforementioned challenges. Therefore, we have introduced the MCP protocol to standardize the management of different LLM models, serving as the foundation for building an intelligent network control platform.
 
 To be more specific, there are three parts:
 
@@ -136,25 +134,28 @@ Based on these considerations, we propose two solutions:
 
 ### MCP within Local NCE
 
-The user issues a natural language command, which is received by the operations and maintenance (O&M) console and forwarded to the MCP client. The LLM (Large Language Model) then processes the command, invokes the appropriate tools to pass instructions to the MCP server, which finally interacts with network devices using NETCONF and SNMP protocols.
+The user issues a natural language command, which is received by the operations and maintenance (O&M) console and forwarded to the MCP client. The LLM then processes the command, invokes the appropriate tools to pass instructions to the MCP server, which finally interacts with network devices using NETCONF and SNMP protocols.
 
 ### MCP in Remote Device
 
-The main workflow is similar to *MCP within Local NCE*, with the key difference being the integration method of the MCP server. In this solution, the MCP server is integrated in the network devices. Within the network device, the MCP server interacts with network devices via CLI (Command Line Interface) instead of NETCONF and SNMP protocols.
+The main workflow is similar to *MCP within Local NCE*, with the key difference being the integration method of the MCP server. In this solution, the MCP server is integrated in the network devices. Within the network device, the MCP server interacts with network devices via CLI instead of NETCONF and SNMP protocols.
 
 ### Gap Analysis
 
 - **Scalability**: While *MCP within Local NCE* offers compatibility through NETCONF incorporation, its tightly-coupled dual-protocol architecture creates technical debt for scaling. The MCP-Remote Device approach's protocol homogeneity ensures architectural consistency, future-proofing the solution for iterative enhancements.
 - **Cost**: The *MCP within Local NCE* implementation enables localized adaptation while preserving NETCONF/SNMP protocol compliance for downstream device communication, fully capitalizing on existing NETCONF investments. Comparatively, the MCP deployed in Remote Devices architecture operates without NETCONF integration, resulting in significantly higher deployment and operational expenditures.
 
-# Security Considerations
-
-TODO Security
-
-
 # IANA Considerations
 
 This document has no IANA actions.
+
+# Security Considerations
+
+This document analyzes the application of MCP in sophisticated batch network management and proposes two deployment schemes, which may introduce certain security risks. Since MCP's internal instructions are invisible to users and only accessible to the LLM model, attackers could potentially inject malicious instructions, leading to information leakage or workflow errors.
+
+To address such security risks, measures like version locking mechanisms, enhanced visibility, and context isolation can provide a certain level of protection.
+
+
 
 --- back
 
@@ -163,7 +164,4 @@ This document has no IANA actions.
 MCP Technology delivers an innovative solution for cross-vendor network device management at scale. By enhancing and extending traditional network management protocols (NETCONF/RESTCONF), it effectively addresses multi-vendor device management challenges while significantly improving network administration efficiency and service quality. As the technology matures, MCP is positioned for widespread adoption in network management domains.
 
 
-# Acknowledgments
-{:numbered="false"}
-
-TODO acknowledge.
+# Reference
