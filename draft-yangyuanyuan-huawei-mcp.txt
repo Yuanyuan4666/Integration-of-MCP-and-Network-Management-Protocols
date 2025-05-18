@@ -89,8 +89,8 @@ Table of Contents
        5.3.3.  Gap Analysis
    6.  IANA Considerations
    7.  Security Considerations
-   Appendix A.  Conclusion
-   Appendix B.  Reference
+   8.  Conclusion
+   Appendix A.  Reference
    Author's Address
 
 1.  Introduction
@@ -106,7 +106,7 @@ Table of Contents
    In this context, MCP provides a universal, open standard that offers
    LLMs a standardized way to transmit contextual information,
    simplifying the integration of AI models with data and tools.  This
-   draft analyzes the market demand in the scenario of cross-vendor
+   document analyzes the market demand in the scenario of cross-vendor
    network equipment batch management, the advantages of MCP, and the
    deployment plan, while also evaluating the pros and cons of two
    deployment strategies.
@@ -185,7 +185,7 @@ Table of Contents
       instructions into executable tool operations.
 
    *  Achieving the "language/text command -> automated execution"
-      closed loop.
+      closure.
 
 5.  Deployment Plan
 
@@ -276,7 +276,7 @@ Table of Contents
    mechanisms, enhanced visibility, and context isolation can provide a
    certain level of protection.
 
-Appendix A.  Conclusion
+8.  Conclusion
 
    MCP Technology delivers an innovative solution for cross-vendor
    network device management at scale.  By enhancing and extending
@@ -286,7 +286,7 @@ Appendix A.  Conclusion
    quality.  As the technology matures, MCP is positioned for widespread
    adoption in network management domains.
 
-Appendix B.  Reference
+Appendix A.  Reference
 
 Author's Address
 
