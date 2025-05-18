@@ -62,7 +62,7 @@ With the emergence of various LLM models, enterprises face different frameworks 
 
 With the emergence of various LLM models, enterprises face different frameworks and systems during deployment, such as ChatGPT's plugin mechanism and agent frameworks. Adapting to these mechanisms requires developing distinct toolchains, which increases development costs. Additionally, LLMs rely on contextual data, but various agents retrieve local and remote data in a fragmented manner, lacking a unified management approach.
 
-In this context, MCP provides a universal, open standard that offers LLMs a standardized way to transmit contextual information, simplifying the integration of AI models with data and tools. This draft analyzes the market demand in the scenario of cross-vendor network equipment batch management, the advantages of MCP, and the deployment plan, while also evaluating the pros and cons of two deployment strategies.
+In this context, MCP provides a universal, open standard that offers LLMs a standardized way to transmit contextual information, simplifying the integration of AI models with data and tools. This document analyzes the market demand in the scenario of cross-vendor network equipment batch management, the advantages of MCP, and the deployment plan, while also evaluating the pros and cons of two deployment strategies.
 
 # Terminology & Notation Conventions
 
@@ -110,7 +110,7 @@ To be more specific, there are three parts:
 
 - Encapsulating diverse device operations into discrete MCP tools for host-side calling.
 - Exposing LLM model APIs that transform natural language instructions into executable tool operations.
-- Achieving the "language/text command -> automated execution" closed loop.
+- Achieving the "language/text command -> automated execution" closure.
 
 # Deployment Plan
 
@@ -155,13 +155,10 @@ This document analyzes the application of MCP in sophisticated batch network man
 
 To address such security risks, measures like version locking mechanisms, enhanced visibility, and context isolation can provide a certain level of protection.
 
-
-
---- back
-
 # Conclusion
 
 MCP Technology delivers an innovative solution for cross-vendor network device management at scale. By enhancing and extending traditional network management protocols (NETCONF/RESTCONF), it effectively addresses multi-vendor device management challenges while significantly improving network administration efficiency and service quality. As the technology matures, MCP is positioned for widespread adoption in network management domains.
 
+--- back
 
 # Reference
