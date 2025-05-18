@@ -31,7 +31,7 @@ About This Document
    be found at https://datatracker.ietf.org/doc/draft-yangyuanyuan-
    huawei-mcp/.
 
-   Discussion of this document takes place on the HW Working Group
+   Discussion of this document takes place on the HuaWei Working Group
    mailing list (mailto:yangyuanyuan55@huawei.com), which is archived at
    https://example.com/WG.
 
