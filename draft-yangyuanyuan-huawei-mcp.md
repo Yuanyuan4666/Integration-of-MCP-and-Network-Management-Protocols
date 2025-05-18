@@ -34,7 +34,7 @@ keyword:
  - large language model
  - model context protocol
 venue:
-  group: HW
+  group: HuaWei
   type: Working Group
   mail: yangyuanyuan55@huawei.com
   arch: https://example.com/WG
