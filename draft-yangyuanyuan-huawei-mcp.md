@@ -55,15 +55,16 @@ informative:
 
 --- abstract
 
-In today's complex network environment, the unified management of multi-vendor network devices faces numerous challenges, such as diverse models and complex configurations. Traditional network management protocols like Netconf and Restconf are difficult to standardize during the management process, resulting in low efficiency. MCP (Model Context Protocol) technology, combined with LLM technology, brings new ideas and solutions for the batch management of multi-vendor network devices, and is expected to significantly improve the efficiency and flexibility of network management.
+With the emergence of various LLM models, enterprises face different frameworks or systems during deployment. For each LLM model, a corresponding toolchain needs to be developed, causing significant inconvenience. This paper introduces MCP, a technology that can effectively manage different LLM models.
 
 
 --- middle
 
 # Introduction
 
-In today's complex network environment, the unified management of multi-vendor network devices faces numerous challenges, such as diverse models and complex configurations. Traditional network management protocols like Netconf and Restconf are difficult to standardize during the management process, resulting in low efficiency. MCP (Model Context Protocol) technology, combined with LLM technology, brings new ideas and solutions for the batch management of multi-vendor network devices, and is expected to significantly improve the efficiency and flexibility of network management.
+With the emergence of various LLM models, enterprises face different frameworks and systems during deployment, such as ChatGPT's plugin mechanism and agent frameworks. Adapting to these mechanisms requires developing distinct toolchains, which increases development costs. Additionally, LLMs rely on contextual data, but various agents retrieve local and remote data in a fragmented manner, lacking a unified management approach.
 
+In this context, MCP provides a universal, open standard that offers LLMs a standardized way to transmit contextual information, simplifying the integration of AI models with data and tools. This draft analyzes the market demand in the scenario of cross-vendor network equipment batch management, the advantages of MCP, and the deployment plan, while also evaluating the pros and cons of two deployment models.
 
 # Terminology & Notation Conventions
 
@@ -71,59 +72,49 @@ The following terms are used throughout this document:
 
 ## MCP
 
-- Host
-- Client
-- CLI
-- MCP Server
-- MCP protocol
-- LLM
-- NCE equipment
-- 自然语言指令
-- Netconf
-- Restconf
-- SNMP
+- Host: The entity initiating the LLM request
+- Client: A built-in module within a host, specifically designed for interaction with the MCP server.
+- CLI: Command Line Interface
+- MCP Server: A dedicated server that interacts with MCP clients and provides MCP services.
+- MCP protocol: The whole MCP framework
 
-## Netconf协议
+## Others
 
-NETCONF（Network Configuration Protocol）是一种基于XML的网络配置管理协议，由IETF标准化（RFC 6241），旨在提供更灵活、可靠的设备配置方式。尽管它在一定程度上实现了设备管理的标准化，但在实际应用中，尤其是在**跨厂商设备管理**时，面临着**数据模型不统一、配置操作复杂、厂商实现差异**等问题。具体来说：
+- LLM: Large Language Model
+- Netconf: Network Configuration Protocol
+- Restconf: RESTful Network Configuration Protocol
+- SNMP: Simple Network Management Protocol
 
-- 数据模型（YANG）不统一：不同厂商的YANG节点路径和接口命名不同，尽管可以采用**OpenConfig YANG模型**，但并非所有厂商完全支持。
-- 配置操作复杂：NETCONF的XML配置较CLI更冗长，且不同厂商的YANG模型可能导致相同功能的XML结构不同。
-- 厂商实现差异：厂商存在私有扩展，高级功能需要额外模块等等。
+# Market Demand
 
-## Restconf协议
+In the scenario of batch management of cross-vendor network devices, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues:
 
-RESTCONF是NETCONF的现代化演进版本，采用 **HTTP/HTTPS + JSON** 进行数据交互，更适合现代自动化运维工具（如Ansible、Python脚本、Postman等）。尽管它比NETCONF更轻量、更易用，但在**跨厂商设备管理**中，仍然面临 **数据模型不一致、接口实现差异、功能支持不统一** 等问题，导致批量管理时难以高效整合。
+## Inconsistent YANG Model Support
 
-- 数据模型（YANG）不统一，相同功能的API路径和JSON结构不同
-- 接口实现差异：部分高级功能（如Telemetry）需额外License，部分操作（如BGP策略）需使用私有API扩展
-- 功能支持不完整：部分厂商仅实现基础RESTCONF功能，缺少高级操作（如事务回滚）。
+Different vendors implement different YANG models (standard or proprietary), leading to:
 
-# MCP对传统网管协议的影响
+- Lack of uniform data structures for configuration/retrieval.
+- Requirement for vendor-specific adaptations in automation scripts.
 
-MCP技术通过引入自然语言指令、LLM等先进技术，实现了对跨厂商网络设备的智能化、自动化批量管理。用户通过自然语言指令向系统下达管理任务，系统通过一系列处理将指令转化为对网络设备的具体操作。
+## Partial or Non-Standard RESTCONF/NETCONF Implementations
 
-- 提升协议兼容性
+Some vendors only partially support standard YANG models, and proprietary extensions may break interoperability.
 
-MCP通过统一的数据建模和转换机制，能够适配不同厂商对Netconf和Restconf协议的实现差异。它可以将用户的自然语言指令转化为符合不同厂商设备要求的Netconf或Restconf操作，从而在不改变设备原有协议支持的前提下，实现跨厂商设备的统一管理。
+## Performance & Scalability Issues
 
-- 简化操作流程
+When managing cross-vendor devices in bulk, NETCONF can be slower than RESTCONF (HTTP/HTTPS) for large-scale operations, while RESTCONF lacks native batching support. Additionally, both protocols may suffer from timeouts when handling many devices simultaneously.
 
-MCP通过统一的数据建模和转换机制，能够适配不同厂商对Netconf和Restconf协议的实现差异。它可以将用户的自然语言指令转化为符合不同厂商设备要求的Netconf或Restconf操作，从而在不改变设备原有协议支持的前提下，实现跨厂商设备的统一管理。
+# Solution
 
-- 增强批量管理能力
+The LLM model, with its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for sophisticated batch network management scenarios, effectively addressing the aforementioned challenges. Therefore, we have introduced the MCP protocol to standardize the management of different LLM models, serving as the foundation for building an intelligent network control platform.
 
-MCP能够对多个不同厂商的设备同时执行批量操作，通过优化的任务调度和并发控制机制，充分利用Netconf和Restconf协议的优势，提高管理效率。例如，在进行设备配置升级时，MCP可以同时向多个设备发送经过转换和优化的Netconf配置指令，确保操作的一致性和高效性。
+To be more specific, there are three parts:
 
-# 解决方案
+- Encapsulating diverse device operations into discrete MCP tools for host-side calling.
+- Exposing LLM model APIs that transform natural language instructions into executable tool operations.
+- Achieving the "language/text command -> automated execution" closed loop.
 
-dasofhdafadufhpaufdsiau
-
-# value
-
-ashdoudsahfduos
-
-# plan
+# Deployment Plan
 
 ## Preliminary Research
 
@@ -135,23 +126,26 @@ Based on the research findings, develop MCP system modules compatible with NETCO
 
 ## Deployment
 
-After successful testing, deploy the MCP system in selected pilot networks to observe its performance in real production environments. Collect user feedback and promptly implement optimizations. Based on the pilot results, gradually expand the deployment across the entire network environment to achieve efficient batch management of multi-vendor network devices.
+During the deployment phase, there are three key aspects to consider:
 
-### MCP Workflow Diagram and Gap Analysis
+- **Function-Specific MCP Servers**: Deploy dedicated MCP servers tailored to different functions and domains, such as network log analysis, device configuration management, energy consumption management, and security operations.
+- **Secure and Scalable Architecture**: Implement stringent security measures to ensure only authorized AI models and users can access and control network resources via MCP.
+- **Automated Workflows**: Leverage MCP to enable LLM-coordinated multi-tool automation, supporting real-time monitoring, diagnostics, and fault remediation.
 
-#### Diagram 1
+Based on these considerations, we propose two solutions:
+
+### MCP within Local NCE
 
 The user issues a natural language command, which is received by the operations and maintenance (O&M) console and forwarded to the MCP client. The LLM (Large Language Model) then processes the command, invokes the appropriate tools to pass instructions to the MCP server, which finally interacts with network devices using NETCONF and SNMP protocols.
 
-#### Diagram 2
+### MCP in Remote Device
 
-The main workflow is similar to Diagram 1, with the key difference being the interaction method between the MCP server and network devices. In Diagram 2, the MCP server interacts with network devices via CLI (Command Line Interface) instead of NETCONF and SNMP protocols. This variation demonstrates MCP's flexibility in device interaction, allowing selection of the most appropriate communication method based on each device's characteristics and management requirements.
+The main workflow is similar to *MCP within Local NCE*, with the key difference being the integration method of the MCP server. In this solution, the MCP server is integrated in the network devices. Within the network device, the MCP server interacts with network devices via CLI (Command Line Interface) instead of NETCONF and SNMP protocols.
 
-#### Gap Analysis
+### Gap Analysis
 
-- Performance
-- Cose
-- Security
+- **Scalability**: While *MCP within Local NCE* offers compatibility through NETCONF incorporation, its tightly-coupled dual-protocol architecture creates technical debt for scaling. The MCP-Remote Device approach's protocol homogeneity ensures architectural consistency, future-proofing the solution for iterative enhancements.
+- **Cost**: The *MCP within Local NCE* implementation enables localized adaptation while preserving NETCONF/SNMP protocol compliance for downstream device communication, fully capitalizing on existing NETCONF investments. Comparatively, the MCP deployed in Remote Devices architecture operates without NETCONF integration, resulting in significantly higher deployment and operational expenditures.
 
 # Security Considerations
 
@@ -162,12 +156,11 @@ TODO Security
 
 This document has no IANA actions.
 
-
 --- back
 
 # Conclusion
 
-MCP技术为跨厂商网络设备的批量管理提供了创新的解决方案，通过对传统网管协议Netconf和Restconf的优化和扩展，能够有效解决跨厂商设备管理中的难题，提升网络管理的效率和质量。随着技术的不断发展和完善，MCP有望在网络管理领域得到更广泛的应用。
+MCP Technology delivers an innovative solution for cross-vendor network device management at scale. By enhancing and extending traditional network management protocols (NETCONF/RESTCONF), it effectively addresses multi-vendor device management challenges while significantly improving network administration efficiency and service quality. As the technology matures, MCP is positioned for widespread adoption in network management domains.
 
 
 # Acknowledgments
