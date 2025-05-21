@@ -4,11 +4,11 @@
 
 HuaWei                                                       Y. Yuanyuan
 Internet-Draft                                                    HuaWei
-Intended status: Informational                               18 May 2025
-Expires: 19 November 2025
+Intended status: Informational                               21 May 2025
+Expires: 22 November 2025
 
 
-                                  MCP
+                                  MCP2
                   draft-yangyuanyuan-huawei-mcp-latest
 
 Abstract
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 November 2025.
+   This Internet-Draft will expire on 22 November 2025.
 
 Copyright Notice
 
@@ -71,12 +71,12 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Introduction
+   1.  Introductio
    2.  Terminology & Notation Conventions
      2.1.  MCP
      2.2.  Others
    3.  Market Demand
-     3.1.  Inconsistent YANG Model Support
+     3.1.  Inconsistent YANG Model Suppor
      3.2.  Partial or Non-Standard RESTCONF/NETCONF Implementations
      3.3.  Performance & Scalability Issues
    4.  Solution
@@ -93,7 +93,7 @@ Table of Contents
    Appendix A.  Reference
    Author's Address
 
-1.  Introduction
+1.  Introductio
 
    With the emergence of various LLM models, enterprises face different
    frameworks and systems during deployment, such as ChatGPT's plugin
@@ -145,7 +145,7 @@ Table of Contents
    large number of devices from different vendors need to be uniformly
    managed, which can lead to the following issues:
 
-3.1.  Inconsistent YANG Model Support
+3.1.  Inconsistent YANG Model Suppor
 
    Different vendors implement different YANG models (standard or
    proprietary), leading to:
