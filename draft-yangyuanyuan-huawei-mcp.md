@@ -19,7 +19,7 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "MC0P1"
+title: "MCP"
 category: info
 
 docname: draft-yangyuanyuan-huawei-mcp-latest
@@ -58,7 +58,7 @@ With the emergence of various LLM models, enterprises face different frameworks 
 
 --- middle
 
-# Introductio
+# Introduction
 
 With the emergence of various LLM models, enterprises face different frameworks and systems during deployment, such as ChatGPT's plugin mechanism and agent frameworks. Adapting to these mechanisms requires developing distinct toolchains, which increases development costs. Additionally, LLMs rely on contextual data, but various agents retrieve local and remote data in a fragmented manner, lacking a unified management approach.
 
@@ -83,11 +83,11 @@ The following terms are used throughout this document:
 - **Restconf**: RESTful Network Configuration Protocol
 - **SNMP**: Simple Network Management Protocol
 
-# Market Demand
+# Operation Need
 
 In the scenario of cross-vendor network equipment batch management, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues:
 
-## Inconsistent YANG Model Suppor
+## Inconsistent YANG Model Support
 
 Different vendors implement different YANG models (standard or proprietary), leading to:
 
@@ -114,16 +114,6 @@ To be more specific, there are three parts:
 
 # Deployment Plan
 
-## Preliminary Research
-
-Conduct a detailed survey of the existing multi-vendor network device environment, analyzing the support status of NETCONF and RESTCONF protocols across different vendors' equipment, as well as identifying data model variations. This will provide foundational data for subsequent MCP adaptation and development.
-
-## Development and Test
-
-Based on the research findings, develop MCP system modules compatible with NETCONF and RESTCONF protocols to achieve accurate conversion from natural language commands to protocol operations. Conduct comprehensive testing in a lab environment to validate MCP’s functionality and performance in multi-vendor device batch management, with a focus on protocol compatibility and operational accuracy.
-
-## Deployment
-
 During the deployment phase, there are three key aspects to consider:
 
 - **Function-Specific MCP Servers**: Deploy dedicated MCP servers tailored to different functions and domains, such as network log analysis, device configuration management, energy consumption management, and security operations.
@@ -132,18 +122,13 @@ During the deployment phase, there are three key aspects to consider:
 
 Based on these considerations, we propose two solutions:
 
-### MCP within Local NCE
+## MCP within Local NCE
 
 The user issues a natural language command, which is received by the operations and maintenance (O&M) console and forwarded to the MCP client. The LLM then processes the command, invokes the appropriate tools to pass instructions to the MCP server, which finally interacts with network devices using NETCONF and SNMP protocols.
 
-### MCP in Remote Device
+## MCP in Remote Device
 
 The main workflow is similar to *MCP within Local NCE*, with the key difference being the integration method of the MCP server. In this solution, the MCP server is integrated in the network devices. Within the network device, the MCP server interacts with network devices via CLI instead of NETCONF and SNMP protocols.
-
-### Gap Analysis
-
-- **Scalability**: While *MCP within Local NCE* offers compatibility through NETCONF incorporation, its tightly-coupled dual-protocol architecture creates technical debt for scaling. The MCP-Remote Device approach's protocol homogeneity ensures architectural consistency, future-proofing the solution for iterative enhancements.
-- **Cost**: The *MCP within Local NCE* implementation enables localized adaptation while preserving NETCONF/SNMP protocol compliance for downstream device communication, fully capitalizing on existing NETCONF investments. Comparatively, the MCP deployed in Remote Devices architecture operates without NETCONF integration, resulting in significantly higher deployment and operational expenditures.
 
 # IANA Considerations
 
