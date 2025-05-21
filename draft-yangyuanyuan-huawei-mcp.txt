@@ -8,7 +8,7 @@ Intended status: Informational                               21 May 2025
 Expires: 22 November 2025
 
 
-                                  MCP1
+                                 MClP1
                   draft-yangyuanyuan-huawei-mcp-latest
 
 Abstract
