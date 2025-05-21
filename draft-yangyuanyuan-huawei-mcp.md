@@ -19,7 +19,7 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "MCP"
+title: "MCP2"
 category: info
 
 docname: draft-yangyuanyuan-huawei-mcp-latest
@@ -58,7 +58,7 @@ With the emergence of various LLM models, enterprises face different frameworks 
 
 --- middle
 
-# Introduction
+# Introductio
 
 With the emergence of various LLM models, enterprises face different frameworks and systems during deployment, such as ChatGPT's plugin mechanism and agent frameworks. Adapting to these mechanisms requires developing distinct toolchains, which increases development costs. Additionally, LLMs rely on contextual data, but various agents retrieve local and remote data in a fragmented manner, lacking a unified management approach.
 
@@ -87,7 +87,7 @@ The following terms are used throughout this document:
 
 In the scenario of cross-vendor network equipment batch management, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues:
 
-## Inconsistent YANG Model Support
+## Inconsistent YANG Model Suppor
 
 Different vendors implement different YANG models (standard or proprietary), leading to:
 
