@@ -8,7 +8,7 @@ Intended status: Informational                               21 May 2025
 Expires: 22 November 2025
 
 
-                                 MC0P1
+                                  MCP
                   draft-yangyuanyuan-huawei-mcp-latest
 
 Abstract
@@ -71,29 +71,25 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Introductio
+   1.  Introduction
    2.  Terminology & Notation Conventions
      2.1.  MCP
      2.2.  Others
-   3.  Market Demand
-     3.1.  Inconsistent YANG Model Suppor
+   3.  Operation Need
+     3.1.  Inconsistent YANG Model Support
      3.2.  Partial or Non-Standard RESTCONF/NETCONF Implementations
      3.3.  Performance & Scalability Issues
    4.  Solution
    5.  Deployment Plan
-     5.1.  Preliminary Research
-     5.2.  Development and Test
-     5.3.  Deployment
-       5.3.1.  MCP within Local NCE
-       5.3.2.  MCP in Remote Device
-       5.3.3.  Gap Analysis
+     5.1.  MCP within Local NCE
+     5.2.  MCP in Remote Device
    6.  IANA Considerations
    7.  Security Considerations
    8.  Conclusion
    Appendix A.  Reference
    Author's Address
 
-1.  Introductio
+1.  Introduction
 
    With the emergence of various LLM models, enterprises face different
    frameworks and systems during deployment, such as ChatGPT's plugin
@@ -139,13 +135,13 @@ Table of Contents
 
    *  *SNMP*: Simple Network Management Protocol
 
-3.  Market Demand
+3.  Operation Need
 
    In the scenario of cross-vendor network equipment batch management, a
    large number of devices from different vendors need to be uniformly
    managed, which can lead to the following issues:
 
-3.1.  Inconsistent YANG Model Suppor
+3.1.  Inconsistent YANG Model Support
 
    Different vendors implement different YANG models (standard or
    proprietary), leading to:
@@ -189,26 +185,6 @@ Table of Contents
 
 5.  Deployment Plan
 
-5.1.  Preliminary Research
-
-   Conduct a detailed survey of the existing multi-vendor network device
-   environment, analyzing the support status of NETCONF and RESTCONF
-   protocols across different vendors' equipment, as well as identifying
-   data model variations.  This will provide foundational data for
-   subsequent MCP adaptation and development.
-
-5.2.  Development and Test
-
-   Based on the research findings, develop MCP system modules compatible
-   with NETCONF and RESTCONF protocols to achieve accurate conversion
-   from natural language commands to protocol operations.  Conduct
-   comprehensive testing in a lab environment to validate MCP’s
-   functionality and performance in multi-vendor device batch
-   management, with a focus on protocol compatibility and operational
-   accuracy.
-
-5.3.  Deployment
-
    During the deployment phase, there are three key aspects to consider:
 
    *  *Function-Specific MCP Servers*: Deploy dedicated MCP servers
@@ -226,7 +202,7 @@ Table of Contents
 
    Based on these considerations, we propose two solutions:
 
-5.3.1.  MCP within Local NCE
+5.1.  MCP within Local NCE
 
    The user issues a natural language command, which is received by the
    operations and maintenance (O&M) console and forwarded to the MCP
@@ -234,30 +210,13 @@ Table of Contents
    tools to pass instructions to the MCP server, which finally interacts
    with network devices using NETCONF and SNMP protocols.
 
-5.3.2.  MCP in Remote Device
+5.2.  MCP in Remote Device
 
    The main workflow is similar to _MCP within Local NCE_, with the key
    difference being the integration method of the MCP server.  In this
    solution, the MCP server is integrated in the network devices.
    Within the network device, the MCP server interacts with network
    devices via CLI instead of NETCONF and SNMP protocols.
-
-5.3.3.  Gap Analysis
-
-   *  *Scalability*: While _MCP within Local NCE_ offers compatibility
-      through NETCONF incorporation, its tightly-coupled dual-protocol
-      architecture creates technical debt for scaling.  The MCP-Remote
-      Device approach's protocol homogeneity ensures architectural
-      consistency, future-proofing the solution for iterative
-      enhancements.
-
-   *  *Cost*: The _MCP within Local NCE_ implementation enables
-      localized adaptation while preserving NETCONF/SNMP protocol
-      compliance for downstream device communication, fully capitalizing
-      on existing NETCONF investments.  Comparatively, the MCP deployed
-      in Remote Devices architecture operates without NETCONF
-      integration, resulting in significantly higher deployment and
-      operational expenditures.
 
 6.  IANA Considerations
 

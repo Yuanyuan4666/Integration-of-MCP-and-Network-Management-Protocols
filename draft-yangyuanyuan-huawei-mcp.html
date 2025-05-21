@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>MC0P1</title>
+<title>MCP</title>
 <meta content="Yang Yuanyuan" name="author">
 <meta content="
        With the emergence of various LLM models, enterprises face different frameworks or systems during deployment. For each LLM model, a corresponding toolchain needs to be developed, causing significant inconvenience. This document introduces MCP(Model Context Protocol), a technology that can effectively manage different LLM models. Further, this document discusses the application of MCP in cross-vendor network equipment batch management and proposes corresponding deployment strategies. 
@@ -1044,7 +1044,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">MC0P1</td>
+<td class="center">MCP</td>
 <td class="right">May 2025</td>
 </tr></thead>
 <tfoot><tr>
@@ -1077,7 +1077,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">MC0P1</h1>
+<h1 id="title">MCP</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">With the emergence of various LLM models, enterprises face different frameworks or systems during deployment. For each LLM model, a corresponding toolchain needs to be developed, causing significant inconvenience. This document introduces MCP(Model Context Protocol), a technology that can effectively manage different LLM models. Further, this document discusses the application of MCP in cross-vendor network equipment batch management and proposes corresponding deployment strategies.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -1146,7 +1146,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </h2>
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introductio" class="internal xref">Introductio</a></p>
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-terminology-notation-conven" class="internal xref">Terminology &amp; Notation Conventions</a></p>
@@ -1160,10 +1160,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-market-demand" class="internal xref">Market Demand</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-operation-need" class="internal xref">Operation Need</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-inconsistent-yang-model-sup" class="internal xref">Inconsistent YANG Model Suppor</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-inconsistent-yang-model-sup" class="internal xref">Inconsistent YANG Model Support</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-partial-or-non-standard-res" class="internal xref">Partial or Non-Standard RESTCONF/NETCONF Implementations</a></p>
@@ -1180,24 +1180,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-deployment-plan" class="internal xref">Deployment Plan</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-preliminary-research" class="internal xref">Preliminary Research</a></p>
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-mcp-within-local-nce" class="internal xref">MCP within Local NCE</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-development-and-test" class="internal xref">Development and Test</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-deployment" class="internal xref">Deployment</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3.2.1">
-                    <p id="section-toc.1-1.5.2.3.2.1.1"><a href="#section-5.3.1" class="auto internal xref">5.3.1</a>.  <a href="#name-mcp-within-local-nce" class="internal xref">MCP within Local NCE</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3.2.2">
-                    <p id="section-toc.1-1.5.2.3.2.2.1"><a href="#section-5.3.2" class="auto internal xref">5.3.2</a>.  <a href="#name-mcp-in-remote-device" class="internal xref">MCP in Remote Device</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3.2.3">
-                    <p id="section-toc.1-1.5.2.3.2.3.1"><a href="#section-5.3.3" class="auto internal xref">5.3.3</a>.  <a href="#name-gap-analysis" class="internal xref">Gap Analysis</a></p>
-</li>
-                </ul>
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-mcp-in-remote-device" class="internal xref">MCP in Remote Device</a></p>
 </li>
             </ul>
 </li>
@@ -1220,10 +1206,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </nav>
 </section>
 </div>
-<div id="introductio">
+<div id="introduction">
 <section id="section-1">
-      <h2 id="name-introductio">
-<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introductio" class="section-name selfRef">Introductio</a>
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">With the emergence of various LLM models, enterprises face different frameworks and systems during deployment, such as ChatGPT's plugin mechanism and agent frameworks. Adapting to these mechanisms requires developing distinct toolchains, which increases development costs. Additionally, LLMs rely on contextual data, but various agents retrieve local and remote data in a fragmented manner, lacking a unified management approach.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">In this context, MCP provides a universal, open standard that offers LLMs a standardized way to transmit contextual information, simplifying the integration of AI models with data and tools. This document analyzes the market demand in the scenario of cross-vendor network equipment batch management, the advantages of MCP, and the deployment plan, while also evaluating the pros and cons of two deployment strategies.<a href="#section-1-2" class="pilcrow">¶</a></p>
@@ -1282,16 +1268,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </div>
 </section>
 </div>
-<div id="market-demand">
+<div id="operation-need">
 <section id="section-3">
-      <h2 id="name-market-demand">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-market-demand" class="section-name selfRef">Market Demand</a>
+      <h2 id="name-operation-need">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-operation-need" class="section-name selfRef">Operation Need</a>
       </h2>
 <p id="section-3-1">In the scenario of cross-vendor network equipment batch management, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues:<a href="#section-3-1" class="pilcrow">¶</a></p>
-<div id="inconsistent-yang-model-suppor">
+<div id="inconsistent-yang-model-support">
 <section id="section-3.1">
         <h3 id="name-inconsistent-yang-model-sup">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-inconsistent-yang-model-sup" class="section-name selfRef">Inconsistent YANG Model Suppor</a>
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-inconsistent-yang-model-sup" class="section-name selfRef">Inconsistent YANG Model Support</a>
         </h3>
 <p id="section-3.1-1">Different vendors implement different YANG models (standard or proprietary), leading to:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1347,71 +1333,33 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-deployment-plan">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-deployment-plan" class="section-name selfRef">Deployment Plan</a>
       </h2>
-<div id="preliminary-research">
-<section id="section-5.1">
-        <h3 id="name-preliminary-research">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-preliminary-research" class="section-name selfRef">Preliminary Research</a>
-        </h3>
-<p id="section-5.1-1">Conduct a detailed survey of the existing multi-vendor network device environment, analyzing the support status of NETCONF and RESTCONF protocols across different vendors' equipment, as well as identifying data model variations. This will provide foundational data for subsequent MCP adaptation and development.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="development-and-test">
-<section id="section-5.2">
-        <h3 id="name-development-and-test">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-development-and-test" class="section-name selfRef">Development and Test</a>
-        </h3>
-<p id="section-5.2-1">Based on the research findings, develop MCP system modules compatible with NETCONF and RESTCONF protocols to achieve accurate conversion from natural language commands to protocol operations. Conduct comprehensive testing in a lab environment to validate MCP’s functionality and performance in multi-vendor device batch management, with a focus on protocol compatibility and operational accuracy.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="deployment">
-<section id="section-5.3">
-        <h3 id="name-deployment">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-deployment" class="section-name selfRef">Deployment</a>
-        </h3>
-<p id="section-5.3-1">During the deployment phase, there are three key aspects to consider:<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">During the deployment phase, there are three key aspects to consider:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.3-2.1">
-            <p id="section-5.3-2.1.1"><strong>Function-Specific MCP Servers</strong>: Deploy dedicated MCP servers tailored to different functions and domains, such as network log analysis, device configuration management, energy consumption management, and security operations.<a href="#section-5.3-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5-2.1">
+          <p id="section-5-2.1.1"><strong>Function-Specific MCP Servers</strong>: Deploy dedicated MCP servers tailored to different functions and domains, such as network log analysis, device configuration management, energy consumption management, and security operations.<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-5.3-2.2">
-            <p id="section-5.3-2.2.1"><strong>Secure and Scalable Architecture</strong>: Implement stringent security measures to ensure only authorized AI models and users can access and control network resources via MCP.<a href="#section-5.3-2.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-2.2">
+          <p id="section-5-2.2.1"><strong>Secure and Scalable Architecture</strong>: Implement stringent security measures to ensure only authorized AI models and users can access and control network resources via MCP.<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-5.3-2.3">
-            <p id="section-5.3-2.3.1"><strong>Automated Workflows</strong>: Leverage MCP to enable LLM-coordinated multi-tool automation, supporting real-time monitoring, diagnostics, and fault remediation.<a href="#section-5.3-2.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-2.3">
+          <p id="section-5-2.3.1"><strong>Automated Workflows</strong>: Leverage MCP to enable LLM-coordinated multi-tool automation, supporting real-time monitoring, diagnostics, and fault remediation.<a href="#section-5-2.3.1" class="pilcrow">¶</a></p>
 </li>
-        </ul>
-<p id="section-5.3-3">Based on these considerations, we propose two solutions:<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+      </ul>
+<p id="section-5-3">Based on these considerations, we propose two solutions:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div id="mcp-within-local-nce">
-<section id="section-5.3.1">
-          <h4 id="name-mcp-within-local-nce">
-<a href="#section-5.3.1" class="section-number selfRef">5.3.1. </a><a href="#name-mcp-within-local-nce" class="section-name selfRef">MCP within Local NCE</a>
-          </h4>
-<p id="section-5.3.1-1">The user issues a natural language command, which is received by the operations and maintenance (O&amp;M) console and forwarded to the MCP client. The LLM then processes the command, invokes the appropriate tools to pass instructions to the MCP server, which finally interacts with network devices using NETCONF and SNMP protocols.<a href="#section-5.3.1-1" class="pilcrow">¶</a></p>
+<section id="section-5.1">
+        <h3 id="name-mcp-within-local-nce">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-mcp-within-local-nce" class="section-name selfRef">MCP within Local NCE</a>
+        </h3>
+<p id="section-5.1-1">The user issues a natural language command, which is received by the operations and maintenance (O&amp;M) console and forwarded to the MCP client. The LLM then processes the command, invokes the appropriate tools to pass instructions to the MCP server, which finally interacts with network devices using NETCONF and SNMP protocols.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="mcp-in-remote-device">
-<section id="section-5.3.2">
-          <h4 id="name-mcp-in-remote-device">
-<a href="#section-5.3.2" class="section-number selfRef">5.3.2. </a><a href="#name-mcp-in-remote-device" class="section-name selfRef">MCP in Remote Device</a>
-          </h4>
-<p id="section-5.3.2-1">The main workflow is similar to <em>MCP within Local NCE</em>, with the key difference being the integration method of the MCP server. In this solution, the MCP server is integrated in the network devices. Within the network device, the MCP server interacts with network devices via CLI instead of NETCONF and SNMP protocols.<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="gap-analysis">
-<section id="section-5.3.3">
-          <h4 id="name-gap-analysis">
-<a href="#section-5.3.3" class="section-number selfRef">5.3.3. </a><a href="#name-gap-analysis" class="section-name selfRef">Gap Analysis</a>
-          </h4>
-<ul class="normal">
-<li class="normal" id="section-5.3.3-1.1">
-              <p id="section-5.3.3-1.1.1"><strong>Scalability</strong>: While <em>MCP within Local NCE</em> offers compatibility through NETCONF incorporation, its tightly-coupled dual-protocol architecture creates technical debt for scaling. The MCP-Remote Device approach's protocol homogeneity ensures architectural consistency, future-proofing the solution for iterative enhancements.<a href="#section-5.3.3-1.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-5.3.3-1.2">
-              <p id="section-5.3.3-1.2.1"><strong>Cost</strong>: The <em>MCP within Local NCE</em> implementation enables localized adaptation while preserving NETCONF/SNMP protocol compliance for downstream device communication, fully capitalizing on existing NETCONF investments. Comparatively, the MCP deployed in Remote Devices architecture operates without NETCONF integration, resulting in significantly higher deployment and operational expenditures.<a href="#section-5.3.3-1.2.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-</section>
-</div>
+<section id="section-5.2">
+        <h3 id="name-mcp-in-remote-device">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-mcp-in-remote-device" class="section-name selfRef">MCP in Remote Device</a>
+        </h3>
+<p id="section-5.2-1">The main workflow is similar to <em>MCP within Local NCE</em>, with the key difference being the integration method of the MCP server. In this solution, the MCP server is integrated in the network devices. Within the network device, the MCP server interacts with network devices via CLI instead of NETCONF and SNMP protocols.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
