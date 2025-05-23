@@ -22,7 +22,7 @@
 title: "integration of MCP and network management protocols"
 category: info
 
-docname: draft-yang-mcp-nm
+docname: draft-yangyuanyuan-huawei-mcp-latest
 submissiontype: IETF
 number:
 date:
@@ -34,7 +34,7 @@ keyword:
  - large language model
  - model context protocol
 venue:
-  group: 
+  group: nmrg
   type: Working Group
   mail: yangyuanyuan55@huawei.com
   arch: https://example.com/WG
@@ -177,6 +177,38 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 
 ## MCP within Network Controller
 
+        +--------------+
+        |     User     |
+        +-------+------+
+                |
+        Natural Language
+        Request |
+     ......................
+     .  +-------+------+  .N
+     .  |     LLM      |  .E
+     .  +-------+------+  .T
+     .          |         .W
+     .    O&M Console     .O
+     .          |         .R
+     .  +-------+------+  .K
+     .  |  MCP Client  |  .
+     .  +-------+------+  .C
+     .          |         .O
+     .   Tools Request    .N
+     .          |         .T
+     .  +-------+------+  .R
+     .  |  MCP Server  |  .O
+     .  +-------+------+  .L
+     .          |         .L
+     .          |         .E
+     ...........|..........R
+                |
+            Netconf
+        +--------------+
+        |   Network    |
+        |   Devices    |
+        +--------------+
+
 - Scope: The MCP Server is hosted within the operator's local network, colocated with the O&M Console and MCP Client.
 - Key Characteristics:
   - Low Latency: Direct access to network devices minimizes tool execution delays.
@@ -193,6 +225,37 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 
 ## MCP in Remote Device
 
+      +--------------+
+      |     User     |
+      +-------+------+
+              |
+      Natural Language
+      Request |
+   ......................
+   .  +-------+------+  .N C
+   .  |     LLM      |  .E O
+   .  +-------+------+  .T N
+   .          |         .W T
+   .    O&M Console     .O R
+   .          |         .R O
+   .  +-------+------+  .K L
+   .  |  MCP Client  |  .  L
+   .  +-------+------+  .  L
+   .          |         .  E
+   .   Tools Request    .  R
+   .          |         .
+   ......................
+   ......................
+   .  +-------+------+  .N D
+   .  |  MCP Server  |  .E E
+   .  +-------+------+  .T V
+   .          |         .W I
+   .  +--------------+  .O C
+   .  |   Network    |  .R E
+   .  |   Devices    |  .K
+   .  +--------------+  .
+   ......................
+
 - Scope: The MCP Server operates in a cloud environment, serving distributed MCP Clients via public/private APIs.
 - Key Characteristics:
   - Centralized Management: A single MCP Server instance can manage multiple geographically dispersed networks.
@@ -206,7 +269,7 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
     - MCP Server hosted on AWS/Azure with regional replicas.
     - Tools like deploy_vpn_template adapt to local compliance rules.
   - Advantage: Unified toolchain reduces configuration drift.
- 
+
 # Conclusion
 
 MCP Technology delivers an innovative solution for cross-vendor network device management at scale. By enhancing and extending traditional network management protocols (NETCONF/RESTCONF), it effectively addresses multi-vendor device management challenges while significantly improving network administration efficiency and service quality. As the technology matures, MCP is positioned for widespread adoption in network management domains.
