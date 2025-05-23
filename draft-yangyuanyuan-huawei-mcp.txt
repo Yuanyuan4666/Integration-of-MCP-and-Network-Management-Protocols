@@ -2,13 +2,13 @@
 
 
 
-HuaWei                                                       Y. Yuanyuan
+nmrg                                                         Y. Yuanyuan
 Internet-Draft                                                    HuaWei
 Intended status: Informational                               23 May 2025
 Expires: 24 November 2025
 
 
-                                  MCP
+          integration of MCP and network management protocols
                   draft-yangyuanyuan-huawei-mcp-latest
 
 Abstract
@@ -31,7 +31,7 @@ About This Document
    be found at https://datatracker.ietf.org/doc/draft-yangyuanyuan-
    huawei-mcp/.
 
-   Discussion of this document takes place on the HuaWei Working Group
+   Discussion of this document takes place on the nmrg Working Group
    mailing list (mailto:yangyuanyuan55@huawei.com), which is archived at
    https://example.com/WG.
 
@@ -75,7 +75,7 @@ Table of Contents
    2.  Terminology & Notation Conventions
      2.1.  MCP
      2.2.  Others
-   3.  Operation Need
+   3.  Problem Statemtent
      3.1.  Inconsistent YANG Model Support
      3.2.  Partial or Non-Standard RESTCONF/NETCONF Implementations
      3.3.  Performance & Scalability Issues
@@ -83,14 +83,14 @@ Table of Contents
      4.1.  Encapsulating Device Operations into MCP Tools
      4.2.  LLM APIs for Intent-to-Tool Translation
      4.3.  Closed-Loop Automation Execution
-   5.  Deployment Plan
-     5.1.  MCP within Local NCE
+   5.  Operational Consideration
+     5.1.  MCP within Network Controller
        5.1.1.  Use cases
      5.2.  MCP in Remote Device
        5.2.1.  Use cases
-   6.  IANA Considerations
-   7.  Security Considerations
-   8.  Conclusion
+   6.  Conclusion
+   7.  IANA Considerations
+   8.  Security Considerations
    Appendix A.  Reference
    Author's Address
 
@@ -158,7 +158,7 @@ Table of Contents
 
    *  *SNMP*: Simple Network Management Protocol
 
-3.  Operation Need
+3.  Problem Statemtent
 
    In the scenario of cross-vendor network equipment batch management, a
    large number of devices from different vendors need to be uniformly
@@ -277,7 +277,7 @@ Table of Contents
       -  Auditability: Full traceability of LLM decisions and tool
          executions.
 
-5.  Deployment Plan
+5.  Operational Consideration
 
    During the deployment phase, there are three key aspects to consider:
 
@@ -329,7 +329,39 @@ Table of Contents
    variations.  This section defines two refined approaches to
    accommodate differing deployment scenarios.
 
-5.1.  MCP within Local NCE
+5.1.  MCP within Network Controller
+
+       +--------------+
+       |     User     |
+       +-------+------+
+               |
+       Natural Language
+       Request |
+    ......................
+    .  +-------+------+  .N
+    .  |     LLM      |  .E
+    .  +-------+------+  .T
+    .          |         .W
+    .    O&M Console     .O
+    .          |         .R
+    .  +-------+------+  .K
+    .  |  MCP Client  |  .
+    .  +-------+------+  .C
+    .          |         .O
+    .   Tools Request    .N
+    .          |         .T
+    .  +-------+------+  .R
+    .  |  MCP Server  |  .O
+    .  +-------+------+  .L
+    .          |         .L
+    .          |         .E
+    ...........|..........R
+               |
+           Netconf
+       +--------------+
+       |   Network    |
+       |   Devices    |
+       +--------------+
 
    *  Scope: The MCP Server is hosted within the operator's local
       network, colocated with the O&M Console and MCP Client.
@@ -361,6 +393,13 @@ Table of Contents
 
 5.2.  MCP in Remote Device
 
+  +--------------+
+  |     User     |
+  +-------+------+
+          |
+  Natural Language
+  Request |    ......................    .  +-------+------+  .N C    .  |     LLM      |  .E O    .  +-------+------+  .T N    .          |         .W T    .    O&M Console     .O R    .          |         .R O    .  +-------+------+  .K L    .  |  MCP Client  |  .  L    .  +-------+------+  .  L    .          |         .  E    .   Tools Request    .  R    .          |         .    ......................    ......................    .  +-------+------+  .N D    .  |  MCP Server  |  .E E    .  +-------+------+  .T V    .          |         .W I    .  +--------------+  .O C    .  |   Network    |  .R E    .  |   Devices    |  .K    .  +--------------+  .    ......................
+
    *  Scope: The MCP Server operates in a cloud environment, serving
       distributed MCP Clients via public/private APIs.
 
@@ -388,11 +427,21 @@ Table of Contents
 
       -  Advantage: Unified toolchain reduces configuration drift.
 
-6.  IANA Considerations
+6.  Conclusion
+
+   MCP Technology delivers an innovative solution for cross-vendor
+   network device management at scale.  By enhancing and extending
+   traditional network management protocols (NETCONF/RESTCONF), it
+   effectively addresses multi-vendor device management challenges while
+   significantly improving network administration efficiency and service
+   quality.  As the technology matures, MCP is positioned for widespread
+   adoption in network management domains.
+
+7.  IANA Considerations
 
    This document has no IANA actions.
 
-7.  Security Considerations
+8.  Security Considerations
 
    This document analyzes the application of MCP in sophisticated batch
    network management and proposes two deployment schemes, which may
@@ -404,16 +453,6 @@ Table of Contents
    To address such security risks, measures like version locking
    mechanisms, enhanced visibility, and context isolation can provide a
    certain level of protection.
-
-8.  Conclusion
-
-   MCP Technology delivers an innovative solution for cross-vendor
-   network device management at scale.  By enhancing and extending
-   traditional network management protocols (NETCONF/RESTCONF), it
-   effectively addresses multi-vendor device management challenges while
-   significantly improving network administration efficiency and service
-   quality.  As the technology matures, MCP is positioned for widespread
-   adoption in network management domains.
 
 Appendix A.  Reference
 
