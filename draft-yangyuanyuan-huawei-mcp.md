@@ -19,17 +19,17 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "MCP"
+title: "integration of MCP and network management protocols"
 category: info
 
-docname: draft-yangyuanyuan-huawei-mcp-latest
+docname: draft-yang-mcp-nm
 submissiontype: IETF
 number:
 date:
 consensus: true
 v: 3
 area: AREA
-workgroup: HuaWei
+workgroup: nmrg
 keyword:
  - large language model
  - model context protocol
