@@ -34,7 +34,7 @@ keyword:
  - large language model
  - model context protocol
 venue:
-  group: HuaWei
+  group: 
   type: Working Group
   mail: yangyuanyuan55@huawei.com
   arch: https://example.com/WG
@@ -93,7 +93,7 @@ The following terms are used throughout this document:
 - **Restconf**: RESTful Network Configuration Protocol
 - **SNMP**: Simple Network Management Protocol
 
-# Operation Need
+# Problem Statemtent
 
 In the scenario of cross-vendor network equipment batch management, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues:
 
@@ -154,7 +154,7 @@ To be more specific, there are three parts:
   - Idempotency: Tools safely retry/rollback.
   - Auditability: Full traceability of LLM decisions and tool executions.
 
-# Deployment Plan
+# Operational Consideration
 
 During the deployment phase, there are three key aspects to consider:
 
@@ -175,7 +175,7 @@ A general workflow is as follows:
 
 While the overall workflow remains consistent, the MCP Server's deployment location (on-premises or remote) introduces operational variations. This section defines two refined approaches to accommodate differing deployment scenarios.
 
-## MCP within Local NCE
+## MCP within Network Controller
 
 - Scope: The MCP Server is hosted within the operator's local network, colocated with the O&M Console and MCP Client.
 - Key Characteristics:
@@ -206,6 +206,10 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
     - MCP Server hosted on AWS/Azure with regional replicas.
     - Tools like deploy_vpn_template adapt to local compliance rules.
   - Advantage: Unified toolchain reduces configuration drift.
+ 
+# Conclusion
+
+MCP Technology delivers an innovative solution for cross-vendor network device management at scale. By enhancing and extending traditional network management protocols (NETCONF/RESTCONF), it effectively addresses multi-vendor device management challenges while significantly improving network administration efficiency and service quality. As the technology matures, MCP is positioned for widespread adoption in network management domains.
 
 # IANA Considerations
 
@@ -216,10 +220,6 @@ This document has no IANA actions.
 This document analyzes the application of MCP in sophisticated batch network management and proposes two deployment schemes, which may introduce certain security risks. Since MCP's internal instructions are invisible to users and only accessible to the LLM model, attackers could potentially inject malicious instructions, leading to information leakage or workflow errors.
 
 To address such security risks, measures like version locking mechanisms, enhanced visibility, and context isolation can provide a certain level of protection.
-
-# Conclusion
-
-MCP Technology delivers an innovative solution for cross-vendor network device management at scale. By enhancing and extending traditional network management protocols (NETCONF/RESTCONF), it effectively addresses multi-vendor device management challenges while significantly improving network administration efficiency and service quality. As the technology matures, MCP is positioned for widespread adoption in network management domains.
 
 --- back
 
