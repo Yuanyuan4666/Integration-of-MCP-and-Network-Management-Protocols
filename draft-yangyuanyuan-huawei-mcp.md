@@ -22,7 +22,7 @@
 title: "integration of MCP and network management protocols"
 category: info
 
-docname: draft-yangyuanyuan-huawei-mcp-latest
+docname: draft-yang-mcp-nm-latest
 submissiontype: IETF
 number:
 date:
@@ -112,13 +112,15 @@ Some vendors only partially support standard YANG models, and proprietary extens
 
 When managing cross-vendor devices in bulk, NETCONF can be slower than RESTCONF (HTTP/HTTPS) for large-scale operations, while RESTCONF lacks native batching support. Additionally, both protocols may suffer from timeouts when handling many devices simultaneously.
 
-# Solution
+# Operational Consideration
+
+## Functional Modules
 
 The LLM model, with its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for cross-vendor network equipment batch management, effectively addressing the aforementioned challenges. Therefore, we have introduced the MCP protocol to standardize the management of different LLM models, serving as the foundation for building an intelligent network control platform.
 
-To be more specific, there are three parts:
+To be more specific, there are three functional modules needed:
 
-## Encapsulating Device Operations into MCP Tools
+### Encapsulating Device Operations into MCP Tools
 
 - *Objective*: Standardize heterogeneous device operations into modular, reusable tools.
 - *Implementation*:
@@ -129,7 +131,7 @@ To be more specific, there are three parts:
   - Eliminates manual translation of commands across vendors.
   - Enables plug-and-play integration of new device types.
 
-## LLM APIs for Intent-to-Tool Translation
+### LLM APIs for Intent-to-Tool Translation
 
 - Objective: Bridge natural language instructions to executable tool sequences.
 - Workflow:
@@ -140,7 +142,7 @@ To be more specific, there are three parts:
   - mcp-translate: Converts text to toolchain JSON.
   - mcp-validate: Confirms tool availability/permissions.
 
-## Closed-Loop Automation Execution
+### Closed-Loop Automation Execution
 
 - Objective: Achieve end-to-end automation from language input to network changes.
 - Execution Flow:
@@ -154,13 +156,7 @@ To be more specific, there are three parts:
   - Idempotency: Tools safely retry/rollback.
   - Auditability: Full traceability of LLM decisions and tool executions.
 
-# Operational Consideration
-
-During the deployment phase, there are three key aspects to consider:
-
-- **Function-Specific MCP Servers**: Deploy dedicated MCP servers tailored to different functions and domains, such as network log analysis, device configuration management, energy consumption management, and security operations.
-- **Secure and Scalable Architecture**: Implement stringent security measures to ensure only authorized AI models and users can access and control network resources via MCP.
-- **Automated Workflows**: Leverage MCP to enable LLM-coordinated multi-tool automation, supporting real-time monitoring, diagnostics, and fault remediation.
+## Workflow
 
 A general workflow is as follows:
 
