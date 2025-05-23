@@ -62,7 +62,17 @@ With the emergence of various LLM models, enterprises face different frameworks 
 
 With the emergence of various LLM models, enterprises face different frameworks and systems during deployment, such as ChatGPT's plugin mechanism and agent frameworks. Adapting to these mechanisms requires developing distinct toolchains, which increases development costs. Additionally, LLMs rely on contextual data, but various agents retrieve local and remote data in a fragmented manner, lacking a unified management approach.
 
-In this context, MCP provides a universal, open standard that offers LLMs a standardized way to transmit contextual information, simplifying the integration of AI models with data and tools. This document analyzes the market demand in the scenario of cross-vendor network equipment batch management, the advantages of MCP, and the deployment plan, while also evaluating the pros and cons of two deployment strategies.
+The Model Control Protocol (MCP) provides a standardized framework for intent-based network automation in multi-vendor environments, specifically addressing the interoperability challenges between large language models (LLMs) and heterogeneous network equipment. By establishing vendor-neutral interfaces for tool encapsulation, intent translation, and closed-loop execution, MCP enables:
+
+- Unified operation abstraction through normalized MCP tool definitions
+- Seamless LLM integration via structured API contracts
+- Closed-Loop Automation Execution
+
+Further, this document specifies MCP's architecture and operational workflows for network automation scenarios, with particular focus on:
+
+- The end-to-end processing chain from natural language input to device configuration
+- Protocol translation requirements between AI systems and network elements
+- Comparative analysis of on-premises versus cloud-hosted deployment models
 
 # Terminology & Notation Conventions
 
@@ -108,9 +118,41 @@ The LLM model, with its ability to comprehend diverse complex requirements and d
 
 To be more specific, there are three parts:
 
-- Encapsulating diverse device operations into discrete MCP tools for host-side calling.
-- Exposing LLM model APIs that transform natural language instructions into executable tool operations.
-- Achieving the "language/text command -> automated execution" closure.
+## Encapsulating Device Operations into MCP Tools
+
+- *Objective*: Standardize heterogeneous device operations into modular, reusable tools.
+- *Implementation*:
+  - *Tool Abstraction*: Vendor-specific CLI/API commands are wrapped into discrete MCP Tools with uniform JSON/Protobuf schemas.
+  - *Tool Registry*: A centralized repository hosts MCP Tools with metadata (e.g., vendor compatibility, privilege requirements).
+  - *Dynamic Loading*: Servers (e.g., network controllers) invoke tools on demand via MCP RPCs, decoupling tool updates from core platform logic.
+- *Benefits*:
+  - Eliminates manual translation of commands across vendors.
+  - Enables plug-and-play integration of new device types.
+
+## LLM APIs for Intent-to-Tool Translation
+
+- Objective: Bridge natural language instructions to executable tool sequences.
+- Workflow:
+  - Intent Parsing: LLM APIs (e.g., GPT-4, Claude) process user queries like "Upgrade all switches in Datacenter A during maintenance" into structured intents.
+  - Toolchain Generation: The LLM selects and sequences MCP Tools (e.g., get_inventory → schedule_downtime → download_firmware → validate_upgrade).
+  - Validation: Pre-execution checks verify tool compatibility with target devices (e.g., ensuring upgrade_tool supports Arista EOS versions).
+- APIs Exposed:
+  - mcp-translate: Converts text to toolchain JSON.
+  - mcp-validate: Confirms tool availability/permissions.
+
+## Closed-Loop Automation Execution
+
+- Objective: Achieve end-to-end automation from language input to network changes.
+- Execution Flow:
+  - User Input: Operator submits request via chat/voice (e.g., "Block TCP port 22 on all edge routers").
+  - LLM Processing:
+    - Intent → Toolchain: Identifies get_edge_routers + configure_acl tools.
+    - Parameter Binding: Maps "TCP port 22" to {"protocol": "tcp", "port": 22, "action": "deny"}.
+  - Orchestration: MCP Runtime schedules tools, handles dependencies (e.g., backup configs first), and enforces RBAC.
+  - Feedback: Real-time logs/rollback if configure_acl fails on any device.
+- Key Features:
+  - Idempotency: Tools safely retry/rollback.
+  - Auditability: Full traceability of LLM decisions and tool executions.
 
 # Deployment Plan
 
@@ -120,15 +162,50 @@ During the deployment phase, there are three key aspects to consider:
 - **Secure and Scalable Architecture**: Implement stringent security measures to ensure only authorized AI models and users can access and control network resources via MCP.
 - **Automated Workflows**: Leverage MCP to enable LLM-coordinated multi-tool automation, supporting real-time monitoring, diagnostics, and fault remediation.
 
-Based on these considerations, we propose two solutions:
+A general workflow is as follows:
+
+- User Input Submission: An operator submits a natural language request (e.g., "Disable port 22 on all edge switches") to the LLM interface.
+- LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured request to the local O&M Console for validation and logging.
+- MCP Tool Discovery: The O&M Console routes the request to the MCP Client, which queries the MCP Server to retrieve the available tools.
+- LLM Toolchain Decision:
+  - The LLM evaluates the context and if tools are required, select and sequence tools.
+  - The decision is sent back to the MCP Client and then MCP Client will execute tools via server.
+- Protocol Translation & Execution: The MCP Server executes the translated commands on target devices and returns results to the client.
+- Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.
+
+While the overall workflow remains consistent, the MCP Server's deployment location (on-premises or remote) introduces operational variations. This section defines two refined approaches to accommodate differing deployment scenarios.
 
 ## MCP within Local NCE
 
-The user issues a natural language command, which is received by the operations and maintenance (O&M) console and forwarded to the MCP client. The LLM then processes the command, invokes the appropriate tools to pass instructions to the MCP server, which finally interacts with network devices using NETCONF and SNMP protocols.
+- Scope: The MCP Server is hosted within the operator's local network, colocated with the O&M Console and MCP Client.
+- Key Characteristics:
+  - Low Latency: Direct access to network devices minimizes tool execution delays.
+  - Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.
+
+### Use cases
+
+- Air-Gapped Networks (Military/Critical Infrastructure)
+  - Scenario: A power grid control network prohibits external connectivity.
+  - Implementation:
+    - MCP Server runs on local servers with pre-loaded tool definitions.
+    - LLM operates offline (e.g., quantized model) or via approved internal APIs.
+  - Advantage: Ensures zero data exfiltration risks.
 
 ## MCP in Remote Device
 
-The main workflow is similar to *MCP within Local NCE*, with the key difference being the integration method of the MCP server. In this solution, the MCP server is integrated in the network devices. Within the network device, the MCP server interacts with network devices via CLI instead of NETCONF and SNMP protocols.
+- Scope: The MCP Server operates in a cloud environment, serving distributed MCP Clients via public/private APIs.
+- Key Characteristics:
+  - Centralized Management: A single MCP Server instance can manage multiple geographically dispersed networks.
+  - Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.
+
+### Use cases
+
+- Global Enterprise Network Automation
+  - Scenario: A multinational corporation standardizes configurations across hundreds of branch offices.
+  - Implementation:
+    - MCP Server hosted on AWS/Azure with regional replicas.
+    - Tools like deploy_vpn_template adapt to local compliance rules.
+  - Advantage: Unified toolchain reduces configuration drift.
 
 # IANA Considerations
 
