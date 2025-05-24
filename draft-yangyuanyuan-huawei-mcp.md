@@ -22,7 +22,7 @@
 title: "integration of MCP and network management protocols"
 category: info
 
-docname: draft-yang-mcp-nm-latest
+docname: draft-yangyuanyuan-huawei-mcp-latest
 submissiontype: IETF
 number:
 date:
@@ -221,36 +221,36 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 
 ## MCP in Remote Device
 
-      +--------------+
-      |     User     |
-      +-------+------+
-              |
-      Natural Language
-      Request |
-   ......................
-   .  +-------+------+  .
-   .  |     LLM      |  .
-   .  +-------+------+  .
-   .          |         .
-   .    O&M Console     .
-   .          |         .R O
-   .  +-------+------+  .K L
-   .  |  MCP Client  |  .  L
-   .  +-------+------+  .  L
-   .          |         .  E
-   .   Tools Request    .  R
-   .          |         .
-   ......................
-   ......................
-   .  +-------+------+  .N D
-   .  |  MCP Server  |  .E E
-   .  +-------+------+  .T V
-   .          |         .W I
-   .  +--------------+  .O C
-   .  |   Network    |  .R E
-   .  |   Devices    |  .K
-   .  +--------------+  .
-   ......................
+        +--------------+
+        |     User     |
+        +-------+------+
+                |
+        Natural Language
+        Request |
+     ......................
+     .  +-------+------+  .N C
+     .  |     LLM      |  .E O
+     .  +-------+------+  .T N
+     .          |         .W T
+     .    O&M Console     .O R
+     .          |         .R O
+     .  +-------+------+  .K L
+     .  |  MCP Client  |  .  L
+     .  +-------+------+  .  L
+     .          |         .  E
+     .   Tools Request    .  R
+     .          |         .
+     ......................
+     ......................
+     .  +-------+------+  .N D
+     .  |  MCP Server  |  .E E
+     .  +-------+------+  .T V
+     .          |         .W I
+     .  +--------------+  .O C
+     .  |   Network    |  .R E
+     .  |   Devices    |  .K
+     .  +--------------+  .
+     ......................
 
 - Scope: The MCP Server operates in a cloud environment, serving distributed MCP Clients via public/private APIs.
 - Key Characteristics:
