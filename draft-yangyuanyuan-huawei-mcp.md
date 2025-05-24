@@ -228,11 +228,11 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
       Natural Language
       Request |
    ......................
-   .  +-------+------+  .N C
-   .  |     LLM      |  .E O
-   .  +-------+------+  .T N
-   .          |         .W T
-   .    O&M Console     .O R
+   .  +-------+------+  .
+   .  |     LLM      |  .
+   .  +-------+------+  .
+   .          |         .
+   .    O&M Console     .
    .          |         .R O
    .  +-------+------+  .K L
    .  |  MCP Client  |  .  L
