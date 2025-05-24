@@ -9,7 +9,7 @@ Expires: 25 November 2025
 
 
           integration of MCP and network management protocols
-                  draft-yangyuanyuan-huawei-mcp-latest
+                        draft-yang-mcp-nm-latest
 
 Abstract
 
@@ -28,8 +28,7 @@ About This Document
 
    The latest revision of this draft can be found at
    https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-yangyuanyuan-
-   huawei-mcp/.
+   be found at https://datatracker.ietf.org/doc/draft-yang-mcp-nm/.
 
    Discussion of this document takes place on the nmrg Working Group
    mailing list (mailto:yangyuanyuan55@huawei.com), which is archived at
@@ -381,36 +380,12 @@ Table of Contents
 
 4.4.  MCP in Remote Device
 
-       +--------------+
-       |     User     |
-       +-------+------+
-               |
-       Natural Language
-       Request |
-    ......................
-    .  +-------+------+  .N C
-    .  |     LLM      |  .E O
-    .  +-------+------+  .T N
-    .          |         .W T
-    .    O&M Console     .O R
-    .          |         .R O
-    .  +-------+------+  .K L
-    .  |  MCP Client  |  .  L
-    .  +-------+------+  .  L
-    .          |         .  E
-    .   Tools Request    .  R
-    .          |         .
-    ......................
-    ......................
-    .  +-------+------+  .N D
-    .  |  MCP Server  |  .E E
-    .  +-------+------+  .T V
-    .          |         .W I
-    .  +--------------+  .O C
-    .  |   Network    |  .R E
-    .  |   Devices    |  .K
-    .  +--------------+  .
-    ......................
+  +--------------+
+  |     User     |
+  +-------+------+
+          |
+  Natural Language
+  Request |    ......................    .  +-------+------+  .    .  |     LLM      |  .    .  +-------+------+  .    .          |         .    .    O&M Console     .    .          |         .R O    .  +-------+------+  .K L    .  |  MCP Client  |  .  L    .  +-------+------+  .  L    .          |         .  E    .   Tools Request    .  R    .          |         .    ......................    ......................    .  +-------+------+  .N D    .  |  MCP Server  |  .E E    .  +-------+------+  .T V    .          |         .W I    .  +--------------+  .O C    .  |   Network    |  .R E    .  |   Devices    |  .K    .  +--------------+  .    ......................
 
    *  Scope: The MCP Server operates in a cloud environment, serving
       distributed MCP Clients via public/private APIs.
