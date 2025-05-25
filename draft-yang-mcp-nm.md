@@ -65,7 +65,6 @@ With the emergence of various LLM models, enterprises face different frameworks 
 The Model Control Protocol (MCP) provides a standardized framework for intent-based network automation in multi-vendor environments, specifically addressing the interoperability challenges between large language models (LLMs) and heterogeneous network equipment. By establishing vendor-neutral interfaces for tool encapsulation, intent translation, and closed-loop execution, MCP enables:
 
 - Unified operation abstraction through normalized MCP tool definitions
-- Seamless LLM integration via structured API contracts
 - Closed-Loop Automation Execution
 
 Further, this document specifies MCP's architecture and operational workflows for network automation scenarios, with particular focus on:
