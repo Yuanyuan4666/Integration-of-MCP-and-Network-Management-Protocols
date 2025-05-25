@@ -114,8 +114,6 @@ Table of Contents
    *  Unified operation abstraction through normalized MCP tool
       definitions
 
-   *  Seamless LLM integration via structured API contracts
-
    *  Closed-Loop Automation Execution
 
    Further, this document specifies MCP's architecture and operational
