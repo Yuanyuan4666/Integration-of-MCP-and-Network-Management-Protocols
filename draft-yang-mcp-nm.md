@@ -284,3 +284,334 @@ This document has no IANA actions.
 --- back
 
 # Reference
+
+1.  Introduction
+
+   The Model Control Protocol (MCP) provides a standardized way for LLMs to
+   access and utilize information from different sources, making it easier
+   to build AI applications that can interact with external systems.
+
+   MCP has been seen as rapid adoption technology in the consumer field.
+   The application of MCP in the network management field is meant to
+   develop various rich AI driven network applications, realize intent based networks
+   management automation in the multi-vendor heterogeneous network environment. By
+   establishing standard interfaces for tool encapsulation, intent
+   translation, and closed-loop execution, MCP enables:
+
+   *  Unified operation abstraction through normalized MCP tool
+      definitions
+
+   *  Seamless LLM integration via structured API contracts
+
+   *  Closed-Loop Automation Execution
+
+   This document outlines the applicability of MCP to the network management
+   in the IP network that utilizes IETF technologies. It explores operational
+   aspect, key components, generic workflow and deployment senarios. The impact
+   of integrating MCP into the network management system is also discussed.
+
+2.  Terminology & Notation Conventions
+
+   The following terms are used throughout this document:
+
+2.1.  MCP
+
+   *  *Host*: The entity initiating the LLM request
+
+   *  *Client*: A built-in module within a host, specifically designed
+      for interaction with the MCP server.
+
+   *  *CLI*: Command Line Interface
+
+   *  *MCP Server*: A dedicated server that interacts with MCP clients
+      and provides MCP services.
+
+   *  *MCP protocol*: The whole MCP framework
+
+2.2.  Others
+
+   *  *LLM*: Large Language Model
+
+   *  *Netconf*: Network Configuration Protocol
+
+   *  *Restconf*: RESTful Network Configuration Protocol
+
+3.  Overveiw of key challenges for the network management
+
+  In large scale network management environment, a
+  large number of devices from different vendors need to be uniformly
+  managed, which can lead to the following issues:
+
+3.1.  Inconsistent YANG Model Support
+
+  Different vendors implement different YANG models (standard or
+  proprietary), leading to:
+
+  *  Lack of uniform data structures for configuration/retrieval.
+
+  *  Requirement for vendor-specific adaptations in automation scripts.
+
+3.2.  Partial or Non-Standard RESTCONF/NETCONF Implementations
+
+  Some vendors only partially support standard RESTCONF/NETCONF protocol, and
+  proprietary extensions may break interoperability.
+
+3.3.  Performance & Scalability Issues
+
+  NETCONF, while transactional and robust, can be more resource-intensive,
+  particularly for large deployments and fast-changing configurations.
+  
+  RESTCONF, with its stateless, web-friendly architecture, scales better
+  but may lack the advanced transactional features of NETCONF and can be
+  less efficient for bandwidth-intensive operations.
+
+4. Operational Considerations
+
+This section outlines operational aspects of MCP with Network management requirements
+as follows:
+   *  *Function-Specific MCP Servers*: Deploy dedicated MCP servers
+      tailored to different functions and domains, such as network log
+      analysis, device configuration management, energy consumption
+      management, and security operations.
+
+   *  *Secure and Scalable Architecture*: Implement stringent security
+      measures to ensure only authorized AI models and users can access
+      and control network resources via MCP.
+
+   *  *Automated Workflows*: Leverage MCP to enable LLM-coordinated
+      multi-tool automation, supporting real-time monitoring,
+      diagnostics, and fault remediation.
+
+
+5.  Architecture Overview
+
+The LLM model with MCP support, with its ability to comprehend diverse complex
+requirements and deliver corresponding functionalities, is well-
+suited for large scale multi-vendor network management environments,
+effectively addressing the aforementioned operational challenges in section 4.
+Therefore, we have introduced the MCP protocol in the network management environments
+for building an intelligent network management and control platform.
+
+5.1.  Encapsulating Device Operations into MCP Tools
+
+   *  _Objective_: Standardize heterogeneous device operations into
+      modular, reusable tools.
+
+   *  _Implementation_:
+
+      -  _Tool Abstraction_: Vendor-specific CLI/API commands are
+         wrapped into discrete MCP Tools with uniform JSON/Protobuf
+         schemas.
+
+      -  _Tool Registry_: A centralized repository hosts MCP Tools with
+         metadata (e.g., vendor compatibility, privilege requirements).
+
+      -  _Dynamic Loading_: Servers (e.g., network controllers) invoke
+         tools on demand via MCP RPCs, decoupling tool updates from core
+         platform logic.
+
+   *  _Benefits_:
+
+      -  Eliminates manual translation of commands across vendors.
+
+      -  Enables plug-and-play integration of new device types.
+
+5.2.  LLM APIs for Intent-to-Tool Translation
+
+   *  Objective: Bridge natural language instructions to executable tool
+      sequences.
+
+   *  Workflow:
+
+      -  Intent Parsing: LLM APIs (e.g., GPT-4, Claude) process user
+         queries like "Upgrade all switches in Datacenter A during
+         maintenance" into structured intents.
+
+      -  Toolchain Generation: The LLM selects and sequences MCP Tools
+         (e.g., get_inventory → schedule_downtime → download_firmware →
+         validate_upgrade).
+
+      -  Validation: Pre-execution checks verify tool compatibility with
+         target devices (e.g., ensuring upgrade_tool supports Arista EOS
+         versions).
+
+   *  APIs Exposed:
+
+      -  mcp-translate: Converts text to toolchain JSON.
+
+      -  mcp-validate: Confirms tool availability/permissions.
+
+5.3.  Closed-Loop Automation Execution
+
+   *  Objective: Achieve end-to-end automation from language input to
+      network changes.
+
+   *  Execution Flow:
+
+      -  User Input: Operator submits request via chat/voice (e.g.,
+         "Block TCP port 22 on all edge routers").
+
+      -  LLM Processing:
+
+         o  Intent → Toolchain: Identifies get_edge_routers +
+            configure_acl tools.
+
+         o  Parameter Binding: Maps "TCP port 22" to {"protocol": "tcp",
+            "port": 22, "action": "deny"}.
+
+      -  Orchestration: MCP Runtime schedules tools, handles
+         dependencies (e.g., backup configs first), and enforces RBAC.
+
+      -  Feedback: Real-time logs/rollback if configure_acl fails on any
+         device.
+
+   *  Key Features:
+
+      -  Idempotency: Tools safely retry/rollback.
+
+      -  Auditability: Full traceability of LLM decisions and tool
+         executions.
+
+5.5 General workflow
+
+   A general workflow is as follows:
+
+   *  User Input Submission: An operator submits a natural language
+      request (e.g., "Disable port 22 on all edge routers") to the LLM
+      interface.
+
+   *  LLM Intent Processing: The LLM/Agent parses the input, identifies the
+      operational intent, and forwards a structured request to the local
+      O&M Console or MCP client for validation and logging.
+
+   *  MCP Tool Discovery: The O&M Console/MCP CLient routes the request to the MCP
+      Server, which retrieves the data or invoke available tools.
+
+   *  LLM Toolchain Decision:
+
+      -  The LLM evaluates the context and if tools are required, select
+         and sequence tools.
+
+      -  The decision is sent back to the MCP Client and then MCP Client
+         will execute tools via server.
+
+   *  Protocol Translation & Execution: The MCP Server executes the
+      translated commands on target devices and returns results to the
+      client.
+
+   *  Result Aggregation & Feedback: The MCP Client collates tool
+      outputs (success/failure logs) and forwards them to the LLM for
+      summarization.
+
+5.6 Deployment considerations
+
+   While the overall workflow remains consistent, the MCP Server's
+   deployment location (on-premises or remote) introduces operational
+   variations.  This section explores two deployment considerations.
+
+5.6.1.  MCP hosted within the Network Controller
+
+                   +--------------+
+                   |     User     |
+                   +-------+------+
+                           |
+                   Natural Language
+                  Command  |
+                ......................
+                .  +-------+------+  .
+                .  |  LLM/Agent   |  .
+                .  +-------+------+  .
+                .          |         .
+                .          |         .
+                .  +-------+------+  .
+                .  |  MCP Client  |  .
+                .  +-------+------+  .Network
+                .          |         .Controller
+                .   Tools Request    .
+                .          |         .
+                .  +-------+------+  .
+                .  |  MCP Server  |  .
+                .  +-------+------+  .
+                .          |         .
+                .          |         .
+                ...........|..........
+                           |
+                  Netconf/Telemetry
+                           |
+                   +--------------+
+                   |   Network    |
+                   |   Devices    |
+                   +--------------+
+
+   *  Scope: The MCP Server operates within the centralized nework controller,
+      colocated with the O&M Console and LLM,serving distributed Network Devices
+      via Netconf and Telemetry standard protocol.
+
+   *  Key Characteristics:
+
+      -  Centralized Management: A single MCP Server instance can manage
+         multiple geographically dispersed networks devices.
+
+      -  Scalability: Cloud-native scaling accommodates dynamic tool
+         registry updates and high request volumes.
+
+5.6.2.  MCP Within the Network Device
+
+                     +--------------+
+                     |     User     |
+                     +-------+------+
+                            |
+                    Natural Language
+                    Request |
+                  ......................
+                  .  +-------+------+  .
+                  .  |  LLM/Agent   |  .
+                  .  +-------+------+  .
+                  .          |         .
+                  .          |         .
+                  .          |         .
+                  .  +-------+------+  .
+                  .  |  MCP Client  |  .
+                  .  +-------+------+  .Network
+                  .          |         .Controller
+                  .   Tools Request    .
+                  .          |         .
+                  .          |         .
+                  ......................
+                  .  +-------+------+  .
+                  .  |  MCP Server  |  .
+                  .  +-------+------+  .Network
+                  .        CLI         .Device
+                  .          |         .
+                  . +--------------+   .
+                  . |   Network    |   .
+                  . |   Devices    |   .
+                  . +--------------+   .
+                  ......................
+   *  Scope: The MCP Server operates within each network device, dedicated serving
+      one single Network device via public/private APIs or CLI.
+
+   *  Key Characteristics:
+
+      -  Low Latency: Direct access to network devices minimizes tool
+         execution delays.
+
+      -  Data Control: All processing (LLM queries, tool executions)
+         remains within the operator’s infrastructure.
+
+
+7.  IANA Considerations
+
+   This document has no IANA actions.
+
+8.  Security Considerations
+
+    TBC.
+
+Appendix A.  Reference
+
+Author's Address
+
+   Yang Yuanyuan
+   HuaWei
+   Email: yangyuanyuan55@huawei.com
