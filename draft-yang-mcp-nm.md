@@ -124,22 +124,22 @@ To be more specific, there are three functional modules needed:
 
 - *Objective*: Standardize heterogeneous device operations into modular, reusable tools.
 - *Implementation*:
-  - *Tool Abstraction*: Vendor-specific CLI/API commands are wrapped into discrete MCP Tools with uniform JSON/Protobuf schemas.
+  - *Tool Abstraction*: Vendor-specific commands are wrapped into discrete MCP Tools with uniform schemas.
   - *Tool Registry*: A centralized repository hosts MCP Tools with metadata (e.g., vendor compatibility, privilege requirements).
-  - *Dynamic Loading*: Servers (e.g., network controllers) invoke tools on demand via MCP RPCs, decoupling tool updates from core platform logic.
+  - *Dynamic Loading*: MCP Servers dynamically invoke required tools via NETCONF on demand, thereby decoupling tool lifecycle management from the server's core functionality.
 - *Benefits*:
   - Eliminates manual translation of commands across vendors.
   - Enables plug-and-play integration of new device types.
 
-### LLM APIs for Intent-to-Tool Translation
+### LLM APIs for Words-to-Tool Translation
 
 - Objective: Bridge natural language instructions to executable tool sequences.
 - Workflow:
-  - Intent Parsing: LLM APIs (e.g., GPT-4, Claude) process user queries like "Upgrade all switches in Datacenter A during maintenance" into structured intents.
+  - Command Parsing: LLM APIs (e.g., GPT-4, Claude) process user queries like "Upgrade all switches in Datacenter A during maintenance" into structured commands.
   - Toolchain Generation: The LLM selects and sequences MCP Tools (e.g., get_inventory → schedule_downtime → download_firmware → validate_upgrade).
-  - Validation: Pre-execution checks verify tool compatibility with target devices (e.g., ensuring upgrade_tool supports Arista EOS versions).
+  - Validation: Pre-execution checks verify tool compatibility with target devices.
 - APIs Exposed:
-  - mcp-translate: Converts text to toolchain JSON.
+  - mcp-translate: Converts words to toolchain JSON.
   - mcp-validate: Confirms tool availability/permissions.
 
 ### Closed-Loop Automation Execution
@@ -268,7 +268,6 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 
 # Conclusion
 
-MCP Technology delivers an innovative solution for cross-vendor network device management at scale. By enhancing and extending traditional network management protocols (NETCONF/RESTCONF), it effectively addresses multi-vendor device management challenges while significantly improving network administration efficiency and service quality. As the technology matures, MCP is positioned for widespread adoption in network management domains.
 
 # IANA Considerations
 
@@ -276,9 +275,6 @@ This document has no IANA actions.
 
 # Security Considerations
 
-This document analyzes the application of MCP in sophisticated batch network management and proposes two deployment schemes, which may introduce certain security risks. Since MCP's internal instructions are invisible to users and only accessible to the LLM model, attackers could potentially inject malicious instructions, leading to information leakage or workflow errors.
-
-To address such security risks, measures like version locking mechanisms, enhanced visibility, and context isolation can provide a certain level of protection.
 
 --- back
 
