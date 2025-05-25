@@ -7,13 +7,7 @@
 <title>Integration of MCP and Network Management Protocols</title>
 <meta content="Yang Yuanyuan" name="author">
 <meta content="
-       With the emergence of various LLM models, enterprises face different frameworks or systems during deployment. For each LLM model, a corresponding toolchain needs to be developed, causing significant inconvenience. This document introduces MCP(Model Context Protocol), a technology that can effectively manage different LLM models. Further, this document discusses the application of MCP in cross-vendor network equipment batch management and proposes corresponding deployment strategies.  MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to
-    develop various rich AI driven network applications, realize intent based networks
-    management automation in the multi-vendor heterogeneous network environment.
-    This document outlines the applicability of MCP to the network management
-    in the IP network that utilizes IETF technologies. It explores operational
-    aspect, key components, generic workflow and deployment senarios. The impact
-    of integrating MCP into the network management system is also discussed. 
+       The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. This document outlines the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system is also discussed. 
     " name="description">
 <meta content="xml2rfc 3.28.1" name="generator">
 <meta content="large language model" name="keyword">
@@ -1086,13 +1080,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Integration of MCP and Network Management Protocols</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">With the emergence of various LLM models, enterprises face different frameworks or systems during deployment. For each LLM model, a corresponding toolchain needs to be developed, causing significant inconvenience. This document introduces MCP(Model Context Protocol), a technology that can effectively manage different LLM models. Further, this document discusses the application of MCP in cross-vendor network equipment batch management and proposes corresponding deployment strategies.  MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to
-    develop various rich AI driven network applications, realize intent based networks
-    management automation in the multi-vendor heterogeneous network environment.
-    This document outlines the applicability of MCP to the network management
-    in the IP network that utilizes IETF technologies. It explores operational
-    aspect, key components, generic workflow and deployment senarios. The impact
-    of integrating MCP into the network management system is also discussed.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. This document outlines the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system is also discussed.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1172,7 +1160,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-problem-statemtent" class="internal xref">Problem Statemtent</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-overveiw-of-key-challenges-" class="internal xref">Overveiw of key challenges for the network management</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-inconsistent-yang-model-sup" class="internal xref">Inconsistent YANG Model Support</a></p>
@@ -1187,44 +1175,34 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-operational-consideration" class="internal xref">Operational Consideration</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-architecture-overview" class="internal xref">Architecture Overview</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-functional-modules" class="internal xref">Functional Modules</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-encapsulating-device-operat" class="internal xref">Encapsulating Device Operations into MCP Tools</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-llm-apis-for-intent-to-tool" class="internal xref">LLM APIs for Intent-to-Tool Translation</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-closed-loop-automation-exec" class="internal xref">Closed-Loop Automation Execution</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-workflow" class="internal xref">Workflow</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
+                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-deployment-considerations" class="internal xref">Deployment considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
-                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-encapsulating-device-operat" class="internal xref">Encapsulating Device Operations into MCP Tools</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5.2.1">
+                    <p id="section-toc.1-1.5.2.5.2.1.1"><a href="#section-5.5.1" class="auto internal xref">5.5.1</a>.  <a href="#name-mcp-hosted-within-the-netwo" class="internal xref">MCP hosted within the Network Controller</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.2">
-                    <p id="section-toc.1-1.4.2.1.2.2.1"><a href="#section-4.1.2" class="auto internal xref">4.1.2</a>.  <a href="#name-llm-apis-for-words-to-tool-" class="internal xref">LLM APIs for Words-to-Tool Translation</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.3">
-                    <p id="section-toc.1-1.4.2.1.2.3.1"><a href="#section-4.1.3" class="auto internal xref">4.1.3</a>.  <a href="#name-closed-loop-automation-exec" class="internal xref">Closed-Loop Automation Execution</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-workflow" class="internal xref">Workflow</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-mcp-within-network-controll" class="internal xref">MCP within Network Controller</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.1">
-                    <p id="section-toc.1-1.4.2.3.2.1.1"><a href="#section-4.3.1" class="auto internal xref">4.3.1</a>.  <a href="#name-use-cases" class="internal xref">Use cases</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-mcp-in-remote-device" class="internal xref">MCP in Remote Device</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.1">
-                    <p id="section-toc.1-1.4.2.4.2.1.1"><a href="#section-4.4.1" class="auto internal xref">4.4.1</a>.  <a href="#name-use-cases-2" class="internal xref">Use cases</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5.2.2">
+                    <p id="section-toc.1-1.5.2.5.2.2.1"><a href="#section-5.5.2" class="auto internal xref">5.5.2</a>.  <a href="#name-mcp-within-the-network-devi" class="internal xref">MCP Within the Network Device</a></p>
 </li>
                 </ul>
 </li>
             </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-conclusion" class="internal xref">Conclusion</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
@@ -1247,28 +1225,20 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">With the emergence of various LLM models, enterprises face different frameworks and systems during deployment, such as ChatGPT's plugin mechanism and agent frameworks. Adapting to these mechanisms requires developing distinct toolchains, which increases development costs. Additionally, LLMs rely on contextual data, but various agents retrieve local and remote data in a fragmented manner, lacking a unified management approach.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">The Model Control Protocol (MCP) provides a standardized framework for intent-based network automation in multi-vendor environments, specifically addressing the interoperability challenges between large language models (LLMs) and heterogeneous network equipment. By establishing vendor-neutral interfaces for tool encapsulation, intent translation, and closed-loop execution, MCP enables:<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-1">The Model Control Protocol (MCP) provides a standardized way for LLMs to access and utilize information from different sources, making it easier to build AI applications that can interact with external systems.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution, MCP enables:<a href="#section-1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-3.1">
           <p id="section-1-3.1.1">Unified operation abstraction through normalized MCP tool definitions<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-3.2">
-          <p id="section-1-3.2.1">Closed-Loop Automation Execution<a href="#section-1-3.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-3.2.1">Seamless LLM integration via structured API contracts<a href="#section-1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-3.3">
+          <p id="section-1-3.3.1">Closed-Loop Automation Execution<a href="#section-1-3.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-4">Further, this document specifies MCP's architecture and operational workflows for network automation scenarios, with particular focus on:<a href="#section-1-4" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-1-5.1">
-          <p id="section-1-5.1.1">The end-to-end processing chain from natural language input to device configuration<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-5.2">
-          <p id="section-1-5.2.1">Protocol translation requirements between AI systems and network elements<a href="#section-1-5.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-5.3">
-          <p id="section-1-5.3.1">Comparative analysis of on-premises versus cloud-hosted deployment models<a href="#section-1-5.3.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
+<p id="section-1-4">This document outlines the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system is also discussed.<a href="#section-1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology-notation-conventions">
@@ -1316,20 +1286,17 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <li class="normal" id="section-2.2-1.3">
             <p id="section-2.2-1.3.1"><strong>Restconf</strong>: RESTful Network Configuration Protocol<a href="#section-2.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-2.2-1.4">
-            <p id="section-2.2-1.4.1"><strong>SNMP</strong>: Simple Network Management Protocol<a href="#section-2.2-1.4.1" class="pilcrow">¶</a></p>
-</li>
         </ul>
 </section>
 </div>
 </section>
 </div>
-<div id="problem-statemtent">
+<div id="overveiw-of-key-challenges-for-the-network-management">
 <section id="section-3">
-      <h2 id="name-problem-statemtent">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-problem-statemtent" class="section-name selfRef">Problem Statemtent</a>
+      <h2 id="name-overveiw-of-key-challenges-">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-overveiw-of-key-challenges-" class="section-name selfRef">Overveiw of key challenges for the network management</a>
       </h2>
-<p id="section-3-1">In the scenario of cross-vendor network equipment batch management, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">In large scale network management environment, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="inconsistent-yang-model-support">
 <section id="section-3.1">
         <h3 id="name-inconsistent-yang-model-sup">
@@ -1359,7 +1326,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-performance-scalability-iss">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-performance-scalability-iss" class="section-name selfRef">Performance &amp; Scalability Issues</a>
         </h3>
-<p id="section-3.3-1">When managing cross-vendor devices in bulk, NETCONF can be slower than RESTCONF (HTTP/HTTPS) for large-scale operations, while RESTCONF lacks native batching support. Additionally, both protocols may suffer from timeouts when handling many devices simultaneously.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-1">NETCONF, while transactional and robust, can be more resource-intensive, particularly for large deployments and fast-changing configurations.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">RESTCONF, with its stateless, web-friendly architecture, scales better but may lack the advanced transactional features of NETCONF and can be less efficient for bandwidth-intensive operations.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1369,334 +1337,371 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-operational-consideration">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-operational-consideration" class="section-name selfRef">Operational Consideration</a>
       </h2>
-<div id="functional-modules">
-<section id="section-4.1">
-        <h3 id="name-functional-modules">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-functional-modules" class="section-name selfRef">Functional Modules</a>
-        </h3>
-<p id="section-4.1-1">The LLM model, with its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for cross-vendor network equipment batch management, effectively addressing the aforementioned challenges. Therefore, we have introduced the MCP protocol to standardize the management of different LLM models, serving as the foundation for building an intelligent network control platform.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">To be more specific, there are three functional modules needed:<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<div id="encapsulating-device-operations-into-mcp-tools">
-<section id="section-4.1.1">
-          <h4 id="name-encapsulating-device-operat">
-<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-encapsulating-device-operat" class="section-name selfRef">Encapsulating Device Operations into MCP Tools</a>
-          </h4>
+<p id="section-4-1">This section outlines operational aspects of MCP with Network management requirements as follows:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1.1-1.1">
-              <p id="section-4.1.1-1.1.1"><em>Objective</em>: Standardize heterogeneous device operations into modular, reusable tools.<a href="#section-4.1.1-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-4-2.1">
+          <p id="section-4-2.1.1"><em>Function-Specific MCP Servers</em>: Deploy dedicated MCP servers tailored to different functions and domains, such as network log analysis, device configuration management, energy consumption management, and security operations.<a href="#section-4-2.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-4.1.1-1.2">
-              <p id="section-4.1.1-1.2.1"><em>Implementation</em>:<a href="#section-4.1.1-1.2.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-4.1.1-1.2.2.1">
-                  <p id="section-4.1.1-1.2.2.1.1"><em>Tool Abstraction</em>: Vendor-specific commands are wrapped into discrete MCP Tools with uniform schemas.<a href="#section-4.1.1-1.2.2.1.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-2.2">
+          <p id="section-4-2.2.1"><em>Secure and Scalable Architecture</em>: Implement stringent security measures to ensure only authorized AI models and users can access and control network resources via MCP.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-4.1.1-1.2.2.2">
-                  <p id="section-4.1.1-1.2.2.2.1"><em>Tool Registry</em>: A centralized repository hosts MCP Tools with metadata (e.g., vendor compatibility, privilege requirements).<a href="#section-4.1.1-1.2.2.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-2.3">
+          <p id="section-4-2.3.1"><em>Automated Workflows</em>: Leverage MCP to enable LLM-coordinated multi-tool automation, supporting real-time monitoring, diagnostics, and fault remediation.<a href="#section-4-2.3.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-4.1.1-1.2.2.3">
-                  <p id="section-4.1.1-1.2.2.3.1"><em>Dynamic Loading</em>: MCP Servers dynamically invoke required tools via NETCONF on demand, thereby decoupling tool lifecycle management from the server's core functionality.<a href="#section-4.1.1-1.2.2.3.1" class="pilcrow">¶</a></p>
-</li>
-              </ul>
-</li>
-            <li class="normal" id="section-4.1.1-1.3">
-              <p id="section-4.1.1-1.3.1"><em>Benefits</em>:<a href="#section-4.1.1-1.3.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-4.1.1-1.3.2.1">
-                  <p id="section-4.1.1-1.3.2.1.1">Eliminates manual translation of commands across vendors.<a href="#section-4.1.1-1.3.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                <li class="normal" id="section-4.1.1-1.3.2.2">
-                  <p id="section-4.1.1-1.3.2.2.1">Enables plug-and-play integration of new device types.<a href="#section-4.1.1-1.3.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              </ul>
-</li>
-          </ul>
+      </ul>
 </section>
 </div>
-<div id="llm-apis-for-words-to-tool-translation">
-<section id="section-4.1.2">
-          <h4 id="name-llm-apis-for-words-to-tool-">
-<a href="#section-4.1.2" class="section-number selfRef">4.1.2. </a><a href="#name-llm-apis-for-words-to-tool-" class="section-name selfRef">LLM APIs for Words-to-Tool Translation</a>
-          </h4>
+<div id="architecture-overview">
+<section id="section-5">
+      <h2 id="name-architecture-overview">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-architecture-overview" class="section-name selfRef">Architecture Overview</a>
+      </h2>
+<p id="section-5-1">The LLM model with MCP support, with its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well- suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in section 4. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<div id="encapsulating-device-operations-into-mcp-tools">
+<section id="section-5.1">
+        <h3 id="name-encapsulating-device-operat">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-encapsulating-device-operat" class="section-name selfRef">Encapsulating Device Operations into MCP Tools</a>
+        </h3>
 <ul class="normal">
-<li class="normal" id="section-4.1.2-1.1">
-              <p id="section-4.1.2-1.1.1">Objective: Bridge natural language instructions to executable tool sequences.<a href="#section-4.1.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1-1.1">
+            <p id="section-5.1-1.1.1"><em>Objective</em>: Standardize heterogeneous device operations into modular, reusable tools.<a href="#section-5.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-4.1.2-1.2">
-              <p id="section-4.1.2-1.2.1">Workflow:<a href="#section-4.1.2-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.1-1.2">
+            <p id="section-5.1-1.2.1"><em>Implementation</em>:<a href="#section-5.1-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1.2-1.2.2.1">
-                  <p id="section-4.1.2-1.2.2.1.1">Command Parsing: LLM APIs (e.g., GPT-4, Claude) process user queries like "Upgrade all switches in Datacenter A during maintenance" into structured commands.<a href="#section-4.1.2-1.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1-1.2.2.1">
+                <p id="section-5.1-1.2.2.1.1"><em>Tool Abstraction</em>: Vendor-specific commands are wrapped into discrete MCP Tools with uniform schemas.<a href="#section-5.1-1.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-4.1.2-1.2.2.2">
-                  <p id="section-4.1.2-1.2.2.2.1">Toolchain Generation: The LLM selects and sequences MCP Tools (e.g., get_inventory → schedule_downtime → download_firmware → validate_upgrade).<a href="#section-4.1.2-1.2.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-5.1-1.2.2.2">
+                <p id="section-5.1-1.2.2.2.1"><em>Tool Registry</em>: A centralized repository hosts MCP Tools with metadata (e.g., vendor compatibility, privilege requirements).<a href="#section-5.1-1.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-4.1.2-1.2.2.3">
-                  <p id="section-4.1.2-1.2.2.3.1">Validation: Pre-execution checks verify tool compatibility with target devices.<a href="#section-4.1.2-1.2.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-5.1-1.2.2.3">
+                <p id="section-5.1-1.2.2.3.1"><em>Dynamic Loading</em>: MCP Servers dynamically invoke required tools via NETCONF on demand, thereby decoupling tool lifecycle management from the server's core functionality.<a href="#section-5.1-1.2.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              </ul>
+            </ul>
 </li>
-            <li class="normal" id="section-4.1.2-1.3">
-              <p id="section-4.1.2-1.3.1">APIs Exposed:<a href="#section-4.1.2-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.1-1.3">
+            <p id="section-5.1-1.3.1"><em>Benefits</em>:<a href="#section-5.1-1.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1.2-1.3.2.1">
-                  <p id="section-4.1.2-1.3.2.1.1">mcp-translate: Converts words to toolchain JSON.<a href="#section-4.1.2-1.3.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1-1.3.2.1">
+                <p id="section-5.1-1.3.2.1.1">Eliminates manual translation of commands across vendors.<a href="#section-5.1-1.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-4.1.2-1.3.2.2">
-                  <p id="section-4.1.2-1.3.2.2.1">mcp-validate: Confirms tool availability/permissions.<a href="#section-4.1.2-1.3.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-5.1-1.3.2.2">
+                <p id="section-5.1-1.3.2.2.1">Enables plug-and-play integration of new device types.<a href="#section-5.1-1.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              </ul>
+            </ul>
 </li>
-          </ul>
+        </ul>
+</section>
+</div>
+<div id="llm-apis-for-intent-to-tool-translation">
+<section id="section-5.2">
+        <h3 id="name-llm-apis-for-intent-to-tool">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-llm-apis-for-intent-to-tool" class="section-name selfRef">LLM APIs for Intent-to-Tool Translation</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-5.2-1.1">
+            <p id="section-5.2-1.1.1">Objective: Bridge natural language instructions to executable tool sequences.<a href="#section-5.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-1.2">
+            <p id="section-5.2-1.2.1">Workflow:<a href="#section-5.2-1.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-1.2.2.1">
+                <p id="section-5.2-1.2.2.1.1">Command Parsing: LLM APIs (e.g., GPT-4, Claude) process user queries like "Upgrade all switches in Datacenter A during maintenance" into structured commands.<a href="#section-5.2-1.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-5.2-1.2.2.2">
+                <p id="section-5.2-1.2.2.2.1">Toolchain Generation: The LLM selects and sequences MCP Tools (e.g., get_inventory → schedule_downtime → download_firmware → validate_upgrade).<a href="#section-5.2-1.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-5.2-1.2.2.3">
+                <p id="section-5.2-1.2.2.3.1">Validation: Pre-execution checks verify tool compatibility with target devices.<a href="#section-5.2-1.2.2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-5.2-1.3">
+            <p id="section-5.2-1.3.1">APIs Exposed:<a href="#section-5.2-1.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-1.3.2.1">
+                <p id="section-5.2-1.3.2.1.1">mcp-translate: Converts intent to toolchain JSON.<a href="#section-5.2-1.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-5.2-1.3.2.2">
+                <p id="section-5.2-1.3.2.2.1">mcp-validate: Confirms tool availability/permissions.<a href="#section-5.2-1.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+        </ul>
 </section>
 </div>
 <div id="closed-loop-automation-execution">
-<section id="section-4.1.3">
-          <h4 id="name-closed-loop-automation-exec">
-<a href="#section-4.1.3" class="section-number selfRef">4.1.3. </a><a href="#name-closed-loop-automation-exec" class="section-name selfRef">Closed-Loop Automation Execution</a>
-          </h4>
+<section id="section-5.3">
+        <h3 id="name-closed-loop-automation-exec">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-closed-loop-automation-exec" class="section-name selfRef">Closed-Loop Automation Execution</a>
+        </h3>
 <ul class="normal">
-<li class="normal" id="section-4.1.3-1.1">
-              <p id="section-4.1.3-1.1.1">Objective: Achieve end-to-end automation from language input to network changes.<a href="#section-4.1.3-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.3-1.1">
+            <p id="section-5.3-1.1.1">Objective: Achieve end-to-end automation from language input to network changes.<a href="#section-5.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-4.1.3-1.2">
-              <p id="section-4.1.3-1.2.1">Execution Flow:<a href="#section-4.1.3-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.3-1.2">
+            <p id="section-5.3-1.2.1">Execution Flow:<a href="#section-5.3-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1.3-1.2.2.1">
-                  <p id="section-4.1.3-1.2.2.1.1">User Input: Operator submits request via chat/voice (e.g., "Block TCP port 22 on all edge routers").<a href="#section-4.1.3-1.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.3-1.2.2.1">
+                <p id="section-5.3-1.2.2.1.1">User Input: Operator submits request via chat/voice (e.g., "Block TCP port 22 on all edge routers").<a href="#section-5.3-1.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-4.1.3-1.2.2.2">
-                  <p id="section-4.1.3-1.2.2.2.1">LLM Processing:<a href="#section-4.1.3-1.2.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-5.3-1.2.2.2">
+                <p id="section-5.3-1.2.2.2.1">LLM Processing:<a href="#section-5.3-1.2.2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1.3-1.2.2.2.2.1">
-                      <p id="section-4.1.3-1.2.2.2.2.1.1">Intent → Toolchain: Identifies get_edge_routers + configure_acl tools.<a href="#section-4.1.3-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.3-1.2.2.2.2.1">
+                    <p id="section-5.3-1.2.2.2.2.1.1">Intent → Toolchain: Identifies get_edge_routers + configure_acl tools.<a href="#section-5.3-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                    <li class="normal" id="section-4.1.3-1.2.2.2.2.2">
-                      <p id="section-4.1.3-1.2.2.2.2.2.1">Parameter Binding: Maps "TCP port 22" to {"protocol": "tcp", "port": 22, "action": "deny"}.<a href="#section-4.1.3-1.2.2.2.2.2.1" class="pilcrow">¶</a></p>
+                  <li class="normal" id="section-5.3-1.2.2.2.2.2">
+                    <p id="section-5.3-1.2.2.2.2.2.1">Parameter Binding: Maps "TCP port 22" to {"protocol": "tcp", "port": 22, "action": "deny"}.<a href="#section-5.3-1.2.2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                  </ul>
+                </ul>
 </li>
-                <li class="normal" id="section-4.1.3-1.2.2.3">
-                  <p id="section-4.1.3-1.2.2.3.1">Orchestration: MCP Runtime schedules tools, handles dependencies (e.g., backup configs first), and enforces RBAC.<a href="#section-4.1.3-1.2.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-5.3-1.2.2.3">
+                <p id="section-5.3-1.2.2.3.1">Orchestration: MCP Runtime schedules tools, handles dependencies (e.g., backup configs first), and enforces RBAC.<a href="#section-5.3-1.2.2.3.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-4.1.3-1.2.2.4">
-                  <p id="section-4.1.3-1.2.2.4.1">Feedback: Real-time logs/rollback if configure_acl fails on any device.<a href="#section-4.1.3-1.2.2.4.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-5.3-1.2.2.4">
+                <p id="section-5.3-1.2.2.4.1">Feedback: Real-time logs/rollback if configure_acl fails on any device.<a href="#section-5.3-1.2.2.4.1" class="pilcrow">¶</a></p>
 </li>
-              </ul>
+            </ul>
 </li>
-            <li class="normal" id="section-4.1.3-1.3">
-              <p id="section-4.1.3-1.3.1">Key Features:<a href="#section-4.1.3-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.3-1.3">
+            <p id="section-5.3-1.3.1">Key Features:<a href="#section-5.3-1.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1.3-1.3.2.1">
-                  <p id="section-4.1.3-1.3.2.1.1">Idempotency: Tools safely retry/rollback.<a href="#section-4.1.3-1.3.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.3-1.3.2.1">
+                <p id="section-5.3-1.3.2.1.1">Idempotency: Tools safely retry/rollback.<a href="#section-5.3-1.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-4.1.3-1.3.2.2">
-                  <p id="section-4.1.3-1.3.2.2.1">Auditability: Full traceability of LLM decisions and tool executions.<a href="#section-4.1.3-1.3.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-5.3-1.3.2.2">
+                <p id="section-5.3-1.3.2.2.1">Auditability: Full traceability of LLM decisions and tool executions.<a href="#section-5.3-1.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              </ul>
+            </ul>
 </li>
-          </ul>
-</section>
-</div>
+        </ul>
 </section>
 </div>
 <div id="workflow">
-<section id="section-4.2">
+<section id="section-5.4">
         <h3 id="name-workflow">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-workflow" class="section-name selfRef">Workflow</a>
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-workflow" class="section-name selfRef">Workflow</a>
         </h3>
-<p id="section-4.2-1">A general workflow is as follows:<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-1">A general workflow is as follows:<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.2-2.1">
-            <p id="section-4.2-2.1.1">User Input Submission: An operator submits a natural language request (e.g., "Disable port 22 on all edge switches") to the LLM interface.<a href="#section-4.2-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.4-2.1">
+            <p id="section-5.4-2.1.1">User Input Submission: An operator submits a natural language request (e.g., "Disable port 22 on all edge switches") to the LLM interface.<a href="#section-5.4-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.2-2.2">
-            <p id="section-4.2-2.2.1">LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured request to the local O&amp;M Console for validation and logging.<a href="#section-4.2-2.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.4-2.2">
+            <p id="section-5.4-2.2.1">LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured request to the local O&amp;M Console for validation and logging.<a href="#section-5.4-2.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.2-2.3">
-            <p id="section-4.2-2.3.1">MCP Tool Discovery: The O&amp;M Console routes the request to the MCP Client, which queries the MCP Server to retrieve the available tools.<a href="#section-4.2-2.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.4-2.3">
+            <p id="section-5.4-2.3.1">MCP Tool Discovery: The O&amp;M Console routes the request to the MCP Client, which queries the MCP Server to retrieve the available tools.<a href="#section-5.4-2.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.2-2.4">
-            <p id="section-4.2-2.4.1">LLM Toolchain Decision:<a href="#section-4.2-2.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.4-2.4">
+            <p id="section-5.4-2.4.1">LLM Toolchain Decision:<a href="#section-5.4-2.4.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.2-2.4.2.1">
-                <p id="section-4.2-2.4.2.1.1">The LLM evaluates the context and if tools are required, select and sequence tools.<a href="#section-4.2-2.4.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.4-2.4.2.1">
+                <p id="section-5.4-2.4.2.1.1">The LLM evaluates the context and if tools are required, select and sequence tools.<a href="#section-5.4-2.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-4.2-2.4.2.2">
-                <p id="section-4.2-2.4.2.2.1">The decision is sent back to the MCP Client and then MCP Client will execute tools via server.<a href="#section-4.2-2.4.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-5.4-2.4.2.2">
+                <p id="section-5.4-2.4.2.2.1">The decision is sent back to the MCP Client and then MCP Client will execute tools via server.<a href="#section-5.4-2.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="section-4.2-2.5">
-            <p id="section-4.2-2.5.1">Protocol Translation &amp; Execution: The MCP Server executes the translated commands on target devices and returns results to the client.<a href="#section-4.2-2.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.4-2.5">
+            <p id="section-5.4-2.5.1">Protocol Translation &amp; Execution: The MCP Server executes the translated commands on target devices and returns results to the client.<a href="#section-5.4-2.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.2-2.6">
-            <p id="section-4.2-2.6.1">Result Aggregation &amp; Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.<a href="#section-4.2-2.6.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.4-2.6">
+            <p id="section-5.4-2.6.1">Result Aggregation &amp; Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.<a href="#section-5.4-2.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.2-3">While the overall workflow remains consistent, the MCP Server's deployment location (on-premises or remote) introduces operational variations. This section defines two refined approaches to accommodate differing deployment scenarios.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.4-3">While the overall workflow remains consistent, the MCP Server's deployment location (on-premises or remote) introduces operational variations. This section defines two refined approaches to accommodate differing deployment scenarios.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="mcp-within-network-controller">
-<section id="section-4.3">
-        <h3 id="name-mcp-within-network-controll">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-mcp-within-network-controll" class="section-name selfRef">MCP within Network Controller</a>
+<div id="deployment-considerations">
+<section id="section-5.5">
+        <h3 id="name-deployment-considerations">
+<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-deployment-considerations" class="section-name selfRef">Deployment considerations</a>
         </h3>
-<div class="alignLeft art-text artwork" id="section-4.3-1">
+<p id="section-5.5-1">While the overall workflow remains consistent, the MCP Server's deployment location (on-premises or remote) introduces operational variations.  This section explores two deployment considerations.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
+<div id="mcp-hosted-within-the-network-controller">
+<section id="section-5.5.1">
+          <h4 id="name-mcp-hosted-within-the-netwo">
+<a href="#section-5.5.1" class="section-number selfRef">5.5.1. </a><a href="#name-mcp-hosted-within-the-netwo" class="section-name selfRef">MCP hosted within the Network Controller</a>
+          </h4>
+<div class="alignLeft art-text artwork" id="section-5.5.1-1">
 <pre>
-    +--------------+
-    |     User     |
-    +-------+------+
-            |
-    Natural Language
-    Request |
- ......................
- .  +-------+------+  .N
- .  |     LLM      |  .E
- .  +-------+------+  .T
- .          |         .W
- .    O&amp;M Console     .O
- .          |         .R
- .  +-------+------+  .K
- .  |  MCP Client  |  .
- .  +-------+------+  .C
- .          |         .O
- .   Tools Request    .N
- .          |         .T
- .  +-------+------+  .R
- .  |  MCP Server  |  .O
- .  +-------+------+  .L
- .          |         .L
- .          |         .E
- ...........|..........R
-            |
-        Netconf
-    +--------------+
-    |   Network    |
-    |   Devices    |
-    +--------------+
-</pre><a href="#section-4.3-1" class="pilcrow">¶</a>
+               +--------------+
+               |     User     |
+               +-------+------+
+                       |
+               Natural Language
+              Command  |
+            ......................
+            .  +-------+------+  .
+            .  |  LLM/Agent   |  .
+            .  +-------+------+  .
+            .          |         .
+            .          |         .
+            .  +-------+------+  .
+            .  |  MCP Client  |  .
+            .  +-------+------+  .Network
+            .          |         .Controller
+            .   Tools Request    .
+            .          |         .
+            .  +-------+------+  .
+            .  |  MCP Server  |  .
+            .  +-------+------+  .
+            .          |         .
+            .          |         .
+            ...........|..........
+                       |
+              Netconf/Telemetry
+                       |
+               +--------------+
+               |   Network    |
+               |   Devices    |
+               +--------------+
+</pre><a href="#section-5.5.1-1" class="pilcrow">¶</a>
 </div>
 <ul class="normal">
-<li class="normal" id="section-4.3-2.1">
-            <p id="section-4.3-2.1.1">Scope: The MCP Server is hosted within the operator's local network, colocated with the O&amp;M Console and MCP Client.<a href="#section-4.3-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.5.1-2.1">
+              <p id="section-5.5.1-2.1.1">Scope: The MCP Server is hosted within the operator's local network, colocated with the O&amp;M Console and MCP Client.<a href="#section-5.5.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.3-2.2">
-            <p id="section-4.3-2.2.1">Key Characteristics:<a href="#section-4.3-2.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-5.5.1-2.2">
+              <p id="section-5.5.1-2.2.1">Key Characteristics:<a href="#section-5.5.1-2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.3-2.2.2.1">
-                <p id="section-4.3-2.2.2.1.1">Low Latency: Direct access to network devices minimizes tool execution delays.<a href="#section-4.3-2.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.5.1-2.2.2.1">
+                  <p id="section-5.5.1-2.2.2.1.1">Low Latency: Direct access to network devices minimizes tool execution delays.<a href="#section-5.5.1-2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-4.3-2.2.2.2">
-                <p id="section-4.3-2.2.2.2.1">Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.<a href="#section-4.3-2.2.2.2.1" class="pilcrow">¶</a></p>
+                <li class="normal" id="section-5.5.1-2.2.2.2">
+                  <p id="section-5.5.1-2.2.2.2.1">Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.<a href="#section-5.5.1-2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+              </ul>
 </li>
-        </ul>
+          </ul>
 <div id="use-cases">
-<section id="section-4.3.1">
-          <h4 id="name-use-cases">
-<a href="#section-4.3.1" class="section-number selfRef">4.3.1. </a><a href="#name-use-cases" class="section-name selfRef">Use cases</a>
-          </h4>
+<section id="section-5.5.1.1">
+            <h5 id="name-use-cases">
+<a href="#section-5.5.1.1" class="section-number selfRef">5.5.1.1. </a><a href="#name-use-cases" class="section-name selfRef">Use cases</a>
+            </h5>
 <ul class="normal">
-<li class="normal" id="section-4.3.1-1.1">
-              <p id="section-4.3.1-1.1.1">Air-Gapped Networks (Military/Critical Infrastructure)<a href="#section-4.3.1-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.5.1.1-1.1">
+                <p id="section-5.5.1.1-1.1.1">Air-Gapped Networks (Military/Critical Infrastructure)<a href="#section-5.5.1.1-1.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.3.1-1.1.2.1">
-                  <p id="section-4.3.1-1.1.2.1.1">Scenario: A power grid control network prohibits external connectivity.<a href="#section-4.3.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.5.1.1-1.1.2.1">
+                    <p id="section-5.5.1.1-1.1.2.1.1">Scenario: A power grid control network prohibits external connectivity.<a href="#section-5.5.1.1-1.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-4.3.1-1.1.2.2">
-                  <p id="section-4.3.1-1.1.2.2.1">Implementation:<a href="#section-4.3.1-1.1.2.2.1" class="pilcrow">¶</a></p>
+                  <li class="normal" id="section-5.5.1.1-1.1.2.2">
+                    <p id="section-5.5.1.1-1.1.2.2.1">Implementation:<a href="#section-5.5.1.1-1.1.2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.3.1-1.1.2.2.2.1">
-                      <p id="section-4.3.1-1.1.2.2.2.1.1">MCP Server runs on local servers with pre-loaded tool definitions.<a href="#section-4.3.1-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.5.1.1-1.1.2.2.2.1">
+                        <p id="section-5.5.1.1-1.1.2.2.2.1.1">MCP Server runs on local servers with pre-loaded tool definitions.<a href="#section-5.5.1.1-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                    <li class="normal" id="section-4.3.1-1.1.2.2.2.2">
-                      <p id="section-4.3.1-1.1.2.2.2.2.1">LLM operates offline (e.g., quantized model) or via approved internal APIs.<a href="#section-4.3.1-1.1.2.2.2.2.1" class="pilcrow">¶</a></p>
+                      <li class="normal" id="section-5.5.1.1-1.1.2.2.2.2">
+                        <p id="section-5.5.1.1-1.1.2.2.2.2.1">LLM operates offline (e.g., quantized model) or via approved internal APIs.<a href="#section-5.5.1.1-1.1.2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                  </ul>
+                    </ul>
 </li>
-                <li class="normal" id="section-4.3.1-1.1.2.3">
-                  <p id="section-4.3.1-1.1.2.3.1">Advantage: Ensures zero data exfiltration risks.<a href="#section-4.3.1-1.1.2.3.1" class="pilcrow">¶</a></p>
+                  <li class="normal" id="section-5.5.1.1-1.1.2.3">
+                    <p id="section-5.5.1.1-1.1.2.3.1">Advantage: Ensures zero data exfiltration risks.<a href="#section-5.5.1.1-1.1.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              </ul>
-</li>
-          </ul>
-</section>
-</div>
-</section>
-</div>
-<div id="mcp-in-remote-device">
-<section id="section-4.4">
-        <h3 id="name-mcp-in-remote-device">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-mcp-in-remote-device" class="section-name selfRef">MCP in Remote Device</a>
-        </h3>
-<div class="alignLeft art-text artwork" id="section-4.4-1">
-<pre>
-  +--------------+
-  |     User     |
-  +-------+------+
-          |
-  Natural Language
-  Request |    ......................    .  +-------+------+  .    .  |     LLM      |  .    .  +-------+------+  .    .          |         .    .    O&amp;M Console     .    .          |         .R O    .  +-------+------+  .K L    .  |  MCP Client  |  .  L    .  +-------+------+  .  L    .          |         .  E    .   Tools Request    .  R    .          |         .    ......................    ......................    .  +-------+------+  .N D    .  |  MCP Server  |  .E E    .  +-------+------+  .T V    .          |         .W I    .  +--------------+  .O C    .  |   Network    |  .R E    .  |   Devices    |  .K    .  +--------------+  .    ......................
-</pre><a href="#section-4.4-1" class="pilcrow">¶</a>
-</div>
-<ul class="normal">
-<li class="normal" id="section-4.4-2.1">
-            <p id="section-4.4-2.1.1">Scope: The MCP Server operates in a cloud environment, serving distributed MCP Clients via public/private APIs.<a href="#section-4.4-2.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-4.4-2.2">
-            <p id="section-4.4-2.2.1">Key Characteristics:<a href="#section-4.4-2.2.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-4.4-2.2.2.1">
-                <p id="section-4.4-2.2.2.1.1">Centralized Management: A single MCP Server instance can manage multiple geographically dispersed networks.<a href="#section-4.4-2.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-4.4-2.2.2.2">
-                <p id="section-4.4-2.2.2.2.1">Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.<a href="#section-4.4-2.2.2.2.1" class="pilcrow">¶</a></p>
+                </ul>
 </li>
             </ul>
-</li>
-        </ul>
-<div id="use-cases-1">
-<section id="section-4.4.1">
-          <h4 id="name-use-cases-2">
-<a href="#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="#name-use-cases-2" class="section-name selfRef">Use cases</a>
+</section>
+</div>
+</section>
+</div>
+<div id="mcp-within-the-network-device">
+<section id="section-5.5.2">
+          <h4 id="name-mcp-within-the-network-devi">
+<a href="#section-5.5.2" class="section-number selfRef">5.5.2. </a><a href="#name-mcp-within-the-network-devi" class="section-name selfRef">MCP Within the Network Device</a>
           </h4>
+<div class="alignLeft art-text artwork" id="section-5.5.2-1">
+<pre>
+                 +--------------+
+                 |     User     |
+                 +-------+------+
+                        |
+                Natural Language
+                Request |
+              ......................
+              .  +-------+------+  .
+              .  |  LLM/Agent   |  .
+              .  +-------+------+  .
+              .          |         .
+              .          |         .
+              .          |         .
+              .  +-------+------+  .
+              .  |  MCP Client  |  .
+              .  +-------+------+  .Network
+              .          |         .Controller
+              .   Tools Request    .
+              .          |         .
+              .          |         .
+              ......................
+              .  +-------+------+  .
+              .  |  MCP Server  |  .
+              .  +-------+------+  .Network
+              .        CLI         .Device
+              .          |         .
+              . +--------------+   .
+              . |   Network    |   .
+              . |   Devices    |   .
+              . +--------------+   .
+              ......................
+</pre><a href="#section-5.5.2-1" class="pilcrow">¶</a>
+</div>
 <ul class="normal">
-<li class="normal" id="section-4.4.1-1.1">
-              <p id="section-4.4.1-1.1.1">Global Enterprise Network Automation<a href="#section-4.4.1-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.5.2-2.1">
+              <p id="section-5.5.2-2.1.1">Scope: The MCP Server operates in a cloud environment, serving distributed MCP Clients via public/private APIs.<a href="#section-5.5.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.5.2-2.2">
+              <p id="section-5.5.2-2.2.1">Key Characteristics:<a href="#section-5.5.2-2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.4.1-1.1.2.1">
-                  <p id="section-4.4.1-1.1.2.1.1">Scenario: A multinational corporation standardizes configurations across hundreds of branch offices.<a href="#section-4.4.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.5.2-2.2.2.1">
+                  <p id="section-5.5.2-2.2.2.1.1">Centralized Management: A single MCP Server instance can manage multiple geographically dispersed networks.<a href="#section-5.5.2-2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-4.4.1-1.1.2.2">
-                  <p id="section-4.4.1-1.1.2.2.1">Implementation:<a href="#section-4.4.1-1.1.2.2.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-4.4.1-1.1.2.2.2.1">
-                      <p id="section-4.4.1-1.1.2.2.2.1.1">MCP Server hosted on AWS/Azure with regional replicas.<a href="#section-4.4.1-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                    <li class="normal" id="section-4.4.1-1.1.2.2.2.2">
-                      <p id="section-4.4.1-1.1.2.2.2.2.1">Tools like deploy_vpn_template adapt to local compliance rules.<a href="#section-4.4.1-1.1.2.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                  </ul>
-</li>
-                <li class="normal" id="section-4.4.1-1.1.2.3">
-                  <p id="section-4.4.1-1.1.2.3.1">Advantage: Unified toolchain reduces configuration drift.<a href="#section-4.4.1-1.1.2.3.1" class="pilcrow">¶</a></p>
+                <li class="normal" id="section-5.5.2-2.2.2.2">
+                  <p id="section-5.5.2-2.2.2.2.1">Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.<a href="#section-5.5.2-2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
               </ul>
 </li>
           </ul>
+<div id="use-cases-1">
+<section id="section-5.5.2.1">
+            <h5 id="name-use-cases-2">
+<a href="#section-5.5.2.1" class="section-number selfRef">5.5.2.1. </a><a href="#name-use-cases-2" class="section-name selfRef">Use cases</a>
+            </h5>
+<ul class="normal">
+<li class="normal" id="section-5.5.2.1-1.1">
+                <p id="section-5.5.2.1-1.1.1">Global Enterprise Network Automation<a href="#section-5.5.2.1-1.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.5.2.1-1.1.2.1">
+                    <p id="section-5.5.2.1-1.1.2.1.1">Scenario: A multinational corporation standardizes configurations across hundreds of branch offices.<a href="#section-5.5.2.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-5.5.2.1-1.1.2.2">
+                    <p id="section-5.5.2.1-1.1.2.2.1">Implementation:<a href="#section-5.5.2.1-1.1.2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.5.2.1-1.1.2.2.2.1">
+                        <p id="section-5.5.2.1-1.1.2.2.2.1.1">MCP Server hosted on AWS/Azure with regional replicas.<a href="#section-5.5.2.1-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                      <li class="normal" id="section-5.5.2.1-1.1.2.2.2.2">
+                        <p id="section-5.5.2.1-1.1.2.2.2.2.1">Tools like deploy_vpn_template adapt to local compliance rules.<a href="#section-5.5.2.1-1.1.2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                    </ul>
+</li>
+                  <li class="normal" id="section-5.5.2.1-1.1.2.3">
+                    <p id="section-5.5.2.1-1.1.2.3.1">Advantage: Unified toolchain reduces configuration drift.<a href="#section-5.5.2.1-1.1.2.3.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
 </section>
 </div>
 </section>
 </div>
 </section>
 </div>
-<div id="conclusion">
-<section id="section-5">
-      <h2 id="name-conclusion">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-conclusion" class="section-name selfRef">Conclusion</a>
-    </h2>
 </section>
 </div>
 <div id="iana-considerations">
