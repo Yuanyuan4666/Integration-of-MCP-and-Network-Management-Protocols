@@ -4,11 +4,11 @@
 
 nmrg                                                         Y. Yuanyuan
 Internet-Draft                                                    HuaWei
-Intended status: Informational                               24 May 2025
-Expires: 25 November 2025
+Intended status: Informational                               25 May 2025
+Expires: 26 November 2025
 
 
-          integration of MCP and network management protocols
+          Integration of MCP and Network Management Protocols
                         draft-yang-mcp-nm-latest
 
 Abstract
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 November 2025.
+   This Internet-Draft will expire on 26 November 2025.
 
 Copyright Notice
 
