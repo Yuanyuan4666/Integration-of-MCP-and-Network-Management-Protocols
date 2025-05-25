@@ -81,7 +81,7 @@ Table of Contents
    4.  Operational Consideration
      4.1.  Functional Modules
        4.1.1.  Encapsulating Device Operations into MCP Tools
-       4.1.2.  LLM APIs for Intent-to-Tool Translation
+       4.1.2.  LLM APIs for Words-to-Tool Translation
        4.1.3.  Closed-Loop Automation Execution
      4.2.  Workflow
      4.3.  MCP within Network Controller
@@ -206,16 +206,15 @@ Table of Contents
 
    *  _Implementation_:
 
-      -  _Tool Abstraction_: Vendor-specific CLI/API commands are
-         wrapped into discrete MCP Tools with uniform JSON/Protobuf
-         schemas.
+      -  _Tool Abstraction_: Vendor-specific commands are wrapped into
+         discrete MCP Tools with uniform schemas.
 
       -  _Tool Registry_: A centralized repository hosts MCP Tools with
          metadata (e.g., vendor compatibility, privilege requirements).
 
-      -  _Dynamic Loading_: Servers (e.g., network controllers) invoke
-         tools on demand via MCP RPCs, decoupling tool updates from core
-         platform logic.
+      -  _Dynamic Loading_: MCP Servers dynamically invoke required
+         tools via NETCONF on demand, thereby decoupling tool lifecycle
+         management from the server's core functionality.
 
    *  _Benefits_:
 
@@ -223,28 +222,27 @@ Table of Contents
 
       -  Enables plug-and-play integration of new device types.
 
-4.1.2.  LLM APIs for Intent-to-Tool Translation
+4.1.2.  LLM APIs for Words-to-Tool Translation
 
    *  Objective: Bridge natural language instructions to executable tool
       sequences.
 
    *  Workflow:
 
-      -  Intent Parsing: LLM APIs (e.g., GPT-4, Claude) process user
+      -  Command Parsing: LLM APIs (e.g., GPT-4, Claude) process user
          queries like "Upgrade all switches in Datacenter A during
-         maintenance" into structured intents.
+         maintenance" into structured commands.
 
       -  Toolchain Generation: The LLM selects and sequences MCP Tools
          (e.g., get_inventory → schedule_downtime → download_firmware →
          validate_upgrade).
 
       -  Validation: Pre-execution checks verify tool compatibility with
-         target devices (e.g., ensuring upgrade_tool supports Arista EOS
-         versions).
+         target devices.
 
    *  APIs Exposed:
 
-      -  mcp-translate: Converts text to toolchain JSON.
+      -  mcp-translate: Converts words to toolchain JSON.
 
       -  mcp-validate: Confirms tool availability/permissions.
 
@@ -416,30 +414,11 @@ Table of Contents
 
 5.  Conclusion
 
-   MCP Technology delivers an innovative solution for cross-vendor
-   network device management at scale.  By enhancing and extending
-   traditional network management protocols (NETCONF/RESTCONF), it
-   effectively addresses multi-vendor device management challenges while
-   significantly improving network administration efficiency and service
-   quality.  As the technology matures, MCP is positioned for widespread
-   adoption in network management domains.
-
 6.  IANA Considerations
 
    This document has no IANA actions.
 
 7.  Security Considerations
-
-   This document analyzes the application of MCP in sophisticated batch
-   network management and proposes two deployment schemes, which may
-   introduce certain security risks.  Since MCP's internal instructions
-   are invisible to users and only accessible to the LLM model,
-   attackers could potentially inject malicious instructions, leading to
-   information leakage or workflow errors.
-
-   To address such security risks, measures like version locking
-   mechanisms, enhanced visibility, and context isolation can provide a
-   certain level of protection.
 
 Appendix A.  Reference
 
