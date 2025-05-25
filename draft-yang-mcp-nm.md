@@ -19,7 +19,7 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "integration of MCP and network management protocols"
+title: "Integration of MCP and Network Management Protocols"
 category: info
 
 docname: draft-yang-mcp-nm-latest
