@@ -54,7 +54,13 @@ informative:
 
 --- abstract
 
-With the emergence of various LLM models, enterprises face different frameworks or systems during deployment. For each LLM model, a corresponding toolchain needs to be developed, causing significant inconvenience. This document introduces MCP(Model Context Protocol), a technology that can effectively manage different LLM models. Further, this document discusses the application of MCP in cross-vendor network equipment batch management and proposes corresponding deployment strategies.
+With the emergence of various LLM models, enterprises face different frameworks or systems during deployment. For each LLM model, a corresponding toolchain needs to be developed, causing significant inconvenience. This document introduces MCP(Model Context Protocol), a technology that can effectively manage different LLM models. Further, this document discusses the application of MCP in cross-vendor network equipment batch management and proposes corresponding deployment strategies.  MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to
+    develop various rich AI driven network applications, realize intent based networks
+    management automation in the multi-vendor heterogeneous network environment.
+    This document outlines the applicability of MCP to the network management
+    in the IP network that utilizes IETF technologies. It explores operational
+    aspect, key components, generic workflow and deployment senarios. The impact
+    of integrating MCP into the network management system is also discussed.
 
 --- middle
 
