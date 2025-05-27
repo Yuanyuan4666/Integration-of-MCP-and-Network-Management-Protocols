@@ -109,7 +109,7 @@ NETCONF defined in {{!RFC6241}}, while transactional and robust, can be more res
 
 RESTCONF defined in {{!RFC8040}}, with its stateless, web-friendly architecture, scales better but may lack the advanced transactional features of NETCONF and can be less efficient for bandwidth-intensive operations.
 
-# Operational Consideration{#sec-radiu}
+# Operational Consideration {#sec-radiu}
 
 This section outlines operational aspects of MCP with Network management requirements as follows:
 
