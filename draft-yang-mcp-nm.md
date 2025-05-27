@@ -109,7 +109,7 @@ NETCONF defined in {{!RFC6241}}, while transactional and robust, can be more res
 
 RESTCONF defined in {{!RFC8040}}, with its stateless, web-friendly architecture, scales better but may lack the advanced transactional features of NETCONF and can be less efficient for bandwidth-intensive operations.
 
-# Operational Consideration {#sec-radiu}
+# Operational Consideration {#radius}
 
 This section outlines operational aspects of MCP with Network management requirements as follows:
 
@@ -119,7 +119,7 @@ This section outlines operational aspects of MCP with Network management require
 
 # Architecture Overview
 
-The LLM model with MCP support, with its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well- suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in section {{sec-radius}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
+The LLM model with MCP support, with its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well- suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in section {{radius}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
 
 ## Encapsulating Device Operations into MCP Tools
 
