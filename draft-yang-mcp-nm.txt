@@ -4,8 +4,8 @@
 
 nmrg                                                         Y. Yuanyuan
 Internet-Draft                                                    HuaWei
-Intended status: Informational                               25 May 2025
-Expires: 26 November 2025
+Intended status: Informational                               27 May 2025
+Expires: 28 November 2025
 
 
           Integration of MCP and Network Management Protocols
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 November 2025.
+   This Internet-Draft will expire on 28 November 2025.
 
 Copyright Notice
 
@@ -89,6 +89,7 @@ Table of Contents
        5.5.2.  MCP Within the Network Device
    6.  IANA Considerations
    7.  Security Considerations
+   8.  Normative References
    Appendix A.  Reference
    Author's Address
 
@@ -168,13 +169,14 @@ Table of Contents
 
 3.3.  Performance & Scalability Issues
 
-   NETCONF, while transactional and robust, can be more resource-
-   intensive, particularly for large deployments and fast-changing
-   configurations.
+   NETCONF defined in [RFC6241], while transactional and robust, can be
+   more resource-intensive, particularly for large deployments and fast-
+   changing configurations.
 
-   RESTCONF, with its stateless, web-friendly architecture, scales
-   better but may lack the advanced transactional features of NETCONF
-   and can be less efficient for bandwidth-intensive operations.
+   RESTCONF defined in [RFC8040], with its stateless, web-friendly
+   architecture, scales better but may lack the advanced transactional
+   features of NETCONF and can be less efficient for bandwidth-intensive
+   operations.
 
 4.  Operational Consideration
 
@@ -200,9 +202,9 @@ Table of Contents
    diverse complex requirements and deliver corresponding
    functionalities, is well- suited for large scale multi-vendor network
    management environments, effectively addressing the aforementioned
-   operational challenges in section 4.  Therefore, we have introduced
-   the MCP protocol in the network management environments for building
-   an intelligent network management and control platform.
+   operational challenges in section Section 4.  Therefore, we have
+   introduced the MCP protocol in the network management environments
+   for building an intelligent network management and control platform.
 
 5.1.  Encapsulating Device Operations into MCP Tools
 
@@ -453,6 +455,17 @@ Table of Contents
    This document has no IANA actions.
 
 7.  Security Considerations
+
+8.  Normative References
+
+   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
+              and A. Bierman, Ed., "Network Configuration Protocol
+              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
+              <https://www.rfc-editor.org/rfc/rfc6241>.
+
+   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
+              Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
+              <https://www.rfc-editor.org/rfc/rfc8040>.
 
 Appendix A.  Reference
 
