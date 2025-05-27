@@ -54,7 +54,7 @@ informative:
 
 --- abstract
 
-The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. This document outlines the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system is also discussed.
+The application of MCP {{!https://modelcontextprotocol.io}} in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. This document outlines the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system is also discussed.
 
 --- middle
 
@@ -105,11 +105,11 @@ Some vendors only partially support standard YANG models, and proprietary extens
 
 ## Performance & Scalability Issues
 
-NETCONF, while transactional and robust, can be more resource-intensive, particularly for large deployments and fast-changing configurations.
+NETCONF defined in {{!RFC6241}}, while transactional and robust, can be more resource-intensive, particularly for large deployments and fast-changing configurations.
 
-RESTCONF, with its stateless, web-friendly architecture, scales better but may lack the advanced transactional features of NETCONF and can be less efficient for bandwidth-intensive operations.
+RESTCONF defined in {{!RFC8040}}, with its stateless, web-friendly architecture, scales better but may lack the advanced transactional features of NETCONF and can be less efficient for bandwidth-intensive operations.
 
-# Operational Consideration
+# Operational Consideration{#sec-radiu}
 
 This section outlines operational aspects of MCP with Network management requirements as follows:
 
@@ -119,7 +119,7 @@ This section outlines operational aspects of MCP with Network management require
 
 # Architecture Overview
 
-The LLM model with MCP support, with its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well- suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in section 4. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
+The LLM model with MCP support, with its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well- suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in section {{sec-radius}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
 
 ## Encapsulating Device Operations into MCP Tools
 
@@ -283,4 +283,3 @@ This document has no IANA actions.
 --- back
 
 # Reference
-
