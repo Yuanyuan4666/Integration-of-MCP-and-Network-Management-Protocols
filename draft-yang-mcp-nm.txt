@@ -4,8 +4,8 @@
 
 nmrg                                                         Y. Yuanyuan
 Internet-Draft                                                    HuaWei
-Intended status: Informational                               27 May 2025
-Expires: 28 November 2025
+Intended status: Informational                               28 May 2025
+Expires: 29 November 2025
 
 
           Integration of MCP and Network Management Protocols
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 November 2025.
+   This Internet-Draft will expire on 29 November 2025.
 
 Copyright Notice
 
@@ -289,15 +289,12 @@ Table of Contents
    A general workflow is as follows:
 
    *  User Input Submission: An operator submits a natural language
-      request (e.g., "Disable port 22 on all edge switches") to the LLM
-      interface.
+      request (e.g., "Disable port 22 on all edge switches") to the MCP
+      client.  And The MCP client forwards this request to the LLM.
 
    *  LLM Intent Processing: The LLM parses the input, identifies the
-      operational intent, and forwards a structured request to the local
-      O&M Console for validation and logging.
-
-   *  MCP Tool Discovery: The O&M Console routes the request to the MCP
-      Client, which queries the MCP Server to retrieve the available
+      operational intent, and forwards a structured request to the MCP
+      client, which queries the MCP Server to retrieve the available
       tools.
 
    *  LLM Toolchain Decision:
@@ -329,37 +326,33 @@ Table of Contents
 
 5.5.1.  MCP hosted within the Network Controller
 
-                  +--------------+
-                  |     User     |
-                  +-------+------+
-                          |
-                  Natural Language
-                 Command  |
-               ......................
-               .  +-------+------+  .
-               .  |  LLM/Agent   |  .
-               .  +-------+------+  .
-               .          |         .
-               .          |         .
-               .  +-------+------+  .
-               .  |  MCP Client  |  .
-               .  +-------+------+  .Network
-               .          |         .Controller
-               .   Tools Request    .
-               .          |         .
-               .  +-------+------+  .
-               .  |  MCP Server  |  .
-               .  +-------+------+  .
-               .          |         .
-               .          |         .
-               ...........|..........
-                          |
+                 +--------------+
+                 |     User     |
+                 +-------+------+
+                         |
+                 Natural Language
+                Command  |
+              ...........|............................
+              .          |                           .
+              .  +-------+------+       +-----------+.
+              .  |  MCP Client  +-------+  LLM      |.
+              .  +-------+------+       +-----------+.
+              .          |                           .
+              .   Tools Request                      .Network
+              .          |                           .Controller
+              .  +-------+------+                    .
+              .  |  MCP Server  |                    .
+              .  +-------+------+                    .
+              .          |                           .
+              ...........|............................
+                         |
+                         |
                  Netconf/Telemetry
-                          |
-                  +--------------+
-                  |   Network    |
-                  |   Devices    |
-                  +--------------+
+                         |
+                 +--------------+
+                 |   Network    |
+                 |   Devices    |
+                 +--------------+
 
    *  Scope: The MCP Server is hosted within the operator's local
       network, colocated with the O&M Console and MCP Client.
@@ -391,37 +384,30 @@ Table of Contents
 
 5.5.2.  MCP Within the Network Device
 
-                    +--------------+
-                    |     User     |
-                    +-------+------+
-                           |
-                   Natural Language
-                   Request |
-                 ......................
-                 .  +-------+------+  .
-                 .  |  LLM/Agent   |  .
-                 .  +-------+------+  .
-                 .          |         .
-                 .          |         .
-                 .          |         .
-                 .  +-------+------+  .
-                 .  |  MCP Client  |  .
-                 .  +-------+------+  .Network
-                 .          |         .Controller
-                 .   Tools Request    .
-                 .          |         .
-                 .          |         .
-                 ......................
-                 .  +-------+------+  .
-                 .  |  MCP Server  |  .
-                 .  +-------+------+  .Network
-                 .        CLI         .Device
-                 .          |         .
-                 . +--------------+   .
-                 . |   Network    |   .
-                 . |   Devices    |   .
-                 . +--------------+   .
-                 ......................
+                 +--------------+
+                 |     User     |
+                 +-------+------+
+                         |
+                 Natural Language
+                 Command  |
+               . .........|............................
+               .          |                           .
+               .  +-------+------+       +-----------+.
+               .  |  MCP Client  +-------+  LLM      |.Network
+               .  +-------+------+       +-----------+.Controller
+               .          |                           .
+               .   Tools Request                      .
+               ...........|............................
+               .  +-------+------+                    .
+               .  |  MCP Server  |                    .
+               .  +-------+------+                    .
+               .        CLI                           .Network
+               .          |                           .Device
+               .  +--------------+                    .
+               .  |   Network    |                    .
+               .  |   Devices    |                    .
+               .  +--------------+                    .
+               ........................................
 
    *  Scope: The MCP Server operates in a cloud environment, serving
       distributed MCP Clients via public/private APIs.
