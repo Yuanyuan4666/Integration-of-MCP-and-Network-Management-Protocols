@@ -53,7 +53,7 @@ informative:
 
 --- abstract
 
-The application of MCP {{!https://modelcontextprotocol.io}} in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. This document outlines the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system is also discussed.
+The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. This document outlines the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system is also discussed.
 
 --- middle
 
@@ -176,33 +176,33 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 
 ### MCP hosted within the Network Controller
 
-+--------------+
-|     User     |
-+-------+------+
-        |
-Natural Language
-Command  |
-. .........|............................
-.          |                           .
-.  +-------+------+       +-----------+.
-.  |  MCP Client  +-------+  LLM      |.
-.  +-------+------+       +-----------+.
-.          |                           .
-.   Tools Request                      .Network
-.          |                           .Controller
-.  +-------+------+                    .
-.  |  MCP Server  |                    .
-.  +-------+------+                    .
-.          |                           .
-...........|............................
-        |
-        |
-Netconf/Telemetry
-        |
-+--------------+
-|   Network    |
-|   Devices    |
-+--------------+
+                  +--------------+
+                  |     User     |
+                  +-------+------+
+                          |
+                  Natural Language
+                 Command  |
+               ...........|............................
+               .          |                           .
+               .  +-------+------+       +-----------+.
+               .  |  MCP Client  +-------+  LLM      |.
+               .  +-------+------+       +-----------+.
+               .          |                           .
+               .   Tools Request                      .Network
+               .          |                           .Controller
+               .  +-------+------+                    .
+               .  |  MCP Server  |                    .
+               .  +-------+------+                    .
+               .          |                           .
+               ...........|............................
+                          |
+                          |
+                  Netconf/Telemetry
+                          |
+                  +--------------+
+                  |   Network    |
+                  |   Devices    |
+                  +--------------+
 
 - Scope: The MCP Server is hosted within the operator's local network, colocated with the O&M Console and MCP Client.
 - Key Characteristics:
@@ -220,30 +220,30 @@ Netconf/Telemetry
 
 ### MCP Within the Network Device
 
-+--------------+
-|     User     |
-+-------+------+
-        |
-Natural Language
-Command  |
-. .........|............................
-.          |                           .
-.  +-------+------+       +-----------+.
-.  |  MCP Client  +-------+  LLM      |.Network
-.  +-------+------+       +-----------+.Controller
-.          |                           .
-.   Tools Request                      .
-...........|............................
-.  +-------+------+                    .
-.  |  MCP Server  |                    .
-.  +-------+------+                    .
-.        CLI                           .Network
-.          |                           .Device
-.  +--------------+                    .
-.  |   Network    |                    .
-.  |   Devices    |                    .
-.  +--------------+                    .
-........................................
+                  +--------------+
+                  |     User     |
+                  +-------+------+
+                          |
+                  Natural Language
+                  Command  |
+                . .........|............................
+                .          |                           .
+                .  +-------+------+       +-----------+.
+                .  |  MCP Client  +-------+  LLM      |.Network
+                .  +-------+------+       +-----------+.Controller
+                .          |                           .
+                .   Tools Request                      .
+                ...........|............................
+                .  +-------+------+                    .
+                .  |  MCP Server  |                    .
+                .  +-------+------+                    .
+                .        CLI                           .Network
+                .          |                           .Device
+                .  +--------------+                    .
+                .  |   Network    |                    .
+                .  |   Devices    |                    .
+                .  +--------------+                    .
+                ........................................
 
 - Scope: The MCP Server operates in a cloud environment, serving distributed MCP Clients via public/private APIs.
 - Key Characteristics:
