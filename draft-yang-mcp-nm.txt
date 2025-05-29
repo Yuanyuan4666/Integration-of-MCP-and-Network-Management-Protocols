@@ -305,16 +305,11 @@ Table of Contents
       outputs (success/failure logs) and forwards them to the LLM for
       summarization.
 
-   While the overall workflow remains consistent, the MCP Server's
-   deployment location (on-premises or remote) introduces operational
-   variations.  This section defines two refined approaches to
-   accommodate differing deployment scenarios.
-
 5.5.  Deployment considerations
 
    While the overall workflow remains consistent, the MCP Server's
    deployment location (on-premises or remote) introduces operational
-   variations.  This section explores two deployment considerations.
+   variations.  This section explores two deployment scenarios.
 
 5.5.1.  MCP hosted within the Network Controller
 
