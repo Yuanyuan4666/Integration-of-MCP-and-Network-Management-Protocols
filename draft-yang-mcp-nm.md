@@ -1,24 +1,4 @@
 ---
-###
-# Internet-Draft Markdown Template
-#
-# Rename this file from draft-todo-yourname-protocol.md to get started.
-# Draft name format is "draft-<yourname>-<workgroup>-<name>.md".
-#
-# For initial setup, you only need to edit the first block of fields.
-# Only "title" needs to be changed; delete "abbrev" if your title is short.
-# Any other content can be edited, but be careful not to introduce errors.
-# Some fields will be set automatically during setup if they are unchanged.
-#
-# Don't include "-00" or "-latest" in the filename.
-# Labels in the form draft-<yourname>-<workgroup>-<name>-latest are used by
-# the tools to refer to the current version; see "docname" for example.
-#
-# This template uses kramdown-rfc: https://github.com/cabo/kramdown-rfc
-# You can replace the entire file if you prefer a different format.
-# Change the file extension to match the format (.xml for XML, etc...)
-#
-###
 title: "Integration of MCP and Network Management Protocols"
 category: info
 
@@ -33,19 +13,16 @@ workgroup: nmrg
 keyword:
  - large language model
  - model context protocol
-venue:
-  group: nmrg
-  type: Working Group
-  mail: yangyuanyuan55@huawei.com
-  arch: https://example.com/WG
-  github: USER/REPO
-  latest: https://example.com/LATEST
 
 author:
  -
-    fullname: Yang Yuanyuan
-    organization: HuaWei
+    fullname: Yuanyuan Yang
+    organization: Huawei
     email: yangyuanyuan55@huawei.com
+ -
+   fullname: Qin Wu
+   organization: Huawei
+   email: bill.wu@huawei.com
 
 normative:
 
@@ -60,15 +37,15 @@ The application of MCP in the network management field is meant to develop vario
 
 # Introduction
 
-The Model Control Protocol (MCP) provides a standardized way for LLMs to access and utilize information from different sources, making it easier to build AI applications that can interact with external systems.
+The Model Control Protocol (MCP) provides a standardized way for LLMs to access and utilize information from different sources, interact with tools, making it easier to build AI applications that can interact with external systems.
 
-MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution, MCP enables:
+MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution within the network management system or the network controller, MCP enables:
 
 - Unified operation abstraction through normalized MCP tool definitions
 - Seamless LLM integration via structured API contracts
 - Closed-Loop Automation Execution
 
-This document outlines the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system is also discussed.
+This document outlines the applicability of MCP to the network management plane in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system will also be discussed.
 
 # Terminology & Notation Conventions
 
@@ -88,9 +65,9 @@ The following terms are used throughout this document:
 - **Netconf**: Network Configuration Protocol
 - **Restconf**: RESTful Network Configuration Protocol
 
-# Overveiw of key challenges for the network management
+# Overview of key challenges for the network management
 
-In large scale network management environment, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues:
+In large scale network management environment, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues or challenges:
 
 ## Inconsistent YANG Model Support
 
@@ -99,15 +76,20 @@ Different vendors implement different YANG models (standard or proprietary), lea
 - Lack of uniform data structures for configuration/retrieval.
 - Requirement for vendor-specific adaptations in automation scripts.
 
-## Partial or Non-Standard RESTCONF/NETCONF Implementations
+Also IETF standard device models has slow adoption. Similar device models
+are defined in Openconfig or other SDOs, therefore the current YANG device
+models ecosystem is fragmented.
 
-Some vendors only partially support standard YANG models, and proprietary extensions may break interoperability.
+## Partial or Non-Standard Network management protocols Implementations
 
-## Performance & Scalability Issues
+Some vendors only partially support standard Network management protocols, and proprietary extensions may break interoperability.
+Other vendors might choose non-stanard network management protocol or telemetry protocol such as gnmi, grpc.
 
-NETCONF defined in {{!RFC6241}}, while transactional and robust, can be more resource-intensive, particularly for large deployments and fast-changing configurations.
+## Lack integration with Network APIs
 
-RESTCONF defined in {{!RFC8040}}, with its stateless, web-friendly architecture, scales better but may lack the advanced transactional features of NETCONF and can be less efficient for bandwidth-intensive operations.
+Today, network API has been widely adopted by the northbound interface of OSS/BSS or Network orchestrators while YANG data models have 
+been widely adopted by the northbound interface of the network controller or the interface between the network controller and the network devices.
+However Network API ecosystem and YANG model ecosystem are both built as silo and lack integration or mapping between them.
 
 # Operational Consideration {#sec-radiu}
 
@@ -210,15 +192,6 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
   - Low Latency: Direct access to network devices minimizes tool execution delays.
   - Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.
 
-#### Use cases
-
-- Air-Gapped Networks (Military/Critical Infrastructure)
-  - Scenario: A power grid control network prohibits external connectivity.
-  - Implementation:
-    - MCP Server runs on local servers with pre-loaded tool definitions.
-    - LLM operates offline (e.g., quantized model) or via approved internal APIs.
-  - Advantage: Ensures zero data exfiltration risks.
-
 ### MCP Within the Network Device
 
                   +--------------+
@@ -250,15 +223,6 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 - Key Characteristics:
   - Centralized Management: A single MCP Server instance can manage multiple geographically dispersed networks.
   - Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.
-
-#### Use cases
-
-- Global Enterprise Network Automation
-  - Scenario: A multinational corporation standardizes configurations across hundreds of branch offices.
-  - Implementation:
-    - MCP Server hosted on AWS/Azure with regional replicas.
-    - Tools like deploy_vpn_template adapt to local compliance rules.
-  - Advantage: Unified toolchain reduces configuration drift.
 
 # IANA Considerations
 
