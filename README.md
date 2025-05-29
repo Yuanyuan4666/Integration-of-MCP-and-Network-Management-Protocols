@@ -4,7 +4,7 @@
 
 This is the working area for the individual Internet-Draft, "TODO - Your title".
 
-* [Editor's Copy](https://Yuanyuan4666.github.io/MCPA2A/#go.draft-yangyuanyuan-huawei-mcp.html)
+* [Editor's Copy](https://Yuanyuan4666.github.io/Integration-of-MCP-and-Network-Management-Protocols/#go.draft-yang-mcp-nm.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-yangyuanyuan-huawei-mcp)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-yangyuanyuan-huawei-mcp)
 * [Compare Editor's Copy to Individual Draft](https://Yuanyuan4666.github.io/MCPA2A/#go.draft-yangyuanyuan-huawei-mcp.diff)
