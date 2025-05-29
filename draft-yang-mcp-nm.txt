@@ -2,10 +2,10 @@
 
 
 
-nmrg                                                         Y. Yuanyuan
-Internet-Draft                                                    HuaWei
-Intended status: Informational                               28 May 2025
-Expires: 29 November 2025
+nmrg                                                             Y. Yang
+Internet-Draft                                                     Q. Wu
+Intended status: Informational                                    Huawei
+Expires: 30 November 2025                                    29 May 2025
 
 
           Integration of MCP and Network Management Protocols
@@ -22,21 +22,6 @@ Abstract
    components, generic workflow and deployment senarios.  The impact of
    integrating MCP into the network management system is also discussed.
 
-About This Document
-
-   This note is to be removed before publishing as an RFC.
-
-   The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-yang-mcp-nm/.
-
-   Discussion of this document takes place on the nmrg Working Group
-   mailing list (mailto:yangyuanyuan55@huawei.com), which is archived at
-   https://example.com/WG.
-
-   Source for this draft and an issue tracker can be found at
-   https://github.com/USER/REPO.
-
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
@@ -52,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 November 2025.
+   This Internet-Draft will expire on 30 November 2025.
 
 Copyright Notice
 
@@ -74,10 +59,11 @@ Table of Contents
    2.  Terminology & Notation Conventions
      2.1.  MCP
      2.2.  Others
-   3.  Overveiw of key challenges for the network management
+   3.  Overview of key challenges for the network management
      3.1.  Inconsistent YANG Model Support
-     3.2.  Partial or Non-Standard RESTCONF/NETCONF Implementations
-     3.3.  Performance & Scalability Issues
+     3.2.  Partial or Non-Standard Network management protocols
+           Implementations
+     3.3.  Lack integration with Network APIs
    4.  Operational Consideration
    5.  Architecture Overview
      5.1.  Encapsulating Device Operations into MCP Tools
@@ -89,16 +75,15 @@ Table of Contents
        5.5.2.  MCP Within the Network Device
    6.  IANA Considerations
    7.  Security Considerations
-   8.  Normative References
    Appendix A.  Reference
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
    The Model Control Protocol (MCP) provides a standardized way for LLMs
-   to access and utilize information from different sources, making it
-   easier to build AI applications that can interact with external
-   systems.
+   to access and utilize information from different sources, interact
+   with tools, making it easier to build AI applications that can
+   interact with external systems.
 
    MCP has been seen as rapid adoption technology in the consumer field.
    The application of MCP in the network management field is meant to
@@ -106,7 +91,8 @@ Table of Contents
    based networks management automation in the multi-vendor
    heterogeneous network environment.  By establishing standard
    interfaces for tool encapsulation, intent translation, and closed-
-   loop execution, MCP enables:
+   loop execution within the network management system or the network
+   controller, MCP enables:
 
    *  Unified operation abstraction through normalized MCP tool
       definitions
@@ -116,10 +102,10 @@ Table of Contents
    *  Closed-Loop Automation Execution
 
    This document outlines the applicability of MCP to the network
-   management in the IP network that utilizes IETF technologies.  It
-   explores operational aspect, key components, generic workflow and
+   management plane in the IP network that utilizes IETF technologies.
+   It explores operational aspect, key components, generic workflow and
    deployment senarios.  The impact of integrating MCP into the network
-   management system is also discussed.
+   management system will also be discussed.
 
 2.  Terminology & Notation Conventions
 
@@ -147,11 +133,11 @@ Table of Contents
 
    *  *Restconf*: RESTful Network Configuration Protocol
 
-3.  Overveiw of key challenges for the network management
+3.  Overview of key challenges for the network management
 
    In large scale network management environment, a large number of
    devices from different vendors need to be uniformly managed, which
-   can lead to the following issues:
+   can lead to the following issues or challenges:
 
 3.1.  Inconsistent YANG Model Support
 
@@ -162,21 +148,27 @@ Table of Contents
 
    *  Requirement for vendor-specific adaptations in automation scripts.
 
-3.2.  Partial or Non-Standard RESTCONF/NETCONF Implementations
+   Also IETF standard device models has slow adoption.  Similar device
+   models are defined in Openconfig or other SDOs, therefore the current
+   YANG device models ecosystem is fragmented.
 
-   Some vendors only partially support standard YANG models, and
-   proprietary extensions may break interoperability.
+3.2.  Partial or Non-Standard Network management protocols
+      Implementations
 
-3.3.  Performance & Scalability Issues
+   Some vendors only partially support standard Network management
+   protocols, and proprietary extensions may break interoperability.
+   Other vendors might choose non-stanard network management protocol or
+   telemetry protocol such as gnmi, grpc.
 
-   NETCONF defined in [RFC6241], while transactional and robust, can be
-   more resource-intensive, particularly for large deployments and fast-
-   changing configurations.
+3.3.  Lack integration with Network APIs
 
-   RESTCONF defined in [RFC8040], with its stateless, web-friendly
-   architecture, scales better but may lack the advanced transactional
-   features of NETCONF and can be less efficient for bandwidth-intensive
-   operations.
+   Today, network API has been widely adopted by the northbound
+   interface of OSS/BSS or Network orchestrators while YANG data models
+   have been widely adopted by the northbound interface of the network
+   controller or the interface between the network controller and the
+   network devices.  However Network API ecosystem and YANG model
+   ecosystem are both built as silo and lack integration or mapping
+   between them.
 
 4.  Operational Consideration
 
@@ -365,23 +357,6 @@ Table of Contents
       -  Data Control: All processing (LLM queries, tool executions)
          remains within the operator’s infrastructure.
 
-5.5.1.1.  Use cases
-
-   *  Air-Gapped Networks (Military/Critical Infrastructure)
-
-      -  Scenario: A power grid control network prohibits external
-         connectivity.
-
-      -  Implementation:
-
-         o  MCP Server runs on local servers with pre-loaded tool
-            definitions.
-
-         o  LLM operates offline (e.g., quantized model) or via approved
-            internal APIs.
-
-      -  Advantage: Ensures zero data exfiltration risks.
-
 5.5.2.  MCP Within the Network Device
 
                  +--------------+
@@ -420,43 +395,21 @@ Table of Contents
       -  Scalability: Cloud-native scaling accommodates dynamic tool
          registry updates and high request volumes.
 
-5.5.2.1.  Use cases
-
-   *  Global Enterprise Network Automation
-
-      -  Scenario: A multinational corporation standardizes
-         configurations across hundreds of branch offices.
-
-      -  Implementation:
-
-         o  MCP Server hosted on AWS/Azure with regional replicas.
-
-         o  Tools like deploy_vpn_template adapt to local compliance
-            rules.
-
-      -  Advantage: Unified toolchain reduces configuration drift.
-
 6.  IANA Considerations
 
    This document has no IANA actions.
 
 7.  Security Considerations
 
-8.  Normative References
-
-   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
-              and A. Bierman, Ed., "Network Configuration Protocol
-              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
-              <https://www.rfc-editor.org/rfc/rfc6241>.
-
-   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
-              Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
-              <https://www.rfc-editor.org/rfc/rfc8040>.
-
 Appendix A.  Reference
 
-Author's Address
+Authors' Addresses
 
-   Yang Yuanyuan
-   HuaWei
+   Yuanyuan Yang
+   Huawei
    Email: yangyuanyuan55@huawei.com
+
+
+   Qin Wu
+   Huawei
+   Email: bill.wu@huawei.com

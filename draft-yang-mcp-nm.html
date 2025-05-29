@@ -5,7 +5,8 @@
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>Integration of MCP and Network Management Protocols</title>
-<meta content="Yang Yuanyuan" name="author">
+<meta content="Yuanyuan Yang" name="author">
+<meta content="Qin Wu" name="author">
 <meta content="
        The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. This document outlines the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system is also discussed. 
     " name="description">
@@ -1048,8 +1049,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <td class="right">May 2025</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Yuanyuan</td>
-<td class="center">Expires 29 November 2025</td>
+<td class="left">Yang &amp; Wu</td>
+<td class="center">Expires 30 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,17 +1063,21 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-yang-mcp-nm-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-28" class="published">28 May 2025</time>
+<time datetime="2025-05-29" class="published">29 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-29">29 November 2025</time></dd>
-<dt class="label-authors">Author:</dt>
+<dd class="expires"><time datetime="2025-11-30">30 November 2025</time></dd>
+<dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
-      <div class="author-name">Y. Yuanyuan</div>
-<div class="org">HuaWei</div>
+      <div class="author-name">Y. Yang</div>
+<div class="org">Huawei</div>
+</div>
+<div class="author">
+      <div class="author-name">Q. Wu</div>
+<div class="org">Huawei</div>
 </div>
 </dd>
 </dl>
@@ -1081,21 +1086,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. This document outlines the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system is also discussed.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-</section>
-<section class="note rfcEditorRemove" id="section-note.1">
-      <h2 id="name-about-this-document">
-<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
-      </h2>
-<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
-<p id="section-note.1-2">
-        The latest revision of this draft can be found at <span><a href="https://example.com/LATEST">https://example.com/LATEST</a></span>.
-        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-yang-mcp-nm/">https://datatracker.ietf.org/doc/draft-yang-mcp-nm/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
-<p id="section-note.1-3">
-        Discussion of this document takes place on the
-        nmrg Working Group mailing list (<span><a href="mailto:yangyuanyuan55@huawei.com">mailto:yangyuanyuan55@huawei.com</a></span>),
-        which is archived at <span><a href="https://example.com/WG">https://example.com/WG</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
-<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/USER/REPO">https://github.com/USER/REPO</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1116,7 +1106,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1160,16 +1150,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-overveiw-of-key-challenges-" class="internal xref">Overveiw of key challenges for the network management</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-overview-of-key-challenges-" class="internal xref">Overview of key challenges for the network management</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-inconsistent-yang-model-sup" class="internal xref">Inconsistent YANG Model Support</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-partial-or-non-standard-res" class="internal xref">Partial or Non-Standard RESTCONF/NETCONF Implementations</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-partial-or-non-standard-net" class="internal xref">Partial or Non-Standard Network management protocols Implementations</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-performance-scalability-iss" class="internal xref">Performance &amp; Scalability Issues</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-lack-integration-with-netwo" class="internal xref">Lack integration with Network APIs</a></p>
 </li>
             </ul>
 </li>
@@ -1211,13 +1201,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-reference" class="internal xref">Reference</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-reference" class="internal xref">Reference</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1228,8 +1215,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The Model Control Protocol (MCP) provides a standardized way for LLMs to access and utilize information from different sources, making it easier to build AI applications that can interact with external systems.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution, MCP enables:<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-1">The Model Control Protocol (MCP) provides a standardized way for LLMs to access and utilize information from different sources, interact with tools, making it easier to build AI applications that can interact with external systems.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution within the network management system or the network controller, MCP enables:<a href="#section-1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-3.1">
           <p id="section-1-3.1.1">Unified operation abstraction through normalized MCP tool definitions<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
@@ -1241,7 +1228,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <p id="section-1-3.3.1">Closed-Loop Automation Execution<a href="#section-1-3.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-4">This document outlines the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system is also discussed.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-4">This document outlines the applicability of MCP to the network management plane in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment senarios. The impact of integrating MCP into the network management system will also be discussed.<a href="#section-1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology-notation-conventions">
@@ -1294,12 +1281,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </div>
 </section>
 </div>
-<div id="overveiw-of-key-challenges-for-the-network-management">
+<div id="overview-of-key-challenges-for-the-network-management">
 <section id="section-3">
-      <h2 id="name-overveiw-of-key-challenges-">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-overveiw-of-key-challenges-" class="section-name selfRef">Overveiw of key challenges for the network management</a>
+      <h2 id="name-overview-of-key-challenges-">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-overview-of-key-challenges-" class="section-name selfRef">Overview of key challenges for the network management</a>
       </h2>
-<p id="section-3-1">In large scale network management environment, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">In large scale network management environment, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues or challenges:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="inconsistent-yang-model-support">
 <section id="section-3.1">
         <h3 id="name-inconsistent-yang-model-sup">
@@ -1314,23 +1301,28 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-3.1-2.2.1">Requirement for vendor-specific adaptations in automation scripts.<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
+<p id="section-3.1-3">Also IETF standard device models has slow adoption. Similar device models
+are defined in Openconfig or other SDOs, therefore the current YANG device
+models ecosystem is fragmented.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="partial-or-non-standard-restconfnetconf-implementations">
+<div id="partial-or-non-standard-network-management-protocols-implementations">
 <section id="section-3.2">
-        <h3 id="name-partial-or-non-standard-res">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-partial-or-non-standard-res" class="section-name selfRef">Partial or Non-Standard RESTCONF/NETCONF Implementations</a>
+        <h3 id="name-partial-or-non-standard-net">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-partial-or-non-standard-net" class="section-name selfRef">Partial or Non-Standard Network management protocols Implementations</a>
         </h3>
-<p id="section-3.2-1">Some vendors only partially support standard YANG models, and proprietary extensions may break interoperability.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">Some vendors only partially support standard Network management protocols, and proprietary extensions may break interoperability.
+Other vendors might choose non-stanard network management protocol or telemetry protocol such as gnmi, grpc.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="performance-scalability-issues">
+<div id="lack-integration-with-network-apis">
 <section id="section-3.3">
-        <h3 id="name-performance-scalability-iss">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-performance-scalability-iss" class="section-name selfRef">Performance &amp; Scalability Issues</a>
+        <h3 id="name-lack-integration-with-netwo">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-lack-integration-with-netwo" class="section-name selfRef">Lack integration with Network APIs</a>
         </h3>
-<p id="section-3.3-1">NETCONF defined in <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span>, while transactional and robust, can be more resource-intensive, particularly for large deployments and fast-changing configurations.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">RESTCONF defined in <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>, with its stateless, web-friendly architecture, scales better but may lack the advanced transactional features of NETCONF and can be less efficient for bandwidth-intensive operations.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-1">Today, network API has been widely adopted by the northbound interface of OSS/BSS or Network orchestrators while YANG data models have
+been widely adopted by the northbound interface of the network controller or the interface between the network controller and the network devices.
+However Network API ecosystem and YANG model ecosystem are both built as silo and lack integration or mapping between them.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1574,37 +1566,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
               </ul>
 </li>
           </ul>
-<div id="use-cases">
-<section id="section-5.5.1.1">
-            <h5 id="name-use-cases">
-<a href="#section-5.5.1.1" class="section-number selfRef">5.5.1.1. </a><a href="#name-use-cases" class="section-name selfRef">Use cases</a>
-            </h5>
-<ul class="normal">
-<li class="normal" id="section-5.5.1.1-1.1">
-                <p id="section-5.5.1.1-1.1.1">Air-Gapped Networks (Military/Critical Infrastructure)<a href="#section-5.5.1.1-1.1.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5.5.1.1-1.1.2.1">
-                    <p id="section-5.5.1.1-1.1.2.1.1">Scenario: A power grid control network prohibits external connectivity.<a href="#section-5.5.1.1-1.1.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="normal" id="section-5.5.1.1-1.1.2.2">
-                    <p id="section-5.5.1.1-1.1.2.2.1">Implementation:<a href="#section-5.5.1.1-1.1.2.2.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5.5.1.1-1.1.2.2.2.1">
-                        <p id="section-5.5.1.1-1.1.2.2.2.1.1">MCP Server runs on local servers with pre-loaded tool definitions.<a href="#section-5.5.1.1-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                      <li class="normal" id="section-5.5.1.1-1.1.2.2.2.2">
-                        <p id="section-5.5.1.1-1.1.2.2.2.2.1">LLM operates offline (e.g., quantized model) or via approved internal APIs.<a href="#section-5.5.1.1-1.1.2.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                    </ul>
-</li>
-                  <li class="normal" id="section-5.5.1.1-1.1.2.3">
-                    <p id="section-5.5.1.1-1.1.2.3.1">Advantage: Ensures zero data exfiltration risks.<a href="#section-5.5.1.1-1.1.2.3.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</section>
-</div>
 </section>
 </div>
 <div id="mcp-within-the-network-device">
@@ -1656,37 +1617,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
               </ul>
 </li>
           </ul>
-<div id="use-cases-1">
-<section id="section-5.5.2.1">
-            <h5 id="name-use-cases-2">
-<a href="#section-5.5.2.1" class="section-number selfRef">5.5.2.1. </a><a href="#name-use-cases-2" class="section-name selfRef">Use cases</a>
-            </h5>
-<ul class="normal">
-<li class="normal" id="section-5.5.2.1-1.1">
-                <p id="section-5.5.2.1-1.1.1">Global Enterprise Network Automation<a href="#section-5.5.2.1-1.1.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5.5.2.1-1.1.2.1">
-                    <p id="section-5.5.2.1-1.1.2.1.1">Scenario: A multinational corporation standardizes configurations across hundreds of branch offices.<a href="#section-5.5.2.1-1.1.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="normal" id="section-5.5.2.1-1.1.2.2">
-                    <p id="section-5.5.2.1-1.1.2.2.1">Implementation:<a href="#section-5.5.2.1-1.1.2.2.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5.5.2.1-1.1.2.2.2.1">
-                        <p id="section-5.5.2.1-1.1.2.2.2.1.1">MCP Server hosted on AWS/Azure with regional replicas.<a href="#section-5.5.2.1-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                      <li class="normal" id="section-5.5.2.1-1.1.2.2.2.2">
-                        <p id="section-5.5.2.1-1.1.2.2.2.2.1">Tools like deploy_vpn_template adapt to local compliance rules.<a href="#section-5.5.2.1-1.1.2.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                    </ul>
-</li>
-                  <li class="normal" id="section-5.5.2.1-1.1.2.3">
-                    <p id="section-5.5.2.1-1.1.2.3.1">Advantage: Unified toolchain reduces configuration drift.<a href="#section-5.5.2.1-1.1.2.3.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</section>
-</div>
 </section>
 </div>
 </section>
@@ -1708,23 +1638,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
     </h2>
 </section>
 </div>
-<div id="sec-normative-references">
-<section id="section-8">
-      <h2 id="name-normative-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-      </h2>
-<dl class="references">
-<dt id="RFC6241">[RFC6241]</dt>
-      <dd>
-<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8040">[RFC8040]</dt>
-    <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-</dl>
-</section>
-</div>
 <div id="reference">
 <section id="appendix-A">
       <h2 id="name-reference">
@@ -1734,15 +1647,23 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </div>
 <div id="authors-addresses">
 <section id="appendix-B">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Yang Yuanyuan</span></div>
-<div dir="auto" class="left"><span class="org">HuaWei</span></div>
+        <div dir="auto" class="left"><span class="fn nameRole">Yuanyuan Yang</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:yangyuanyuan55@huawei.com" class="email">yangyuanyuan55@huawei.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Qin Wu</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:bill.wu@huawei.com" class="email">bill.wu@huawei.com</a>
 </div>
 </address>
 </section>
