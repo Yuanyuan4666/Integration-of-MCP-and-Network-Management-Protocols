@@ -144,7 +144,7 @@ Table of Contents
    Different vendors implement different YANG models (standard or
    proprietary), leading to:
 
-   *  Lack of uniform data structures for configuration/retrieval.
+   *  Lack of uniform data structures for configuration/state retrieval.
 
    *  Requirement for vendor-specific adaptations in automation scripts.
 
