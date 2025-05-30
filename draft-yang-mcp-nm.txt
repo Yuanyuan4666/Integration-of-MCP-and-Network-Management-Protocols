@@ -75,7 +75,6 @@ Table of Contents
        5.5.2.  MCP Within the Network Device
    6.  IANA Considerations
    7.  Security Considerations
-   Appendix A.  Reference
    Authors' Addresses
 
 1.  Introduction
@@ -395,8 +394,6 @@ Table of Contents
    This document has no IANA actions.
 
 7.  Security Considerations
-
-Appendix A.  Reference
 
 Authors' Addresses
 
