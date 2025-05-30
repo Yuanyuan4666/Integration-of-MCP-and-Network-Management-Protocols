@@ -8,8 +8,8 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: nmrg
+area: OPS and ART
+workgroup: Network Management Working Group
 keyword:
  - large language model
  - model context protocol
