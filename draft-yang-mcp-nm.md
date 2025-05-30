@@ -73,7 +73,7 @@ In large scale network management environment, a large number of devices from di
 
 Different vendors implement different YANG models (standard or proprietary), leading to:
 
-- Lack of uniform data structures for configuration/retrieval.
+- Lack of uniform data structures for configuration/state retrieval.
 - Requirement for vendor-specific adaptations in automation scripts.
 
 Also IETF standard device models has slow adoption. Similar device models
