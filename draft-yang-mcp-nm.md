@@ -1,5 +1,5 @@
 ---
-title: "Integration of MCP and Network Management Protocols"
+title: "Applicability of MCP for the Network Management"
 category: info
 
 docname: draft-yang-mcp-nm-latest
