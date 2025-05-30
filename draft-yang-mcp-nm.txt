@@ -211,8 +211,9 @@ Table of Contents
          metadata (e.g., vendor compatibility, privilege requirements).
 
       -  _Dynamic Loading_: MCP Servers dynamically invoke required
-         tools via NETCONF on demand, thereby decoupling tool lifecycle
-         management from the server's core functionality.
+         tools via network management protocol on demand, thereby
+         decoupling tool lifecycle management from the server's core
+         functionality.
 
    *  _Benefits_:
 
