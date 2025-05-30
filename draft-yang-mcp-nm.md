@@ -101,7 +101,7 @@ This section outlines operational aspects of MCP with Network management require
 
 # Architecture Overview
 
-The LLM model with MCP support, with its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well- suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in section {{sec-radiu}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
+The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well- suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in section {{sec-radiu}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
 
 ## Encapsulating Device Operations into MCP Tools
 
