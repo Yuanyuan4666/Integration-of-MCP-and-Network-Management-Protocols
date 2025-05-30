@@ -1,8 +1,8 @@
 <!-- regenerate: on (set to off if you edit this file) -->
 
-# TODO - Your title
+# Applicability of MCP for the Network Management
 
-This is the working area for the individual Internet-Draft, "TODO - Your title".
+This is the working area for the individual Internet-Draft, "Applicability of MCP for the Network Management".
 
 * [Editor's Copy](https://Yuanyuan4666.github.io/Integration-of-MCP-and-Network-Management-Protocols/#go.draft-yang-mcp-nm.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-yangyuanyuan-huawei-mcp)
