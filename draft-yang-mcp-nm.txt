@@ -16,7 +16,7 @@ Abstract
    The application of MCP in the network management field is meant to
    develop various rich AI driven network applications, realize intent
    based networks management automation in the multi-vendor
-   heterogeneous network environment.  This document outlines the
+   heterogeneous network environment.  This document discusses the
    applicability of MCP to the network management in the IP network that
    utilizes IETF technologies.  It explores operational aspect, key
    components, generic workflow and deployment senarios.  The impact of
@@ -91,7 +91,7 @@ Table of Contents
    heterogeneous network environment.  By establishing standard
    interfaces for tool encapsulation, intent translation, and closed-
    loop execution within the network management system or the network
-   controller, MCP enables:
+   controller, MCP enables AI Agents to have:
 
    *  Unified operation abstraction through normalized MCP tool
       definitions
@@ -100,7 +100,7 @@ Table of Contents
 
    *  Closed-Loop Automation Execution
 
-   This document outlines the applicability of MCP to the network
+   This document discusses the applicability of MCP to the network
    management plane in the IP network that utilizes IETF technologies.
    It explores operational aspect, key components, generic workflow and
    deployment senarios.  The impact of integrating MCP into the network
