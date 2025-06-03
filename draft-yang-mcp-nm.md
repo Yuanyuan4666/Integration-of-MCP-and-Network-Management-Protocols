@@ -203,6 +203,17 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
   - Low Latency: Direct access to network devices minimizes tool execution delays.
   - Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.
 
+### Use cases
+
+In the scenario of cross-vendor network device batch management, the server is deployed locally on the network controller, and the tools are integrated into the server. The main parts of the server are listed below:
+
+- Tools description: it describes the name, use, and parameters of tools. ***some code here***
+- Tools implementation: it implementats how the tools work. ***some code here***
+
+For example, when a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the client retrieves the necessary tooling information from the server and forwards it to the LLM. The LLM determines the appropriate tools and responds in JSON format.***some code here***
+
+The server executes the operation and returns the results (in JSON) to the client (***some code here***), which forwards them to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.
+
 ## MCP Server Hosted Within the Network Device
 
 ~~~~
