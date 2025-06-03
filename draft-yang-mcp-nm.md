@@ -196,7 +196,7 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
   - Low Latency: Direct access to network devices minimizes tool execution delays.
   - Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.
 
-## MCP Within the Network Device
+## MCP Server Hosted Within the Network Device
 
 ~~~~
                    +--------------+
