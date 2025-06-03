@@ -84,8 +84,9 @@ models ecosystem is fragmented.
 ## Partial or Non-Standard Network management protocols Implementations
 
 Some vendors only partially support standard Network management protocols, and proprietary extensions may break interoperability.
-Other vendors might choose non-stanard network management protocol or telemetry protocol such as gnmi(https://datatracker.ietf.org/doc/draft-openconfig-rtgwg-gnmi-spec/), grpc(https://datatracker.ietf.org/doc/html/draft-kumar-rtgwg-grpc-protocol-00).
-A significant number of network operators continue to rely on legacy network management mechanisms such as SNMP and CLI.
+Other vendors might choose non-stanard network management protocol or telemetry protocol such as gnmi {{?I-D.openconfig-rtgwg-gnmi-spec}},
+grpc {{?I-D.kumar-rtgwg-grpc-protocol}}. A significant number of network operators continue to rely on legacy network management mechanisms
+such as SNMP and CLI.
 
 ## Lack integration with Network APIs
 
