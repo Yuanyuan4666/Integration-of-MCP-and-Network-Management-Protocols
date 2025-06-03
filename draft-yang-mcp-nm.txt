@@ -75,6 +75,7 @@ Table of Contents
        5.5.2.  MCP Within the Network Device
    6.  IANA Considerations
    7.  Security Considerations
+   8.  Informative References
    Authors' Addresses
 
 1.  Introduction
@@ -158,11 +159,10 @@ Table of Contents
    Some vendors only partially support standard Network management
    protocols, and proprietary extensions may break interoperability.
    Other vendors might choose non-stanard network management protocol or
-   telemetry protocol such as gnmi(https://datatracker.ietf.org/doc/
-   draft-openconfig-rtgwg-gnmi-spec/),
-   grpc(https://datatracker.ietf.org/doc/html/draft-kumar-rtgwg-grpc-
-   protocol-00).  A significant number of network operators continue to
-   rely on legacy network management mechanisms such as SNMP and CLI.
+   telemetry protocol such as gnmi [I-D.openconfig-rtgwg-gnmi-spec],
+   grpc [I-D.kumar-rtgwg-grpc-protocol].  A significant number of
+   network operators continue to rely on legacy network management
+   mechanisms such as SNMP and CLI.
 
 3.3.  Lack integration with Network APIs
 
@@ -404,6 +404,23 @@ Table of Contents
    This document has no IANA actions.
 
 7.  Security Considerations
+
+8.  Informative References
+
+   [I-D.kumar-rtgwg-grpc-protocol]
+              Kumar, A., Kolhe, J., Ghemawat, S., and L. Ryan, "gRPC
+              Protocol", Work in Progress, Internet-Draft, draft-kumar-
+              rtgwg-grpc-protocol-00, 8 July 2016,
+              <https://datatracker.ietf.org/doc/html/draft-kumar-rtgwg-
+              grpc-protocol-00>.
+
+   [I-D.openconfig-rtgwg-gnmi-spec]
+              Shakir, R., Shaikh, A., Borman, P., Hines, M., Lebsack,
+              C., and C. Morrow, "gRPC Network Management Interface
+              (gNMI)", Work in Progress, Internet-Draft, draft-
+              openconfig-rtgwg-gnmi-spec-01, 5 March 2018,
+              <https://datatracker.ietf.org/doc/html/draft-openconfig-
+              rtgwg-gnmi-spec-01>.
 
 Authors' Addresses
 
