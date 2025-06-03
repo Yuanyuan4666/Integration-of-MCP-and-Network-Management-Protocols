@@ -5,7 +5,7 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 2 December 2025                                     31 May 2025
+Expires: 5 December 2025                                     3 June 2025
 
 
             Applicability of MCP for the Network Management
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 December 2025.
+   This Internet-Draft will expire on 5 December 2025.
 
 Copyright Notice
 
@@ -112,17 +112,16 @@ Table of Contents
 
 2.1.  MCP
 
-   *  *Host*: The entity initiating the LLM request
+   *  *MCP protocol*: MCP is an open standard designed to facilitate
+      communication between LLMs and external data sources or tools.
 
-   *  *Client*: A built-in module within a host, specifically designed
-      for interaction with the MCP server.
+   *  *MCP Host*: The entity initiating the LLM request.
 
-   *  *CLI*: Command Line Interface
+   *  *MCP Client*: A built-in module within a host, specifically
+      designed for interaction with the MCP server.
 
    *  *MCP Server*: A dedicated server that interacts with MCP clients
       and provides MCP services.
-
-   *  *MCP protocol*: The whole MCP framework
 
 2.2.  Others
 
@@ -131,6 +130,8 @@ Table of Contents
    *  *Netconf*: Network Configuration Protocol
 
    *  *Restconf*: RESTful Network Configuration Protocol
+
+   *  *CLI*: Command Line Interface
 
 3.  Overview of key challenges for the network management
 
@@ -157,7 +158,11 @@ Table of Contents
    Some vendors only partially support standard Network management
    protocols, and proprietary extensions may break interoperability.
    Other vendors might choose non-stanard network management protocol or
-   telemetry protocol such as gnmi, grpc.
+   telemetry protocol such as gnmi(https://datatracker.ietf.org/doc/
+   draft-openconfig-rtgwg-gnmi-spec/),
+   grpc(https://datatracker.ietf.org/doc/html/draft-kumar-rtgwg-grpc-
+   protocol-00).  A significant number of network operators continue to
+   rely on legacy network management mechanisms such as SNMP and CLI.
 
 3.3.  Lack integration with Network APIs
 
@@ -313,33 +318,30 @@ Table of Contents
 
 5.5.1.  MCP hosted within the Network Controller
 
-                 +--------------+
-                 |     User     |
-                 +-------+------+
-                         |
-                 Natural Language
-                Command  |
-              ...........|............................
-              .          |                           .
-              .  +-------+------+       +-----------+.
-              .  |  MCP Client  +-------+  LLM      |.
-              .  +-------+------+       +-----------+.
-              .          |                           .
-              .   Tools Request                      .Network
-              .          |                           .Controller
-              .  +-------+------+                    .
-              .  |  MCP Server  |                    .
-              .  +-------+------+                    .
-              .          |                           .
-              ...........|............................
-                         |
-                         |
-                 Netconf/Telemetry
-                         |
-                 +--------------+
-                 |   Network    |
-                 |   Devices    |
-                 +--------------+
+              +--------------+
+              |     User     |
+              +-------+------+
+                      |
+              Natural Language
+             Command  |
+           ...........|............................
+           .          |                           .
+           .  +-------+------+       +-----------+.
+           .  |  MCP Client  +-------+  LLM      |.
+           .  +-------+------+       +-----------+.
+           .          |                           .
+           .   Tools Request                      .Network
+           .          |                           .Controller
+           .  +-------+------+                    .
+           .  |  MCP Server  |                    .
+           .  +-------+------+                    .
+           .          |                           .
+           ...........|............................
+                      |
+              Netconf/Telemetry
+  +-------------------+------------------+
+  |                   |                  |
+  |                   |                  | +-----+--------+  +-------+------+    +------+-------+ |   Network    |  |   Network    |    |   Network    | |   Device     |  |   Device     |    |   Device     | +--------------+  +--------------+    +--------------+
 
    *  Scope: The MCP Server is hosted within the operator's local
       network, colocated with the O&M Console and MCP Client.
@@ -354,30 +356,12 @@ Table of Contents
 
 5.5.2.  MCP Within the Network Device
 
-                 +--------------+
-                 |     User     |
-                 +-------+------+
-                         |
-                 Natural Language
-                 Command  |
-               . .........|............................
-               .          |                           .
-               .  +-------+------+       +-----------+.
-               .  |  MCP Client  +-------+  LLM      |.Network
-               .  +-------+------+       +-----------+.Controller
-               .          |                           .
-               .   Tools Request                      .
-               ...........|............................
-               .  +-------+------+                    .
-               .  |  MCP Server  |                    .
-               .  +-------+------+                    .
-               .        CLI                           .Network
-               .          |                           .Device
-               .  +--------------+                    .
-               .  |   Network    |                    .
-               .  |   Devices    |                    .
-               .  +--------------+                    .
-               ........................................
+               +--------------+
+               |     User     |
+               +-------+------+
+                       |
+              Natural Language
+              Command  | ........................................................ .                          |                           . .                  +-------+------+       +-----------+. .                  |  MCP Client  +-------+  LLM      |.Network .                  +-------+------+       +-----------+.Controller .                          |                           . .                   Tools Request                      . ........................................................ .                  +-------+------+                    . .                  |  MCP Server  |                    . .                  +-------+------+                    . .                        CLI                           .Network .                          |                           .Device .     +--------------------+--------------------+      . .     |                    |                    |       . .+----+-------+    +-------+------+     +-------+------+. .| Network    |    |   Network    |     |   Network    |. .| Device     |    |   Device     |     |   Device     |. .+------------+    +--------------+     +--------------+. .                                                       . .........................................................
 
    *  Scope: The MCP Server operates in a cloud environment, serving
       distributed MCP Clients via public/private APIs.
