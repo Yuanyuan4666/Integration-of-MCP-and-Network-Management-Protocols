@@ -242,7 +242,43 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 
 # Impact of integrating MCP on Network Management
 
-
+~~~~
++------------+-----------------------------+-----------------------+
+|            |   MCP Hosted Within         |   MCP Server Hosted   |
+|            | the Network Controller      | Within Network Device |
+|            |                             |                       |
+|            |                             |                       |
+|Management  |  No impact,reuse            |1.Protocol for Context |
+|Protocol    |  existing NM Protocols      |2 Management including |
+|            |                             | approval mechanisms   |
+|            |                             | where human input is  |
+|            |                             | required.             |
+|            |                             |3.Coexist with NM proto|
+|            |                             |in case not all devices|
+|            |                             |support MCP            |
++------------+-----------------------------+-----------------------+
+|            |                             |                       |
+|Management  |  use internal tools and     |  Need to ensure right |
+|   Tools    |  LLMs for managing context  |  tools and background |
+|            |  and decision making        |  info in the network  |
+|            |                             |  device               |
++------------+-----------------------------+-----------------------+
+|            |                             |                       |
+|            |                             |                       |
+|  Task      |  Works with pre-structured  |                       |
+|Management  |  goal driven tasks.         |    Same Rule Apply    |
+|            |  Tasks are usually designed |                       |
+|            |  and pre-defined by client  |                       |
+|            |                             |                       |
++------------+-----------------------------+-----------------------+
+|            |                             |                       |
+| Stateful   |  Agents can retain context  |                       |
+|Management  |  from previous interaction, |    Same Rule Apply    |
+|            |  enabling continuity in     |                       |
+|            |  long term task or          |                       |
+|            |  conversation               |                       |
+-------------+-----------------------------+-----------------------+
+~~~~
 
 # IANA Considerations
 
