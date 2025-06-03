@@ -205,13 +205,13 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
                            |
                   Natural Language
                   Command  |
-........................................................
-.                          |                           .
-.                  +-------+------+       +-----------+.
-. Network          |  MCP Client  +-------+  LLM      |.
-. Controller       +-------+------+       +-----------+.
-.                          |                           .
-.                   Tools Request                      .
+.........................................................
+.                          |                            .
+.                  +-------+------+       +-----------+ .
+. Network          |  MCP Client  +-------+  LLM      | .
+. Controller       +-------+------+       +-----------+ .
+.                          |                            .
+.                   Tools Request                       .
 .........................................................
 .                  +-------+------+                     .
 .                  |  MCP Server  |                     .
