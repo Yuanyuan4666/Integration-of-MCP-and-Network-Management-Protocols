@@ -154,11 +154,11 @@ A general workflow is as follows:
 - Protocol Translation & Execution: The MCP Server executes the translated commands on target devices and returns results to the client.
 - Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.
 
-## Deployment considerations
+# Deployment considerations
 
 While the overall workflow remains consistent, the MCP Server's deployment location (on-premises or remote) introduces operational variations.  This section explores two deployment scenarios.
 
-### MCP hosted within the Network Controller
+## MCP hosted within the Network Controller
 
 ~~~~
                   +--------------+
@@ -196,7 +196,7 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
   - Low Latency: Direct access to network devices minimizes tool execution delays.
   - Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.
 
-### MCP Within the Network Device
+## MCP Within the Network Device
 
 ~~~~
                    +--------------+
