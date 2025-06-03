@@ -158,6 +158,7 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 
 ### MCP hosted within the Network Controller
 
+~~~~
                   +--------------+
                   |     User     |
                   +-------+------+
@@ -186,6 +187,7 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 |   Network    |  |   Network    |    |   Network    |
 |   Device     |  |   Device     |    |   Device     |
 +--------------+  +--------------+    +--------------+
+~~~~
 
 - Scope: The MCP Server is hosted within the operator's local network, colocated with the O&M Console and MCP Client.
 - Key Characteristics:
@@ -194,7 +196,7 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 
 ### MCP Within the Network Device
 
-
+~~~~
                    +--------------+
                    |     User     |
                    +-------+------+
@@ -204,17 +206,17 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 ........................................................
 .                          |                           .
 .                  +-------+------+       +-----------+.
-.                  |  MCP Client  +-------+  LLM      |.Network
-.                  +-------+------+       +-----------+.Controller
+. Network          |  MCP Client  +-------+  LLM      |.
+. Controller       +-------+------+       +-----------+.
 .                          |                           .
 .                   Tools Request                      .
-........................................................
-.                  +-------+------+                    .
-.                  |  MCP Server  |                    .
-.                  +-------+------+                    .
-.                        CLI                           .Network
-.                          |                           .Device
-.     +--------------------+--------------------+      .
+.........................................................
+.                  +-------+------+                     .
+.                  |  MCP Server  |                     .
+.                  +-------+------+                     .
+.Network                        CLI                     .
+.Device                          |                      .
+.     +--------------------+--------------------+       .
 .     |                    |                    |       .
 .+----+-------+    +-------+------+     +-------+------+.
 .| Network    |    |   Network    |     |   Network    |.
@@ -222,7 +224,7 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 .+------------+    +--------------+     +--------------+.
 .                                                       .
 .........................................................
-
+~~~~
 
 - Scope: The MCP Server operates in a cloud environment, serving distributed MCP Clients via public/private APIs.
 - Key Characteristics:
