@@ -191,7 +191,7 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 +--------------+  +--------------+    +--------------+
 ~~~~
 
-- Scope: The MCP Server is hosted within the operator's local network, colocated with the O&M Console and MCP Client.
+- Scope: The MCP Server is hosted within the operator's local network, collocated with the O&M Console and MCP Client.
 - Key Characteristics:
   - Low Latency: Direct access to network devices minimizes tool execution delays.
   - Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.
