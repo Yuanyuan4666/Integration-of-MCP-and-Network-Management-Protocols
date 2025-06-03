@@ -114,7 +114,7 @@ Table of Contents
 
 2.1.  MCP
 
-   *  *MCP protocol*: MCP is an open standard designed to facilitate
+   *  *MCP Protocol*: MCP is an open standard designed to facilitate
       communication between LLMs and external data sources or tools.
 
    *  *MCP Host*: The entity initiating the LLM request.
