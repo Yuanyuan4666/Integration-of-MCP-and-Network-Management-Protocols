@@ -146,11 +146,11 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
 
 A general workflow is as follows:
 
-- User Input Submission: An operator submits a natural language request (e.g., "Disable port 22 on all edge switches") to the MCP client. And The MCP client 
+- User Input Submission: An operator submits a natural language request (e.g., "Disable port 22 on all edge switches") to the MCP client. And The MCP client
   forwards this request to the LLM.
 
-- LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured request to the MCP client, which queries the MCP 
-  Server to retrieve the available tools.
+- LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured request to the MCP client, which queries the 
+  MCP Server to retrieve the available tools.
 
 - LLM Toolchain Decision:
   - The LLM evaluates the context and if tools are required, select and sequence tools.
