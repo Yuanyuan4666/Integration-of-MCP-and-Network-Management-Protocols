@@ -349,7 +349,7 @@ Table of Contents
    +--------------+  +--------------+    +--------------+
 
    *  Scope: The MCP Server is hosted within the operator's local
-      network, colocated with the O&M Console and MCP Client.
+      network, collocated with the O&M Console and MCP Client.
 
    *  Key Characteristics:
 
