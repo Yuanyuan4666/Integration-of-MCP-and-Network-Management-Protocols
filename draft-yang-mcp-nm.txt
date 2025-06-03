@@ -72,7 +72,7 @@ Table of Contents
      5.4.  Workflow
    6.  Deployment considerations
      6.1.  MCP hosted within the Network Controller
-     6.2.  MCP Within the Network Device
+     6.2.  MCP Server Hosted Within the Network Device
    7.  Impact of integrating MCP on Network Management
    8.  IANA Considerations
    9.  Security Considerations
@@ -359,7 +359,7 @@ Table of Contents
       -  Data Control: All processing (LLM queries, tool executions)
          remains within the operator’s infrastructure.
 
-6.2.  MCP Within the Network Device
+6.2.  MCP Server Hosted Within the Network Device
 
                       +--------------+
                       |     User     |
