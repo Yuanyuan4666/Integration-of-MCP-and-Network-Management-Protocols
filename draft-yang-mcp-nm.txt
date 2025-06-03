@@ -72,6 +72,7 @@ Table of Contents
      5.4.  Workflow
    6.  Deployment considerations
      6.1.  MCP hosted within the Network Controller
+       6.1.1.  Use cases
      6.2.  MCP Server Hosted Within the Network Device
    7.  Impact of integrating MCP on Network Management
    8.  IANA Considerations
@@ -358,6 +359,31 @@ Table of Contents
 
       -  Data Control: All processing (LLM queries, tool executions)
          remains within the operator’s infrastructure.
+
+6.1.1.  Use cases
+
+   In the scenario of cross-vendor network device batch management, the
+   server is deployed locally on the network controller, and the tools
+   are integrated into the server.  The main parts of the server are
+   listed below:
+
+   *  Tools description: it describes the name, use, and parameters of
+      tools. *_some code here_*
+
+   *  Tools implementation: it implementats how the tools work. *_some
+      code here_*
+
+   For example, when a user submits a request (via the client) such as
+   "Configure OSPF Area 0 with process ID 100 for all core switches in
+   the Beijing data center," the client retrieves the necessary tooling
+   information from the server and forwards it to the LLM.  The LLM
+   determines the appropriate tools and responds in JSON format.*_some
+   code here_*
+
+   The server executes the operation and returns the results (in JSON)
+   to the client (*_some code here_*), which forwards them to the LLM.
+   The LLM parses the response, generates a natural-language summary,
+   and sends it back to the client for final presentation to the user.
 
 6.2.  MCP Server Hosted Within the Network Device
 
