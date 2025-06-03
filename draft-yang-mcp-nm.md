@@ -54,7 +54,7 @@ The following terms are used throughout this document:
 
 ## MCP
 
-- **MCP protocol**: MCP is an open standard designed to facilitate communication between LLMs and external data sources or tools.
+- **MCP Protocol**: MCP is an open standard designed to facilitate communication between LLMs and external data sources or tools.
 - **MCP Host**: The entity initiating the LLM request.
 - **MCP Client**: A built-in module within a host, specifically designed for interaction with the MCP server.
 - **MCP Server**: A dedicated server that interacts with MCP clients and provides MCP services.
@@ -146,13 +146,20 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
 
 A general workflow is as follows:
 
-- User Input Submission: An operator submits a natural language request (e.g., "Disable port 22 on all edge switches") to the MCP client. And The MCP client forwards this request to the LLM.
-- LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured request to the MCP client, which queries the MCP Server to retrieve the available tools.
+- User Input Submission: An operator submits a natural language request (e.g., "Disable port 22 on all edge switches") to the MCP client. And The MCP client 
+  forwards this request to the LLM.
+
+- LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured request to the MCP client, which queries the MCP 
+  Server to retrieve the available tools.
+
 - LLM Toolchain Decision:
   - The LLM evaluates the context and if tools are required, select and sequence tools.
   - The decision is sent back to the MCP Client and then MCP Client will execute tools via server.
+
 - Protocol Translation & Execution: The MCP Server executes the translated commands on target devices and returns results to the client.
+
 - Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.
+
 
 # Deployment considerations
 
