@@ -199,8 +199,8 @@ Table of Contents
    complex requirements and deliver corresponding functionalities, is
    well- suited for large scale multi-vendor network management
    environments, effectively addressing the aforementioned operational
-   challenges in section Section 4.  Therefore, we have introduced the
-   MCP protocol in the network management environments for building an
+   challenges in Section 4.  Therefore, we have introduced the MCP
+   protocol in the network management environments for building an
    intelligent network management and control platform.
 
 5.1.  Encapsulating Device Operations into MCP Tools
