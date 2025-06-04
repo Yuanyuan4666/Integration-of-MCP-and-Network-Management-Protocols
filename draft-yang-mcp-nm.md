@@ -168,6 +168,37 @@ Tools description: it describes the name, use, and parameters of tools.
 
 Tools implementation: MCP implementation describe how the tools are invoked.
 
+See Tool descriptor information example as follows:
+
+~~~~
+[
+  {
+    "name":"batch_configure_devices",
+    "description":"Batch Configure Network Devices"，
+    "parameters": {
+      "type": "object",
+      "properties":{
+        "device_ips": {"type": "array", "items": {"type": "string"},"description":"Device IP List"}，
+        "commands": {"type":"array", "items": {"type": "string"},"description":"CLI Sequence"}，
+        "credential_id": {"type": "string","description":"存凭证标识符"}
+      }，
+      "required":["device_ips","commands"]
+    }
+  },
+  {
+    "name": "check_device_status",
+    "description":"Check the Status of Network Devices"，
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "device_ip": {"type": "string"},
+        "metrics": {"type": "array", "items": {"enum": ["cpu","memory","interface"]}}
+      }
+    }
+  }
+]
+~~~~
+
 Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
 client retrieves the necessary tooling descriptor information from the MCP server and forwards it to the LLM. The LLM determines the appropriate tools and responds
 in JSON format.
