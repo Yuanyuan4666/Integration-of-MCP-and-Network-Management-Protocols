@@ -24,6 +24,11 @@ author:
    organization: Huawei
    email: bill.wu@huawei.com
 
+contributor:
+ -  fullname: Guanming Zeng
+    organization: Huawei
+    email: zengguanming@huawei.com
+
 normative:
 
 informative:
