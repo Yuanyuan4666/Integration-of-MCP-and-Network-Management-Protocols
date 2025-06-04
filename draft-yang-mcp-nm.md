@@ -317,7 +317,27 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
     - It is necessary to deal with compatibility and consistency issues between different protocols.
 
 ## MCP Server Hosted within the Network Device
-
+- Pro
+  - The protocol stack Simplification:
+    - If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP.
+      This reduces the complexity of protocol conversion and simplifies the overall architecture.
+    - It reduces the development and maintenance costs caused by protocol adaptation, especially when the device manufacturer supports the MCP protocol.
+  - Real-time performance and response speed:
+    - The MCP Server is directly deployed on the device, which reduces the transmission latency in the middle and can respond to management instructions
+      faster, which is suitable for scenarios with high real-time requirements.
+- Con
+  - Device Resource Consumption:
+    - Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP Server may occupy a large amount of resources, affecting the normal
+      operation of the device.
+    - It is necessary to optimize and expand the hardware and software resources of the device, which increases the complexity of the device.
+  - Security and Management Complexity:
+    - Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the
+      complexity of management.
+    - Each device needs to independently deploy and maintain the MCP Server, which increases the operation and maintenance cost.
+  - Incompatible with Legacy devices:
+    - Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible
+      for the network to form a unified control mechanism.
+  
 # IANA Considerations
 
 This document has no IANA actions.
