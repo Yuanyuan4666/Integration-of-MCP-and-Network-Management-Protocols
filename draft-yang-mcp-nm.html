@@ -1567,7 +1567,7 @@ MCP Server to retrieve the available tools.<a href="#section-5.4-2.2.1" class="p
 </div>
 <ul class="normal">
 <li class="normal" id="section-6.1-2.1">
-            <p id="section-6.1-2.1.1">Scope: The MCP Server is hosted within the operator's local network, collocated with the O&amp;M Console and MCP Client.<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-2.1.1">Scope: The MCP Server,collocated with the LLM model and MCP Client, is hosted within the operator's local network, the network devices stay as it is.<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.1-2.2">
             <p id="section-6.1-2.2.1">Key Characteristics:<a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p>
@@ -1613,7 +1613,7 @@ MCP Server to retrieve the available tools.<a href="#section-5.4-2.2.1" class="p
                    +-------+------+
                            |
                   Natural Language
-                  Command  |
+                        Command
 .........................................................
 .                          |                            .
 .                  +-------+------+       +-----------+ .
@@ -1639,13 +1639,13 @@ MCP Server to retrieve the available tools.<a href="#section-5.4-2.2.1" class="p
 </div>
 <ul class="normal">
 <li class="normal" id="section-6.2-2.1">
-            <p id="section-6.2-2.1.1">Scope: The MCP Server operates in a cloud environment, serving distributed MCP Clients via public/private APIs.<a href="#section-6.2-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.2-2.1.1">Scope: The MCP Client operates in a cloud environment, serving distributed MCP Server via public/private APIs.<a href="#section-6.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.2-2.2">
             <p id="section-6.2-2.2.1">Key Characteristics:<a href="#section-6.2-2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-2.2.2.1">
-                <p id="section-6.2-2.2.2.1.1">Centralized Management: A single MCP Server instance can manage multiple geographically dispersed networks.<a href="#section-6.2-2.2.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-6.2-2.2.2.1.1">Decentralized Management: A single MCP Client instance can manage multiple MCP Server instances in geographically dispersed network.<a href="#section-6.2-2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-6.2-2.2.2.2">
                 <p id="section-6.2-2.2.2.2.1">Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.<a href="#section-6.2-2.2.2.2.1" class="pilcrow">¶</a></p>
