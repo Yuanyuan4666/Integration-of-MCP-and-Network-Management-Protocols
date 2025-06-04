@@ -166,7 +166,7 @@ integrated into the MCP server. The server provide the following registered tool
 
 Tools description: it describes the name, use, and parameters of tools.
 
-Tools implementation: MCP implementation describe how the tools are invoked. 
+Tools implementation: MCP implementation describe how the tools are invoked.
 
 Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
 client retrieves the necessary tooling descriptor information from the MCP server and forwards it to the LLM. The LLM determines the appropriate tools and responds
