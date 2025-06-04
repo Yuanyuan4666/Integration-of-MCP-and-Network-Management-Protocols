@@ -79,6 +79,7 @@ Table of Contents
    8.  IANA Considerations
    9.  Security Considerations
    10. Informative References
+   Contributors
    Authors' Addresses
 
 1.  Introduction
@@ -670,6 +671,13 @@ async def check_status(device_ip: str, metrics: list):
               openconfig-rtgwg-gnmi-spec-01, 5 March 2018,
               <https://datatracker.ietf.org/doc/html/draft-openconfig-
               rtgwg-gnmi-spec-01>.
+
+Contributors
+
+   Guanming Zeng
+   Huawei
+   Email: zengguanming@huawei.com
+
 
 Authors' Addresses
 
