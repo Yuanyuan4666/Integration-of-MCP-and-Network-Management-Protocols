@@ -378,11 +378,11 @@ Table of Contents
 
    *  Key Characteristics:
 
-      -  Low Latency: Direct access to network devices minimizes tool
-         execution delays.
+      -  Centralized Management: A single MCP Client instance can manage
+         multiple MCP server in geographically dispersed network.
 
-      -  Data Control: All processing (LLM queries, tool executions)
-         remains within the operator’s infrastructure.
+      -  Scalability: Cloud-native scaling accommodates dynamic tool
+         registry updates and high request volumes.
 
 6.2.  MCP Server Hosted Within the Network Device
 
@@ -419,12 +419,11 @@ Table of Contents
 
    *  Key Characteristics:
 
-      -  Decentralized Management: A single MCP Client instance can
-         manage multiple MCP Server instances in geographically
-         dispersed network.
+      -  Low Latency: Direct access to network devices minimizes tool
+         execution delays.
 
-      -  Scalability: Cloud-native scaling accommodates dynamic tool
-         registry updates and high request volumes.
+      -  Data Control: All processing (LLM queries, tool executions)
+         remains within the operator’s infrastructure.
 
 7.  Impact of integrating MCP on Network Management
 
