@@ -445,5 +445,22 @@ This document has no IANA actions.
 # Security Considerations
 
 
+The deployment of MCP in network management environments introduces several security considerations that implementers and operators must address.
+
+## Expanded Attack Surface
+
+MCP introduces AI/ML capabilities directly into the network control plane, creating new attack vectors that did not exist in conventional network management systems. Unlike traditional SNMP or NETCONF management that primarily processes structured data, MCP systems must handle unstructured context, natural language queries, and dynamic model interactions. This expanded interface increases the potential for input-based attacks, including prompt injection and context manipulation that could lead to unintended network modifications.
+
+The protocol's stateful nature and context persistence create additional vulnerabilities. Malicious context injection in earlier sessions could influence future network management decisions, potentially remaining dormant until triggered by specific network conditions or queries.
+
+## Model Integrity as a Security Foundation
+
+The reliability of network management decisions depends entirely on the integrity of the underlying AI models. Unlike traditional network management systems where logic is explicitly programmed, MCP systems rely on learned behaviors that can be subtly corrupted. Model poisoning attacks could introduce biases or backdoors that only manifest under specific network conditions, making detection extremely difficult.
+
+## Data Sensitivity and Inference Risks
+
+Network management systems process highly sensitive operational data including performance metrics, failure patterns, and capacity utilization. MCP systems that learn from this data could inadvertently expose sensitive information through model inversion attacks or membership inference. An attacker with access to model outputs could potentially reconstruct network topology, identify traffic patterns, or infer the existence of specific network segments.
+
+The contextual memory capabilities of MCP systems mean that sensitive information from previous interactions could be inadvertently revealed in responses to seemingly innocuous queries. This creates risks of information leakage across different security domains or user sessions.
 
 --- back
