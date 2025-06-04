@@ -2,7 +2,7 @@
 <html lang="en" class="Internet-Draft">
 <head>
 <meta charset="utf-8">
-<meta content="Common,Han,Latin" name="scripts">
+<meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>Applicability of MCP for the Network Management</title>
 <meta content="Yuanyuan Yang" name="author">
@@ -1529,6 +1529,7 @@ integrated into the MCP server. The server provide the following registered tool
 <p id="section-5.4-6">See Tool descriptor information example as follows:<a href="#section-5.4-6" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.4-7">
 <pre>
+# Tool Descriptor
 [
   {
     "name":"batch_configure_devices",
@@ -1538,7 +1539,7 @@ integrated into the MCP server. The server provide the following registered tool
       "properties":{
         "device_ips": {"type": "array", "items": {"type": "string"},"description":"Device IP List"}，
         "commands": {"type":"array", "items": {"type": "string"},"description":"CLI Sequence"}，
-        "credential_id": {"type": "string","description":"存凭证标识符"}
+        "credential_id": {"type": "string","description":"Credential ID"}
       }，
       "required":["device_ips","commands"]
     }
@@ -1555,13 +1556,74 @@ integrated into the MCP server. The server provide the following registered tool
     }
   }
 ]
+# Tool Implementation
+from netmiko import ConnectHandler
+from mcp_server import McpServer
+
+app =FastAPI()
+server = McpServer(app)
+
+#Connection Pool Management
+devices ={
+    "192.168.1.1": {"device_type": "VendorA-XYZ"，"credential": "admin:password"},
+    "192.168.1.2":{"device_type": "VendorB-ABC","credential":"admin:huawei@passowrd"}
+     ....
+}
+
+@server.tool("batch_configure_devices")
+async def batch_config(device_ips: list,commands: list,credential_id: str):
+    results ={}
+    for ip in device_ips:
+        conn = ConnectHandler(
+            ip=ip,
+            username=devices[ip]["credential"].split(':')[0],
+            password=devices[ip]["credential"].split(':')[1],
+            device_type=devices[ip]["device_type"]
+        )
+        output = conn.send_config_set(commands)
+        results[ip]=output
+    return {"success":True,"details": results)
+
+@server.tool("check_device_status")
+async def check_status(device_ip: str, metrics: list):
+    status ={}
+    if "cpu" in metrics:
+        status["cpu"]= get_cpu_usage (device_ip)
+    if "memory" in metrics:
+        status["memory"] = get_memory_usage(device_ip)
+    return status
 </pre><a href="#section-5.4-7" class="pilcrow">¶</a>
 </div>
 <p id="section-5.4-8">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
 client retrieves the necessary tooling descriptor information from the MCP server and forwards it to the LLM. The LLM determines the appropriate tools and responds
-in JSON format.<a href="#section-5.4-8" class="pilcrow">¶</a></p>
-<p id="section-5.4-9">The MCP server executes the network management operation in JSON format and returns the results (in JSON) to the MCP client, which forwards them to the LLM. The
-LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.<a href="#section-5.4-9" class="pilcrow">¶</a></p>
+in JSON format as follows:<a href="#section-5.4-8" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.4-9">
+<pre>
+{
+"method": "batch_configure_devices",
+"params": {
+   "device_ips":["192.168.10.1",....,"192.168.10.10"],
+   "command": [
+     "router ospf 100",
+     "network 192.168.0.0 0.0.255.255 area 0"
+   ]
+ }
+}
+}
+
+</pre><a href="#section-5.4-9" class="pilcrow">¶</a>
+</div>
+<p id="section-5.4-10">The MCP server executes the network management operation in JSON format and returns the results (in JSON) to the MCP client, which forwards them to the LLM. The
+LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user. See natural lanauge summary example as follows:<a href="#section-5.4-10" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.4-11">
+<pre>
+{
+  "192.168.10.1": "Configure Successfully, take 2.3 seconds",
+  "192.168.10.2", "Error: no response from the device",
+}
+
+</pre><a href="#section-5.4-11" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 </section>
