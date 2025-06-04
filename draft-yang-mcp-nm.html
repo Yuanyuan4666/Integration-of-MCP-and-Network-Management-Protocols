@@ -1968,7 +1968,7 @@ for the network to form a unified control mechanism.<a href="#section-7.2-1.2.2.
         <h3 id="name-expanded-attack-surface">
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-expanded-attack-surface" class="section-name selfRef">Expanded Attack Surface</a>
         </h3>
-<p id="section-9.1-1">MCP introduces AI/ML capabilities directly into the network control plane, creating new attack vectors that did not exist in conventional network management systems. Unlike traditional SNMP or NETCONF management that primarily processes structured data, MCP systems must handle unstructured context, natural language queries, and dynamic model interactions. This expanded interface increases the potential for input-based attacks, including prompt injection and context manipulation that could lead to unintended network modifications.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.1-1">MCP introduces AI capabilities directly into the network control plane, creating new attack vectors that did not exist in conventional network management systems. Unlike traditional SNMP or NETCONF management that primarily processes structured data, MCP systems must handle natural language queries. This expanded interface increases the potential for input-based attacks, including prompt injection and context manipulation that could lead to unintended network modifications.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.1-2">The protocol's stateful nature and context persistence create additional vulnerabilities. Malicious context injection in earlier sessions could influence future network management decisions, potentially remaining dormant until triggered by specific network conditions or queries.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1977,7 +1977,7 @@ for the network to form a unified control mechanism.<a href="#section-7.2-1.2.2.
         <h3 id="name-model-integrity-as-a-securi">
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-model-integrity-as-a-securi" class="section-name selfRef">Model Integrity as a Security Foundation</a>
         </h3>
-<p id="section-9.2-1">The reliability of network management decisions depends entirely on the integrity of the underlying AI models. Unlike traditional network management systems where logic is explicitly programmed, MCP systems rely on learned behaviors that can be subtly corrupted. Model poisoning attacks could introduce biases or backdoors that only manifest under specific network conditions, making detection extremely difficult.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
+<p id="section-9.2-1">The reliability of network management decisions depends entirely on the integrity of the underlying AI models. Unlike traditional network management systems where logic is explicitly programmed, MCP systems rely on learned behaviors that can be subtly corrupted. Model poisoning attacks could introduce biases that only manifest under specific network conditions, making detection extremely difficult.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="data-sensitivity-and-inference-risks">
@@ -1986,7 +1986,6 @@ for the network to form a unified control mechanism.<a href="#section-7.2-1.2.2.
 <a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-data-sensitivity-and-infere" class="section-name selfRef">Data Sensitivity and Inference Risks</a>
         </h3>
 <p id="section-9.3-1">Network management systems process highly sensitive operational data including performance metrics, failure patterns, and capacity utilization. MCP systems that learn from this data could inadvertently expose sensitive information through model inversion attacks or membership inference. An attacker with access to model outputs could potentially reconstruct network topology, identify traffic patterns, or infer the existence of specific network segments.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
-<p id="section-9.3-2">The contextual memory capabilities of MCP systems mean that sensitive information from previous interactions could be inadvertently revealed in responses to seemingly innocuous queries. This creates risks of information leakage across different security domains or user sessions.<a href="#section-9.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
