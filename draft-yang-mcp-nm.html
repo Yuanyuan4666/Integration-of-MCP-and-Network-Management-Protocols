@@ -1585,6 +1585,67 @@ LLM parses the response, generates a natural-language summary, and sends it back
 </li>
             </ul>
 </li>
+          <li class="normal" id="section-6.1-2.3">
+            <p id="section-6.1-2.3.1">Pro<a href="#section-6.1-2.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-2.3.2.1">
+                <p id="section-6.1-2.3.2.1.1">Resource utilization efficiency:
+Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant
+impact on the performance of the network equipment itself.<a href="#section-6.1-2.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1-2.3.2.2">
+                <p id="section-6.1-2.3.2.2.1">Security：<a href="#section-6.1-2.3.2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-2.3.2.2.2.1">
+                    <p id="section-6.1-2.3.2.2.2.1.1">Security mechanisms can be implemented centrally on the controller, and the overall security can be improved through unified authentication, authorization
+and audit mechanisms.<a href="#section-6.1-2.3.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-6.1-2.3.2.2.2.2">
+                    <p id="section-6.1-2.3.2.2.2.2.1">Reduces the risk of equipment being exposed to the network and reduces the possibility of being attacked.<a href="#section-6.1-2.3.2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-6.1-2.3.2.3">
+                <p id="section-6.1-2.3.2.3.1">Protocol adaptability：<a href="#section-6.1-2.3.2.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-2.3.2.3.2.1">
+                    <p id="section-6.1-2.3.2.3.2.1.1">Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment
+modification.<a href="#section-6.1-2.3.2.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-6.1-2.3.2.3.2.2">
+                    <p id="section-6.1-2.3.2.3.2.2.1">NETCONF protocol has wide support and mature tool chains in the industry, which is easy to develop and maintain.<a href="#section-6.1-2.3.2.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-6.1-2.4">
+            <p id="section-6.1-2.4.1">Con<a href="#section-6.1-2.4.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-2.4.2.1">
+                <p id="section-6.1-2.4.2.1.1">Latency and real-time performance：<a href="#section-6.1-2.4.2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-2.4.2.1.2.1">
+                    <p id="section-6.1-2.4.2.1.2.1.1">Since management instructions need to be forwarded through the controller, latency may increase and real-time performance may be affected.<a href="#section-6.1-2.4.2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-6.1-2.4.2.1.2.2">
+                    <p id="section-6.1-2.4.2.1.2.2.1">For some scenarios with extremely high real-time requirements, it may not meet the requirements.<a href="#section-6.1-2.4.2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-6.1-2.4.2.2">
+                <p id="section-6.1-2.4.2.2.1">Protocol conversion complexity：<a href="#section-6.1-2.4.2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-2.4.2.2.2.1">
+                    <p id="section-6.1-2.4.2.2.2.1.1">The MCP protocol needs to be converted to the NETCONF protocol, which increases the complexity and development cost of protocol conversion.<a href="#section-6.1-2.4.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-6.1-2.4.2.2.2.2">
+                    <p id="section-6.1-2.4.2.2.2.2.1">It is necessary to deal with compatibility and consistency issues between different protocols.<a href="#section-6.1-2.4.2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
         </ul>
 </section>
 </div>
