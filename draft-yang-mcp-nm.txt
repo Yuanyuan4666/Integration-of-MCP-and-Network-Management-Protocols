@@ -19,7 +19,7 @@ Abstract
    heterogeneous network environment.  This document discusses the
    applicability of MCP to the network management in the IP network that
    utilizes IETF technologies.  It explores operational aspect, key
-   components, generic workflow and deployment senarios.  The impact of
+   components, generic workflow and deployment scenarios.  The impact of
    integrating MCP into the network management system is also discussed.
 
 Status of This Memo
@@ -106,7 +106,7 @@ Table of Contents
    This document discusses the applicability of MCP to the network
    management plane in the IP network that utilizes IETF technologies.
    It explores operational aspect, key components, generic workflow and
-   deployment senarios.  The impact of integrating MCP into the network
+   deployment scenarios.  The impact of integrating MCP into the network
    management system will also be discussed.
 
 2.  Terminology & Notation Conventions
