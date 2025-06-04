@@ -198,7 +198,7 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 +--------------+  +--------------+    +--------------+
 ~~~~
 
-- Scope: The MCP Server is hosted within the operator's local network, collocated with the O&M Console and MCP Client.
+- Scope: The MCP Server,collocated with the LLM model and MCP Client, is hosted within the operator's local network, the network devices stay as it is.
 - Key Characteristics:
   - Low Latency: Direct access to network devices minimizes tool execution delays.
   - Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.
@@ -222,7 +222,7 @@ The server executes the operation and returns the results (in JSON) to the clien
                    +-------+------+
                            |
                   Natural Language
-                  Command  |
+                        Command
 .........................................................
 .                          |                            .
 .                  +-------+------+       +-----------+ .
@@ -246,9 +246,9 @@ The server executes the operation and returns the results (in JSON) to the clien
 .........................................................
 ~~~~
 
-- Scope: The MCP Server operates in a cloud environment, serving distributed MCP Clients via public/private APIs.
+- Scope: The MCP Client operates in a cloud environment, serving distributed MCP Server via public/private APIs.
 - Key Characteristics:
-  - Centralized Management: A single MCP Server instance can manage multiple geographically dispersed networks.
+  - Decentralized Management: A single MCP Client instance can manage multiple MCP Server instances in geographically dispersed network.
   - Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.
 
 # Impact of integrating MCP on Network Management
