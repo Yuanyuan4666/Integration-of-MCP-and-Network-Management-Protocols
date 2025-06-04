@@ -254,10 +254,11 @@ The server executes the operation and returns the results (in JSON) to the clien
 # Impact of integrating MCP on Network Management
 
 ~~~~
+
 +------------+-----------------------------+-----------------------+
 |            |   MCP Hosted Within         |   MCP Server Hosted   |
 |            | the Network Controller      | Within Network Device |
-|            |                             |                       |
++------------+-----------------------------+-----------------------+
 |            |                             |                       |
 |Management  |  No impact,reuse            |1.Protocol for Context |
 |Protocol    |  existing NM Protocols      |2 Management including |
@@ -289,6 +290,7 @@ The server executes the operation and returns the results (in JSON) to the clien
 |            |  long term task or          |                       |
 |            |  conversation               |                       |
 -------------+-----------------------------+-----------------------+
+
 ~~~~
 
 # IANA Considerations
