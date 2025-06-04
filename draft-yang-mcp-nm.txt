@@ -5,7 +5,7 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 5 December 2025                                     3 June 2025
+Expires: 6 December 2025                                     4 June 2025
 
 
             Applicability of MCP for the Network Management
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 December 2025.
+   This Internet-Draft will expire on 6 December 2025.
 
 Copyright Notice
 
@@ -431,7 +431,7 @@ Table of Contents
    +------------+-----------------------------+-----------------------+
    |            |   MCP Hosted Within         |   MCP Server Hosted   |
    |            | the Network Controller      | Within Network Device |
-   |            |                             |                       |
+   +------------+-----------------------------+-----------------------+
    |            |                             |                       |
    |Management  |  No impact,reuse            |1.Protocol for Context |
    |Protocol    |  existing NM Protocols      |2 Management including |
