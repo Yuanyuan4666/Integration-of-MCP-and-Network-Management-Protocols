@@ -218,21 +218,21 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
   -  Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.
 - Pro
   - Resource utilization efficiency:
-    Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant impact 
-    on the performance of the network equipment itself.
-  - Security
+    Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant
+    impact on the performance of the network equipment itself.
+  - Security：
     - Security mechanisms can be implemented centrally on the controller, and the overall security can be improved through unified authentication, authorization
       and audit mechanisms.
     - Reduces the risk of equipment being exposed to the network and reduces the possibility of being attacked.
-  - Protocol adaptability
+  - Protocol adaptability：
     - Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment
       modification.
     - NETCONF protocol has wide support and mature tool chains in the industry, which is easy to develop and maintain.
 - Con
-  - Latency and real-time performance
+  - Latency and real-time performance：
     - Since management instructions need to be forwarded through the controller, latency may increase and real-time performance may be affected.
     - For some scenarios with extremely high real-time requirements, it may not meet the requirements.
-  - Protocol conversion complexity
+  - Protocol conversion complexity：
     - The MCP protocol needs to be converted to the NETCONF protocol, which increases the complexity and development cost of protocol conversion.
     - It is necessary to deal with compatibility and consistency issues between different protocols.
 
