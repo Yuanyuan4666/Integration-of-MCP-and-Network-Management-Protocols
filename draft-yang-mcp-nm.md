@@ -295,7 +295,9 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 -------------+-----------------------------+-----------------------+
 
 ~~~~
+
 ## MCP Hosted Within the Network Controller
+
 - Pro
   - Resource utilization efficiency:
     Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant
@@ -317,6 +319,7 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
     - It is necessary to deal with compatibility and consistency issues between different protocols.
 
 ## MCP Server Hosted within the Network Device
+
 - Pro
   - The protocol stack Simplification:
     - If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP.
