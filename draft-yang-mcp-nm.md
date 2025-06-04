@@ -112,8 +112,8 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
 - *Implementation*:
   - *Tool Abstraction*: Vendor-specific commands are wrapped into discrete MCP Tools with uniform schemas.
   - *Tool Registry*: A centralized repository hosts MCP Tools with metadata (e.g., vendor compatibility, privilege requirements).
-  - *Dynamic Loading*: MCP Servers dynamically invoke required tools via network management protocol on demand, thereby decoupling tool lifecycle management from 
-     the server's core functionality.
+  - *Dynamic Loading*: MCP Servers dynamically invoke required tools via network management protocol on demand, thereby decoupling
+    tool lifecycle management from the server's core functionality.
 - *Benefits*:
   - Eliminates manual translation of commands across vendors.
   - Enables plug-and-play integration of new device types.
