@@ -337,7 +337,7 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
   - Incompatible with Legacy devices:
     - Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible
       for the network to form a unified control mechanism.
-  
+
 # IANA Considerations
 
 This document has no IANA actions.
