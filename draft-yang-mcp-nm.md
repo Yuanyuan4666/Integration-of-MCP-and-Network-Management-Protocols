@@ -181,7 +181,7 @@ See Tool descriptor information example as follows:
       "properties":{
         "device_ips": {"type": "array", "items": {"type": "string"},"description":"Device IP List"}，
         "commands": {"type":"array", "items": {"type": "string"},"description":"CLI Sequence"}，
-        "credential_id": {"type": "string","description":"存凭证标识符"}
+        "credential_id": {"type": "string","description":"Credential ID"}
       }，
       "required":["device_ips","commands"]
     }
@@ -207,7 +207,9 @@ server = McpServer(app)
 
 #Connection Pool Management 
 devices ={
-    "192.168.1.1": {"device_type": "cisco_ios"，"credential": "admin:password"},"192.168.1.2":{"device_type": "huawei","credential":"admin:huawei@123"}
+    "192.168.1.1": {"device_type": "VendorA-XYZ"，"credential": "admin:password"},
+    "192.168.1.2":{"device_type": "VendorB-ABC","credential":"admin:huawei@passowrd"}
+     ....
 }
 
 @server.tool("batch_configure_devices")
