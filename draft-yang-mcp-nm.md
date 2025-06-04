@@ -270,10 +270,10 @@ The server executes the operation and returns the results (in JSON) to the clien
 |            |                             |support MCP            |
 +------------+-----------------------------+-----------------------+
 |            |                             |                       |
-|Management  |  use internal tools and     |  Need to ensure right |
-|   Tools    |  LLMs for managing context  |  tools and background |
-|            |  and decision making        |  info in the network  |
-|            |                             |  device               |
+|Management  |  Use internal tools and     |  Need to ensure right |
+|   Tools    |  LLMs within the controller |  tools and background |
+|            |  for managing context and   |  info in the network  |
+|            |  decision making            |  device               |
 +------------+-----------------------------+-----------------------+
 |            |                             |                       |
 |            |                             |                       |
@@ -283,7 +283,7 @@ The server executes the operation and returns the results (in JSON) to the clien
 |            |  and pre-defined by client  |                       |
 |            |                             |                       |
 +------------+-----------------------------+-----------------------+
-|            |                             |                       |
+|            |  Yes,                       |    Yes                |
 | Stateful   |  Agents can retain context  |                       |
 |Management  |  from previous interaction, |    Same Rule Apply    |
 |            |  enabling continuity in     |                       |
