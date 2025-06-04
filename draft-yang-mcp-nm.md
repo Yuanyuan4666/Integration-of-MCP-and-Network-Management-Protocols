@@ -112,7 +112,8 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
 - *Implementation*:
   - *Tool Abstraction*: Vendor-specific commands are wrapped into discrete MCP Tools with uniform schemas.
   - *Tool Registry*: A centralized repository hosts MCP Tools with metadata (e.g., vendor compatibility, privilege requirements).
-  - *Dynamic Loading*: MCP Servers dynamically invoke required tools via network management protocol on demand, thereby decoupling tool lifecycle management from the server's core functionality.
+  - *Dynamic Loading*: MCP Servers dynamically invoke required tools via network management protocol on demand, thereby decoupling tool lifecycle management from 
+     the server's core functionality.
 - *Benefits*:
   - Eliminates manual translation of commands across vendors.
   - Enables plug-and-play integration of new device types.
@@ -160,6 +161,19 @@ A general workflow is as follows:
 
 - Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.
 
+Take multi-vendor network management as an example, the MCP server is deployed locally on the network controller, and the tools are
+integrated into the MCP server. The server provide the following registered tool descriptor information:
+
+Tools description: it describes the name, use, and parameters of tools.
+
+Tools implementation: MCP implementation describe how the tools are invoked. 
+
+Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
+client retrieves the necessary tooling descriptor information from the MCP server and forwards it to the LLM. The LLM determines the appropriate tools and responds
+in JSON format.
+
+The MCP server executes the network management operation in JSON format and returns the results (in JSON) to the MCP client, which forwards them to the LLM. The
+LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.
 
 # Deployment considerations
 
@@ -202,17 +216,6 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 - Key Characteristics:
   - Low Latency: Direct access to network devices minimizes tool execution delays.
   - Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.
-
-### Use cases
-
-In the scenario of cross-vendor network device batch management, the server is deployed locally on the network controller, and the tools are integrated into the server. The main parts of the server are listed below:
-
-- Tools description: it describes the name, use, and parameters of tools. ***some code here***
-- Tools implementation: it implementats how the tools work. ***some code here***
-
-For example, when a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the client retrieves the necessary tooling information from the server and forwards it to the LLM. The LLM determines the appropriate tools and responds in JSON format.***some code here***
-
-The server executes the operation and returns the results (in JSON) to the client (***some code here***), which forwards them to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.
 
 ## MCP Server Hosted Within the Network Device
 
