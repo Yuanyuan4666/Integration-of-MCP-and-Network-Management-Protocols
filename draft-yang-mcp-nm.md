@@ -199,13 +199,13 @@ See Tool descriptor information example as follows:
   }
 ]
 # Tool Implementation
-from netmiko import ConnectHandler 
+from netmiko import ConnectHandler
 from mcp_server import McpServer
 
 app =FastAPI()
 server = McpServer(app)
 
-#Connection Pool Management 
+#Connection Pool Management
 devices ={
     "192.168.1.1": {"device_type": "VendorA-XYZ"，"credential": "admin:password"},
     "192.168.1.2":{"device_type": "VendorB-ABC","credential":"admin:huawei@passowrd"}
