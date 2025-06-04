@@ -241,13 +241,31 @@ client retrieves the necessary tooling descriptor information from the MCP serve
 in JSON format as follows:
 
 ~~~~
-
-
+{
+"method": "batch_configure_devices",
+"params": {
+   "device_ips":["192.168.10.1",....,"192.168.10.10"],
+   "command": [
+     "router ospf 100",
+     "network 192.168.0.0 0.0.255.255 area 0"
+   ]
+ }
+}
+}
 
 ~~~~
 
 The MCP server executes the network management operation in JSON format and returns the results (in JSON) to the MCP client, which forwards them to the LLM. The
-LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.
+LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user. See natural lanauge summary example as follows:
+
+~~~~
+
+{
+  "192.168.10.1": "Configure Successfully, take 2.3 seconds",
+  "192.168.10.2", "Error: no response from the device",
+}
+
+~~~~
 
 # Deployment considerations
 
