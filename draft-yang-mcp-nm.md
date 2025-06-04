@@ -222,7 +222,7 @@ async def batch_config(device_ips: list,commands: list,credential_id: str):
             password=devices[ip]["credential"].split(':')[1],
             device_type=devices[ip]["device_type"]
         )
-        output = conn.send_config_set(commands) 
+        output = conn.send_config_set(commands)
         results[ip]=output
     return {"success":True,"details": results)
 
@@ -230,9 +230,9 @@ async def batch_config(device_ips: list,commands: list,credential_id: str):
 async def check_status(device_ip: str, metrics: list):
     status ={}
     if "cpu" in metrics:
-        status["cpu"]= get_cpu_usage (device_ip)  
+        status["cpu"]= get_cpu_usage (device_ip)
     if "memory" in metrics:
-        status["memory"] = get_memory_usage(device_ip) 
+        status["memory"] = get_memory_usage(device_ip)
     return status
 ~~~~
 
