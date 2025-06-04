@@ -1198,7 +1198,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-impact-of-integrating-mcp-o" class="internal xref">Impact of integrating MCP on Network Management</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-mcp-server-hosted-within-the" class="internal xref">MCP Server Hosted within the Network Device</a></p>
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-mcp-hosted-within-the-networ" class="internal xref">MCP Hosted Within the Network Controller</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-mcp-server-hosted-within-the" class="internal xref">MCP Server Hosted within the Network Device</a></p>
 </li>
             </ul>
 </li>
@@ -1694,53 +1697,41 @@ LLM parses the response, generates a natural-language summary, and sends it back
 
 </pre><a href="#section-7-1" class="pilcrow">¶</a>
 </div>
-<p id="section-7-2">## MCP Hosted Within the Network Controller
-- Pro
-  - Resource utilization efficiency:
-    Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant
-    impact on the performance of the network equipment itself.
-  - Security：
-    - Security mechanisms can be implemented centrally on the controller, and the overall security can be improved through unified authentication, authorization
-      and audit mechanisms.
-    - Reduces the risk of equipment being exposed to the network and reduces the possibility of being attacked.
-  - Protocol adaptability：
-    - Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment
-      modification.
-    - NETCONF protocol has wide support and mature tool chains in the industry, which is easy to develop and maintain.
-- Con
-  - Latency and real-time performance：
-    - Since management instructions need to be forwarded through the controller, latency may increase and real-time performance may be affected.
-    - For some scenarios with extremely high real-time requirements, it may not meet the requirements.
-  - Protocol conversion complexity：
-    - The MCP protocol needs to be converted to the NETCONF protocol, which increases the complexity and development cost of protocol conversion.
-    - It is necessary to deal with compatibility and consistency issues between different protocols.<a href="#section-7-2" class="pilcrow">¶</a></p>
-<div id="mcp-server-hosted-within-the-network-device-1">
+<div id="mcp-hosted-within-the-network-controller-1">
 <section id="section-7.1">
-        <h3 id="name-mcp-server-hosted-within-the">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-mcp-server-hosted-within-the" class="section-name selfRef">MCP Server Hosted within the Network Device</a>
+        <h3 id="name-mcp-hosted-within-the-networ">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-mcp-hosted-within-the-networ" class="section-name selfRef">MCP Hosted Within the Network Controller</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="section-7.1-1.1">
             <p id="section-7.1-1.1.1">Pro<a href="#section-7.1-1.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.1-1.1.2.1">
-                <p id="section-7.1-1.1.2.1.1">The protocol stack Simplification:<a href="#section-7.1-1.1.2.1.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-7.1-1.1.2.1.2.1">
-                    <p id="section-7.1-1.1.2.1.2.1.1">If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP.
-This reduces the complexity of protocol conversion and simplifies the overall architecture.<a href="#section-7.1-1.1.2.1.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-7.1-1.1.2.1.1">Resource utilization efficiency:
+Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant
+impact on the performance of the network equipment itself.<a href="#section-7.1-1.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="normal" id="section-7.1-1.1.2.1.2.2">
-                    <p id="section-7.1-1.1.2.1.2.2.1">It reduces the development and maintenance costs caused by protocol adaptation, especially when the device manufacturer supports the MCP protocol.<a href="#section-7.1-1.1.2.1.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-7.1-1.1.2.2">
+                <p id="section-7.1-1.1.2.2.1">Security：<a href="#section-7.1-1.1.2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.1-1.1.2.2.2.1">
+                    <p id="section-7.1-1.1.2.2.2.1.1">Security mechanisms can be implemented centrally on the controller, and the overall security can be improved through unified authentication, authorization
+and audit mechanisms.<a href="#section-7.1-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-7.1-1.1.2.2.2.2">
+                    <p id="section-7.1-1.1.2.2.2.2.1">Reduces the risk of equipment being exposed to the network and reduces the possibility of being attacked.<a href="#section-7.1-1.1.2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
-              <li class="normal" id="section-7.1-1.1.2.2">
-                <p id="section-7.1-1.1.2.2.1">Real-time performance and response speed:<a href="#section-7.1-1.1.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-7.1-1.1.2.3">
+                <p id="section-7.1-1.1.2.3.1">Protocol adaptability：<a href="#section-7.1-1.1.2.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-7.1-1.1.2.2.2.1">
-                    <p id="section-7.1-1.1.2.2.2.1.1">The MCP Server is directly deployed on the device, which reduces the transmission latency in the middle and can respond to management instructions
-faster, which is suitable for scenarios with high real-time requirements.<a href="#section-7.1-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-7.1-1.1.2.3.2.1">
+                    <p id="section-7.1-1.1.2.3.2.1.1">Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment
+modification.<a href="#section-7.1-1.1.2.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-7.1-1.1.2.3.2.2">
+                    <p id="section-7.1-1.1.2.3.2.2.1">NETCONF protocol has wide support and mature tool chains in the industry, which is easy to develop and maintain.<a href="#section-7.1-1.1.2.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
@@ -1750,35 +1741,97 @@ faster, which is suitable for scenarios with high real-time requirements.<a href
             <p id="section-7.1-1.2.1">Con<a href="#section-7.1-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.1-1.2.2.1">
-                <p id="section-7.1-1.2.2.1.1">Device Resource Consumption:<a href="#section-7.1-1.2.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-7.1-1.2.2.1.1">Latency and real-time performance：<a href="#section-7.1-1.2.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.1-1.2.2.1.2.1">
-                    <p id="section-7.1-1.2.2.1.2.1.1">Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP Server may occupy a large amount of resources, affecting the normal
-operation of the device.<a href="#section-7.1-1.2.2.1.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-7.1-1.2.2.1.2.1.1">Since management instructions need to be forwarded through the controller, latency may increase and real-time performance may be affected.<a href="#section-7.1-1.2.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-7.1-1.2.2.1.2.2">
-                    <p id="section-7.1-1.2.2.1.2.2.1">It is necessary to optimize and expand the hardware and software resources of the device, which increases the complexity of the device.<a href="#section-7.1-1.2.2.1.2.2.1" class="pilcrow">¶</a></p>
+                    <p id="section-7.1-1.2.2.1.2.2.1">For some scenarios with extremely high real-time requirements, it may not meet the requirements.<a href="#section-7.1-1.2.2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
               <li class="normal" id="section-7.1-1.2.2.2">
-                <p id="section-7.1-1.2.2.2.1">Security and Management Complexity:<a href="#section-7.1-1.2.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-7.1-1.2.2.2.1">Protocol conversion complexity：<a href="#section-7.1-1.2.2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.1-1.2.2.2.2.1">
-                    <p id="section-7.1-1.2.2.2.2.1.1">Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the
-complexity of management.<a href="#section-7.1-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-7.1-1.2.2.2.2.1.1">The MCP protocol needs to be converted to the NETCONF protocol, which increases the complexity and development cost of protocol conversion.<a href="#section-7.1-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-7.1-1.2.2.2.2.2">
-                    <p id="section-7.1-1.2.2.2.2.2.1">Each device needs to independently deploy and maintain the MCP Server, which increases the operation and maintenance cost.<a href="#section-7.1-1.2.2.2.2.2.1" class="pilcrow">¶</a></p>
+                    <p id="section-7.1-1.2.2.2.2.2.1">It is necessary to deal with compatibility and consistency issues between different protocols.<a href="#section-7.1-1.2.2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
-              <li class="normal" id="section-7.1-1.2.2.3">
-                <p id="section-7.1-1.2.2.3.1">Incompatible with Legacy devices:<a href="#section-7.1-1.2.2.3.1" class="pilcrow">¶</a></p>
+            </ul>
+</li>
+        </ul>
+</section>
+</div>
+<div id="mcp-server-hosted-within-the-network-device-1">
+<section id="section-7.2">
+        <h3 id="name-mcp-server-hosted-within-the">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-mcp-server-hosted-within-the" class="section-name selfRef">MCP Server Hosted within the Network Device</a>
+        </h3>
 <ul class="normal">
-<li class="normal" id="section-7.1-1.2.2.3.2.1">
-                    <p id="section-7.1-1.2.2.3.2.1.1">Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible
-for the network to form a unified control mechanism.<a href="#section-7.1-1.2.2.3.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-7.2-1.1">
+            <p id="section-7.2-1.1.1">Pro<a href="#section-7.2-1.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.2-1.1.2.1">
+                <p id="section-7.2-1.1.2.1.1">The protocol stack Simplification:<a href="#section-7.2-1.1.2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.2-1.1.2.1.2.1">
+                    <p id="section-7.2-1.1.2.1.2.1.1">If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP.
+This reduces the complexity of protocol conversion and simplifies the overall architecture.<a href="#section-7.2-1.1.2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-7.2-1.1.2.1.2.2">
+                    <p id="section-7.2-1.1.2.1.2.2.1">It reduces the development and maintenance costs caused by protocol adaptation, especially when the device manufacturer supports the MCP protocol.<a href="#section-7.2-1.1.2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-7.2-1.1.2.2">
+                <p id="section-7.2-1.1.2.2.1">Real-time performance and response speed:<a href="#section-7.2-1.1.2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.2-1.1.2.2.2.1">
+                    <p id="section-7.2-1.1.2.2.2.1.1">The MCP Server is directly deployed on the device, which reduces the transmission latency in the middle and can respond to management instructions
+faster, which is suitable for scenarios with high real-time requirements.<a href="#section-7.2-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-7.2-1.2">
+            <p id="section-7.2-1.2.1">Con<a href="#section-7.2-1.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.2-1.2.2.1">
+                <p id="section-7.2-1.2.2.1.1">Device Resource Consumption:<a href="#section-7.2-1.2.2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.2-1.2.2.1.2.1">
+                    <p id="section-7.2-1.2.2.1.2.1.1">Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP Server may occupy a large amount of resources, affecting the normal
+operation of the device.<a href="#section-7.2-1.2.2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-7.2-1.2.2.1.2.2">
+                    <p id="section-7.2-1.2.2.1.2.2.1">It is necessary to optimize and expand the hardware and software resources of the device, which increases the complexity of the device.<a href="#section-7.2-1.2.2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-7.2-1.2.2.2">
+                <p id="section-7.2-1.2.2.2.1">Security and Management Complexity:<a href="#section-7.2-1.2.2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.2-1.2.2.2.2.1">
+                    <p id="section-7.2-1.2.2.2.2.1.1">Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the
+complexity of management.<a href="#section-7.2-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-7.2-1.2.2.2.2.2">
+                    <p id="section-7.2-1.2.2.2.2.2.1">Each device needs to independently deploy and maintain the MCP Server, which increases the operation and maintenance cost.<a href="#section-7.2-1.2.2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-7.2-1.2.2.3">
+                <p id="section-7.2-1.2.2.3.1">Incompatible with Legacy devices:<a href="#section-7.2-1.2.2.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.2-1.2.2.3.2.1">
+                    <p id="section-7.2-1.2.2.3.2.1.1">Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible
+for the network to form a unified control mechanism.<a href="#section-7.2-1.2.2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>

@@ -74,7 +74,8 @@ Table of Contents
      6.1.  MCP hosted within the Network Controller
      6.2.  MCP Server Hosted Within the Network Device
    7.  Impact of integrating MCP on Network Management
-     7.1.  MCP Server Hosted within the Network Device
+     7.1.  MCP Hosted Within the Network Controller
+     7.2.  MCP Server Hosted within the Network Device
    8.  IANA Considerations
    9.  Security Considerations
    10. Informative References
@@ -464,31 +465,55 @@ Table of Contents
    |            |  conversation               |                       |
    -------------+-----------------------------+-----------------------+
 
-   ## MCP Hosted Within the Network Controller - Pro - Resource
-   utilization efficiency: Controllers usually have stronger computing
-   and storage resources, which can better support the operation of MCP
-   Server and will not have a significant impact on the performance of
-   the network equipment itself.  - Security： - Security mechanisms can
-   be implemented centrally on the controller, and the overall security
-   can be improved through unified authentication, authorization and
-   audit mechanisms.  - Reduces the risk of equipment being exposed to
-   the network and reduces the possibility of being attacked.  -
-   Protocol adaptability： - Communicating with devices through the
-   NETCONF protocol can better be compatible with existing devices and
-   protocols, reducing the need for equipment modification.  - NETCONF
-   protocol has wide support and mature tool chains in the industry,
-   which is easy to develop and maintain. - Con - Latency and real-time
-   performance： - Since management instructions need to be forwarded
-   through the controller, latency may increase and real-time
-   performance may be affected.  - For some scenarios with extremely
-   high real-time requirements, it may not meet the requirements.  -
-   Protocol conversion complexity： - The MCP protocol needs to be
-   converted to the NETCONF protocol, which increases the complexity and
-   development cost of protocol conversion.  - It is necessary to deal
-   with compatibility and consistency issues between different
-   protocols.
+7.1.  MCP Hosted Within the Network Controller
 
-7.1.  MCP Server Hosted within the Network Device
+   *  Pro
+
+      -  Resource utilization efficiency: Controllers usually have
+         stronger computing and storage resources, which can better
+         support the operation of MCP Server and will not have a
+         significant impact on the performance of the network equipment
+         itself.
+
+      -  Security：
+
+         o  Security mechanisms can be implemented centrally on the
+            controller, and the overall security can be improved through
+            unified authentication, authorization and audit mechanisms.
+
+         o  Reduces the risk of equipment being exposed to the network
+            and reduces the possibility of being attacked.
+
+      -  Protocol adaptability：
+
+         o  Communicating with devices through the NETCONF protocol can
+            better be compatible with existing devices and protocols,
+            reducing the need for equipment modification.
+
+         o  NETCONF protocol has wide support and mature tool chains in
+            the industry, which is easy to develop and maintain.
+
+   *  Con
+
+      -  Latency and real-time performance：
+
+         o  Since management instructions need to be forwarded through
+            the controller, latency may increase and real-time
+            performance may be affected.
+
+         o  For some scenarios with extremely high real-time
+            requirements, it may not meet the requirements.
+
+      -  Protocol conversion complexity：
+
+         o  The MCP protocol needs to be converted to the NETCONF
+            protocol, which increases the complexity and development
+            cost of protocol conversion.
+
+         o  It is necessary to deal with compatibility and consistency
+            issues between different protocols.
+
+7.2.  MCP Server Hosted within the Network Device
 
    *  Pro
 
