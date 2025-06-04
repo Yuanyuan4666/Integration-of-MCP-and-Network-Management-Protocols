@@ -179,26 +179,26 @@ See Tool descriptor information example as follows:
 # Tool Descriptor
 [
   {
-    "name":"batch_configure_devices",
-    "description":"Batch Configure Network Devices"，
+    "name": "batch_configure_devices",
+    "description": "Batch Configure Network Devices"，
     "parameters": {
       "type": "object",
-      "properties":{
-        "device_ips": {"type": "array", "items": {"type": "string"},"description":"Device IP List"}，
-        "commands": {"type":"array", "items": {"type": "string"},"description":"CLI Sequence"}，
-        "credential_id": {"type": "string","description":"Credential ID"}
+      "properties": {
+        "device_ips": {"type": "array", "items": {"type": "string"}, "description": "Device IP List"}，
+        "commands": {"type": "array", "items": {"type": "string"}, "description": "CLI Sequence"}，
+        "credential_id": {"type": "string", "description": "Credential ID"}
       }，
-      "required":["device_ips","commands"]
+      "required": ["device_ips", "commands"]
     }
   },
   {
     "name": "check_device_status",
-    "description":"Check the Status of Network Devices"，
+    "description": "Check the Status of Network Devices"，
     "parameters": {
       "type": "object",
       "properties": {
         "device_ip": {"type": "string"},
-        "metrics": {"type": "array", "items": {"enum": ["cpu","memory","interface"]}}
+        "metrics": {"type": "array", "items": {"enum": ["cpu", "memory", "interface"]}}
       }
     }
   }
@@ -207,35 +207,35 @@ See Tool descriptor information example as follows:
 from netmiko import ConnectHandler
 from mcp_server import McpServer
 
-app =FastAPI()
+app = FastAPI()
 server = McpServer(app)
 
 #Connection Pool Management
-devices ={
+devices = {
     "192.168.1.1": {"device_type": "VendorA-XYZ"，"credential": "admin:password"},
-    "192.168.1.2":{"device_type": "VendorB-ABC","credential":"admin:huawei@passowrd"}
+    "192.168.1.2": {"device_type": "VendorB-ABC","credential":"admin:huawei@passowrd"}
      ....
 }
 
 @server.tool("batch_configure_devices")
 async def batch_config(device_ips: list,commands: list,credential_id: str):
-    results ={}
+    results = {}
     for ip in device_ips:
         conn = ConnectHandler(
-            ip=ip,
-            username=devices[ip]["credential"].split(':')[0],
-            password=devices[ip]["credential"].split(':')[1],
-            device_type=devices[ip]["device_type"]
+            ip = ip,
+            username = devices[ip]["credential"].split(':')[0],
+            password = devices[ip]["credential"].split(':')[1],
+            device_type = devices[ip]["device_type"]
         )
         output = conn.send_config_set(commands)
-        results[ip]=output
-    return {"success":True,"details": results)
+        results[ip] = output
+    return {"success": True, "details": results)
 
 @server.tool("check_device_status")
 async def check_status(device_ip: str, metrics: list):
-    status ={}
+    status = {}
     if "cpu" in metrics:
-        status["cpu"]= get_cpu_usage (device_ip)
+        status["cpu"] = get_cpu_usage (device_ip)
     if "memory" in metrics:
         status["memory"] = get_memory_usage(device_ip)
     return status
@@ -267,7 +267,7 @@ LLM parses the response, generates a natural-language summary, and sends it back
 
 {
   "192.168.10.1": "Configure Successfully, take 2.3 seconds",
-  "192.168.10.2", "Error: no response from the device",
+  "192.168.10.2": "Error: no response from the device",
 }
 
 ~~~~
