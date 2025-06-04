@@ -171,6 +171,7 @@ Tools implementation: MCP implementation describe how the tools are invoked.
 See Tool descriptor information example as follows:
 
 ~~~~
+# Tool Descriptor
 [
   {
     "name":"batch_configure_devices",
@@ -197,11 +198,51 @@ See Tool descriptor information example as follows:
     }
   }
 ]
+# Tool Implementation
+from netmiko import ConnectHandler 
+from mcp_server import McpServer
+
+app =FastAPI()
+server = McpServer(app)
+
+#Connection Pool Management 
+devices ={
+    "192.168.1.1": {"device_type": "cisco_ios"，"credential": "admin:password"},"192.168.1.2":{"device_type": "huawei","credential":"admin:huawei@123"}
+}
+
+@server.tool("batch_configure_devices")
+async def batch_config(device_ips: list,commands: list,credential_id: str):
+    results ={}
+    for ip in device_ips:
+        conn = ConnectHandler(
+            ip=ip,
+            username=devices[ip]["credential"].split(':')[0],
+            password=devices[ip]["credential"].split(':')[1],
+            device_type=devices[ip]["device_type"]
+        )
+        output = conn.send_config_set(commands) 
+        results[ip]=output
+    return {"success":True,"details": results)
+
+@server.tool("check_device_status")
+async def check_status(device_ip: str, metrics: list):
+    status ={}
+    if "cpu" in metrics:
+        status["cpu"]= get_cpu_usage (device_ip)  
+    if "memory" in metrics:
+        status["memory"] = get_memory_usage(device_ip) 
+    return status
 ~~~~
 
 Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
 client retrieves the necessary tooling descriptor information from the MCP server and forwards it to the LLM. The LLM determines the appropriate tools and responds
-in JSON format.
+in JSON format as follows:
+
+~~~~
+
+
+
+~~~~
 
 The MCP server executes the network management operation in JSON format and returns the results (in JSON) to the MCP client, which forwards them to the LLM. The
 LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.
