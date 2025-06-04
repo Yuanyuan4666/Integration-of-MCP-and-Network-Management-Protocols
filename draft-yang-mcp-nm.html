@@ -1188,11 +1188,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-mcp-hosted-within-the-netwo" class="internal xref">MCP hosted within the Network Controller</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
-                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-use-cases" class="internal xref">Use cases</a></p>
-</li>
-                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-mcp-server-hosted-within-th" class="internal xref">MCP Server Hosted Within the Network Device</a></p>
@@ -1382,7 +1377,8 @@ However Network API ecosystem and YANG model ecosystem are both built as silo an
                 <p id="section-5.1-1.2.2.2.1"><em>Tool Registry</em>: A centralized repository hosts MCP Tools with metadata (e.g., vendor compatibility, privilege requirements).<a href="#section-5.1-1.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-5.1-1.2.2.3">
-                <p id="section-5.1-1.2.2.3.1"><em>Dynamic Loading</em>: MCP Servers dynamically invoke required tools via network management protocol on demand, thereby decoupling tool lifecycle management from the server's core functionality.<a href="#section-5.1-1.2.2.3.1" class="pilcrow">¶</a></p>
+                <p id="section-5.1-1.2.2.3.1"><em>Dynamic Loading</em>: MCP Servers dynamically invoke required tools via network management protocol on demand, thereby decoupling
+tool lifecycle management from the server's core functionality.<a href="#section-5.1-1.2.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
@@ -1518,6 +1514,15 @@ MCP Server to retrieve the available tools.<a href="#section-5.4-2.2.1" class="p
             <p id="section-5.4-2.5.1">Result Aggregation &amp; Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.<a href="#section-5.4-2.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
+<p id="section-5.4-3">Take multi-vendor network management as an example, the MCP server is deployed locally on the network controller, and the tools are
+integrated into the MCP server. The server provide the following registered tool descriptor information:<a href="#section-5.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.4-4">Tools description: it describes the name, use, and parameters of tools.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
+<p id="section-5.4-5">Tools implementation: MCP implementation describe how the tools are invoked.<a href="#section-5.4-5" class="pilcrow">¶</a></p>
+<p id="section-5.4-6">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
+client retrieves the necessary tooling descriptor information from the MCP server and forwards it to the LLM. The LLM determines the appropriate tools and responds
+in JSON format.<a href="#section-5.4-6" class="pilcrow">¶</a></p>
+<p id="section-5.4-7">The MCP server executes the network management operation in JSON format and returns the results (in JSON) to the MCP client, which forwards them to the LLM. The
+LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.<a href="#section-5.4-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1581,24 +1586,6 @@ MCP Server to retrieve the available tools.<a href="#section-5.4-2.2.1" class="p
             </ul>
 </li>
         </ul>
-<div id="use-cases">
-<section id="section-6.1.1">
-          <h4 id="name-use-cases">
-<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-use-cases" class="section-name selfRef">Use cases</a>
-          </h4>
-<p id="section-6.1.1-1">In the scenario of cross-vendor network device batch management, the server is deployed locally on the network controller, and the tools are integrated into the server. The main parts of the server are listed below:<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-6.1.1-2.1">
-              <p id="section-6.1.1-2.1.1">Tools description: it describes the name, use, and parameters of tools. <strong><em>some code here</em></strong><a href="#section-6.1.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-6.1.1-2.2">
-              <p id="section-6.1.1-2.2.1">Tools implementation: it implementats how the tools work. <strong><em>some code here</em></strong><a href="#section-6.1.1-2.2.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-6.1.1-3">For example, when a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the client retrieves the necessary tooling information from the server and forwards it to the LLM. The LLM determines the appropriate tools and responds in JSON format.<strong><em>some code here</em></strong><a href="#section-6.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.1.1-4">The server executes the operation and returns the results (in JSON) to the client (<strong><em>some code here</em></strong>), which forwards them to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
-</section>
-</div>
 </section>
 </div>
 <div id="mcp-server-hosted-within-the-network-device">
