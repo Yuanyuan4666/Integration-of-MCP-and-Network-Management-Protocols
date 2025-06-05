@@ -67,8 +67,9 @@ The following terms are used throughout this document:
 ## Others
 
 - **LLM**: Large Language Model
-- **Netconf**: Network Configuration Protocol
-- **Restconf**: RESTful Network Configuration Protocol
+- **NETCONF**: Network Configuration Protocol {{!RFC6241}}
+- **RESTCONF**: RESTful Network Configuration Protocol {{!RFC8040}}
+- **SNMP**: A Simple Network Management Protocol {{!RFC2576}}
 - **CLI**: Command Line Interface
 
 # Overview of key challenges for the network management
@@ -359,29 +360,24 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 |            |   MCP Hosted Within         |   MCP Server Hosted   |
 |            | the Network Controller      | Within Network Device |
 +------------+-----------------------------+-----------------------+
-|            |                             |                       |
-|Management  |  No impact,reuse            |1.Protocol for Context |
-|Protocol    |  existing NM Protocols      |2 Management including |
-|            |                             | approval mechanisms   |
-|            |                             | where human input is  |
-|            |                             | required.             |
+|            |                             |1.Protocol for Context |
+|Management  |  No impact,reuse            |  Management           |
+|Protocol    |  existing NM Protocols      |2 Including approval   |
+|            |                             | mechanisms where human|
+|            |                             | input is required.    |
 |            |                             |3.Coexist with NM proto|
 |            |                             |in case not all devices|
 |            |                             |support MCP            |
 +------------+-----------------------------+-----------------------+
-|            |                             |                       |
 |Management  |  Use internal tools and     |  Need to ensure right |
 |   Tools    |  LLMs within the controller |  tools and background |
 |            |  for managing context and   |  info in the network  |
 |            |  decision making            |  device               |
 +------------+-----------------------------+-----------------------+
-|            |                             |                       |
-|            |                             |                       |
 |  Task      |  Works with pre-structured  |                       |
 |Management  |  goal driven tasks.         |    Same Rule Apply    |
 |            |  Tasks are usually designed |                       |
 |            |  and pre-defined by client  |                       |
-|            |                             |                       |
 +------------+-----------------------------+-----------------------+
 |            |  Yes,                       |    Yes                |
 | Stateful   |  Agents can retain context  |                       |
