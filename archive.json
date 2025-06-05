@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-03T03:35:06.868718+00:00",
+  "timestamp": "2025-06-05T03:36:25.219541+00:00",
   "repo": "Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols",
   "labels": [
     {
@@ -49,6 +49,51 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOOrizn865mDys",
+      "title": "The impact of integrating MCP into the network management system",
+      "url": "https://github.com/Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols/issues/1",
+      "state": "OPEN",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "billwuqin"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-03T12:28:41Z",
+      "updatedAt": "2025-06-03T13:47:56Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "body": "https://github.com/Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols/commit/1cccc8f33b86d27040c862971ac746761dde42e6",
+          "createdAt": "2025-06-03T13:47:55Z",
+          "updatedAt": "2025-06-03T13:47:55Z"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOOrizn865mGUJ",
+      "title": "Walk through exmaples in section 5.1, section 5.2, section 5.3.",
+      "url": "https://github.com/Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols/issues/2",
+      "state": "OPEN",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "Yuanyuan4666"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-03T12:31:35Z",
+      "updatedAt": "2025-06-03T12:31:35Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": []
 }
