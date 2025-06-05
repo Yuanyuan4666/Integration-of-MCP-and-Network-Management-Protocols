@@ -5,7 +5,7 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 6 December 2025                                     4 June 2025
+Expires: 7 December 2025                                     5 June 2025
 
 
             Applicability of MCP for the Network Management
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 December 2025.
+   This Internet-Draft will expire on 7 December 2025.
 
 Copyright Notice
 
@@ -81,7 +81,9 @@ Table of Contents
      9.1.  Expanded Attack Surface
      9.2.  Model Integrity as a Security Foundation
      9.3.  Data Sensitivity and Inference Risks
-   10. Informative References
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Contributors
    Authors' Addresses
 
@@ -135,9 +137,11 @@ Table of Contents
 
    *  *LLM*: Large Language Model
 
-   *  *Netconf*: Network Configuration Protocol
+   *  *NETCONF*: Network Configuration Protocol [RFC6241]
 
-   *  *Restconf*: RESTful Network Configuration Protocol
+   *  *RESTCONF*: RESTful Network Configuration Protocol [RFC8040]
+
+   *  *SNMP*: A Simple Network Management Protocol [RFC2576]
 
    *  *CLI*: Command Line Interface
 
@@ -521,29 +525,24 @@ async def check_status(device_ip: str, metrics: list):
    |            |   MCP Hosted Within         |   MCP Server Hosted   |
    |            | the Network Controller      | Within Network Device |
    +------------+-----------------------------+-----------------------+
-   |            |                             |                       |
-   |Management  |  No impact,reuse            |1.Protocol for Context |
-   |Protocol    |  existing NM Protocols      |2 Management including |
-   |            |                             | approval mechanisms   |
-   |            |                             | where human input is  |
-   |            |                             | required.             |
+   |            |                             |1.Protocol for Context |
+   |Management  |  No impact,reuse            |  Management           |
+   |Protocol    |  existing NM Protocols      |2 Including approval   |
+   |            |                             | mechanisms where human|
+   |            |                             | input is required.    |
    |            |                             |3.Coexist with NM proto|
    |            |                             |in case not all devices|
    |            |                             |support MCP            |
    +------------+-----------------------------+-----------------------+
-   |            |                             |                       |
    |Management  |  Use internal tools and     |  Need to ensure right |
    |   Tools    |  LLMs within the controller |  tools and background |
    |            |  for managing context and   |  info in the network  |
    |            |  decision making            |  device               |
    +------------+-----------------------------+-----------------------+
-   |            |                             |                       |
-   |            |                             |                       |
    |  Task      |  Works with pre-structured  |                       |
    |Management  |  goal driven tasks.         |    Same Rule Apply    |
    |            |  Tasks are usually designed |                       |
    |            |  and pre-defined by client  |                       |
-   |            |                             |                       |
    +------------+-----------------------------+-----------------------+
    |            |  Yes,                       |    Yes                |
    | Stateful   |  Agents can retain context  |                       |
@@ -700,7 +699,26 @@ async def check_status(device_ip: str, metrics: list):
    traffic patterns, or infer the existence of specific network
    segments.
 
-10.  Informative References
+10.  References
+
+10.1.  Normative References
+
+   [RFC2576]  Frye, R., Levi, D., Routhier, S., and B. Wijnen,
+              "Coexistence between Version 1, Version 2, and Version 3
+              of the Internet-standard Network Management Framework",
+              RFC 2576, DOI 10.17487/RFC2576, March 2000,
+              <https://www.rfc-editor.org/rfc/rfc2576>.
+
+   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
+              and A. Bierman, Ed., "Network Configuration Protocol
+              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
+              <https://www.rfc-editor.org/rfc/rfc6241>.
+
+   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
+              Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
+              <https://www.rfc-editor.org/rfc/rfc8040>.
+
+10.2.  Informative References
 
    [I-D.kumar-rtgwg-grpc-protocol]
               Kumar, A., Kolhe, J., Ghemawat, S., and L. Ryan, "gRPC
