@@ -5,7 +5,7 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 7 December 2025                                     5 June 2025
+Expires: 9 December 2025                                     7 June 2025
 
 
             Applicability of MCP for the Network Management
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 December 2025.
+   This Internet-Draft will expire on 9 December 2025.
 
 Copyright Notice
 
@@ -89,7 +89,7 @@ Table of Contents
 
 1.  Introduction
 
-   The Model Control Protocol (MCP) provides a standardized way for LLMs
+   The Model Context Protocol (MCP) provides a standardized way for LLMs
    to access and utilize information from different sources, interact
    with tools, making it easier to build AI applications that can
    interact with external systems.
