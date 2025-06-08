@@ -133,6 +133,8 @@ Table of Contents
    *  *MCP Server*: A dedicated server that interacts with MCP clients
       and provides tools.
 
+   *  *CLI*: Command Line Interface
+
 2.2.  Others
 
    *  *LLM*: Large Language Model
@@ -205,7 +207,7 @@ Table of Contents
 
    The LLM model with MCP support and its ability to comprehend diverse
    complex requirements and deliver corresponding functionalities, is
-   well- suited for large scale multi-vendor network management
+   well-suited for large scale multi-vendor network management
    environments, effectively addressing the aforementioned operational
    challenges in Section 4.  Therefore, we have introduced the MCP
    protocol in the network management environments for building an
@@ -266,8 +268,8 @@ Table of Contents
 
    *  Execution Flow:
 
-      -  User Input: Operator submits request via chat/voice (e.g.,
-         "Block TCP port 22 on all edge routers").
+      -  User Input: Operator submits request via chat (e.g., "Block TCP
+         port 22 on all edge routers").
 
       -  LLM Processing:
 
@@ -311,9 +313,8 @@ Table of Contents
       -  The decision is sent back to the MCP Client and then MCP Client
          will execute tools via server.
 
-   *  Protocol Translation & Execution: The MCP Server executes the
-      translated commands on target devices and returns results to the
-      client.
+   *  Tool Execution: The MCP Server executes the translated commands on
+      target devices and returns results to the client.
 
    *  Result Aggregation & Feedback: The MCP Client collates tool
       outputs (success/failure logs) and forwards them to the LLM for
@@ -399,9 +400,9 @@ async def check_status(device_ip: str, metrics: list):
    Suppose a user submits a request (via the client) such as "Configure
    OSPF Area 0 with process ID 100 for all core switches in the Beijing
    data center," the MCP client retrieves the necessary tooling
-   descriptor information from the MCP server and forwards it to the
-   LLM.  The LLM determines the appropriate tools and responds in JSON
-   format as follows:
+   descriptor information from the MCP server and forwards it along with
+   the request to the LLM.  The LLM determines the appropriate tools and
+   responds in JSON format as follows:
 
    {
    "method": "batch_configure_devices",
@@ -416,9 +417,9 @@ async def check_status(device_ip: str, metrics: list):
    }
 
    The MCP server executes the network management operation in JSON
-   format and returns the results (in JSON) to the MCP client, which
-   forwards them to the LLM.  The LLM parses the response, generates a
-   natural-language summary, and sends it back to the client for final
+   format and returns the results to the MCP client, which forwards them
+   to the LLM.  The LLM parses the response, generates a natural-
+   language summary, and sends it back to the client for final
    presentation to the user.  See natural lanauge summary example as
    follows:
 
@@ -464,14 +465,14 @@ async def check_status(device_ip: str, metrics: list):
    |   Device     |  |   Device     |    |   Device     |
    +--------------+  +--------------+    +--------------+
 
-   *  Scope: The MCP Server,collocated with the LLM model and MCP
-      Client, is hosted within the operator's local network, the network
-      devices stay as it is.
+   *  Scope: The MCP Server, colocated with the MCP Client and LLM
+      model, is hosted within a cloud environment, the network devices
+      stay as it is.
 
    *  Key Characteristics:
 
       -  Centralized Management: A single MCP Client instance can manage
-         multiple MCP server in geographically dispersed network.
+         all network devices in geographically dispersed network.
 
       -  Scalability: Cloud-native scaling accommodates dynamic tool
          registry updates and high request volumes.
@@ -506,16 +507,14 @@ async def check_status(device_ip: str, metrics: list):
    .                                                       .
    .........................................................
 
-   *  Scope: The MCP Client operates in a cloud environment, serving
-      distributed MCP Server via public/private APIs.
+   *  Scope: The MCP server is colocated with network devices.  The MCP
+      Client operates in a cloud environment, requesting distributed MCP
+      Server via public/private APIs.
 
    *  Key Characteristics:
 
       -  Low Latency: Direct access to network devices minimizes tool
-         execution delays.
-
-      -  Data Control: All processing (LLM queries, tool executions)
-         remains within the operator’s infrastructure.
+         execution delays
 
 7.  Impact of integrating MCP on Network Management
 

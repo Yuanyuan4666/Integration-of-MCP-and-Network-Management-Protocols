@@ -1289,6 +1289,9 @@ Agents to have:<a href="#section-1-2" class="pilcrow">¶</a></p>
           <li class="normal" id="section-2.1-1.4">
             <p id="section-2.1-1.4.1"><strong>MCP Server</strong>: A dedicated server that interacts with MCP clients and provides tools.<a href="#section-2.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
+          <li class="normal" id="section-2.1-1.5">
+            <p id="section-2.1-1.5.1"><strong>CLI</strong>: Command Line Interface<a href="#section-2.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
         </ul>
 </section>
 </div>
@@ -1387,7 +1390,7 @@ However Network API ecosystem and YANG model ecosystem are both built as silo an
       <h2 id="name-architecture-overview">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-architecture-overview" class="section-name selfRef">Architecture Overview</a>
       </h2>
-<p id="section-5-1">The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well- suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in <a href="#ops-radiu" class="auto internal xref">Section 4</a>. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in <a href="#ops-radiu" class="auto internal xref">Section 4</a>. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div id="encapsulating-device-operations-into-mcp-tools">
 <section id="section-5.1">
         <h3 id="name-encapsulating-device-operat">
@@ -1476,7 +1479,7 @@ tool lifecycle management from the server's core functionality.<a href="#section
             <p id="section-5.3-1.2.1">Execution Flow:<a href="#section-5.3-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.3-1.2.2.1">
-                <p id="section-5.3-1.2.2.1.1">User Input: Operator submits request via chat/voice (e.g., "Block TCP port 22 on all edge routers").<a href="#section-5.3-1.2.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-5.3-1.2.2.1.1">User Input: Operator submits request via chat (e.g., "Block TCP port 22 on all edge routers").<a href="#section-5.3-1.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-5.3-1.2.2.2">
                 <p id="section-5.3-1.2.2.2.1">LLM Processing:<a href="#section-5.3-1.2.2.2.1" class="pilcrow">¶</a></p>
@@ -1538,7 +1541,7 @@ MCP Server to retrieve the available tools.<a href="#section-5.4-2.2.1" class="p
             </ul>
 </li>
           <li class="normal" id="section-5.4-2.4">
-            <p id="section-5.4-2.4.1">Protocol Translation &amp; Execution: The MCP Server executes the translated commands on target devices and returns results to the client.<a href="#section-5.4-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.4-2.4.1">Tool Execution: The MCP Server executes the translated commands on target devices and returns results to the client.<a href="#section-5.4-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.4-2.5">
             <p id="section-5.4-2.5.1">Result Aggregation &amp; Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.<a href="#section-5.4-2.5.1" class="pilcrow">¶</a></p>
@@ -1617,7 +1620,7 @@ async def check_status(device_ip: str, metrics: list):
 </pre><a href="#section-5.4-7" class="pilcrow">¶</a>
 </div>
 <p id="section-5.4-8">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
-client retrieves the necessary tooling descriptor information from the MCP server and forwards it to the LLM. The LLM determines the appropriate tools and responds
+client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the appropriate tools and responds
 in JSON format as follows:<a href="#section-5.4-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.4-9">
 <pre>
@@ -1635,7 +1638,7 @@ in JSON format as follows:<a href="#section-5.4-8" class="pilcrow">¶</a></p>
 
 </pre><a href="#section-5.4-9" class="pilcrow">¶</a>
 </div>
-<p id="section-5.4-10">The MCP server executes the network management operation in JSON format and returns the results (in JSON) to the MCP client, which forwards them to the LLM. The
+<p id="section-5.4-10">The MCP server executes the network management operation in JSON format and returns the results to the MCP client, which forwards them to the LLM. The
 LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user. See natural lanauge summary example as follows:<a href="#section-5.4-10" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.4-11">
 <pre>
@@ -1655,7 +1658,7 @@ LLM parses the response, generates a natural-language summary, and sends it back
       <h2 id="name-deployment-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-deployment-considerations" class="section-name selfRef">Deployment considerations</a>
       </h2>
-<p id="section-6-1">While the overall workflow remains consistent, the MCP Server's deployment location (on-premises or remote) introduces operational variations.  This section explores two deployment scenarios.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">While the overall workflow remains consistent, the MCP Server's deployment location (on-premises or remote) introduces operational variations. This section explores two deployment scenarios.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div id="mcp-hosted-within-the-network-controller">
 <section id="section-6.1">
         <h3 id="name-mcp-hosted-within-the-netwo">
@@ -1695,13 +1698,13 @@ LLM parses the response, generates a natural-language summary, and sends it back
 </div>
 <ul class="normal">
 <li class="normal" id="section-6.1-2.1">
-            <p id="section-6.1-2.1.1">Scope: The MCP Server,collocated with the LLM model and MCP Client, is hosted within the operator's local network, the network devices stay as it is.<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-2.1.1">Scope: The MCP Server, colocated with the MCP Client and LLM model, is hosted within a cloud environment, the network devices stay as it is.<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.1-2.2">
             <p id="section-6.1-2.2.1">Key Characteristics:<a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.1-2.2.2.1">
-                <p id="section-6.1-2.2.2.1.1">Centralized Management: A single MCP Client instance can manage multiple MCP server in geographically dispersed network.<a href="#section-6.1-2.2.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-6.1-2.2.2.1.1">Centralized Management: A single MCP Client instance can manage all network devices in geographically dispersed network.<a href="#section-6.1-2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-6.1-2.2.2.2">
                 <p id="section-6.1-2.2.2.2.1">Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.<a href="#section-6.1-2.2.2.2.1" class="pilcrow">¶</a></p>
@@ -1749,16 +1752,13 @@ LLM parses the response, generates a natural-language summary, and sends it back
 </div>
 <ul class="normal">
 <li class="normal" id="section-6.2-2.1">
-            <p id="section-6.2-2.1.1">Scope: The MCP Client operates in a cloud environment, serving distributed MCP Server via public/private APIs.<a href="#section-6.2-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.2-2.1.1">Scope: The MCP server is colocated with network devices. The MCP Client operates in a cloud environment, requesting distributed MCP Server via public/private APIs.<a href="#section-6.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.2-2.2">
             <p id="section-6.2-2.2.1">Key Characteristics:<a href="#section-6.2-2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-2.2.2.1">
-                <p id="section-6.2-2.2.2.1.1">Low Latency: Direct access to network devices minimizes tool execution delays.<a href="#section-6.2-2.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-6.2-2.2.2.2">
-                <p id="section-6.2-2.2.2.2.1">Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.<a href="#section-6.2-2.2.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-6.2-2.2.2.1.1">Low Latency: Direct access to network devices minimizes tool execution delays<a href="#section-6.2-2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
