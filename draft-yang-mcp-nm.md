@@ -42,14 +42,14 @@ The application of MCP in the network management field is meant to develop vario
 
 # Introduction
 
-The Model Context Protocol (MCP) provides a standardized way for LLMs to access and utilize information from different sources, interact with tools, making it easier to build AI applications that can interact with external systems.
+The Model Context Protocol (MCP) provides a standardized way for LLMs to access and utilize information from different sources, interact with tools, making it easier to build AI applications that can interact with external LLM and network management systems.
 
-MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution within the network management system or the network controller, MCP enables AI
+MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution within the network management system, MCP enables AI
 Agents to have:
 
 - Unified operation abstraction through normalized MCP tool definitions
-- Seamless LLM integration via structured API contracts
-- Closed-Loop Automation Execution
+- Seamless LLM integration via the structured protocol
+- Automation Execution Ability
 
 This document discusses the applicability of MCP to the network management plane in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment scenarios. The impact of integrating MCP into the network management system will also be discussed.
 
@@ -62,7 +62,7 @@ The following terms are used throughout this document:
 - **MCP Protocol**: MCP is an open standard designed to facilitate communication between LLMs and external data sources or tools.
 - **MCP Host**: The entity initiating the LLM request.
 - **MCP Client**: A built-in module within a host, specifically designed for interaction with the MCP server.
-- **MCP Server**: A dedicated server that interacts with MCP clients and provides MCP services.
+- **MCP Server**: A dedicated server that interacts with MCP clients and provides tools.
 
 ## Others
 
@@ -70,7 +70,6 @@ The following terms are used throughout this document:
 - **NETCONF**: Network Configuration Protocol {{!RFC6241}}
 - **RESTCONF**: RESTful Network Configuration Protocol {{!RFC8040}}
 - **SNMP**: A Simple Network Management Protocol {{!RFC2576}}
-- **CLI**: Command Line Interface
 
 # Overview of key challenges for the network management
 
@@ -92,7 +91,7 @@ models ecosystem is fragmented.
 Some vendors only partially support standard Network management protocols, and proprietary extensions may break interoperability.
 Other vendors might choose non-stanard network management protocol or telemetry protocol such as gnmi {{?I-D.openconfig-rtgwg-gnmi-spec}},
 grpc {{?I-D.kumar-rtgwg-grpc-protocol}}. A significant number of network operators continue to rely on legacy network management mechanisms
-such as SNMP and CLI.
+such as SNMP.
 
 ## Lack integration with Network APIs
 
@@ -106,7 +105,7 @@ This section outlines operational aspects of MCP with Network management require
 
 -  *Function-Specific MCP Servers*: Deploy dedicated MCP servers tailored to different functions and domains, such as network log analysis, device configuration management, energy consumption management, and security operations.
 -  *Secure and Scalable Architecture*: Implement stringent security measures to ensure only authorized AI models and users can access and control network resources via MCP.
--  *Automated Workflows*: Leverage MCP to enable LLM-coordinated multi-tool automation, supporting real-time monitoring, diagnostics, and fault remediation.
+-  *Automated Workflows*: Leverage MCP to enable LLM-coordinated multi-tool automation, supporting common management such as real-time monitoring, diagnostics, and fault remediation.
 
 # Architecture Overview
 
