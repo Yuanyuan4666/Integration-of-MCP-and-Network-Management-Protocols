@@ -63,6 +63,7 @@ The following terms are used throughout this document:
 - **MCP Host**: The entity initiating the LLM request.
 - **MCP Client**: A built-in module within a host, specifically designed for interaction with the MCP server.
 - **MCP Server**: A dedicated server that interacts with MCP clients and provides tools.
+- **CLI**: Command Line Interface
 
 ## Others
 
@@ -109,7 +110,7 @@ This section outlines operational aspects of MCP with Network management require
 
 # Architecture Overview
 
-The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well- suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in {{ops-radiu}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
+The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in {{ops-radiu}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
 
 ## Encapsulating Device Operations into MCP Tools
 
@@ -138,7 +139,7 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
 
 - Objective: Achieve end-to-end automation from language input to network changes.
 - Execution Flow:
-  - User Input: Operator submits request via chat/voice (e.g., "Block TCP port 22 on all edge routers").
+  - User Input: Operator submits request via chat (e.g., "Block TCP port 22 on all edge routers").
   - LLM Processing:
     - Intent → Toolchain: Identifies get_edge_routers + configure_acl tools.
     - Parameter Binding: Maps "TCP port 22" to {"protocol": "tcp", "port": 22, "action": "deny"}.
@@ -162,7 +163,7 @@ A general workflow is as follows:
   - The LLM evaluates the context and if tools are required, select and sequence tools.
   - The decision is sent back to the MCP Client and then MCP Client will execute tools via server.
 
-- Protocol Translation & Execution: The MCP Server executes the translated commands on target devices and returns results to the client.
+- Tool Execution: The MCP Server executes the translated commands on target devices and returns results to the client.
 
 - Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.
 
@@ -242,7 +243,7 @@ async def check_status(device_ip: str, metrics: list):
 ~~~~
 
 Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
-client retrieves the necessary tooling descriptor information from the MCP server and forwards it to the LLM. The LLM determines the appropriate tools and responds
+client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the appropriate tools and responds
 in JSON format as follows:
 
 ~~~~
@@ -260,7 +261,7 @@ in JSON format as follows:
 
 ~~~~
 
-The MCP server executes the network management operation in JSON format and returns the results (in JSON) to the MCP client, which forwards them to the LLM. The
+The MCP server executes the network management operation in JSON format and returns the results to the MCP client, which forwards them to the LLM. The
 LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user. See natural lanauge summary example as follows:
 
 ~~~~
@@ -274,7 +275,7 @@ LLM parses the response, generates a natural-language summary, and sends it back
 
 # Deployment considerations
 
-While the overall workflow remains consistent, the MCP Server's deployment location (on-premises or remote) introduces operational variations.  This section explores two deployment scenarios.
+While the overall workflow remains consistent, the MCP Server's deployment location (on-premises or remote) introduces operational variations. This section explores two deployment scenarios.
 
 ## MCP hosted within the Network Controller
 
@@ -309,9 +310,9 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 +--------------+  +--------------+    +--------------+
 ~~~~
 
-- Scope: The MCP Server,collocated with the LLM model and MCP Client, is hosted within the operator's local network, the network devices stay as it is.
+- Scope: The MCP Server, colocated with the MCP Client and LLM model, is hosted within a cloud environment, the network devices stay as it is.
 - Key Characteristics:
-  -  Centralized Management: A single MCP Client instance can manage multiple MCP server in geographically dispersed network.
+  -  Centralized Management: A single MCP Client instance can manage all network devices in geographically dispersed network.
   -  Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.
 
 ## MCP Server Hosted Within the Network Device
@@ -346,10 +347,9 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 .........................................................
 ~~~~
 
-- Scope: The MCP Client operates in a cloud environment, serving distributed MCP Server via public/private APIs.
+- Scope: The MCP server is colocated with network devices. The MCP Client operates in a cloud environment, requesting distributed MCP Server via public/private APIs.
 - Key Characteristics:
-  -  Low Latency: Direct access to network devices minimizes tool execution delays.
-  -  Data Control: All processing (LLM queries, tool executions) remains within the operator’s infrastructure.
+  -  Low Latency: Direct access to network devices minimizes tool execution delays
 
 # Impact of integrating MCP on Network Management
 
