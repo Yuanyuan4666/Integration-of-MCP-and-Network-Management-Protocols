@@ -5,7 +5,7 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 9 December 2025                                     7 June 2025
+Expires: 10 December 2025                                    8 June 2025
 
 
             Applicability of MCP for the Network Management
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 December 2025.
+   This Internet-Draft will expire on 10 December 2025.
 
 Copyright Notice
 
@@ -92,7 +92,7 @@ Table of Contents
    The Model Context Protocol (MCP) provides a standardized way for LLMs
    to access and utilize information from different sources, interact
    with tools, making it easier to build AI applications that can
-   interact with external systems.
+   interact with external LLM and network management systems.
 
    MCP has been seen as rapid adoption technology in the consumer field.
    The application of MCP in the network management field is meant to
@@ -100,15 +100,15 @@ Table of Contents
    based networks management automation in the multi-vendor
    heterogeneous network environment.  By establishing standard
    interfaces for tool encapsulation, intent translation, and closed-
-   loop execution within the network management system or the network
-   controller, MCP enables AI Agents to have:
+   loop execution within the network management system, MCP enables AI
+   Agents to have:
 
    *  Unified operation abstraction through normalized MCP tool
       definitions
 
-   *  Seamless LLM integration via structured API contracts
+   *  Seamless LLM integration via the structured protocol
 
-   *  Closed-Loop Automation Execution
+   *  Automation Execution Ability
 
    This document discusses the applicability of MCP to the network
    management plane in the IP network that utilizes IETF technologies.
@@ -131,7 +131,7 @@ Table of Contents
       designed for interaction with the MCP server.
 
    *  *MCP Server*: A dedicated server that interacts with MCP clients
-      and provides MCP services.
+      and provides tools.
 
 2.2.  Others
 
@@ -142,8 +142,6 @@ Table of Contents
    *  *RESTCONF*: RESTful Network Configuration Protocol [RFC8040]
 
    *  *SNMP*: A Simple Network Management Protocol [RFC2576]
-
-   *  *CLI*: Command Line Interface
 
 3.  Overview of key challenges for the network management
 
@@ -173,7 +171,7 @@ Table of Contents
    telemetry protocol such as gnmi [I-D.openconfig-rtgwg-gnmi-spec],
    grpc [I-D.kumar-rtgwg-grpc-protocol].  A significant number of
    network operators continue to rely on legacy network management
-   mechanisms such as SNMP and CLI.
+   mechanisms such as SNMP.
 
 3.3.  Lack integration with Network APIs
 
@@ -200,8 +198,8 @@ Table of Contents
       and control network resources via MCP.
 
    *  _Automated Workflows_: Leverage MCP to enable LLM-coordinated
-      multi-tool automation, supporting real-time monitoring,
-      diagnostics, and fault remediation.
+      multi-tool automation, supporting common management such as real-
+      time monitoring, diagnostics, and fault remediation.
 
 5.  Architecture Overview
 
