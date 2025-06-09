@@ -5,7 +5,7 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 10 December 2025                                    8 June 2025
+Expires: 11 December 2025                                    9 June 2025
 
 
             Applicability of MCP for the Network Management
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 December 2025.
+   This Internet-Draft will expire on 11 December 2025.
 
 Copyright Notice
 
@@ -442,19 +442,19 @@ async def check_status(device_ip: str, metrics: list):
                              |
                      Natural Language
                     Command  |
-                  ...........|............................
-                  .          |                           .
-                  .  +-------+------+       +-----------+.
-                  .  |  MCP Client  +-------+  LLM      |.
-                  .  +-------+------+       +-----------+.
-                  .          |                           .
-                  .   Tools Request                      .Network
-                  .          |                           .Controller
-                  .  +-------+------+                    .
-                  .  |  MCP Server  |                    .
-                  .  +-------+------+                    .
-                  .          |                           .
-                  ...........|............................
+            .................|............................
+            .                |                           .
+            .        +-------+------+       +-----------+.
+            .        |  MCP Client  +-------+  LLM      |.
+            .        +-------+------+       +-----------+.
+            .                |                           .
+            .         Tools Request                      .
+            .                |                           .
+            .        +-------+------+                    .
+            .        |  MCP Server  |       Network      .
+            .        +-------+------+       Controller   .
+            .                |                           .
+            .................|............................
                              |
                      Netconf/Telemetry
          +-------------------+------------------+
