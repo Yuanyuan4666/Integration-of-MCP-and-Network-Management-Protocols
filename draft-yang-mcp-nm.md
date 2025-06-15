@@ -72,7 +72,7 @@ The following terms are used throughout this document:
 - **RESTCONF**: RESTful Network Configuration Protocol {{!RFC8040}}
 - **SNMP**: A Simple Network Management Protocol {{!RFC2576}}
 
-# Overview of key challenges for the network management
+# Overview of key challenges for the network management {#ops-radiu}
 
 In large scale network management environment, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues or challenges:
 
@@ -100,64 +100,41 @@ Today, network API has been widely adopted by the northbound interface of OSS/BS
 been widely adopted by the northbound interface of the network controller or the interface between the network controller and the network devices.
 However Network API ecosystem and YANG model ecosystem are both built as silo and lack integration or mapping between them.
 
-# Operational Consideration {#ops-radiu}
-
-This section outlines operational aspects of MCP with Network management requirements as follows:
-
--  *Function-Specific MCP Servers*: Deploy dedicated MCP servers tailored to different functions and domains, such as network log analysis, device configuration management, energy consumption management, and security operations.
--  *Secure and Scalable Architecture*: Implement stringent security measures to ensure only authorized AI models and users can access and control network resources via MCP.
--  *Automated Workflows*: Leverage MCP to enable LLM-coordinated multi-tool automation, supporting common management such as real-time monitoring, diagnostics, and fault remediation.
-
 # Architecture Overview
 
-The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for large scale multi-vendor network management environments, effectively addressing the aforementioned operational challenges in {{ops-radiu}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
+The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for large scale multi-vendor network management environments, effectively addressing the aforementioned challenges in {{ops-radiu}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
 
 ## Encapsulating Device Operations into MCP Tools
 
-- *Objective*: Standardize heterogeneous device operations into modular, reusable tools.
-- *Implementation*:
-  - *Tool Abstraction*: Vendor-specific commands are wrapped into discrete MCP Tools with uniform schemas.
-  - *Tool Registry*: A centralized repository hosts MCP Tools with metadata (e.g., vendor compatibility, privilege requirements).
-  - *Dynamic Loading*: MCP Servers dynamically invoke required tools via network management protocol on demand, thereby decoupling
-    tool lifecycle management from the server's core functionality.
-- *Benefits*:
-  - Eliminates manual translation of commands across vendors.
-  - Enables plug-and-play integration of new device types.
+- Objective: Standardize device operations into modular, reusable tools.
+- Implementation:
+  - Tool Abstraction: Vendor-specific commands are wrapped into discrete MCP Tools with uniform schemas.
+  - Tool Registry: A centralized database stores MCP Tools with metadata (e.g., names, descriptions, parameters).
+- Benefits:
+  - Eliminates manual translation of commands across different vendors, enabling the plug-and-play integration of new device types.
 
-## LLM APIs for Intent-to-Tool Translation
+## LLM for Intent-to-Tool-Request Translation
 
-- Objective: Bridge natural language instructions to executable tool sequences.
+- Objective: Bridge natural language to tool invocation requests in a fixed format, then return this request to the client, enabling the client to properly parse the request.
 - Workflow:
-  - Command Parsing: LLM APIs (e.g., GPT-4, Claude) process user queries like "Upgrade all switches in Datacenter A during maintenance" into structured commands.
-  - Toolchain Generation: The LLM selects and sequences MCP Tools (e.g., get_inventory → schedule_downtime → download_firmware → validate_upgrade).
-  - Validation: Pre-execution checks verify tool compatibility with target devices.
-- APIs Exposed:
-  - mcp-translate: Converts intent to toolchain JSON.
-  - mcp-validate: Confirms tool availability/permissions.
-
-## Closed-Loop Automation Execution
-
-- Objective: Achieve end-to-end automation from language input to network changes.
-- Execution Flow:
-  - User Input: Operator submits request via chat (e.g., "Block TCP port 22 on all edge routers").
-  - LLM Processing:
-    - Intent → Toolchain: Identifies get_edge_routers + configure_acl tools.
-    - Parameter Binding: Maps "TCP port 22" to {"protocol": "tcp", "port": 22, "action": "deny"}.
-  - Orchestration: MCP Runtime schedules tools, handles dependencies (e.g., backup configs first), and enforces RBAC.
-  - Feedback: Real-time logs/rollback if configure_acl fails on any device.
-- Key Features:
-  - Idempotency: Tools safely retry/rollback.
-  - Auditability: Full traceability of LLM decisions and tool executions.
+  - Intent Recognition: The LLM first analyzes the user's natural language query to identify：
+    - The user's intent or goal
+    - Required actions or operations
+    - Entities, parameters, and constraints mentioned
+    - Context from previous interactions
+  - Tool Discovery and Toolchain Generation: The LLM access tool descriptions provided by MCP servers, and matches the identified intent with available tools.
+  - Parameter Extraction and Mapping: The LLM extracts relevant information from the user query and maps natural language references to structured parameter names
+  - Structured Invocation Generation: The LLM generates properly formatted tool calls following MCP's protocol.
 
 ## Workflow
 
 A general workflow is as follows:
 
-- User Input Submission: An operator submits a natural language request (e.g., "Disable port 22 on all edge switches") to the MCP client. And The MCP client
+- User Input Submission: An operator submits a natural language request to the MCP client. And The MCP client
   forwards this request to the LLM.
 
 - LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured request to the MCP client, which queries the
-  MCP Server to retrieve the available tools.
+  MCP Server to retrieve the available tools. The information would include the functional description, required parameters of tools.
 
 - LLM Toolchain Decision:
   - The LLM evaluates the context and if tools are required, select and sequence tools.
@@ -456,4 +433,13 @@ The reliability of network management decisions depends entirely on the integrit
 
 Network management systems process highly sensitive operational data including performance metrics, failure patterns, and capacity utilization. MCP systems that learn from this data could inadvertently expose sensitive information through model inversion attacks or membership inference. An attacker with access to model outputs could potentially reconstruct network topology, identify traffic patterns, or infer the existence of specific network segments.
 
+# Operational Consideration
+
+This section outlines operational aspects of MCP with Network management requirements as follows:
+
+-  *Function-Specific MCP Servers*: As the number of tools continues to grow, servers must be categorized to maintain proper architecture and performance, adapting to different network management scenarios, such as network log analysis, device configuration management, energy consumption management, and security operations.
+-  *Secure and Scalable Architecture*: Implement stringent security measures to ensure only authorized AI models and users can access and control network resources via MCP. As the number of network devices increases, a scalable architecture should be designed to ensure system performance.
+-  *Automated Workflows*: Leverage MCP to enable LLM-coordinated multi-tool automation, supporting common management such as real-time monitoring, diagnostics, and fault remediation, reducing operator workload.
+
 --- back
+
