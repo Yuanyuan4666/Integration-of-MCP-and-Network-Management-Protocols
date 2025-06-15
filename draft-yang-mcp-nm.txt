@@ -68,7 +68,7 @@ Table of Contents
      4.1.  Encapsulating Device Operations into MCP Tools
      4.2.  LLM for Intent-to-Tool-Request Translation
      4.3.  Workflow
-   5.  Deployment considerations
+   5.  Deployment Considerations
      5.1.  MCP hosted within the Network Controller
      5.2.  MCP Server Hosted Within the Network Device
    6.  Impact of integrating MCP on Network Management
@@ -76,13 +76,9 @@ Table of Contents
      6.2.  MCP Server Hosted within the Network Device
    7.  IANA Considerations
    8.  Security Considerations
-     8.1.  Expanded Attack Surface
-     8.2.  Model Integrity as a Security Foundation
-     8.3.  Data Sensitivity and Inference Risks
-   9.  Operational Consideration
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Contributors
    Authors' Addresses
 
@@ -380,11 +376,39 @@ async def check_status(device_ip: str, metrics: list):
      "192.168.10.2": "Error: no response from the device",
    }
 
-5.  Deployment considerations
+5.  Deployment Considerations
 
-   While the overall workflow remains consistent, the MCP Server's
-   deployment location (on-premises or remote) introduces operational
-   variations.  This section explores two deployment scenarios.
+   This section describes MCP deployment requirements for network
+   management environments, followed by implementation scenarios.  Key
+   architectural requirements include:
+
+   *  Function-Specific MCP Servers: To maintain proper architecture and
+      performance with growing tool volumes, servers should be
+      categorized by network management function.  Typical categories
+      include network log analysis, device configuration management,
+      energy consumption management, and security operations.
+
+   *  Secure and Scalable Architecture: The architecture must:
+
+      -  Enforce strict access controls limiting MCP operations to
+         authorized AI models and users
+
+      -  Scale efficiently with increasing network device counts while
+         maintaining performance
+
+   *  Automated Workflows: MCP implementations should support LLM-
+      coordinated automation of:
+
+      -  Real-time monitoring and diagnostics
+
+      -  Fault remediation workflows
+
+      -  Other common management operations to reduce operator workload
+
+   While these core requirements apply universally, operational
+   characteristics vary based on deployment location (on-premises vs.
+   remote).  The following subsections detail these deployment
+   scenarios.
 
 5.1.  MCP hosted within the Network Controller
 
@@ -448,8 +472,8 @@ async def check_status(device_ip: str, metrics: list):
    .                  +-------+------+                     .
    .                  |  MCP Server  |                     .
    .                  +-------+------+                     .
-   .Network                        CLI                     .
-   .Device                          |                      .
+   .Network                  CLI                           .
+   .Device                    |                            .
    .     +--------------------+--------------------+       .
    .     |                    |                    |       .
    .+----+-------+    +-------+------+     +-------+------+.
@@ -529,76 +553,15 @@ async def check_status(device_ip: str, metrics: list):
          o  NETCONF protocol has wide support and mature tool chains in
             the industry, which is easy to develop and maintain.
 
-   *  Con
-
-      -  Latency and real-time performance：
-
-         o  Since management instructions need to be forwarded through
-            the controller, latency may increase and real-time
-            performance may be affected.
-
-         o  For some scenarios with extremely high real-time
-            requirements, it may not meet the requirements.
-
-      -  Protocol conversion complexity：
-
-         o  The MCP protocol needs to be converted to the NETCONF
-            protocol, which increases the complexity and development
-            cost of protocol conversion.
-
-         o  It is necessary to deal with compatibility and consistency
-            issues between different protocols.
-
 6.2.  MCP Server Hosted within the Network Device
 
    *  Pro
 
-      -  The protocol stack Simplification:
-
-         o  If you deploy the MCP Server directly on the network device,
-            you can skip the NETCONF protocol layer and manage the
-            device directly through MCP.  This reduces the complexity of
-            protocol conversion and simplifies the overall architecture.
-
-         o  It reduces the development and maintenance costs caused by
-            protocol adaptation, especially when the device manufacturer
-            supports the MCP protocol.
-
-      -  Real-time performance and response speed:
-
-         o  The MCP Server is directly deployed on the device, which
-            reduces the transmission latency in the middle and can
-            respond to management instructions faster, which is suitable
-            for scenarios with high real-time requirements.
-
-   *  Con
-
-      -  Device Resource Consumption:
-
-         o  Network devices usually have limited resources (CPU, memory,
-            etc.).  Deploying MCP Server may occupy a large amount of
-            resources, affecting the normal operation of the device.
-
-         o  It is necessary to optimize and expand the hardware and
-            software resources of the device, which increases the
-            complexity of the device.
-
-      -  Security and Management Complexity:
-
-         o  Each device needs to manage the security of the MCP server
-            separately (such as authentication, authorization, audit,
-            etc.), which increases the complexity of management.
-
-         o  Each device needs to independently deploy and maintain the
-            MCP Server, which increases the operation and maintenance
-            cost.
-
-      -  Incompatible with Legacy devices:
-
-         o  Legacy devices do not have the ability to support MCP
-            servers and still need NETCONF to implement network
-            configuration.  This makes it impossible for the network to
-            form a unified control mechanism.
+      -  The protocol architecture simplification: If you deploy the MCP
+         Server directly on the network device, you can skip the NETCONF
+         protocol layer and manage the device directly through MCP.
+         This reduces the complexity of protocol conversion and
+         simplifies the overall architecture.
 
 7.  IANA Considerations
 
@@ -606,74 +569,26 @@ async def check_status(device_ip: str, metrics: list):
 
 8.  Security Considerations
 
-   The deployment of MCP in network management environments introduces
-   several security considerations that implementers and operators must
-   address.
+   The MCP protocol needs to consider scenarios where either the client
+   or server encounters issues, such as crashes.  If one or both parties
+   go offline during communication, the entire process may remain stuck
+   waiting for messages, potentially leading to an infinite loop.
+   Furthermore, certain tool operations may be interrupted, and some
+   irreversible network management operations could be affected.
 
-8.1.  Expanded Attack Surface
+   Due to network latency, some operations might not return in time, yet
+   from the user's perspective, these operations may appear either
+   unexecuted or failed.  If the user then initiates another tool
+   request to the server, problems may occur.
 
-   MCP introduces AI capabilities directly into the network control
-   plane, creating new attack vectors that did not exist in conventional
-   network management systems.  Unlike traditional SNMP or NETCONF
-   management that primarily processes structured data, MCP systems must
-   handle natural language queries.  This expanded interface increases
-   the potential for input-based attacks, including prompt injection and
-   context manipulation that could lead to unintended network
-   modifications.
+   For complex network management workflows, while LLM's tool invocation
+   process may generally function correctly, issues can arise in the
+   details.  Users must verify each LLM operation to prevent unintended
+   hazardous actions.
 
-   The protocol's stateful nature and context persistence create
-   additional vulnerabilities.  Malicious context injection in earlier
-   sessions could influence future network management decisions,
-   potentially remaining dormant until triggered by specific network
-   conditions or queries.
+9.  References
 
-8.2.  Model Integrity as a Security Foundation
-
-   The reliability of network management decisions depends entirely on
-   the integrity of the underlying AI models.  Unlike traditional
-   network management systems where logic is explicitly programmed, MCP
-   systems rely on learned behaviors that can be subtly corrupted.
-   Model poisoning attacks could introduce biases that only manifest
-   under specific network conditions, making detection extremely
-   difficult.
-
-8.3.  Data Sensitivity and Inference Risks
-
-   Network management systems process highly sensitive operational data
-   including performance metrics, failure patterns, and capacity
-   utilization.  MCP systems that learn from this data could
-   inadvertently expose sensitive information through model inversion
-   attacks or membership inference.  An attacker with access to model
-   outputs could potentially reconstruct network topology, identify
-   traffic patterns, or infer the existence of specific network
-   segments.
-
-9.  Operational Consideration
-
-   This section outlines operational aspects of MCP with Network
-   management requirements as follows:
-
-   *  _Function-Specific MCP Servers_: As the number of tools continues
-      to grow, servers must be categorized to maintain proper
-      architecture and performance, adapting to different network
-      management scenarios, such as network log analysis, device
-      configuration management, energy consumption management, and
-      security operations.
-
-   *  _Secure and Scalable Architecture_: Implement stringent security
-      measures to ensure only authorized AI models and users can access
-      and control network resources via MCP.  As the number of network
-      devices increases, a scalable architecture should be designed to
-      ensure system performance.
-
-   *  _Automated Workflows_: Leverage MCP to enable LLM-coordinated
-      multi-tool automation, supporting common management such as real-
-      time monitoring, diagnostics, and fault remediation, reducing
-      operator workload.
-
-10.  References
-
-10.1.  Normative References
+9.1.  Normative References
 
    [RFC2576]  Frye, R., Levi, D., Routhier, S., and B. Wijnen,
               "Coexistence between Version 1, Version 2, and Version 3
@@ -690,7 +605,7 @@ async def check_status(device_ip: str, metrics: list):
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/rfc/rfc8040>.
 
-10.2.  Informative References
+9.2.  Informative References
 
    [I-D.kumar-rtgwg-grpc-protocol]
               Kumar, A., Kolhe, J., Ghemawat, S., and L. Ryan, "gRPC
