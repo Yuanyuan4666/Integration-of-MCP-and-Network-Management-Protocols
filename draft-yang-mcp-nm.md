@@ -250,9 +250,20 @@ LLM parses the response, generates a natural-language summary, and sends it back
 
 ~~~~
 
-# Deployment considerations
+# Deployment Considerations
 
-While the overall workflow remains consistent, the MCP Server's deployment location (on-premises or remote) introduces operational variations. This section explores two deployment scenarios.
+This section describes MCP deployment requirements for network management environments, followed by implementation scenarios. Key architectural requirements include:
+
+- Function-Specific MCP Servers: To maintain proper architecture and performance with growing tool volumes, servers should be categorized by network management function. Typical categories include network log analysis, device configuration management, energy consumption management, and security operations.
+- Secure and Scalable Architecture: The architecture must:
+  - Enforce strict access controls limiting MCP operations to authorized AI models and users
+  - Scale efficiently with increasing network device counts while maintaining performance
+- Automated Workflows: MCP implementations should support LLM-coordinated automation of:
+  - Real-time monitoring and diagnostics
+  - Fault remediation workflows
+  - Other common management operations to reduce operator workload
+
+While these core requirements apply universally, operational characteristics vary based on deployment location (on-premises vs. remote). The following subsections detail these deployment scenarios.
 
 ## MCP hosted within the Network Controller
 
@@ -312,8 +323,8 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 .                  +-------+------+                     .
 .                  |  MCP Server  |                     .
 .                  +-------+------+                     .
-.Network                        CLI                     .
-.Device                          |                      .
+.Network                  CLI                           .
+.Device                    |                            .
 .     +--------------------+--------------------+       .
 .     |                    |                    |       .
 .+----+-------+    +-------+------+     +-------+------+.
@@ -369,46 +380,19 @@ While the overall workflow remains consistent, the MCP Server's deployment locat
 
 - Pro
   - Resource utilization efficiency:
-    Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant
-    impact on the performance of the network equipment itself.
+    Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant impact on the performance of the network equipment itself.
   - Security：
-    - Security mechanisms can be implemented centrally on the controller, and the overall security can be improved through unified authentication, authorization
-      and audit mechanisms.
+    - Security mechanisms can be implemented centrally on the controller, and the overall security can be improved through unified authentication, authorization and audit mechanisms.
     - Reduces the risk of equipment being exposed to the network and reduces the possibility of being attacked.
   - Protocol adaptability：
-    - Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment
-      modification.
+    - Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment modification.
     - NETCONF protocol has wide support and mature tool chains in the industry, which is easy to develop and maintain.
-- Con
-  - Latency and real-time performance：
-    - Since management instructions need to be forwarded through the controller, latency may increase and real-time performance may be affected.
-    - For some scenarios with extremely high real-time requirements, it may not meet the requirements.
-  - Protocol conversion complexity：
-    - The MCP protocol needs to be converted to the NETCONF protocol, which increases the complexity and development cost of protocol conversion.
-    - It is necessary to deal with compatibility and consistency issues between different protocols.
 
 ## MCP Server Hosted within the Network Device
 
 - Pro
-  - The protocol stack Simplification:
-    - If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP.
-      This reduces the complexity of protocol conversion and simplifies the overall architecture.
-    - It reduces the development and maintenance costs caused by protocol adaptation, especially when the device manufacturer supports the MCP protocol.
-  - Real-time performance and response speed:
-    - The MCP Server is directly deployed on the device, which reduces the transmission latency in the middle and can respond to management instructions
-      faster, which is suitable for scenarios with high real-time requirements.
-- Con
-  - Device Resource Consumption:
-    - Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP Server may occupy a large amount of resources, affecting the normal
-      operation of the device.
-    - It is necessary to optimize and expand the hardware and software resources of the device, which increases the complexity of the device.
-  - Security and Management Complexity:
-    - Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the
-      complexity of management.
-    - Each device needs to independently deploy and maintain the MCP Server, which increases the operation and maintenance cost.
-  - Incompatible with Legacy devices:
-    - Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible
-      for the network to form a unified control mechanism.
+  - The protocol architecture simplification:
+    If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP. This reduces the complexity of protocol conversion and simplifies the overall architecture.
 
 # IANA Considerations
 
@@ -416,30 +400,11 @@ This document has no IANA actions.
 
 # Security Considerations
 
+The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations could be affected.
 
-The deployment of MCP in network management environments introduces several security considerations that implementers and operators must address.
+Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.
 
-## Expanded Attack Surface
-
-MCP introduces AI capabilities directly into the network control plane, creating new attack vectors that did not exist in conventional network management systems. Unlike traditional SNMP or NETCONF management that primarily processes structured data, MCP systems must handle natural language queries. This expanded interface increases the potential for input-based attacks, including prompt injection and context manipulation that could lead to unintended network modifications.
-
-The protocol's stateful nature and context persistence create additional vulnerabilities. Malicious context injection in earlier sessions could influence future network management decisions, potentially remaining dormant until triggered by specific network conditions or queries.
-
-## Model Integrity as a Security Foundation
-
-The reliability of network management decisions depends entirely on the integrity of the underlying AI models. Unlike traditional network management systems where logic is explicitly programmed, MCP systems rely on learned behaviors that can be subtly corrupted. Model poisoning attacks could introduce biases that only manifest under specific network conditions, making detection extremely difficult.
-
-## Data Sensitivity and Inference Risks
-
-Network management systems process highly sensitive operational data including performance metrics, failure patterns, and capacity utilization. MCP systems that learn from this data could inadvertently expose sensitive information through model inversion attacks or membership inference. An attacker with access to model outputs could potentially reconstruct network topology, identify traffic patterns, or infer the existence of specific network segments.
-
-# Operational Consideration
-
-This section outlines operational aspects of MCP with Network management requirements as follows:
-
--  *Function-Specific MCP Servers*: As the number of tools continues to grow, servers must be categorized to maintain proper architecture and performance, adapting to different network management scenarios, such as network log analysis, device configuration management, energy consumption management, and security operations.
--  *Secure and Scalable Architecture*: Implement stringent security measures to ensure only authorized AI models and users can access and control network resources via MCP. As the number of network devices increases, a scalable architecture should be designed to ensure system performance.
--  *Automated Workflows*: Leverage MCP to enable LLM-coordinated multi-tool automation, supporting common management such as real-time monitoring, diagnostics, and fault remediation, reducing operator workload.
+For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in the details. Users must verify each LLM operation to prevent unintended hazardous actions.
 
 --- back
 
