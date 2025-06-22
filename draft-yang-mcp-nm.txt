@@ -5,7 +5,7 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 17 December 2025                                   15 June 2025
+Expires: 24 December 2025                                   22 June 2025
 
 
             Applicability of MCP for the Network Management
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 December 2025.
+   This Internet-Draft will expire on 24 December 2025.
 
 Copyright Notice
 
@@ -553,6 +553,27 @@ async def check_status(device_ip: str, metrics: list):
          o  NETCONF protocol has wide support and mature tool chains in
             the industry, which is easy to develop and maintain.
 
+   *  Con
+
+      -  Single Point of Failure: Network controller failure creates a
+         catastrophic impact where the entire AI-driven network
+         management capability is lost across all devices, leaving
+         operators without intelligent automation during critical
+         situations.  While backup and failover mechanisms can be
+         implemented, they introduce additional architectural complexity
+         and may not guarantee seamless transitions, often resulting in
+         management gaps during switchover periods.
+
+      -  Potential Bottleneck: High request volumes could overwhelm the
+         centralized server during peak operations or network events,
+         where concurrent multi-device operations may queue up and cause
+         delays in critical network changes.  Resource contention
+         between different network management tasks affects overall
+         system responsiveness, while limited ability to parallelize
+         device-specific operations when controller CPU/memory becomes
+         constrained further exacerbates performance degradation during
+         high-demand scenarios.
+
 6.2.  MCP Server Hosted within the Network Device
 
    *  Pro
@@ -562,6 +583,24 @@ async def check_status(device_ip: str, metrics: list):
          protocol layer and manage the device directly through MCP.
          This reduces the complexity of protocol conversion and
          simplifies the overall architecture.
+
+      -  High Availability: Device failures are isolated; other devices
+         remain manageable.
+
+      -  Reduced Controller Load: Distributes processing load across the
+         network.
+
+   *  Con
+
+      -  Management Complexity: Operating hundreds or thousands of
+         distributed MCP servers introduces significant operational
+         overhead requiring sophisticated orchestration systems for
+         maintenance, updates, and monitoring.
+
+      -  Resource Overhead: Each network device must allocate additional
+         compute and memory resources to host the MCP server,
+         potentially impacting primary networking functions and
+         increasing per-device infrastructure costs.
 
 7.  IANA Considerations
 
