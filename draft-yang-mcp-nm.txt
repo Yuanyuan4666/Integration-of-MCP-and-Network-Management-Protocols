@@ -71,7 +71,6 @@ Table of Contents
    4.  Architecture Overview
      4.1.  Encapsulating Device Operations into MCP Tools
      4.2.  LLM for Intent-to-Tool-Request Translation
-     4.3.  Workflow
    5.  Deployment Considerations
      5.1.  MCP hosted within the Network Controller
      5.2.  MCP Server Hosted Within the Network Device
@@ -215,9 +214,8 @@ Table of Contents
 
 4.2.  LLM for Intent-to-Tool-Request Translation
 
-   *  Objective: Bridge natural language to tool invocation requests in
-      a fixed format, then return this request to the client, enabling
-      the client to properly parse the request.
+   *  Objective: Allow AI models (such as Claude) to understand natural
+      language commands and trigger operations.
 
    *  Workflow:
 
@@ -236,41 +234,48 @@ Table of Contents
          descriptions provided by MCP servers, and matches the
          identified intent with available tools.
 
-      -  Parameter Extraction and Mapping: The LLM extracts relevant
-         information from the user query and maps natural language
-         references to structured parameter names
+      -  Parameter Extraction and Mapping: The LLM maps natural language
+         references to structured parameter names and extracts relevant
+         information from the user query.
 
       -  Structured Invocation Generation: The LLM generates properly
          formatted tool calls following MCP's protocol.
 
-4.3.  Workflow
+   *  Benefits:
 
-   A general workflow is as follows:
+      -  Bridge natural language to tool invocation requests in a fixed
+         format, then return this request to the client, enabling the
+         client to properly parse the request. ## Close Loop Management
 
-   *  User Input Submission: An operator submits a natural language
-      request to the MCP client.  And The MCP client forwards this
-      request to the LLM.
+   *  Objective: Realize the closed loop of "voice/text commands →
+      automatic execution".
 
-   *  LLM Intent Processing: The LLM parses the input, identifies the
-      operational intent, and forwards a structured request to the MCP
-      client, which queries the MCP Server to retrieve the available
-      tools.  The information would include the functional description,
-      required parameters of tools.
+   *  A general workflow is as follows:
 
-   *  LLM Toolchain Decision:
+      -  User Input Submission: An operator submits a natural language
+         request to the MCP client.  And The MCP client forwards this
+         request to the LLM.
 
-      -  The LLM evaluates the context and if tools are required, select
-         and sequence tools.
+      -  LLM Intent Processing: The LLM parses the input, identifies the
+         operational intent, and forwards a structured request to the
+         MCP client, which queries the MCP Server to retrieve the
+         available tools.  The information would include the functional
+         description, required parameters of tools.
 
-      -  The decision is sent back to the MCP Client and then MCP Client
-         will execute tools via server.
+      -  LLM Toolchain Decision:
 
-   *  Tool Execution: The MCP Server executes the translated commands on
-      target devices and returns results to the client.
+         o  The LLM evaluates the context and if tools are required,
+            select and sequence tools.
 
-   *  Result Aggregation & Feedback: The MCP Client collates tool
-      outputs (success/failure logs) and forwards them to the LLM for
-      summarization.
+         o  The decision is sent back to the MCP Client and then MCP
+            Client will execute tools via server.
+
+      -  Tool Execution: The MCP Server executes the translated commands
+         on target devices and returns results to the client.
+
+      -  Result Aggregation & Feedback: The MCP Client collates tool
+         outputs (success/failure logs) and forwards them to the LLM for
+         summarization.
 
    Take multi-vendor network management as an example, the MCP server is
    deployed locally on the network controller, and the tools are
