@@ -102,11 +102,11 @@ Other vendors might choose non-stanard network management protocol or telemetry 
 grpc {{?I-D.kumar-rtgwg-grpc-protocol}}. A significant number of network operators continue to rely on legacy network management mechanisms
 such as SNMP.
 
-## Lack integration with Network APIs
+## Lack integration with Open APIs
 
-Today, network API has been widely adopted by the northbound interface of OSS/BSS or Network orchestrators while YANG data models have
-been widely adopted by the northbound interface of the network controller or the interface between the network controller and the network devices.
-However Network API ecosystem and YANG model ecosystem are both built as silo and lack integration or mapping between them.
+Today, open API has been widely adopted by the northbound interface of OSS/BSS or Network orchestrators while YANG data models have
+been widely adopted by the northbound interface of the network controller/orchestrator or the southbound interface of the network controller/orchestrator.
+However Open API ecosystem and YANG model ecosystem are both built as silo and lack integration or mapping between them.
 
 # Architecture Overview
 
