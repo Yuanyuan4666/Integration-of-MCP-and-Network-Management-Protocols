@@ -119,7 +119,8 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
   - Tool Abstraction: Vendor-specific commands are wrapped into discrete MCP Tools with uniform schemas.
   - Tool Registry: A centralized database stores MCP Tools with metadata (e.g., names, descriptions, parameters).
 - Benefits:
-  - Eliminates manual translation of commands across different vendors, enabling the plug-and-play integration of new device types.
+  - Eliminates manual translation of commands across different vendors
+  - Enabling the plug-and-play integration of new device types.
 
 ## LLM for Intent-to-Tool-Request Translation
 
@@ -139,9 +140,21 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
         a fixed format, then return this request to the client, enabling
         the client to properly parse the request.
 
-## Close Loop Management
+## Closed-Loop Automation Execution
 
 - Objective: Realize the closed loop of "voice/text commands → automatic execution".
+- Flow:
+  - User Input: Operator submits request via chat/voice (e.g., "Block TCP port 22 on all edge routers").
+  - LLM Processing: Intent → Toolchain: Identifies get_edge_routers + configure_acl tools.
+  - Parameter Binding: Maps "TCP port 22" to {"protocol": "tcp", "port": 22, "action": "deny"}.
+  - Orchestration: MCP Runtime schedules tools, handles dependencies (e.g., backup configs first), and enforces Role based Access Control (RBAC).
+  - Feedback: Real-time logs/rollback if configure_acl fails on any device.
+  - Benefits:
+       - Tools safely retry/rollback.
+       - Full traceability of LLM decisions and tool executions.
+
+# Workflow
+
 - A general workflow is as follows:
   - User Input Submission: An operator submits a natural language request to the MCP client. And The MCP client
     forwards this request to the LLM.
