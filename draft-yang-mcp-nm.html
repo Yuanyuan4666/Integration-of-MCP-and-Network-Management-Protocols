@@ -1694,22 +1694,11 @@ LLM parses the response, generates a natural-language summary, and sends it back
 +--------------+  +--------------+    +--------------+
 </pre><a href="#section-5.1-1" class="pilcrow">¶</a>
 </div>
-<ul class="normal">
-<li class="normal" id="section-5.1-2.1">
-            <p id="section-5.1-2.1.1">Scope: The MCP Server, colocated with the MCP Client and LLM model, is hosted within a cloud environment, the network devices stay as it is.<a href="#section-5.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-5.1-2.2">
-            <p id="section-5.1-2.2.1">Key Characteristics:<a href="#section-5.1-2.2.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5.1-2.2.2.1">
-                <p id="section-5.1-2.2.2.1.1">Centralized Management: A single MCP Client instance can manage all network devices in geographically dispersed network.<a href="#section-5.1-2.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-5.1-2.2.2.2">
-                <p id="section-5.1-2.2.2.2.1">Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.<a href="#section-5.1-2.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-</li>
-        </ul>
+<p id="section-5.1-2">In this senario, the MCP server is deployed within the network controller, which could potentially be a cloud environment. The MCP server acts as a protocol converter, transforming NETCONF's XML/YANG models into JSON-RPC 2.0 format for AI system.
+- Scope: The MCP Server, colocated with the MCP Client and LLM model, is hosted within a cloud environment, the network devices stay as it is.
+- Key Characteristics:
+  -  Centralized Management: A single MCP Client instance can manage all network devices in geographically dispersed network.
+  -  Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="mcp-server-hosted-within-the-network-device">
