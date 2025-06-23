@@ -317,6 +317,7 @@ While these core requirements apply universally, operational characteristics var
 +--------------+  +--------------+    +--------------+
 ~~~~
 
+In this senario, the MCP server is deployed within the network controller, which could potentially be a cloud environment. The MCP server acts as a protocol converter, transforming NETCONF's XML/YANG models into JSON-RPC 2.0 format for AI system.
 - Scope: The MCP Server, colocated with the MCP Client and LLM model, is hosted within a cloud environment, the network devices stay as it is.
 - Key Characteristics:
   -  Centralized Management: A single MCP Client instance can manage all network devices in geographically dispersed network.
