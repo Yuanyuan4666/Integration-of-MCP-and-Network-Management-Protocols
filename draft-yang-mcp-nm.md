@@ -407,19 +407,30 @@ While these core requirements apply universally, operational characteristics var
     - Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment modification.
     - NETCONF protocol has wide support and mature tool chains in the industry, which is easy to develop and maintain.
 - Con
-  - Single Point of Failure: Network controller failure creates a catastrophic impact where the entire AI-driven network management capability is lost across all devices, leaving operators without intelligent automation during critical situations. While backup and failover mechanisms can be implemented, they introduce additional architectural complexity and may not guarantee seamless transitions, often resulting in management gaps during switchover periods.
-  - Potential Bottleneck: High request volumes could overwhelm the centralized server during peak operations or network events, where concurrent multi-device operations may queue up and cause delays in critical network changes. Resource contention between different network management tasks affects overall system responsiveness, while limited ability to parallelize device-specific operations when controller CPU/memory becomes constrained further exacerbates performance degradation during high-demand scenarios.
+  - Latency and real-time performance：
+    - Since management instructions need to be forwarded through the controller, latency may increase and real-time performance may be affected.
+    - For some scenarios with extremely high real-time requirements, it may not meet the requirements.
+  - Protocol conversion complexity：
+    - The MCP protocol needs to be converted to the NETCONF protocol, which increases the complexity and development cost of protocol conversion.
+    - It is necessary to deal with compatibility and consistency issues between different protocols.
 
 ## MCP Server Hosted within the Network Device
 
 - Pro
-  - The protocol architecture simplification:
-    If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP. This reduces the complexity of protocol conversion and simplifies the overall architecture.
-  - High Availability: Device failures are isolated; other devices remain manageable.
-  - Reduced Controller Load: Distributes processing load across the network.
+  - The protocol stack simplification:
+    - If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP. This reduces the complexity of protocol conversion and simplifies the overall architecture.
+    - It reduces the development and maintenance costs caused by protocol adaptation, especially when the device manufacturer supports the MCP protocol.
+  - Real-time performance and response speed:
+    - The MCP Server is directly deployed on the device, which reduces the transmission latency in the middle and can respond to management instructions faster, which is suitable for scenarios with high real-time requirements.
 - Con
-  - Management Complexity: Operating hundreds or thousands of distributed MCP servers introduces significant operational overhead requiring sophisticated orchestration systems for maintenance, updates, and monitoring.
-  - Resource Overhead: Each network device must allocate additional compute and memory resources to host the MCP server, potentially impacting primary networking functions and increasing per-device infrastructure costs.
+  - Device Resource Consumption:
+    - Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP Server may occupy a large amount of resources, affecting the normal operation of the device.
+    - It is necessary to optimize and expand the hardware and software resources of the device, which increases the complexity of the device.
+  - Security and Management Complexity:
+    - Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the complexity of management.
+    - Each device needs to independently deploy and maintain the MCP Server, which increases the operation and maintenance cost.
+  - Incompatible with Legacy devices:
+    - Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible for the network to form a unified control mechanism.
 
 # IANA Considerations
 
