@@ -136,25 +136,12 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
     query.
   - Structured Invocation Generation: The LLM generates properly formatted tool calls following MCP's protocol.
 - Benefits:
-     -  Bridge natural language to tool invocation requests in
-        a fixed format, then return this request to the client, enabling
+     -  Bridge natural language to tool invocation requests in a fixed format, then return this request to the client, enabling
         the client to properly parse the request.
 
-## Closed-Loop Automation Execution
+## Closed-Loop Automation Execution Workflow
 
 - Objective: Realize the closed loop of "voice/text commands → automatic execution".
-- Flow:
-  - User Input: Operator submits request via chat/voice (e.g., "Block TCP port 22 on all edge routers").
-  - LLM Processing: Intent → Toolchain: Identifies get_edge_routers + configure_acl tools.
-  - Parameter Binding: Maps "TCP port 22" to {"protocol": "tcp", "port": 22, "action": "deny"}.
-  - Orchestration: MCP Runtime schedules tools, handles dependencies (e.g., backup configs first), and enforces Role based Access Control (RBAC).
-  - Feedback: Real-time logs/rollback if configure_acl fails on any device.
-  - Benefits:
-       - Tools safely retry/rollback.
-       - Full traceability of LLM decisions and tool executions.
-
-# Workflow
-
 - A general workflow is as follows:
   - User Input Submission: An operator submits a natural language request to the MCP client. And The MCP client
     forwards this request to the LLM.
@@ -171,12 +158,17 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
 
   - Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.
 
+- Benefits:
+  - Tools safely retry/rollback.
+  - Full traceability of LLM decisions and tool executions.
+
+## Example
 Take multi-vendor network management as an example, the MCP server is deployed locally on the network controller, and the tools are
-integrated into the MCP server. The server provide the following registered tool descriptor information:
+integrated into the MCP server. The server provides the following registered tool descriptor information:
 
-Tools description: it describes the name, use, and parameters of tools.
+Tools description: It describes the name, use, and parameters of tools.
 
-Tools implementation: MCP implementation describe how the tools are invoked.
+Tools implementation: MCP implementation describes how the tools are invoked.
 
 See Tool descriptor information example as follows:
 
