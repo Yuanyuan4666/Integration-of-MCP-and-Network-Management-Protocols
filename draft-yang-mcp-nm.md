@@ -23,6 +23,14 @@ author:
    fullname: Qin Wu
    organization: Huawei
    email: bill.wu@huawei.com
+ -
+  fullname: Diego Lopez
+  organization: Telefonica
+  email: diego.r.lopez@telefonica.com
+ -
+  fullname: Nathalie Romo Moreno
+  organization: Deutsche Telekom
+  email: nathalie.romo-moreno@telekom.de
 
 contributor:
  -  fullname: Guanming Zeng
