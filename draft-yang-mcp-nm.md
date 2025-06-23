@@ -18,7 +18,7 @@ author:
  -
     fullname: Yuanyuan Yang
     organization: Huawei
-    email: yangyuanyuan55@huawei.com
+    email: yangyuanyuan55@.com
  -
    fullname: Qin Wu
    organization: Huawei
@@ -198,8 +198,8 @@ server = McpServer(app)
 
 #Connection Pool Management
 devices = {
-    "192.168.1.1": {"device_type": "VendorA-XYZ"，"credential": "admin:password"},
-    "192.168.1.2": {"device_type": "VendorB-ABC","credential":"admin:huawei@passowrd"}
+    "192.168.1.1": {"device_type": "VendorA-XYZ"，"credential": "admin:XYZ@password"},
+    "192.168.1.2": {"device_type": "VendorB-ABC","credential":"admin:ABC@passowrd"}
      ....
 }
 
