@@ -123,7 +123,7 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
 
 ## LLM for Intent-to-Tool-Request Translation
 
-- Objective: Bridge natural language to tool invocation requests in a fixed format, then return this request to the client, enabling the client to properly parse the request.
+- Objective: Allow AI models (such as Claude) to understand natural language commands and trigger operations.
 - Workflow:
   - Intent Recognition: The LLM first analyzes the user's natural language query to identify：
     - The user's intent or goal
@@ -131,26 +131,31 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
     - Entities, parameters, and constraints mentioned
     - Context from previous interactions
   - Tool Discovery and Toolchain Generation: The LLM access tool descriptions provided by MCP servers, and matches the identified intent with available tools.
-  - Parameter Extraction and Mapping: The LLM extracts relevant information from the user query and maps natural language references to structured parameter names
+  - Parameter Extraction and Mapping: The LLM maps natural language references to structured parameter names and extracts relevant information from the user
+    query.
   - Structured Invocation Generation: The LLM generates properly formatted tool calls following MCP's protocol.
+- Benefits:
+     -  Bridge natural language to tool invocation requests in
+        a fixed format, then return this request to the client, enabling
+        the client to properly parse the request.
+## Close Loop Management
 
-## Workflow
+- Objective: Realize the closed loop of "voice/text commands → automatic execution".
+- A general workflow is as follows:
+  - User Input Submission: An operator submits a natural language request to the MCP client. And The MCP client
+    forwards this request to the LLM.
 
-A general workflow is as follows:
+  - LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured
+    request to the MCP client, which queries the MCP Server to retrieve the available tools. The information would
+    include the functional description, required parameters of tools.
 
-- User Input Submission: An operator submits a natural language request to the MCP client. And The MCP client
-  forwards this request to the LLM.
+  - LLM Toolchain Decision:
+    - The LLM evaluates the context and if tools are required, select and sequence tools.
+    - The decision is sent back to the MCP Client and then MCP Client will execute tools via server.
 
-- LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured request to the MCP client, which queries the
-  MCP Server to retrieve the available tools. The information would include the functional description, required parameters of tools.
+  - Tool Execution: The MCP Server executes the translated commands on target devices and returns results to the client.
 
-- LLM Toolchain Decision:
-  - The LLM evaluates the context and if tools are required, select and sequence tools.
-  - The decision is sent back to the MCP Client and then MCP Client will execute tools via server.
-
-- Tool Execution: The MCP Server executes the translated commands on target devices and returns results to the client.
-
-- Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.
+  - Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.
 
 Take multi-vendor network management as an example, the MCP server is deployed locally on the network controller, and the tools are
 integrated into the MCP server. The server provide the following registered tool descriptor information:
