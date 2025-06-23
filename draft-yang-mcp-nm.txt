@@ -71,6 +71,7 @@ Table of Contents
    4.  Architecture Overview
      4.1.  Encapsulating Device Operations into MCP Tools
      4.2.  LLM for Intent-to-Tool-Request Translation
+     4.3.  Close Loop Management
    5.  Deployment Considerations
      5.1.  MCP hosted within the Network Controller
      5.2.  MCP Server Hosted Within the Network Device
@@ -245,7 +246,9 @@ Table of Contents
 
       -  Bridge natural language to tool invocation requests in a fixed
          format, then return this request to the client, enabling the
-         client to properly parse the request. ## Close Loop Management
+         client to properly parse the request.
+
+4.3.  Close Loop Management
 
    *  Objective: Realize the closed loop of "voice/text commands →
       automatic execution".
