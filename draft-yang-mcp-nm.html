@@ -1737,19 +1737,10 @@ LLM parses the response, generates a natural-language summary, and sends it back
 .........................................................
 </pre><a href="#section-5.2-1" class="pilcrow">¶</a>
 </div>
-<ul class="normal">
-<li class="normal" id="section-5.2-2.1">
-            <p id="section-5.2-2.1.1">Scope: The MCP server is colocated with network devices. The MCP Client operates in a cloud environment, requesting distributed MCP Server via public/private APIs.<a href="#section-5.2-2.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-5.2-2.2">
-            <p id="section-5.2-2.2.1">Key Characteristics:<a href="#section-5.2-2.2.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5.2-2.2.2.1">
-                <p id="section-5.2-2.2.2.1.1">Low Latency: Direct access to network devices minimizes tool execution delays<a href="#section-5.2-2.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-</li>
-        </ul>
+<p id="section-5.2-2">In this senario, the MCP server is deployed within the network devices. The MCP server acts as a protocol converter, transforming CLI into JSON-RPC 2.0 format for AI system.
+- Scope: The MCP server is colocated with network devices. The MCP Client operates in a cloud environment, requesting distributed MCP Server via public/private APIs.
+- Key Characteristics:
+  -  Low Latency: Direct access to network devices minimizes tool execution delays<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
