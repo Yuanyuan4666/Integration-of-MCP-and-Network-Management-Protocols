@@ -71,19 +71,19 @@ Table of Contents
    4.  Architecture Overview
      4.1.  Encapsulating Device Operations into MCP Tools
      4.2.  LLM for Intent-to-Tool-Request Translation
-     4.3.  Closed-Loop Automation Execution
-   5.  Workflow
-   6.  Deployment Considerations
-     6.1.  MCP hosted within the Network Controller
-     6.2.  MCP Server Hosted Within the Network Device
-   7.  Impact of integrating MCP on Network Management
-     7.1.  MCP Hosted Within the Network Controller
-     7.2.  MCP Server Hosted within the Network Device
-   8.  IANA Considerations
-   9.  Security Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+     4.3.  Closed-Loop Automation Execution Workflow
+     4.4.  Example
+   5.  Deployment Considerations
+     5.1.  MCP hosted within the Network Controller
+     5.2.  MCP Server Hosted Within the Network Device
+   6.  Impact of integrating MCP on Network Management
+     6.1.  MCP Hosted Within the Network Controller
+     6.2.  MCP Server Hosted within the Network Device
+   7.  IANA Considerations
+   8.  Security Considerations
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Contributors
    Authors' Addresses
 
@@ -250,36 +250,10 @@ Table of Contents
          format, then return this request to the client, enabling the
          client to properly parse the request.
 
-4.3.  Closed-Loop Automation Execution
+4.3.  Closed-Loop Automation Execution Workflow
 
    *  Objective: Realize the closed loop of "voice/text commands →
       automatic execution".
-
-   *  Flow:
-
-      -  User Input: Operator submits request via chat/voice (e.g.,
-         "Block TCP port 22 on all edge routers").
-
-      -  LLM Processing: Intent → Toolchain: Identifies get_edge_routers
-         + configure_acl tools.
-
-      -  Parameter Binding: Maps "TCP port 22" to {"protocol": "tcp",
-         "port": 22, "action": "deny"}.
-
-      -  Orchestration: MCP Runtime schedules tools, handles
-         dependencies (e.g., backup configs first), and enforces Role
-         based Access Control (RBAC).
-
-      -  Feedback: Real-time logs/rollback if configure_acl fails on any
-         device.
-
-      -  Benefits:
-
-         o  Tools safely retry/rollback.
-
-         o  Full traceability of LLM decisions and tool executions.
-
-5.  Workflow
 
    *  A general workflow is as follows:
 
@@ -308,15 +282,23 @@ Table of Contents
          outputs (success/failure logs) and forwards them to the LLM for
          summarization.
 
+   *  Benefits:
+
+      -  Tools safely retry/rollback.
+
+      -  Full traceability of LLM decisions and tool executions.
+
+4.4.  Example
+
    Take multi-vendor network management as an example, the MCP server is
    deployed locally on the network controller, and the tools are
-   integrated into the MCP server.  The server provide the following
+   integrated into the MCP server.  The server provides the following
    registered tool descriptor information:
 
-   Tools description: it describes the name, use, and parameters of
+   Tools description: It describes the name, use, and parameters of
    tools.
 
-   Tools implementation: MCP implementation describe how the tools are
+   Tools implementation: MCP implementation describes how the tools are
    invoked.
 
    See Tool descriptor information example as follows:
@@ -416,7 +398,7 @@ async def check_status(device_ip: str, metrics: list):
      "192.168.10.2": "Error: no response from the device",
    }
 
-6.  Deployment Considerations
+5.  Deployment Considerations
 
    This section describes MCP deployment requirements for network
    management environments, followed by implementation scenarios.  Key
@@ -450,7 +432,7 @@ async def check_status(device_ip: str, metrics: list):
    remote).  The following subsections detail these deployment
    scenarios.
 
-6.1.  MCP hosted within the Network Controller
+5.1.  MCP hosted within the Network Controller
 
                      +--------------+
                      |     User     |
@@ -493,7 +475,7 @@ async def check_status(device_ip: str, metrics: list):
       -  Scalability: Cloud-native scaling accommodates dynamic tool
          registry updates and high request volumes.
 
-6.2.  MCP Server Hosted Within the Network Device
+5.2.  MCP Server Hosted Within the Network Device
 
                       +--------------+
                       |     User     |
@@ -532,7 +514,7 @@ async def check_status(device_ip: str, metrics: list):
       -  Low Latency: Direct access to network devices minimizes tool
          execution delays
 
-7.  Impact of integrating MCP on Network Management
+6.  Impact of integrating MCP on Network Management
 
    +------------+-----------------------------+-----------------------+
    |            |   MCP Hosted Within         |   MCP Server Hosted   |
@@ -565,7 +547,7 @@ async def check_status(device_ip: str, metrics: list):
    |            |  conversation               |                       |
    -------------+-----------------------------+-----------------------+
 
-7.1.  MCP Hosted Within the Network Controller
+6.1.  MCP Hosted Within the Network Controller
 
    *  Pro
 
@@ -614,7 +596,7 @@ async def check_status(device_ip: str, metrics: list):
          constrained further exacerbates performance degradation during
          high-demand scenarios.
 
-7.2.  MCP Server Hosted within the Network Device
+6.2.  MCP Server Hosted within the Network Device
 
    *  Pro
 
@@ -642,11 +624,11 @@ async def check_status(device_ip: str, metrics: list):
          potentially impacting primary networking functions and
          increasing per-device infrastructure costs.
 
-8.  IANA Considerations
+7.  IANA Considerations
 
    This document has no IANA actions.
 
-9.  Security Considerations
+8.  Security Considerations
 
    The MCP protocol needs to consider scenarios where either the client
    or server encounters issues, such as crashes.  If one or both parties
@@ -665,9 +647,9 @@ async def check_status(device_ip: str, metrics: list):
    details.  Users must verify each LLM operation to prevent unintended
    hazardous actions.
 
-10.  References
+9.  References
 
-10.1.  Normative References
+9.1.  Normative References
 
    [RFC2576]  Frye, R., Levi, D., Routhier, S., and B. Wijnen,
               "Coexistence between Version 1, Version 2, and Version 3
@@ -684,7 +666,7 @@ async def check_status(device_ip: str, metrics: list):
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/rfc/rfc8040>.
 
-10.2.  Informative References
+9.2.  Informative References
 
    [I-D.kumar-rtgwg-grpc-protocol]
               Kumar, A., Kolhe, J., Ghemawat, S., and L. Ryan, "gRPC
