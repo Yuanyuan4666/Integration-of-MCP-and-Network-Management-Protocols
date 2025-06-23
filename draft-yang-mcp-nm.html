@@ -1846,10 +1846,26 @@ Controllers usually have stronger computing and storage resources, which can bet
             <p id="section-6.1-1.2.1">Con<a href="#section-6.1-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.1-1.2.2.1">
-                <p id="section-6.1-1.2.2.1.1">Single Point of Failure: Network controller failure creates a catastrophic impact where the entire AI-driven network management capability is lost across all devices, leaving operators without intelligent automation during critical situations. While backup and failover mechanisms can be implemented, they introduce additional architectural complexity and may not guarantee seamless transitions, often resulting in management gaps during switchover periods.<a href="#section-6.1-1.2.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-6.1-1.2.2.1.1">Latency and real-time performance：<a href="#section-6.1-1.2.2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-1.2.2.1.2.1">
+                    <p id="section-6.1-1.2.2.1.2.1.1">Since management instructions need to be forwarded through the controller, latency may increase and real-time performance may be affected.<a href="#section-6.1-1.2.2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-6.1-1.2.2.1.2.2">
+                    <p id="section-6.1-1.2.2.1.2.2.1">For some scenarios with extremely high real-time requirements, it may not meet the requirements.<a href="#section-6.1-1.2.2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
 </li>
               <li class="normal" id="section-6.1-1.2.2.2">
-                <p id="section-6.1-1.2.2.2.1">Potential Bottleneck: High request volumes could overwhelm the centralized server during peak operations or network events, where concurrent multi-device operations may queue up and cause delays in critical network changes. Resource contention between different network management tasks affects overall system responsiveness, while limited ability to parallelize device-specific operations when controller CPU/memory becomes constrained further exacerbates performance degradation during high-demand scenarios.<a href="#section-6.1-1.2.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-6.1-1.2.2.2.1">Protocol conversion complexity：<a href="#section-6.1-1.2.2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-1.2.2.2.2.1">
+                    <p id="section-6.1-1.2.2.2.2.1.1">The MCP protocol needs to be converted to the NETCONF protocol, which increases the complexity and development cost of protocol conversion.<a href="#section-6.1-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-6.1-1.2.2.2.2.2">
+                    <p id="section-6.1-1.2.2.2.2.2.1">It is necessary to deal with compatibility and consistency issues between different protocols.<a href="#section-6.1-1.2.2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
 </li>
             </ul>
 </li>
@@ -1866,14 +1882,23 @@ Controllers usually have stronger computing and storage resources, which can bet
             <p id="section-6.2-1.1.1">Pro<a href="#section-6.2-1.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-1.1.2.1">
-                <p id="section-6.2-1.1.2.1.1">The protocol architecture simplification:
-If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP. This reduces the complexity of protocol conversion and simplifies the overall architecture.<a href="#section-6.2-1.1.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-6.2-1.1.2.1.1">The protocol stack simplification:<a href="#section-6.2-1.1.2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2-1.1.2.1.2.1">
+                    <p id="section-6.2-1.1.2.1.2.1.1">If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP. This reduces the complexity of protocol conversion and simplifies the overall architecture.<a href="#section-6.2-1.1.2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-6.2-1.1.2.1.2.2">
+                    <p id="section-6.2-1.1.2.1.2.2.1">It reduces the development and maintenance costs caused by protocol adaptation, especially when the device manufacturer supports the MCP protocol.<a href="#section-6.2-1.1.2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
 </li>
               <li class="normal" id="section-6.2-1.1.2.2">
-                <p id="section-6.2-1.1.2.2.1">High Availability: Device failures are isolated; other devices remain manageable.<a href="#section-6.2-1.1.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-6.2-1.1.2.2.1">Real-time performance and response speed:<a href="#section-6.2-1.1.2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2-1.1.2.2.2.1">
+                    <p id="section-6.2-1.1.2.2.2.1.1">The MCP Server is directly deployed on the device, which reduces the transmission latency in the middle and can respond to management instructions faster, which is suitable for scenarios with high real-time requirements.<a href="#section-6.2-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.2-1.1.2.3">
-                <p id="section-6.2-1.1.2.3.1">Reduced Controller Load: Distributes processing load across the network.<a href="#section-6.2-1.1.2.3.1" class="pilcrow">¶</a></p>
+                </ul>
 </li>
             </ul>
 </li>
@@ -1881,10 +1906,34 @@ If you deploy the MCP Server directly on the network device, you can skip the NE
             <p id="section-6.2-1.2.1">Con<a href="#section-6.2-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-1.2.2.1">
-                <p id="section-6.2-1.2.2.1.1">Management Complexity: Operating hundreds or thousands of distributed MCP servers introduces significant operational overhead requiring sophisticated orchestration systems for maintenance, updates, and monitoring.<a href="#section-6.2-1.2.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-6.2-1.2.2.1.1">Device Resource Consumption:<a href="#section-6.2-1.2.2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2-1.2.2.1.2.1">
+                    <p id="section-6.2-1.2.2.1.2.1.1">Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP Server may occupy a large amount of resources, affecting the normal operation of the device.<a href="#section-6.2-1.2.2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-6.2-1.2.2.1.2.2">
+                    <p id="section-6.2-1.2.2.1.2.2.1">It is necessary to optimize and expand the hardware and software resources of the device, which increases the complexity of the device.<a href="#section-6.2-1.2.2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
 </li>
               <li class="normal" id="section-6.2-1.2.2.2">
-                <p id="section-6.2-1.2.2.2.1">Resource Overhead: Each network device must allocate additional compute and memory resources to host the MCP server, potentially impacting primary networking functions and increasing per-device infrastructure costs.<a href="#section-6.2-1.2.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-6.2-1.2.2.2.1">Security and Management Complexity:<a href="#section-6.2-1.2.2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2-1.2.2.2.2.1">
+                    <p id="section-6.2-1.2.2.2.2.1.1">Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the complexity of management.<a href="#section-6.2-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-6.2-1.2.2.2.2.2">
+                    <p id="section-6.2-1.2.2.2.2.2.1">Each device needs to independently deploy and maintain the MCP Server, which increases the operation and maintenance cost.<a href="#section-6.2-1.2.2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-6.2-1.2.2.3">
+                <p id="section-6.2-1.2.2.3.1">Incompatible with Legacy devices:<a href="#section-6.2-1.2.2.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2-1.2.2.3.2.1">
+                    <p id="section-6.2-1.2.2.3.2.1.1">Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible for the network to form a unified control mechanism.<a href="#section-6.2-1.2.2.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
 </li>
             </ul>
 </li>
