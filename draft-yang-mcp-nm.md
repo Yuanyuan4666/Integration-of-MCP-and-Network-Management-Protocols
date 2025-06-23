@@ -138,6 +138,7 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
      -  Bridge natural language to tool invocation requests in
         a fixed format, then return this request to the client, enabling
         the client to properly parse the request.
+
 ## Close Loop Management
 
 - Objective: Realize the closed loop of "voice/text commands → automatic execution".
