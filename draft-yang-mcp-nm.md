@@ -95,14 +95,14 @@ Also IETF standard device models has slow adoption. Similar device models
 are defined in Openconfig or other SDOs, therefore the current YANG device
 models ecosystem is fragmented.
 
-## Partial or Non-Standard Network management protocols Implementations
+## Partial or Non-Standard Network Management Protocols Implementations
 
 Some vendors only partially support standard Network management protocols, and proprietary extensions may break interoperability.
 Other vendors might choose non-stanard network management protocol or telemetry protocol such as gnmi {{?I-D.openconfig-rtgwg-gnmi-spec}},
 grpc {{?I-D.kumar-rtgwg-grpc-protocol}}. A significant number of network operators continue to rely on legacy network management mechanisms
 such as SNMP.
 
-## Lack integration with Open APIs
+## YANG Models Lack Integration with Open APIs
 
 Today, open API has been widely adopted by the northbound interface of OSS/BSS or Network orchestrators while YANG data models have
 been widely adopted by the northbound interface of the network controller/orchestrator or the southbound interface of the network controller/orchestrator.
