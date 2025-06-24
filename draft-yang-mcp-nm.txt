@@ -5,11 +5,11 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 25 December 2025                                       D. Lopez
+Expires: 26 December 2025                                       D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
-                                                            23 June 2025
+                                                            24 June 2025
 
 
             Applicability of MCP for the Network Management
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 December 2025.
+   This Internet-Draft will expire on 26 December 2025.
 
 Copyright Notice
 
@@ -65,9 +65,9 @@ Table of Contents
      2.2.  Others
    3.  Overview of key challenges for the network management
      3.1.  Inconsistent YANG Model Support
-     3.2.  Partial or Non-Standard Network management protocols
+     3.2.  Partial or Non-Standard Network Management Protocols
            Implementations
-     3.3.  Lack integration with Open APIs
+     3.3.  YANG Models Lack Integration with Open APIs
    4.  Architecture Overview
      4.1.  Encapsulating Device Operations into MCP Tools
      4.2.  LLM for Intent-to-Tool-Request Translation
@@ -164,7 +164,7 @@ Table of Contents
    models are defined in Openconfig or other SDOs, therefore the current
    YANG device models ecosystem is fragmented.
 
-3.2.  Partial or Non-Standard Network management protocols
+3.2.  Partial or Non-Standard Network Management Protocols
       Implementations
 
    Some vendors only partially support standard Network management
@@ -175,7 +175,7 @@ Table of Contents
    network operators continue to rely on legacy network management
    mechanisms such as SNMP.
 
-3.3.  Lack integration with Open APIs
+3.3.  YANG Models Lack Integration with Open APIs
 
    Today, open API has been widely adopted by the northbound interface
    of OSS/BSS or Network orchestrators while YANG data models have been
