@@ -31,6 +31,10 @@ author:
   fullname: Nathalie Romo Moreno
   organization: Deutsche Telekom
   email: nathalie.romo-moreno@telekom.de
+ -
+  fullname: Lionel Tailhardat
+  organization: Orange Research
+  email: lionel.tailhardat@orange.com
 
 contributor:
  -  fullname: Guanming Zeng
