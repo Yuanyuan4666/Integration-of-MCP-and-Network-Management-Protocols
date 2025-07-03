@@ -19,7 +19,7 @@ author:
     fullname: Yuanyuan Yang
     organization: Huawei
     country: China
-    email: yangyuanyuan55@.com
+    email: yangyuanyuan55@huawei.com
  -
    fullname: Qin Wu
    organization: Huawei
