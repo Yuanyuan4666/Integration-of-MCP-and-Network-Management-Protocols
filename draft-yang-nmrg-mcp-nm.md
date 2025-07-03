@@ -18,27 +18,33 @@ author:
  -
     fullname: Yuanyuan Yang
     organization: Huawei
+    country: China
     email: yangyuanyuan55@.com
  -
    fullname: Qin Wu
    organization: Huawei
+   country: China
    email: bill.wu@huawei.com
  -
   fullname: Diego Lopez
   organization: Telefonica
+  country: Spain
   email: diego.r.lopez@telefonica.com
  -
   fullname: Nathalie Romo Moreno
   organization: Deutsche Telekom
+  country: Germany
   email: nathalie.romo-moreno@telekom.de
  -
   fullname: Lionel Tailhardat
   organization: Orange Research
+  country: France
   email: lionel.tailhardat@orange.com
 
 contributor:
  -  fullname: Guanming Zeng
     organization: Huawei
+    country: China
     email: zengguanming@huawei.com
 
 normative:
