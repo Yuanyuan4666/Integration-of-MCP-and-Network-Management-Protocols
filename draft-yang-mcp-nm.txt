@@ -5,13 +5,13 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 28 December 2025                                       D. Lopez
+Expires: 4 January 2026                                         D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
                                                            L. Tailhardat
                                                          Orange Research
-                                                            26 June 2025
+                                                             3 July 2025
 
 
             Applicability of MCP for the Network Management
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 December 2025.
+   This Internet-Draft will expire on 4 January 2026.
 
 Copyright Notice
 
@@ -96,8 +96,8 @@ Table of Contents
    with tools, making it easier to build AI applications that can
    interact with external LLM and network management systems.
 
-   MCP has been seen as rapid adoption technology in the consumer field.
-   The application of MCP in the network management field is meant to
+   MCP has been seen as rapid adoption internet technology.  The
+   application of MCP in the network management field is meant to
    develop various rich AI driven network applications, realize intent
    based networks management automation in the multi-vendor
    heterogeneous network environment.  By establishing standard
@@ -556,7 +556,7 @@ async def check_status(device_ip: str, metrics: list):
          significant impact on the performance of the network equipment
          itself.
 
-      -  Security：
+      -  Security:
 
          o  Security mechanisms can be implemented centrally on the
             controller, and the overall security can be improved through
@@ -565,7 +565,7 @@ async def check_status(device_ip: str, metrics: list):
          o  Reduces the risk of equipment being exposed to the network
             and reduces the possibility of being attacked.
 
-      -  Protocol adaptability：
+      -  Protocol adaptability:
 
          o  Communicating with devices through the NETCONF protocol can
             better be compatible with existing devices and protocols,
@@ -576,7 +576,7 @@ async def check_status(device_ip: str, metrics: list):
 
    *  Con
 
-      -  Latency and real-time performance：
+      -  Latency and real-time performance:
 
          o  Since management instructions need to be forwarded through
             the controller, latency may increase and real-time
@@ -585,7 +585,7 @@ async def check_status(device_ip: str, metrics: list):
          o  For some scenarios with extremely high real-time
             requirements, it may not meet the requirements.
 
-      -  Protocol conversion complexity：
+      -  Protocol conversion complexity:
 
          o  The MCP protocol needs to be converted to the NETCONF
             protocol, which increases the complexity and development

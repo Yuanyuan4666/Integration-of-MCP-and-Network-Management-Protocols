@@ -1049,11 +1049,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Applicability of MCP for the Network Man</td>
-<td class="right">June 2025</td>
+<td class="right">July 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Yang, et al.</td>
-<td class="center">Expires 28 December 2025</td>
+<td class="center">Expires 4 January 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-yang-mcp-nm-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-06-26" class="published">26 June 2025</time>
+<time datetime="2025-07-03" class="published">3 July 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-12-28">28 December 2025</time></dd>
+<dd class="expires"><time datetime="2026-01-04">4 January 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1121,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1250,7 +1250,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">The Model Context Protocol (MCP) provides a standardized way for LLMs to access and utilize information from different sources, interact with tools, making it easier to build AI applications that can interact with external LLM and network management systems.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution within the network management system, MCP enables AI
+<p id="section-1-2">MCP has been seen as rapid adoption internet technology. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution within the network management system, MCP enables AI
 Agents to have:<a href="#section-1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-3.1">
@@ -1801,13 +1801,15 @@ LLM parses the response, generates a natural-language summary, and sends it back
 <ul class="normal">
 <li class="normal" id="section-6.1-1.1.2.1">
                 <p id="section-6.1-1.1.2.1.1">Resource utilization efficiency:
-Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant impact on the performance of the network equipment itself.<a href="#section-6.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant impact
+on the performance of the network equipment itself.<a href="#section-6.1-1.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-6.1-1.1.2.2">
-                <p id="section-6.1-1.1.2.2.1">Security：<a href="#section-6.1-1.1.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-6.1-1.1.2.2.1">Security:<a href="#section-6.1-1.1.2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.1-1.1.2.2.2.1">
-                    <p id="section-6.1-1.1.2.2.2.1.1">Security mechanisms can be implemented centrally on the controller, and the overall security can be improved through unified authentication, authorization and audit mechanisms.<a href="#section-6.1-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.1-1.1.2.2.2.1.1">Security mechanisms can be implemented centrally on the controller, and the overall security can be improved through unified authentication, authorization
+and audit mechanisms.<a href="#section-6.1-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-6.1-1.1.2.2.2.2">
                     <p id="section-6.1-1.1.2.2.2.2.1">Reduces the risk of equipment being exposed to the network and reduces the possibility of being attacked.<a href="#section-6.1-1.1.2.2.2.2.1" class="pilcrow">¶</a></p>
@@ -1815,10 +1817,11 @@ Controllers usually have stronger computing and storage resources, which can bet
                 </ul>
 </li>
               <li class="normal" id="section-6.1-1.1.2.3">
-                <p id="section-6.1-1.1.2.3.1">Protocol adaptability：<a href="#section-6.1-1.1.2.3.1" class="pilcrow">¶</a></p>
+                <p id="section-6.1-1.1.2.3.1">Protocol adaptability:<a href="#section-6.1-1.1.2.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.1-1.1.2.3.2.1">
-                    <p id="section-6.1-1.1.2.3.2.1.1">Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment modification.<a href="#section-6.1-1.1.2.3.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.1-1.1.2.3.2.1.1">Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment
+modification.<a href="#section-6.1-1.1.2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-6.1-1.1.2.3.2.2">
                     <p id="section-6.1-1.1.2.3.2.2.1">NETCONF protocol has wide support and mature tool chains in the industry, which is easy to develop and maintain.<a href="#section-6.1-1.1.2.3.2.2.1" class="pilcrow">¶</a></p>
@@ -1831,7 +1834,7 @@ Controllers usually have stronger computing and storage resources, which can bet
             <p id="section-6.1-1.2.1">Con<a href="#section-6.1-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.1-1.2.2.1">
-                <p id="section-6.1-1.2.2.1.1">Latency and real-time performance：<a href="#section-6.1-1.2.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-6.1-1.2.2.1.1">Latency and real-time performance:<a href="#section-6.1-1.2.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.1-1.2.2.1.2.1">
                     <p id="section-6.1-1.2.2.1.2.1.1">Since management instructions need to be forwarded through the controller, latency may increase and real-time performance may be affected.<a href="#section-6.1-1.2.2.1.2.1.1" class="pilcrow">¶</a></p>
@@ -1842,7 +1845,7 @@ Controllers usually have stronger computing and storage resources, which can bet
                 </ul>
 </li>
               <li class="normal" id="section-6.1-1.2.2.2">
-                <p id="section-6.1-1.2.2.2.1">Protocol conversion complexity：<a href="#section-6.1-1.2.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-6.1-1.2.2.2.1">Protocol conversion complexity:<a href="#section-6.1-1.2.2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.1-1.2.2.2.2.1">
                     <p id="section-6.1-1.2.2.2.2.1.1">The MCP protocol needs to be converted to the NETCONF protocol, which increases the complexity and development cost of protocol conversion.<a href="#section-6.1-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
@@ -1870,7 +1873,8 @@ Controllers usually have stronger computing and storage resources, which can bet
                 <p id="section-6.2-1.1.2.1.1">The protocol stack simplification:<a href="#section-6.2-1.1.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-1.1.2.1.2.1">
-                    <p id="section-6.2-1.1.2.1.2.1.1">If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP. This reduces the complexity of protocol conversion and simplifies the overall architecture.<a href="#section-6.2-1.1.2.1.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.2-1.1.2.1.2.1.1">If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP. This reduces
+the complexity of protocol conversion and simplifies the overall architecture.<a href="#section-6.2-1.1.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-6.2-1.1.2.1.2.2">
                     <p id="section-6.2-1.1.2.1.2.2.1">It reduces the development and maintenance costs caused by protocol adaptation, especially when the device manufacturer supports the MCP protocol.<a href="#section-6.2-1.1.2.1.2.2.1" class="pilcrow">¶</a></p>
@@ -1881,7 +1885,8 @@ Controllers usually have stronger computing and storage resources, which can bet
                 <p id="section-6.2-1.1.2.2.1">Real-time performance and response speed:<a href="#section-6.2-1.1.2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-1.1.2.2.2.1">
-                    <p id="section-6.2-1.1.2.2.2.1.1">The MCP Server is directly deployed on the device, which reduces the transmission latency in the middle and can respond to management instructions faster, which is suitable for scenarios with high real-time requirements.<a href="#section-6.2-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.2-1.1.2.2.2.1.1">The MCP Server is directly deployed on the device, which reduces the transmission latency in the middle and can respond to management instructions faster,
+which is suitable for scenarios with high real-time requirements.<a href="#section-6.2-1.1.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
@@ -1894,7 +1899,8 @@ Controllers usually have stronger computing and storage resources, which can bet
                 <p id="section-6.2-1.2.2.1.1">Device Resource Consumption:<a href="#section-6.2-1.2.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-1.2.2.1.2.1">
-                    <p id="section-6.2-1.2.2.1.2.1.1">Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP Server may occupy a large amount of resources, affecting the normal operation of the device.<a href="#section-6.2-1.2.2.1.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.2-1.2.2.1.2.1.1">Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP Server may occupy a large amount of resources, affecting the normal
+operation of the device.<a href="#section-6.2-1.2.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-6.2-1.2.2.1.2.2">
                     <p id="section-6.2-1.2.2.1.2.2.1">It is necessary to optimize and expand the hardware and software resources of the device, which increases the complexity of the device.<a href="#section-6.2-1.2.2.1.2.2.1" class="pilcrow">¶</a></p>
@@ -1905,7 +1911,8 @@ Controllers usually have stronger computing and storage resources, which can bet
                 <p id="section-6.2-1.2.2.2.1">Security and Management Complexity:<a href="#section-6.2-1.2.2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-1.2.2.2.2.1">
-                    <p id="section-6.2-1.2.2.2.2.1.1">Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the complexity of management.<a href="#section-6.2-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.2-1.2.2.2.2.1.1">Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the complexity of
+management.<a href="#section-6.2-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-6.2-1.2.2.2.2.2">
                     <p id="section-6.2-1.2.2.2.2.2.1">Each device needs to independently deploy and maintain the MCP Server, which increases the operation and maintenance cost.<a href="#section-6.2-1.2.2.2.2.2.1" class="pilcrow">¶</a></p>
@@ -1916,7 +1923,8 @@ Controllers usually have stronger computing and storage resources, which can bet
                 <p id="section-6.2-1.2.2.3.1">Incompatible with Legacy devices:<a href="#section-6.2-1.2.2.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-1.2.2.3.2.1">
-                    <p id="section-6.2-1.2.2.3.2.1.1">Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible for the network to form a unified control mechanism.<a href="#section-6.2-1.2.2.3.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.2-1.2.2.3.2.1.1">Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible for the
+network to form a unified control mechanism.<a href="#section-6.2-1.2.2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
