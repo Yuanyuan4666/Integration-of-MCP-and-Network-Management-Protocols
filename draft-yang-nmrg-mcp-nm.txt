@@ -717,7 +717,7 @@ Authors' Addresses
    Yuanyuan Yang
    Huawei
    China
-   Email: yangyuanyuan55@.com
+   Email: yangyuanyuan55@huawei.com
 
 
    Qin Wu
