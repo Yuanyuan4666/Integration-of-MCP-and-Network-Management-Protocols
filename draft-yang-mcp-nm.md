@@ -446,7 +446,7 @@ In this senario, the MCP server is deployed within the network devices. The MCP 
     - It is necessary to optimize and expand the hardware and software resources of the device, which increases the complexity of the device.
 
   - Security and Management Complexity:
-    - Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the complexity of 
+    - Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the complexity of
       management.
     - Each device needs to independently deploy and maintain the MCP Server, which increases the operation and maintenance cost.
 
