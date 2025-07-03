@@ -708,6 +708,7 @@ Contributors
 
    Guanming Zeng
    Huawei
+   China
    Email: zengguanming@huawei.com
 
 
@@ -715,24 +716,29 @@ Authors' Addresses
 
    Yuanyuan Yang
    Huawei
+   China
    Email: yangyuanyuan55@.com
 
 
    Qin Wu
    Huawei
+   China
    Email: bill.wu@huawei.com
 
 
    Diego Lopez
    Telefonica
+   Spain
    Email: diego.r.lopez@telefonica.com
 
 
    Nathalie Romo Moreno
    Deutsche Telekom
+   Germany
    Email: nathalie.romo-moreno@telekom.de
 
 
    Lionel Tailhardat
    Orange Research
+   France
    Email: lionel.tailhardat@orange.com
