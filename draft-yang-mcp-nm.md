@@ -56,7 +56,7 @@ The application of MCP in the network management field is meant to develop vario
 
 The Model Context Protocol (MCP) provides a standardized way for LLMs to access and utilize information from different sources, interact with tools, making it easier to build AI applications that can interact with external LLM and network management systems.
 
-MCP has been seen as rapid adoption technology in the consumer field. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution within the network management system, MCP enables AI
+MCP has been seen as rapid adoption internet technology. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution within the network management system, MCP enables AI
 Agents to have:
 
 - Unified operation abstraction through normalized MCP tool definitions
@@ -405,17 +405,24 @@ In this senario, the MCP server is deployed within the network devices. The MCP 
 
 - Pro
   - Resource utilization efficiency:
-    Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant impact on the performance of the network equipment itself.
+    Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant impact 
+    on the performance of the network equipment itself.
+
   - Security：
-    - Security mechanisms can be implemented centrally on the controller, and the overall security can be improved through unified authentication, authorization and audit mechanisms.
+    - Security mechanisms can be implemented centrally on the controller, and the overall security can be improved through unified authentication, authorization 
+      and audit mechanisms.
     - Reduces the risk of equipment being exposed to the network and reduces the possibility of being attacked.
+
   - Protocol adaptability：
-    - Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment modification.
+    - Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment 
+      modification.
     - NETCONF protocol has wide support and mature tool chains in the industry, which is easy to develop and maintain.
+
 - Con
   - Latency and real-time performance：
     - Since management instructions need to be forwarded through the controller, latency may increase and real-time performance may be affected.
     - For some scenarios with extremely high real-time requirements, it may not meet the requirements.
+
   - Protocol conversion complexity：
     - The MCP protocol needs to be converted to the NETCONF protocol, which increases the complexity and development cost of protocol conversion.
     - It is necessary to deal with compatibility and consistency issues between different protocols.
@@ -424,19 +431,28 @@ In this senario, the MCP server is deployed within the network devices. The MCP 
 
 - Pro
   - The protocol stack simplification:
-    - If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP. This reduces the complexity of protocol conversion and simplifies the overall architecture.
+    - If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP. This reduces 
+      the complexity of protocol conversion and simplifies the overall architecture.
     - It reduces the development and maintenance costs caused by protocol adaptation, especially when the device manufacturer supports the MCP protocol.
+
   - Real-time performance and response speed:
-    - The MCP Server is directly deployed on the device, which reduces the transmission latency in the middle and can respond to management instructions faster, which is suitable for scenarios with high real-time requirements.
+    - The MCP Server is directly deployed on the device, which reduces the transmission latency in the middle and can respond to management instructions faster, 
+      which is suitable for scenarios with high real-time requirements.
+
 - Con
   - Device Resource Consumption:
-    - Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP Server may occupy a large amount of resources, affecting the normal operation of the device.
+    - Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP Server may occupy a large amount of resources, affecting the normal 
+      operation of the device.
     - It is necessary to optimize and expand the hardware and software resources of the device, which increases the complexity of the device.
+
   - Security and Management Complexity:
-    - Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the complexity of management.
+    - Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the complexity of 
+      management.
     - Each device needs to independently deploy and maintain the MCP Server, which increases the operation and maintenance cost.
+
   - Incompatible with Legacy devices:
-    - Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible for the network to form a unified control mechanism.
+    - Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible for the 
+      network to form a unified control mechanism.
 
 # IANA Considerations
 
