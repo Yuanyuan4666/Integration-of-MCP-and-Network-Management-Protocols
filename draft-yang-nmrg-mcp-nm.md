@@ -267,8 +267,8 @@ in JSON format as follows:
 
 ~~~~
 
-The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the device executing the CLI. The results are returned to the MCP client and are forwarded to the LLM. The
-LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user. See natural lanauge summary example as follows:
+The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are returned to the MCP client in Json as below and are forwarded to the LLM. The
+LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.
 
 ~~~~
 # Convert to CLI commands of different vendors
@@ -286,6 +286,33 @@ LLM parses the response, generates a natural-language summary, and sends it back
     "end",
     "write memory"
   ]
+
+#Feedbacks received by MCP client in Json of different vendors
+
+{
+    "status": "success",
+    "message": "OSPF configuration applied successfully on device 192.168.10.1",
+    "commands_executed": [
+        "system-view",
+        "ospf 100",
+        "area 0.0.0.0",
+        "network 192.168.10.0 0.0.0.255"
+    ]
+}
+
+{
+    "status": "success",
+    "message": "OSPF configuration applied successfully on device 192.168.10.1",
+    "commands_executed": [
+        "configure terminal",
+        "router ospf 100",
+        "network 192.168.10.0 0.0.0.255 area 0",
+        "end",
+        "write memory"
+    ]
+}
+
+# Natural lanauge summary of success or failure:
 
 {
   "192.168.10.1": "Configure Successfully, take 2.3 seconds",
