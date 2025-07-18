@@ -287,7 +287,7 @@ LLM parses the response, generates a natural-language summary, and sends it back
     "write memory"
   ]
 
-#Feedbacks received by MCP client in Json of different vendors
+#Feedbacks received by the MCP client of different vendors
 {
     "status": "success",
     "message": "OSPF configuration applied successfully on device 192.168.10.1",
