@@ -267,10 +267,25 @@ in JSON format as follows:
 
 ~~~~
 
-The MCP server executes the network management operation in JSON format and returns the results to the MCP client, which forwards them to the LLM. The
+The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the device executing the CLI. The results are returned to the MCP client and are forwarded to the LLM. The
 LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user. See natural lanauge summary example as follows:
 
 ~~~~
+# Convert to CLI commands of different vendors
+"commands": [
+    "system-view",
+    "ospf {{process_id}}",
+    "area {{area_id}}",
+    "network {{network_address}} {{wildcard_mask}}"
+  ]
+
+"commands": [
+    "configure terminal",
+    "router ospf {{process_id}}",
+    "network {{network_address}} {{wildcard_mask}} area {{area_id}}",
+    "end",
+    "write memory"
+  ]
 
 {
   "192.168.10.1": "Configure Successfully, take 2.3 seconds",
