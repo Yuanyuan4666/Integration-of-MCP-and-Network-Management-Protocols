@@ -375,35 +375,37 @@ In this senario, the MCP server is deployed within the network controller, which
 
 ## MCP Server Hosted Within the Network Device
 
-~~~~
-                   +--------------+
-                   |     User     |
-                   +-------+------+
-                           |
-                  Natural Language
-                        Command
-.........................................................
-.                          |                            .
-.                  +-------+------+       +-----------+ .
-. Network          |  MCP Client  +-------+  LLM      | .
-. Controller       +-------+------+       +-----------+ .
-.                          |                            .
-.                   Tools Request                       .
-.........................................................
-.                  +-------+------+                     .
-.                  |  MCP Server  |                     .
-.                  +-------+------+                     .
-.Network                  CLI                           .
-.Device                    |                            .
-.     +--------------------+--------------------+       .
-.     |                    |                    |       .
-.+----+-------+    +-------+------+     +-------+------+.
-.| Network    |    |   Network    |     |   Network    |.
-.| Device     |    |   Device     |     |   Device     |.
-.+------------+    +--------------+     +--------------+.
-.                                                       .
-.........................................................
-~~~~
+~~~~                                                      
+                   +--------------+                       
+                   |     User     |                       
+                   +-------+------+                       
+                           |                              
+                  Natural Language                        
+                        Command                           
+|.......................................................| 
+|                          |                            | 
+|                  +-------+------+       +-----------+ | 
+| Network          |  MCP Client  +-------+  LLM      | | 
+| Controller       +-------|------+       +-----------+ | 
+|                          |                            | 
+|                          |                            | 
+|...................Tools Request ......................| 
+|                          |                            | 
+|                          |                            | 
+|                          |                            | 
+|                          |                            | 
+|                          |                            | 
+|     +--------------------|--------------------+       | 
+|     |                    |                    |       | 
+|+----+-------+    +-------|------+     +-------+------+| 
+||  MCP       |    |    MCP       |     |    MCP       || 
+|| Server     |    |   Server     |     |   Server     || 
+|+------------+    +--------------+     +--------------+| 
+| Network             Network             Network       | 
+| Device              Device              Device        | 
+|.......................................................| 
+~~~~                                                      
+
 
 In this senario, the MCP server is deployed within the network devices. The MCP server acts as a protocol converter, transforming CLI into JSON-RPC 2.0 format for AI system.
 - Scope: The MCP server is colocated with network devices. The MCP Client operates in a cloud environment, requesting distributed MCP Server via public/private APIs.
