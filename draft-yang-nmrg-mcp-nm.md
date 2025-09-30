@@ -375,7 +375,7 @@ In this senario, the MCP server is deployed within the network controller, which
 
 ## MCP Server Hosted Within the Network Device
 
-~~~~                                                      
+~~~~                                                    
                    +--------------+                       
                    |     User     |                       
                    +-------+------+                       
@@ -403,8 +403,9 @@ In this senario, the MCP server is deployed within the network controller, which
 |+------------+    +--------------+     +--------------+| 
 | Network             Network             Network       | 
 | Device              Device              Device        | 
-|.......................................................| 
-~~~~                                                      
+|.......................................................|
+
+~~~~                                                  
 
 
 In this senario, the MCP server is deployed within the network devices. The MCP server acts as a protocol converter, transforming CLI into JSON-RPC 2.0 format for AI system.
