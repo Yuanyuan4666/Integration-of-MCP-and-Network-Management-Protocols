@@ -5,13 +5,13 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 19 January 2026                                        D. Lopez
+Expires: 3 April 2026                                           D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
                                                            L. Tailhardat
                                                          Orange Research
-                                                            18 July 2025
+                                                       30 September 2025
 
 
             Applicability of MCP for the Network Management
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 January 2026.
+   This Internet-Draft will expire on 3 April 2026.
 
 Copyright Notice
 
@@ -522,29 +522,30 @@ async def check_status(device_ip: str, metrics: list):
                       |     User     |
                       +-------+------+
                               |
-                     Natural Language
+                      Natural Language
                            Command
-   .........................................................
-   .                          |                            .
-   .                  +-------+------+       +-----------+ .
-   . Network          |  MCP Client  +-------+  LLM      | .
-   . Controller       +-------+------+       +-----------+ .
-   .                          |                            .
-   .                   Tools Request                       .
-   .........................................................
-   .                  +-------+------+                     .
-   .                  |  MCP Server  |                     .
-   .                  +-------+------+                     .
-   .Network                  CLI                           .
-   .Device                    |                            .
-   .     +--------------------+--------------------+       .
-   .     |                    |                    |       .
-   .+----+-------+    +-------+------+     +-------+------+.
-   .| Network    |    |   Network    |     |   Network    |.
-   .| Device     |    |   Device     |     |   Device     |.
-   .+------------+    +--------------+     +--------------+.
-   .                                                       .
-   .........................................................
+   +.......................................................+
+   |                          |                            |
+   |                  +-------+------+       +-----------+ |
+   | Network          |  MCP Client  +-------+  LLM      | |
+   | Controller       +-------|------+       +-----------+ |
+   |                          |                            |
+   |                          |                            |
+   |...................Tools Request ......................|
+   |                          |                            |
+   |                          |                            |
+   |                          |                            |
+   |                          |                            |
+   |                          |                            |
+   |     +--------------------|--------------------+       |
+   |     |                    |                    |       |
+   |+----+-------+    +-------|------+     +-------+------+|
+   ||  MCP       |    |    MCP       |     |    MCP       ||
+   || Server     |    |   Server     |     |   Server     ||
+   |+------------+    +--------------+     +--------------+|
+   | Network             Network             Network       |
+   | Device              Device              Device        |
+   |.......................................................|
 
    In this senario, the MCP server is deployed within the network
    devices.  The MCP server acts as a protocol converter, transforming
