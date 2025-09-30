@@ -210,6 +210,7 @@ See Tool descriptor information example as follows:
     }
   }
 ]
+
 # Tool Implementation
 from netmiko import ConnectHandler
 from mcp_server import McpServer
