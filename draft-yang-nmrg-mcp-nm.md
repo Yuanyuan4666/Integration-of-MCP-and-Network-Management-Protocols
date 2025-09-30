@@ -376,12 +376,12 @@ In this senario, the MCP server is deployed within the network controller, which
 ## MCP Server Hosted Within the Network Device
 
 ~~~~
-                   +--------------+              
-                   |     User     |                    
-                   +-------+------+                
-                           |            
-                   Natural Language             
-                        Command        
+                   +--------------+
+                   |     User     |
+                   +-------+------+
+                           |
+                   Natural Language
+                        Command
 +.......................................................+
 |                          |                            |
 |                  +-------+------+       +-----------+ |
