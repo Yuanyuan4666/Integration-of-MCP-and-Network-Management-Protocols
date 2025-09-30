@@ -367,7 +367,8 @@ The MCP server acts as a protocol converter, transforming NETCONF's XML/YANG mod
 .........................................................
 ~~~~
 
-In this senario, the MCP server is deployed within the network devices. The MCP server acts as a protocol converter, transforming CLI into JSON-RPC 2.0 format for AI system.
+In this senario, the MCP server is deployed within the network devices. The MCP server acts as a protocol converter,
+transforming CLI into JSON-RPC 2.0 format for AI system.
 - Scope: The MCP server is colocated with network devices. The MCP Client operates in a cloud environment, requesting distributed MCP Server via public/private APIs.
 - Key Characteristics:
   -  Low Latency: Direct access to network devices minimizes tool execution delays
