@@ -1740,7 +1740,8 @@ LLM parses the response, generates a natural-language summary, and sends it back
 +--------------+  +--------------+    +--------------+
 </pre><a href="#section-5.1-1" class="pilcrow">¶</a>
 </div>
-<p id="section-5.1-2">In this senario, the MCP server is deployed within the network controller, which could potentially be a cloud environment. The MCP server acts as a protocol converter, transforming NETCONF's XML/YANG models into JSON-RPC 2.0 format for AI system.
+<p id="section-5.1-2">In this senario, the MCP server is deployed within the network controller, which could potentially be a cloud environment.
+The MCP server acts as a protocol converter, transforming NETCONF's XML/YANG models into JSON-RPC 2.0 format for AI system.
 - Scope: The MCP Server, colocated with the MCP Client and LLM model, is hosted within a cloud environment, the network devices stay as it is.
 - Key Characteristics:
   -  Centralized Management: A single MCP Client instance can manage all network devices in geographically dispersed network.
@@ -1785,7 +1786,8 @@ LLM parses the response, generates a natural-language summary, and sends it back
 
 </pre><a href="#section-5.2-1" class="pilcrow">¶</a>
 </div>
-<p id="section-5.2-2">In this senario, the MCP server is deployed within the network devices. The MCP server acts as a protocol converter, transforming CLI into JSON-RPC 2.0 format for AI system.
+<p id="section-5.2-2">In this senario, the MCP server is deployed within the network devices. The MCP server acts as a protocol
+converter, transforming CLI into JSON-RPC 2.0 format for AI system.
 - Scope: The MCP server is colocated with network devices. The MCP Client operates in a cloud environment, requesting distributed MCP Server via public/private APIs.
 - Key Characteristics:
   -  Low Latency: Direct access to network devices minimizes tool execution delays<a href="#section-5.2-2" class="pilcrow">¶</a></p>
