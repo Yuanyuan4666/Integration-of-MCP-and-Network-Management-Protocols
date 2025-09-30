@@ -365,6 +365,7 @@ The MCP server acts as a protocol converter, transforming NETCONF's XML/YANG mod
 .+------------+    +--------------+     +--------------+.
 .                                                       .
 .........................................................
+
 ~~~~
 
 In this senario, the MCP server is deployed within the network devices. The MCP server acts as a protocol converter,
