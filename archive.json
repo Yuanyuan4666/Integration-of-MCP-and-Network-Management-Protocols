@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-24T00:44:23.629240+00:00",
+  "timestamp": "2025-10-02T00:38:55.972708+00:00",
   "repo": "Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols",
   "labels": [
     {
@@ -120,6 +120,126 @@
       "mergedBy": "billwuqin",
       "mergeCommit": {
         "oid": "a9118e1fe8145a86940ed5ad89d7660ba3adec6d"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOOrizn86rTFOD",
+      "title": "Update draft-yang-mcp-nm.md",
+      "url": "https://github.com/Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols/pull/4",
+      "state": "CLOSED",
+      "author": "Yuanyuan4666",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-30T10:28:39Z",
+      "updatedAt": "2025-09-30T11:30:29Z",
+      "baseRepository": "Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols",
+      "baseRefName": "main",
+      "baseRefOid": "5947b86a684e340bd7465b10314e0778481014a3",
+      "headRepository": "Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols",
+      "headRefName": "Yuanyuan4666-patch-1",
+      "headRefOid": "416a15c0d156c9d620423b0dd078d3e0d0e3fdaf",
+      "closedAt": "2025-09-30T11:30:29Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOOrizn86rUfgW",
+      "title": "Yuanyuan4666 patch 1",
+      "url": "https://github.com/Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols/pull/5",
+      "state": "CLOSED",
+      "author": "Yuanyuan4666",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-30T12:09:52Z",
+      "updatedAt": "2025-09-30T13:00:18Z",
+      "baseRepository": "Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols",
+      "baseRefName": "main",
+      "baseRefOid": "fd199604efba551c1bcc42c78389e5a07074e373",
+      "headRepository": "Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols",
+      "headRefName": "Yuanyuan4666-patch-1",
+      "headRefOid": "c943807cae2cb999ceb64133ddc4639573b9a765",
+      "closedAt": "2025-09-30T13:00:18Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOrizn87Dxpqz",
+          "commit": {
+            "abbreviatedOid": "8eed6c9"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-30T12:50:51Z",
+          "updatedAt": "2025-09-30T12:50:51Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOOrizn87Dxr3r",
+          "commit": {
+            "abbreviatedOid": "b7daa11"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-30T12:52:24Z",
+          "updatedAt": "2025-09-30T12:52:24Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOOrizn87Dxvxn",
+          "commit": {
+            "abbreviatedOid": "c943807"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-30T12:55:13Z",
+          "updatedAt": "2025-09-30T12:55:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOOrizn86rVO5O",
+      "title": "Editorial changes",
+      "url": "https://github.com/Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols/pull/6",
+      "state": "MERGED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-30T13:02:12Z",
+      "updatedAt": "2025-09-30T13:02:47Z",
+      "baseRepository": "Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols",
+      "baseRefName": "main",
+      "baseRefOid": "fd199604efba551c1bcc42c78389e5a07074e373",
+      "headRepository": "Yuanyuan4666/Integration-of-MCP-and-Network-Management-Protocols",
+      "headRefName": "billwuqin-patch-2",
+      "headRefOid": "7cf59ea7bf2657c2b1d891b520fa86dd668f3e57",
+      "closedAt": "2025-09-30T13:02:47Z",
+      "mergedAt": "2025-09-30T13:02:47Z",
+      "mergedBy": "billwuqin",
+      "mergeCommit": {
+        "oid": "012d9332c4b7b7ae2ee28d4b49ad2c2665e78813"
       },
       "comments": [],
       "reviews": []
