@@ -114,36 +114,14 @@ The following terms are used throughout this document:
 - **RESTCONF**: RESTful Network Configuration Protocol {{!RFC8040}}
 - **SNMP**: A Simple Network Management Protocol {{!RFC2576}}
 
-# Overview of key challenges for the network management {#ops-radiu}
+# The values of coupling MCP with the network management {#value-mcp-nm}
+# MCP for Network Exposure
+# MCP Server Discovery
+# Deployment Consideration in Network Management
 
-In large scale network management environment, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues or challenges:
-
-## Inconsistent YANG Model Support
-
-Different vendors implement different YANG models (standard or proprietary), leading to:
-
-- Lack of uniform data structures for configuration/state retrieval.
-- Requirement for vendor-specific adaptations in automation scripts.
-
-Also IETF standard device models has slow adoption. Similar device models
-are defined in Openconfig or other SDOs, therefore the current YANG device
-models ecosystem is fragmented.
-
-## Partial or Non-Standard Network Management Protocols Implementations
-
-Some vendors only partially support standard Network management protocols, and proprietary extensions may break interoperability.
-Other vendors might choose non-stanard network management protocol or telemetry protocol such as gnmi {{?I-D.openconfig-rtgwg-gnmi-spec}},
-grpc {{?I-D.kumar-rtgwg-grpc-protocol}}. A significant number of network operators continue to rely on legacy network management mechanisms
-such as SNMP.
-
-## YANG Models Lack Integration with Open APIs
-
-Today, open API has been widely adopted by the northbound interface of OSS/BSS or Network orchestrators while YANG data models have
-been widely adopted by the northbound interface of the network controller/orchestrator or the southbound interface of the network controller/orchestrator.
-However Open API ecosystem and YANG model ecosystem are both built as silo and lack integration or mapping between them.
-
-# Architecture Overview
-
+# MCP architecture Design for Network Management
+# Interworking with the Network Management protocol and YANG data models
+# MCP Usage Examples
 The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for large scale multi-vendor network management environments, effectively addressing the aforementioned challenges in {{ops-radiu}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
 
 ## Encapsulating Device Operations into MCP Tools
