@@ -70,12 +70,12 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
    MCP has seen rapid adoption across both startups and enterprises since it announced
    in November 2024. Key use cases include AI coding assistants in IDEs, data analysis
    tools that can query databases, and productivity tools that can interact with services
-   like Slack or Google Drive. 
-   
+   like Slack or Google Drive.
+
    The application of MCP for the network management is meant to refactor
    network management operation and network capabilities as tools and provide more agile
    and extensible architecture to expose these AI integration capabilities.
-   
+
    With integration of MCP into the network management system, it allow you
    develop various rich AI driven network applications, realize intent
    based networks management, automate workflows in the multi-vendor
