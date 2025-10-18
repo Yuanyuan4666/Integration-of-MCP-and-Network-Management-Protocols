@@ -54,22 +54,47 @@ informative:
 
 --- abstract
 
-The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. This document discusses the applicability of MCP to the network management in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment scenarios. The impact of integrating MCP into the network management system is also discussed.
+The application of MCP in the network management field is meant to refactor network management operation and network capabilities as tools and provide more agile
+and extensible architecture to expose these AI integration capabilities. This document discusses the applicability of MCP to the network management plane in the
+IP network that utilizes IETF technologies.It explores MCP for network exposure, multiple MCP server discovery generic workflow and deployment scenarios.
 
 --- middle
 
 # Introduction
 
-The Model Context Protocol (MCP) provides a standardized way for LLMs to access and utilize information from different sources, interact with tools, making it easier to build AI applications that can interact with external LLM and network management systems.
+   The Model Context Protocol (MCP) decouples LLMs from tools and provides
+   a standardized way for LLMs to access and utilize information from different
+   data sources and tools, making it easier to build AI applications that can
+   interact with external LLM models and software tools and enable workflows automation.
 
-MCP has been seen as rapid adoption internet technology. The application of MCP in the network management field is meant to develop various rich AI driven network applications, realize intent based networks management automation in the multi-vendor heterogeneous network environment. By establishing standard interfaces for tool encapsulation, intent translation, and closed-loop execution within the network management system, MCP enables AI
-Agents to have:
+   MCP has seen rapid adoption across both startups and enterprises since it announced
+   in November 2024. Key use cases include AI coding assistants in IDEs, data analysis
+   tools that can query databases, and productivity tools that can interact with services
+   like Slack or Google Drive. 
+   
+   The application of MCP for the network management is meant to refactor
+   network management operation and network capabilities as tools and provide more agile
+   and extensible architecture to expose these AI integration capabilities.
+   
+   With integration of MCP into the network management system, it allow you
+   develop various rich AI driven network applications, realize intent
+   based networks management, automate workflows in the multi-vendor
+   heterogeneous network platform. By establishing standard
+   interfaces for tool encapsulation, intent translation, and closed-
+   loop execution within the network management system, MCP enables the network
+   management system to have:
 
-- Unified operation abstraction through normalized MCP tool definitions
-- Seamless LLM integration via the structured protocol
-- Automation Execution Ability
+   -  Unified operation abstraction through normalized MCP tool
+      definitions
 
-This document discusses the applicability of MCP to the network management plane in the IP network that utilizes IETF technologies. It explores operational aspect, key components, generic workflow and deployment scenarios. The impact of integrating MCP into the network management system will also be discussed.
+   - Seamless LLM integration via the structured protocol
+
+   - Automation Execution Ability
+
+   This document discusses the applicability of MCP to the network
+   management plane in the IP network that utilizes IETF technologies.
+   It explores MCP for network exposure, multiple MCP server discovery generic workflow and
+   deployment scenarios.
 
 # Terminology & Notation Conventions
 
