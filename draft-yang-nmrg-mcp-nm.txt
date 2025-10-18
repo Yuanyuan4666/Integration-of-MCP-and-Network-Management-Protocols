@@ -67,12 +67,8 @@ Table of Contents
    2.  Terminology & Notation Conventions
      2.1.  MCP
      2.2.  Others
-   3.  Overview of key challenges for the network management
-     3.1.  Inconsistent YANG Model Support
-     3.2.  Partial or Non-Standard Network Management Protocols
-           Implementations
-     3.3.  YANG Models Lack Integration with Open APIs
-   4.  Architecture Overview
+   3.  The values of coupling MCP with the network management
+   4.  MCP architecture Design for Network Management
      4.1.  Encapsulating Device Operations into MCP Tools
      4.2.  LLM for Intent-to-Tool-Request Translation
      4.3.  Closed-Loop Automation Execution Workflow
@@ -85,9 +81,7 @@ Table of Contents
      6.2.  MCP Server Hosted within the Network Device
    7.  IANA Considerations
    8.  Security Considerations
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   9.  Normative References
    Authors' Addresses
 
 1.  Introduction
@@ -158,54 +152,21 @@ Table of Contents
 
    *  *SNMP*: A Simple Network Management Protocol [RFC2576]
 
-3.  Overview of key challenges for the network management
+3.  The values of coupling MCP with the network management
 
-   In large scale network management environment, a large number of
-   devices from different vendors need to be uniformly managed, which
-   can lead to the following issues or challenges:
+   # MCP for Network Exposure # MCP Server Discovery # Deployment
+   Consideration in Network Management
 
-3.1.  Inconsistent YANG Model Support
+4.  MCP architecture Design for Network Management
 
-   Different vendors implement different YANG models (standard or
-   proprietary), leading to:
-
-   *  Lack of uniform data structures for configuration/state retrieval.
-
-   *  Requirement for vendor-specific adaptations in automation scripts.
-
-   Also IETF standard device models has slow adoption.  Similar device
-   models are defined in Openconfig or other SDOs, therefore the current
-   YANG device models ecosystem is fragmented.
-
-3.2.  Partial or Non-Standard Network Management Protocols
-      Implementations
-
-   Some vendors only partially support standard Network management
-   protocols, and proprietary extensions may break interoperability.
-   Other vendors might choose non-stanard network management protocol or
-   telemetry protocol such as gnmi [I-D.openconfig-rtgwg-gnmi-spec],
-   grpc [I-D.kumar-rtgwg-grpc-protocol].  A significant number of
-   network operators continue to rely on legacy network management
-   mechanisms such as SNMP.
-
-3.3.  YANG Models Lack Integration with Open APIs
-
-   Today, open API has been widely adopted by the northbound interface
-   of OSS/BSS or Network orchestrators while YANG data models have been
-   widely adopted by the northbound interface of the network controller/
-   orchestrator or the southbound interface of the network controller/
-   orchestrator.  However Open API ecosystem and YANG model ecosystem
-   are both built as silo and lack integration or mapping between them.
-
-4.  Architecture Overview
-
-   The LLM model with MCP support and its ability to comprehend diverse
-   complex requirements and deliver corresponding functionalities, is
-   well-suited for large scale multi-vendor network management
-   environments, effectively addressing the aforementioned challenges in
-   Section 3.  Therefore, we have introduced the MCP protocol in the
-   network management environments for building an intelligent network
-   management and control platform.
+   # Interworking with the Network Management protocol and YANG data
+   models # MCP Usage Examples The LLM model with MCP support and its
+   ability to comprehend diverse complex requirements and deliver
+   corresponding functionalities, is well-suited for large scale multi-
+   vendor network management environments, effectively addressing the
+   aforementioned challenges in Section 3.  Therefore, we have
+   introduced the MCP protocol in the network management environments
+   for building an intelligent network management and control platform.
 
 4.1.  Encapsulating Device Operations into MCP Tools
 
@@ -721,9 +682,7 @@ async def check_status(device_ip: str, metrics: list):
    details.  Users must verify each LLM operation to prevent unintended
    hazardous actions.
 
-9.  References
-
-9.1.  Normative References
+9.  Normative References
 
    [RFC2576]  Frye, R., Levi, D., Routhier, S., and B. Wijnen,
               "Coexistence between Version 1, Version 2, and Version 3
@@ -739,23 +698,6 @@ async def check_status(device_ip: str, metrics: list):
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/rfc/rfc8040>.
-
-9.2.  Informative References
-
-   [I-D.kumar-rtgwg-grpc-protocol]
-              Kumar, A., Kolhe, J., Ghemawat, S., and L. Ryan, "gRPC
-              Protocol", Work in Progress, Internet-Draft, draft-kumar-
-              rtgwg-grpc-protocol-00, 8 July 2016,
-              <https://datatracker.ietf.org/doc/html/draft-kumar-rtgwg-
-              grpc-protocol-00>.
-
-   [I-D.openconfig-rtgwg-gnmi-spec]
-              Shakir, R., Shaikh, A., Borman, P., Hines, M., Lebsack,
-              C., and C. Morrow, "gRPC Network Management Interface
-              (gNMI)", Work in Progress, Internet-Draft, draft-
-              openconfig-rtgwg-gnmi-spec-01, 5 March 2018,
-              <https://datatracker.ietf.org/doc/html/draft-openconfig-
-              rtgwg-gnmi-spec-01>.
 
 Authors' Addresses
 

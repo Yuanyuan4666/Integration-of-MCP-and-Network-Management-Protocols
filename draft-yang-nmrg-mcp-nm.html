@@ -1173,21 +1173,10 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-overview-of-key-challenges-" class="internal xref">Overview of key challenges for the network management</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-inconsistent-yang-model-sup" class="internal xref">Inconsistent YANG Model Support</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-partial-or-non-standard-net" class="internal xref">Partial or Non-Standard Network Management Protocols Implementations</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-yang-models-lack-integratio" class="internal xref">YANG Models Lack Integration with Open APIs</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-the-values-of-coupling-mcp-" class="internal xref">The values of coupling MCP with the network management</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-architecture-overview" class="internal xref">Architecture Overview</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-mcp-architecture-design-for" class="internal xref">MCP architecture Design for Network Management</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-encapsulating-device-operat" class="internal xref">Encapsulating Device Operations into MCP Tools</a></p>
@@ -1232,15 +1221,7 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
             <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
@@ -1343,60 +1324,24 @@ definitions<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="ops-radiu">
+<div id="value-mcp-nm">
 <section id="section-3">
-      <h2 id="name-overview-of-key-challenges-">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-overview-of-key-challenges-" class="section-name selfRef">Overview of key challenges for the network management</a>
+      <h2 id="name-the-values-of-coupling-mcp-">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-the-values-of-coupling-mcp-" class="section-name selfRef">The values of coupling MCP with the network management</a>
       </h2>
-<p id="section-3-1">In large scale network management environment, a large number of devices from different vendors need to be uniformly managed, which can lead to the following issues or challenges:<a href="#section-3-1" class="pilcrow">¶</a></p>
-<div id="inconsistent-yang-model-support">
-<section id="section-3.1">
-        <h3 id="name-inconsistent-yang-model-sup">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-inconsistent-yang-model-sup" class="section-name selfRef">Inconsistent YANG Model Support</a>
-        </h3>
-<p id="section-3.1-1">Different vendors implement different YANG models (standard or proprietary), leading to:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.1-2.1">
-            <p id="section-3.1-2.1.1">Lack of uniform data structures for configuration/state retrieval.<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.1-2.2">
-            <p id="section-3.1-2.2.1">Requirement for vendor-specific adaptations in automation scripts.<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-3.1-3">Also IETF standard device models has slow adoption. Similar device models
-are defined in Openconfig or other SDOs, therefore the current YANG device
-models ecosystem is fragmented.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3-1"># MCP for Network Exposure
+# MCP Server Discovery
+# Deployment Consideration in Network Management<a href="#section-3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="partial-or-non-standard-network-management-protocols-implementations">
-<section id="section-3.2">
-        <h3 id="name-partial-or-non-standard-net">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-partial-or-non-standard-net" class="section-name selfRef">Partial or Non-Standard Network Management Protocols Implementations</a>
-        </h3>
-<p id="section-3.2-1">Some vendors only partially support standard Network management protocols, and proprietary extensions may break interoperability.
-Other vendors might choose non-stanard network management protocol or telemetry protocol such as gnmi <span>[<a href="#I-D.openconfig-rtgwg-gnmi-spec" class="cite xref">I-D.openconfig-rtgwg-gnmi-spec</a>]</span>,
-grpc <span>[<a href="#I-D.kumar-rtgwg-grpc-protocol" class="cite xref">I-D.kumar-rtgwg-grpc-protocol</a>]</span>. A significant number of network operators continue to rely on legacy network management mechanisms
-such as SNMP.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="yang-models-lack-integration-with-open-apis">
-<section id="section-3.3">
-        <h3 id="name-yang-models-lack-integratio">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-yang-models-lack-integratio" class="section-name selfRef">YANG Models Lack Integration with Open APIs</a>
-        </h3>
-<p id="section-3.3-1">Today, open API has been widely adopted by the northbound interface of OSS/BSS or Network orchestrators while YANG data models have
-been widely adopted by the northbound interface of the network controller/orchestrator or the southbound interface of the network controller/orchestrator.
-However Open API ecosystem and YANG model ecosystem are both built as silo and lack integration or mapping between them.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
-<div id="architecture-overview">
+<div id="mcp-architecture-design-for-network-management">
 <section id="section-4">
-      <h2 id="name-architecture-overview">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-architecture-overview" class="section-name selfRef">Architecture Overview</a>
+      <h2 id="name-mcp-architecture-design-for">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-mcp-architecture-design-for" class="section-name selfRef">MCP architecture Design for Network Management</a>
       </h2>
-<p id="section-4-1">The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for large scale multi-vendor network management environments, effectively addressing the aforementioned challenges in <a href="#ops-radiu" class="auto internal xref">Section 3</a>. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1"># Interworking with the Network Management protocol and YANG data models
+# MCP Usage Examples
+The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for large scale multi-vendor network management environments, effectively addressing the aforementioned challenges in <a href="#value-mcp-nm" class="auto internal xref">Section 3</a>. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="encapsulating-device-operations-into-mcp-tools">
 <section id="section-4.1">
         <h3 id="name-encapsulating-device-operat">
@@ -2022,49 +1967,25 @@ network to form a unified control mechanism.<a href="#section-6.2-1.2.2.3.2.1.1"
 <p id="section-8-3">For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in the details. Users must verify each LLM operation to prevent unintended hazardous actions.<a href="#section-8-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="sec-combined-references">
-<section id="section-9">
-      <h2 id="name-references">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
-      </h2>
 <div id="sec-normative-references">
-<section id="section-9.1">
-        <h3 id="name-normative-references">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-        </h3>
+<section id="section-9">
+      <h2 id="name-normative-references">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+      </h2>
 <dl class="references">
 <dt id="RFC2576">[RFC2576]</dt>
-        <dd>
+      <dd>
 <span class="refAuthor">Frye, R.</span>, <span class="refAuthor">Levi, D.</span>, <span class="refAuthor">Routhier, S.</span>, and <span class="refAuthor">B. Wijnen</span>, <span class="refTitle">"Coexistence between Version 1, Version 2, and Version 3 of the Internet-standard Network Management Framework"</span>, <span class="seriesInfo">RFC 2576</span>, <span class="seriesInfo">DOI 10.17487/RFC2576</span>, <time datetime="2000-03" class="refDate">March 2000</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2576">https://www.rfc-editor.org/rfc/rfc2576</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6241">[RFC6241]</dt>
-        <dd>
+      <dd>
 <span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8040">[RFC8040]</dt>
-      <dd>
+    <dd>
 <span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
-</section>
-</div>
-<div id="sec-informative-references">
-<section id="section-9.2">
-        <h3 id="name-informative-references">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
-        </h3>
-<dl class="references">
-<dt id="I-D.kumar-rtgwg-grpc-protocol">[I-D.kumar-rtgwg-grpc-protocol]</dt>
-        <dd>
-<span class="refAuthor">Kumar, A.</span>, <span class="refAuthor">Kolhe, J.</span>, <span class="refAuthor">Ghemawat, S.</span>, and <span class="refAuthor">L. Ryan</span>, <span class="refTitle">"gRPC Protocol"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-kumar-rtgwg-grpc-protocol-00</span>, <time datetime="2016-07-08" class="refDate">8 July 2016</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-kumar-rtgwg-grpc-protocol-00">https://datatracker.ietf.org/doc/html/draft-kumar-rtgwg-grpc-protocol-00</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.openconfig-rtgwg-gnmi-spec">[I-D.openconfig-rtgwg-gnmi-spec]</dt>
-      <dd>
-<span class="refAuthor">Shakir, R.</span>, <span class="refAuthor">Shaikh, A.</span>, <span class="refAuthor">Borman, P.</span>, <span class="refAuthor">Hines, M.</span>, <span class="refAuthor">Lebsack, C.</span>, and <span class="refAuthor">C. Morrow</span>, <span class="refTitle">"gRPC Network Management Interface (gNMI)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-openconfig-rtgwg-gnmi-spec-01</span>, <time datetime="2018-03-05" class="refDate">5 March 2018</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-openconfig-rtgwg-gnmi-spec-01">https://datatracker.ietf.org/doc/html/draft-openconfig-rtgwg-gnmi-spec-01</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-</dl>
-</section>
-</div>
 </section>
 </div>
 <div id="authors-addresses">
