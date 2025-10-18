@@ -11,6 +11,8 @@ Expires: 21 April 2026                                          D. Lopez
                                                         Deutsche Telekom
                                                            L. Tailhardat
                                                          Orange Research
+                                                                 G. Zeng
+                                                                  Huawei
                                                          18 October 2025
 
 
@@ -86,7 +88,6 @@ Table of Contents
    9.  References
      9.1.  Normative References
      9.2.  Informative References
-   Contributors
    Authors' Addresses
 
 1.  Introduction
@@ -756,14 +757,6 @@ async def check_status(device_ip: str, metrics: list):
               <https://datatracker.ietf.org/doc/html/draft-openconfig-
               rtgwg-gnmi-spec-01>.
 
-Contributors
-
-   Guanming Zeng
-   Huawei
-   China
-   Email: zengguanming@huawei.com
-
-
 Authors' Addresses
 
    Yuanyuan Yang
@@ -794,3 +787,9 @@ Authors' Addresses
    Orange Research
    France
    Email: lionel.tailhardat@orange.com
+
+
+   Guanming Zeng
+   Huawei
+   China
+   Email: zengguanming@huawei.com
