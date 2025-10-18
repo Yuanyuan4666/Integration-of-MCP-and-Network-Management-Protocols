@@ -115,6 +115,53 @@ The following terms are used throughout this document:
 - **SNMP**: A Simple Network Management Protocol {{!RFC2576}}
 
 # The values of coupling MCP with the network management {#value-mcp-nm}
+
+~~~~
+
+ +---------------+        +---------------+
+ |               |        |               |
+ |  3rd Party    |        |  3rd-party
+ |  AI Agent     |        | Tools/Contents|
+ +-----/---\-----+        +----/---\------+
+       |   |                   |   |
+       |   | ----------------- |   |
+      ///////                 \\\\\\\
+    ||                               ||
+  ||                                   ||
+   |          MCP Eco-system           |
+    ||                               ||
+      \\\\\\\                 ///////
+       /   \ -----------------  /   \
+       |   |                    |   |
+ +---------------+       +----- +---+----+
+ |               |       |               |
+ |  Network MCP  |       |  In-Network   |
+ |   Server      |       |     Service   |
+(network exposure)    (e.g.,Digital assistant)
+ +---------------+       +---------------+
+        /   \                   /   \
+        |   |                   |   |
+ +------+---+-------------------+---+----+
+ |                                       |
+ |       Network Intelligence            |
+ |                                       |
+ |  Agentic + MCP Architecture Paradigm  |
+ |                                       |
+ +---------------------------------------+
+
+~~~~
+There are 3 values for MCP coupling with the network management
+1) Network MCP Server support
+• Exposing network capabilities as MCP Servers for 3rd-party AI Agents & applications
+
+3) In Network Service
+• Empowering network services by leveraging MCP ecosystem tools & contents
+• Network service as a unified interface to various and rich capabilities for network users
+
+4) Network Management Intelligence
+• Making network architecture really agile and friendly for innovation
+• Decoupling network management functions into network agents and network tools
+
 # MCP for Network Exposure
 # MCP Server Discovery
 # Deployment Consideration in Network Management
