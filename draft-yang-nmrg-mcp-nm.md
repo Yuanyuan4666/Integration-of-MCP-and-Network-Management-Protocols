@@ -122,18 +122,18 @@ The following terms are used throughout this document:
  |               |        |               |
  |  3rd Party    |        |  3rd-party
  |  AI Agent     |        | Tools/Contents|
- +-----/---\-----+        +----/---\------+
+ +-----/---\-----+        +---------------+
        |   |                   |   |
-       |   | ----------------- |   |
+       |   | ----------------- \   /
       ///////                 \\\\\\\
     ||                               ||
   ||                                   ||
    |          MCP Eco-system           |
     ||                               ||
       \\\\\\\                 ///////
-       /   \ -----------------  /   \
+       /   \ -----------------  |   |
        |   |                    |   |
- +---------------+       +----- +---+----+
+ +---------------+       +----- \---/----+
  |               |       |               |
  |  Network MCP  |       |  In-Network   |
  |   Server      |       |     Service   |
@@ -163,6 +163,34 @@ There are 3 values for MCP coupling with the network management
   * Decoupling network management functions into network agents and network tools
 
 # MCP for Network Exposure
+
+~~~~
+
+       3rd Party
+  +------------------+
+  |     Consumer     |
+  |   +------------+ |
+  |   |            | |       4. Authoriz and Consume
+  |   | MCP Client <-+------------------------+
+  +---+-+-------^--+-+                        |
+    2.Discover  |3. List of                   |
+    and Authz   | Available APIs              |
+        |       |                             |
+        |       |                             |
+  +---+-V-------+--+------------+         +---V--------+
+  |   | MCP Server |            |         |Tools       |
+  |   +------------+            |1.Publish|+----------+|
+  |                             <---------+|Simulation||
+  |   Network Exposure Agent    |         ||  API     ||
+  |   /Network Controller       |4. Authz |+----------+|
+  | +---+   +---+ +---+         <--------->            |
+  | |NF1|   |NF2| |NF3| ...     |         |+----------+|
+  | +---+   +---+ +---+         |  Heart  ||Other APIs||
+  |                             <--------->+----------+|
+  +-----------------------------+  Beat   +------------+
+
+~~~~
+
 # MCP Server Discovery
 # Deployment Consideration in Network Management
 
