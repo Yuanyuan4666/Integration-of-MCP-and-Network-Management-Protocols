@@ -274,6 +274,119 @@ There are 3 values for MCP coupling with the network management
 
 # Deployment Consideration in Network Management
 
+## MCP Communication using IPC
+
+~~~~
+
+           +----------------------------+
+           |                            |
+           |        OSS/BSS             |
+           |                            |
+           +----------------------------+
+
+
+             +--------------------------+
+             |Network Controller (Network AI Agent)
+             |                          |
+             |  +------+Natrual +----+  |
+             |  |MCP   |Language|LLM |  |
+             |  |Client|------- |    |  |
+             |  +---+--+Command +----+  |
+             |      |                   |
+             |  +---+--+                |
+             |  |MCP   |                |
+             |  |Server|                |
+             |  +------+                |
+             +------------+-------------+
+                          |NETCONF/Telemetry/CLI
+     |-----------------+--+------------+
+ +---+-----+      +----+----+     +----+----+
+ | Network |      | Network |     |Network  |
+ | Device  |      | Device  |     |Device   |
+ +---------+      +---------+     +---------+
+
+~~~~
+
+## The OSS and the Network Controller Communication using MCP
+
+~~~~
+
+            +--------------------------+
+            |                          |
+            |      OSS/BSS             |
+            |                          |
+            |  +------+Natrual +----+- |
+            |  |MCP   |Language|LLM |  |
+            |  |Client|------- |    |  |
+            |  +---+--+Command +----+  |
+            +------+-------------------+
+                   |
+            |      |
+            +------+-------------------+
+            |Network Controller (Network AI Agent)
+            |                          |
+            |      |                   |
+            |  +---+--+                |
+            |  |MCP   |                |
+            |  |Server|                |
+            |  +------+                |
+            +------------+-------------+
+                         |NETCONF/Telemetry/CLI
+    |-----------------+--+------------+
++---+-----+      +----+----+     +----+----+
+| Network |      | Network |     |Network  |
+| Device  |      | Device  |     |Device   |
++---------+      +---------+     +---------+
+
+~~~~
+
+## The Network Controller and the Network Device Communication using MCP
+
+~~~~
+
+                +--------------------------+
+                |Network Controller (Network AI Agent)
+                |                          |
+                |                          |
+                |  +------+Natrual +----+  |
+                |  |MCP   |Language|LLM |  |
+                |  |Client|------- |    |  |
+                |  +---+--+Command +----+  |
+                +------------+-------------+
+                             |NETCONF/Telemetry/CLI
+        |-----------------+--+------------+
+
+    +---+-----+      +----+----+     +----+----+
+    |  MCP    |      |  MCP    |     | MCP     |
+    | Server1 |      | Server2 |     |Server3  |
+    +---------+      +---------+     +---------+
+    Network Device    Network Device  Network Device
+
+~~~~
+
+## The Network Gateway and the Network Device Communication using MCP
+
+~~~~
+
+               +--------------------------+
+               |Network Gateway    (Network AI Agent)
+               |                          |
+               |                          |
+               |  +------+Natrual +----+  |
+               |  |MCP   |Language|LLM |  |
+               |  |Client|------- |    |  |
+               |  +---+--+Command +----+  |
+               +------------+-------------+
+                            |NETCONF/Telemetry/CLI
+       |-----------------+--+------------+
+
+   +---+-----+      +----+----+     +----+----+
+   |  MCP    |      |  MCP    |     | MCP     |
+   | Server1 |      | Server2 |     |Server3  |
+   +---------+      +---------+     +---------+
+   Network Device    Network Device  Network Device
+
+~~~~
 # MCP architecture Design for Network Management
 # Interworking with the Network Management protocol and YANG data models
 # MCP Usage Examples
