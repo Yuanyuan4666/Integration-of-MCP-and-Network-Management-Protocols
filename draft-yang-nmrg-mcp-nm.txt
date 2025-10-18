@@ -70,20 +70,21 @@ Table of Contents
    3.  The values of coupling MCP with the network management
    4.  MCP for Network Exposure
    5.  MCP Server Discovery
-   6.  MCP architecture Design for Network Management
-     6.1.  Encapsulating Device Operations into MCP Tools
-     6.2.  LLM for Intent-to-Tool-Request Translation
-     6.3.  Closed-Loop Automation Execution Workflow
-     6.4.  Example
-   7.  Deployment Considerations
-     7.1.  MCP hosted within the Network Controller
-     7.2.  MCP Server Hosted Within the Network Device
-   8.  Impact of integrating MCP on Network Management
-     8.1.  MCP Hosted Within the Network Controller
-     8.2.  MCP Server Hosted within the Network Device
-   9.  IANA Considerations
-   10. Security Considerations
-   11. Normative References
+   6.  Deployment Consideration in Network Management
+   7.  MCP architecture Design for Network Management
+     7.1.  Encapsulating Device Operations into MCP Tools
+     7.2.  LLM for Intent-to-Tool-Request Translation
+     7.3.  Closed-Loop Automation Execution Workflow
+     7.4.  Example
+   8.  Deployment Considerations
+     8.1.  MCP hosted within the Network Controller
+     8.2.  MCP Server Hosted Within the Network Device
+   9.  Impact of integrating MCP on Network Management
+     9.1.  MCP Hosted Within the Network Controller
+     9.2.  MCP Server Hosted within the Network Device
+   10. IANA Considerations
+   11. Security Considerations
+   12. Normative References
    Authors' Addresses
 
 1.  Introduction
@@ -232,11 +233,78 @@ Table of Contents
      |                             <--------->+----------+|
      +-----------------------------+  Beat   +------------+
 
+                                  +---------------+
+                                  |               |
+                                  | +-----------+ |
+                                  | | MCP Server| |
+                                  +-+-----^-----+-+
+                                          |2. Consume external sources
+                                          |
+                             +------+-----V-----+-----------+
+                             |      | MCP Client|0.Preconfig MCP
+     +--------------+        |      +-----------+  Server Address
+     |     IETF     |1.MCP Service Request                  |
+     |   Network    +-------->                              |
+     |  Management  |2.MCP Service Response                 |
+     |  AI Agents   <--------+                              |
+     +--------------+        |      Network Exposure Agent  |
+                             |      /Network Controller     |
+                             |                              |
+                             +------------------------------+
+
 5.  MCP Server Discovery
 
-   # Deployment Consideration in Network Management
+             +------------+ 2.Discovery ---------------+
+             | Agents     +-----------+      MCP       |
+             |(MCP Client)+-----------+   Respository  |
+             +-+----------+ 3. Authz  +--------^-------+
+               |4. Consume                     |1.Registration
+               | +-------------+---------------+-------+-
+    +----------V-+       +-----+-------+        +------+------+
+    |MCP Server 1|       |MCP Server 2 |        | MCP Server 3|
+    +------------+       +-------------+        +-------------+
+       -------                -----                  -----
+    ///FM  PM \\\          ///     \\\            ///     \\\
+   |             |       ||  Memory   |         ||           |
+   | Routing  ACL|       |             |        |    Templates|
+    \\\Policy ///        ||  Database |         ||           |
+       -------             \\\     ///            \\\     ///
+                              -----                  -----
 
-6.  MCP architecture Design for Network Management
+  +------------------+    +----------+   +-------+     +------+
+  |Network Management|    |          |   |       |     |      |
+  |    AI Agent      |    |  MCP     |   | MCP   |     |Tools |
+  |   (MCP Client)   |    |Repository|   |Servers|     |      |
+  +---------+--------+    +----+-----+   +---+---+     +---+--+
+            |                  |             | 0. Sync the info of tools
+            |                  |             |<------------+
+            |                  |1. Registration            |
+            |                  |<------------+             |
+            |                  |             |             |
+            |    +-------------+----------+  |             |
+            |    |       Repository       |  |             |
+            |    |MCP Server1:ID 1, Capability, Tools      |
+            |    |                        |  |             |
+            |    |MCP Server2:ID 2, Capability, Tools      |
+            |    +------------- ----------+  |             |
+            | 2.1 Discovery    |             |             |
+            +------------------>             |             |
+            |           +------+------+      |             |
+            |           | Search for  |      |             |
+            |           | Proper MCP  |      |             |
+            |           | Server      |      |             |
+                        +-------------+      |             |
+            | 2.2 Address of MCP Server      |             |
+            <------------------+
+               3. oAuth Authz
+            <------------------>             |             |
+            |  4. Consume Tools/Resources/Prompts          |
+            +------------------+-------------|-------------|
+                               |             |             |
+
+6.  Deployment Consideration in Network Management
+
+7.  MCP architecture Design for Network Management
 
    # Interworking with the Network Management protocol and YANG data
    models # MCP Usage Examples The LLM model with MCP support and its
@@ -247,7 +315,7 @@ Table of Contents
    introduced the MCP protocol in the network management environments
    for building an intelligent network management and control platform.
 
-6.1.  Encapsulating Device Operations into MCP Tools
+7.1.  Encapsulating Device Operations into MCP Tools
 
    *  Objective: Standardize device operations into modular, reusable
       tools.
@@ -267,7 +335,7 @@ Table of Contents
 
       -  Enabling the plug-and-play integration of new device types.
 
-6.2.  LLM for Intent-to-Tool-Request Translation
+7.2.  LLM for Intent-to-Tool-Request Translation
 
    *  Objective: Allow AI models (such as Claude) to understand natural
       language commands and trigger operations.
@@ -302,7 +370,7 @@ Table of Contents
          format, then return this request to the client, enabling the
          client to properly parse the request.
 
-6.3.  Closed-Loop Automation Execution Workflow
+7.3.  Closed-Loop Automation Execution Workflow
 
    *  Objective: Realize the closed loop of "voice/text commands →
       automatic execution".
@@ -340,7 +408,7 @@ Table of Contents
 
       -  Full traceability of LLM decisions and tool executions.
 
-6.4.  Example
+7.4.  Example
 
    Take multi-vendor network management as an example, the MCP server is
    deployed locally on the network controller, and the tools are
@@ -491,7 +559,7 @@ async def check_status(device_ip: str, metrics: list):
   "192.168.10.2": "Error: no response from the device",
 }
 
-7.  Deployment Considerations
+8.  Deployment Considerations
 
    This section describes MCP deployment requirements for network
    management environments, followed by implementation scenarios.  Key
@@ -525,7 +593,7 @@ async def check_status(device_ip: str, metrics: list):
    remote).  The following subsections detail these deployment
    scenarios.
 
-7.1.  MCP hosted within the Network Controller
+8.1.  MCP hosted within the Network Controller
 
                      +--------------+
                      |     User     |
@@ -567,7 +635,7 @@ async def check_status(device_ip: str, metrics: list):
    network.  - Scalability: Cloud-native scaling accommodates dynamic
    tool registry updates and high request volumes.
 
-7.2.  MCP Server Hosted Within the Network Device
+8.2.  MCP Server Hosted Within the Network Device
 
                       +--------------+
                       |     User     |
@@ -606,7 +674,7 @@ async def check_status(device_ip: str, metrics: list):
    private APIs. - Key Characteristics: - Low Latency: Direct access to
    network devices minimizes tool execution delays
 
-8.  Impact of integrating MCP on Network Management
+9.  Impact of integrating MCP on Network Management
 
    +------------+-----------------------------+-----------------------+
    |            |   MCP Hosted Within         |   MCP Server Hosted   |
@@ -639,7 +707,7 @@ async def check_status(device_ip: str, metrics: list):
    |            |  conversation               |                       |
    -------------+-----------------------------+-----------------------+
 
-8.1.  MCP Hosted Within the Network Controller
+9.1.  MCP Hosted Within the Network Controller
 
    *  Pro
 
@@ -687,7 +755,7 @@ async def check_status(device_ip: str, metrics: list):
          o  It is necessary to deal with compatibility and consistency
             issues between different protocols.
 
-8.2.  MCP Server Hosted within the Network Device
+9.2.  MCP Server Hosted within the Network Device
 
    *  Pro
 
@@ -738,11 +806,11 @@ async def check_status(device_ip: str, metrics: list):
             configuration.  This makes it impossible for the network to
             form a unified control mechanism.
 
-9.  IANA Considerations
+10.  IANA Considerations
 
    This document has no IANA actions.
 
-10.  Security Considerations
+11.  Security Considerations
 
    The MCP protocol needs to consider scenarios where either the client
    or server encounters issues, such as crashes.  If one or both parties
@@ -761,7 +829,7 @@ async def check_status(device_ip: str, metrics: list):
    details.  Users must verify each LLM operation to prevent unintended
    hazardous actions.
 
-11.  Normative References
+12.  Normative References
 
    [RFC2576]  Frye, R., Levi, D., Routhier, S., and B. Wijnen,
               "Coexistence between Version 1, Version 2, and Version 3
