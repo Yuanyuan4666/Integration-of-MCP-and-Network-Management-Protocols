@@ -40,12 +40,11 @@ author:
   organization: Orange Research
   country: France
   email: lionel.tailhardat@orange.com
-
-contributor:
- -  fullname: Guanming Zeng
-    organization: Huawei
-    country: China
-    email: zengguanming@huawei.com
+ -
+   fullname: Guanming Zeng
+   organization: Huawei
+   country: China
+   email: zengguanming@huawei.com
 
 normative:
 
