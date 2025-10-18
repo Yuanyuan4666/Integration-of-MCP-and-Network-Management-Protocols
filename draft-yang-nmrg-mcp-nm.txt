@@ -71,20 +71,25 @@ Table of Contents
    4.  MCP for Network Exposure
    5.  MCP Server Discovery
    6.  Deployment Consideration in Network Management
-   7.  MCP architecture Design for Network Management
-     7.1.  Encapsulating Device Operations into MCP Tools
-     7.2.  LLM for Intent-to-Tool-Request Translation
-     7.3.  Closed-Loop Automation Execution Workflow
-     7.4.  Example
-   8.  Deployment Considerations
-     8.1.  MCP hosted within the Network Controller
-     8.2.  MCP Server Hosted Within the Network Device
-   9.  Impact of integrating MCP on Network Management
-     9.1.  MCP Hosted Within the Network Controller
-     9.2.  MCP Server Hosted within the Network Device
-   10. IANA Considerations
-   11. Security Considerations
-   12. Normative References
+     6.1.  MCP Communication using IPC
+     6.2.  The OSS and the Network Controller Communication using MCP
+     6.3.  The Network Controller and the Network Device Communication
+           using MCP
+     6.4.  The Network Gateway and the Network Device Communication
+           using MCP
+     6.5.  Encapsulating Device Operations into MCP Tools
+     6.6.  LLM for Intent-to-Tool-Request Translation
+     6.7.  Closed-Loop Automation Execution Workflow
+     6.8.  Example
+   7.  Deployment Considerations
+     7.1.  MCP hosted within the Network Controller
+     7.2.  MCP Server Hosted Within the Network Device
+   8.  Impact of integrating MCP on Network Management
+     8.1.  MCP Hosted Within the Network Controller
+     8.2.  MCP Server Hosted within the Network Device
+   9.  IANA Considerations
+   10. Security Considerations
+   11. Normative References
    Authors' Addresses
 
 1.  Introduction
@@ -304,18 +309,116 @@ Table of Contents
 
 6.  Deployment Consideration in Network Management
 
-7.  MCP architecture Design for Network Management
+6.1.  MCP Communication using IPC
 
-   # Interworking with the Network Management protocol and YANG data
-   models # MCP Usage Examples The LLM model with MCP support and its
-   ability to comprehend diverse complex requirements and deliver
-   corresponding functionalities, is well-suited for large scale multi-
-   vendor network management environments, effectively addressing the
-   aforementioned challenges in Section 3.  Therefore, we have
-   introduced the MCP protocol in the network management environments
-   for building an intelligent network management and control platform.
+              +----------------------------+
+              |                            |
+              |        OSS/BSS             |
+              |                            |
+              +----------------------------+
 
-7.1.  Encapsulating Device Operations into MCP Tools
+
+                +--------------------------+
+                |Network Controller (Network AI Agent)
+                |                          |
+                |  +------+Natrual +----+  |
+                |  |MCP   |Language|LLM |  |
+                |  |Client|------- |    |  |
+                |  +---+--+Command +----+  |
+                |      |                   |
+                |  +---+--+                |
+                |  |MCP   |                |
+                |  |Server|                |
+                |  +------+                |
+                +------------+-------------+
+                             |NETCONF/Telemetry/CLI
+        |-----------------+--+------------+
+    +---+-----+      +----+----+     +----+----+
+    | Network |      | Network |     |Network  |
+    | Device  |      | Device  |     |Device   |
+    +---------+      +---------+     +---------+
+
+6.2.  The OSS and the Network Controller Communication using MCP
+
+               +--------------------------+
+               |                          |
+               |      OSS/BSS             |
+               |                          |
+               |  +------+Natrual +----+- |
+               |  |MCP   |Language|LLM |  |
+               |  |Client|------- |    |  |
+               |  +---+--+Command +----+  |
+               +------+-------------------+
+                      |
+               |      |
+               +------+-------------------+
+               |Network Controller (Network AI Agent)
+               |                          |
+               |      |                   |
+               |  +---+--+                |
+               |  |MCP   |                |
+               |  |Server|                |
+               |  +------+                |
+               +------------+-------------+
+                            |NETCONF/Telemetry/CLI
+       |-----------------+--+------------+
+   +---+-----+      +----+----+     +----+----+
+   | Network |      | Network |     |Network  |
+   | Device  |      | Device  |     |Device   |
+   +---------+      +---------+     +---------+
+
+6.3.  The Network Controller and the Network Device Communication using
+      MCP
+
+                   +--------------------------+
+                   |Network Controller (Network AI Agent)
+                   |                          |
+                   |                          |
+                   |  +------+Natrual +----+  |
+                   |  |MCP   |Language|LLM |  |
+                   |  |Client|------- |    |  |
+                   |  +---+--+Command +----+  |
+                   +------------+-------------+
+                                |NETCONF/Telemetry/CLI
+           |-----------------+--+------------+
+
+       +---+-----+      +----+----+     +----+----+
+       |  MCP    |      |  MCP    |     | MCP     |
+       | Server1 |      | Server2 |     |Server3  |
+       +---------+      +---------+     +---------+
+       Network Device    Network Device  Network Device
+
+6.4.  The Network Gateway and the Network Device Communication using MCP
+
+                  +--------------------------+
+                  |Network Gateway    (Network AI Agent)
+                  |                          |
+                  |                          |
+                  |  +------+Natrual +----+  |
+                  |  |MCP   |Language|LLM |  |
+                  |  |Client|------- |    |  |
+                  |  +---+--+Command +----+  |
+                  +------------+-------------+
+                               |NETCONF/Telemetry/CLI
+          |-----------------+--+------------+
+
+      +---+-----+      +----+----+     +----+----+
+      |  MCP    |      |  MCP    |     | MCP     |
+      | Server1 |      | Server2 |     |Server3  |
+      +---------+      +---------+     +---------+
+      Network Device    Network Device  Network Device
+
+   # MCP architecture Design for Network Management # Interworking with
+   the Network Management protocol and YANG data models # MCP Usage
+   Examples The LLM model with MCP support and its ability to comprehend
+   diverse complex requirements and deliver corresponding
+   functionalities, is well-suited for large scale multi-vendor network
+   management environments, effectively addressing the aforementioned
+   challenges in Section 3.  Therefore, we have introduced the MCP
+   protocol in the network management environments for building an
+   intelligent network management and control platform.
+
+6.5.  Encapsulating Device Operations into MCP Tools
 
    *  Objective: Standardize device operations into modular, reusable
       tools.
@@ -335,7 +438,7 @@ Table of Contents
 
       -  Enabling the plug-and-play integration of new device types.
 
-7.2.  LLM for Intent-to-Tool-Request Translation
+6.6.  LLM for Intent-to-Tool-Request Translation
 
    *  Objective: Allow AI models (such as Claude) to understand natural
       language commands and trigger operations.
@@ -370,7 +473,7 @@ Table of Contents
          format, then return this request to the client, enabling the
          client to properly parse the request.
 
-7.3.  Closed-Loop Automation Execution Workflow
+6.7.  Closed-Loop Automation Execution Workflow
 
    *  Objective: Realize the closed loop of "voice/text commands →
       automatic execution".
@@ -408,7 +511,7 @@ Table of Contents
 
       -  Full traceability of LLM decisions and tool executions.
 
-7.4.  Example
+6.8.  Example
 
    Take multi-vendor network management as an example, the MCP server is
    deployed locally on the network controller, and the tools are
@@ -559,7 +662,7 @@ async def check_status(device_ip: str, metrics: list):
   "192.168.10.2": "Error: no response from the device",
 }
 
-8.  Deployment Considerations
+7.  Deployment Considerations
 
    This section describes MCP deployment requirements for network
    management environments, followed by implementation scenarios.  Key
@@ -593,7 +696,7 @@ async def check_status(device_ip: str, metrics: list):
    remote).  The following subsections detail these deployment
    scenarios.
 
-8.1.  MCP hosted within the Network Controller
+7.1.  MCP hosted within the Network Controller
 
                      +--------------+
                      |     User     |
@@ -635,7 +738,7 @@ async def check_status(device_ip: str, metrics: list):
    network.  - Scalability: Cloud-native scaling accommodates dynamic
    tool registry updates and high request volumes.
 
-8.2.  MCP Server Hosted Within the Network Device
+7.2.  MCP Server Hosted Within the Network Device
 
                       +--------------+
                       |     User     |
@@ -674,7 +777,7 @@ async def check_status(device_ip: str, metrics: list):
    private APIs. - Key Characteristics: - Low Latency: Direct access to
    network devices minimizes tool execution delays
 
-9.  Impact of integrating MCP on Network Management
+8.  Impact of integrating MCP on Network Management
 
    +------------+-----------------------------+-----------------------+
    |            |   MCP Hosted Within         |   MCP Server Hosted   |
@@ -707,7 +810,7 @@ async def check_status(device_ip: str, metrics: list):
    |            |  conversation               |                       |
    -------------+-----------------------------+-----------------------+
 
-9.1.  MCP Hosted Within the Network Controller
+8.1.  MCP Hosted Within the Network Controller
 
    *  Pro
 
@@ -755,7 +858,7 @@ async def check_status(device_ip: str, metrics: list):
          o  It is necessary to deal with compatibility and consistency
             issues between different protocols.
 
-9.2.  MCP Server Hosted within the Network Device
+8.2.  MCP Server Hosted within the Network Device
 
    *  Pro
 
@@ -806,11 +909,11 @@ async def check_status(device_ip: str, metrics: list):
             configuration.  This makes it impossible for the network to
             form a unified control mechanism.
 
-10.  IANA Considerations
+9.  IANA Considerations
 
    This document has no IANA actions.
 
-11.  Security Considerations
+10.  Security Considerations
 
    The MCP protocol needs to consider scenarios where either the client
    or server encounters issues, such as crashes.  If one or both parties
@@ -829,7 +932,7 @@ async def check_status(device_ip: str, metrics: list):
    details.  Users must verify each LLM operation to prevent unintended
    hazardous actions.
 
-12.  Normative References
+11.  Normative References
 
    [RFC2576]  Frye, R., Levi, D., Routhier, S., and B. Wijnen,
               "Coexistence between Version 1, Version 2, and Version 3
