@@ -191,7 +191,87 @@ There are 3 values for MCP coupling with the network management
 
 ~~~~
 
+~~~~
+
+                               +---------------+
+                               |               |
+                               | +-----------+ |
+                               | | MCP Server| |
+                               +-+-----^-----+-+
+                                       |2. Consume external sources
+                                       |
+                          +------+-----V-----+-----------+
+                          |      | MCP Client|0.Preconfig MCP
+  +--------------+        |      +-----------+  Server Address
+  |     IETF     |1.MCP Service Request                  |
+  |   Network    +-------->                              |
+  |  Management  |2.MCP Service Response                 |
+  |  AI Agents   <--------+                              |
+  +--------------+        |      Network Exposure Agent  |
+                          |      /Network Controller     |
+                          |                              |
+                          +------------------------------+
+
+~~~~
+
 # MCP Server Discovery
+
+~~~~
+
+          +------------+ 2.Discovery ---------------+
+          | Agents     +-----------+      MCP       |
+          |(MCP Client)+-----------+   Respository  |
+          +-+----------+ 3. Authz  +--------^-------+
+            |4. Consume                     |1.Registration
+            | +-------------+---------------+-------+-
+ +----------V-+       +-----+-------+        +------+------+
+ |MCP Server 1|       |MCP Server 2 |        | MCP Server 3|
+ +------------+       +-------------+        +-------------+
+    -------                -----                  -----
+ ///FM  PM \\\          ///     \\\            ///     \\\
+|             |       ||  Memory   |         ||           |
+| Routing  ACL|       |             |        |    Templates|
+ \\\Policy ///        ||  Database |         ||           |
+    -------             \\\     ///            \\\     ///
+                           -----                  -----
+
+~~~~
+
+~~~~
+
+ +------------------+    +----------+   +-------+     +------+
+ |Network Management|    |          |   |       |     |      |
+ |    AI Agent      |    |  MCP     |   | MCP   |     |Tools |
+ |   (MCP Client)   |    |Repository|   |Servers|     |      |
+ +---------+--------+    +----+-----+   +---+---+     +---+--+
+           |                  |             | 0. Sync the info of tools
+           |                  |             |<------------+
+           |                  |1. Registration            |
+           |                  |<------------+             |
+           |                  |             |             |
+           |    +-------------+----------+  |             |
+           |    |       Repository       |  |             |
+           |    |MCP Server1:ID 1, Capability, Tools      |
+           |    |                        |  |             |
+           |    |MCP Server2:ID 2, Capability, Tools      |
+           |    +------------- ----------+  |             |
+           | 2.1 Discovery    |             |             |
+           +------------------>             |             |
+           |           +------+------+      |             |
+           |           | Search for  |      |             |
+           |           | Proper MCP  |      |             |
+           |           | Server      |      |             |
+                       +-------------+      |             |
+           | 2.2 Address of MCP Server      |             |
+           <------------------+
+              3. oAuth Authz
+           <------------------>             |             |
+           |  4. Consume Tools/Resources/Prompts          |
+           +------------------+-------------|-------------|
+                              |             |             |
+
+~~~~
+
 # Deployment Consideration in Network Management
 
 # MCP architecture Design for Network Management
