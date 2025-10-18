@@ -5,13 +5,13 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 3 April 2026                                           D. Lopez
+Expires: 21 April 2026                                          D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
                                                            L. Tailhardat
                                                          Orange Research
-                                                       30 September 2025
+                                                         18 October 2025
 
 
             Applicability of MCP for the Network Management
@@ -20,13 +20,13 @@ Expires: 3 April 2026                                           D. Lopez
 Abstract
 
    The application of MCP in the network management field is meant to
-   develop various rich AI driven network applications, realize intent
-   based networks management automation in the multi-vendor
-   heterogeneous network environment.  This document discusses the
-   applicability of MCP to the network management in the IP network that
-   utilizes IETF technologies.  It explores operational aspect, key
-   components, generic workflow and deployment scenarios.  The impact of
-   integrating MCP into the network management system is also discussed.
+   refactor network management operation and network capabilities as
+   tools and provide more agile and extensible architecture to expose
+   these AI integration capabilities.  This document discusses the
+   applicability of MCP to the network management plane in the IP
+   network that utilizes IETF technologies.It explores MCP for network
+   exposure, multiple MCP server discovery generic workflow and
+   deployment scenarios.
 
 Status of This Memo
 
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 April 2026.
+   This Internet-Draft will expire on 21 April 2026.
 
 Copyright Notice
 
@@ -91,19 +91,30 @@ Table of Contents
 
 1.  Introduction
 
-   The Model Context Protocol (MCP) provides a standardized way for LLMs
-   to access and utilize information from different sources, interact
-   with tools, making it easier to build AI applications that can
-   interact with external LLM and network management systems.
+   The Model Context Protocol (MCP) decouples LLMs from tools and
+   provides a standardized way for LLMs to access and utilize
+   information from different data sources and tools, making it easier
+   to build AI applications that can interact with external LLM models
+   and software tools and enable workflows automation.
 
-   MCP has been seen as rapid adoption internet technology.  The
-   application of MCP in the network management field is meant to
-   develop various rich AI driven network applications, realize intent
-   based networks management automation in the multi-vendor
-   heterogeneous network environment.  By establishing standard
+   MCP has seen rapid adoption across both startups and enterprises
+   since it announced in November 2024.  Key use cases include AI coding
+   assistants in IDEs, data analysis tools that can query databases, and
+   productivity tools that can interact with services like Slack or
+   Google Drive.
+
+   The application of MCP for the network management is meant to
+   refactor network management operation and network capabilities as
+   tools and provide more agile and extensible architecture to expose
+   these AI integration capabilities.
+
+   With integration of MCP into the network management system, it allow
+   you develop various rich AI driven network applications, realize
+   intent based networks management, automate workflows in the multi-
+   vendor heterogeneous network platform.  By establishing standard
    interfaces for tool encapsulation, intent translation, and closed-
-   loop execution within the network management system, MCP enables AI
-   Agents to have:
+   loop execution within the network management system, MCP enables the
+   network management system to have:
 
    *  Unified operation abstraction through normalized MCP tool
       definitions
@@ -114,9 +125,8 @@ Table of Contents
 
    This document discusses the applicability of MCP to the network
    management plane in the IP network that utilizes IETF technologies.
-   It explores operational aspect, key components, generic workflow and
-   deployment scenarios.  The impact of integrating MCP into the network
-   management system will also be discussed.
+   It explores MCP for network exposure, multiple MCP server discovery
+   generic workflow and deployment scenarios.
 
 2.  Terminology & Notation Conventions
 
