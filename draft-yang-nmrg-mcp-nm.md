@@ -498,6 +498,27 @@ device.
 ~~~~
 # MCP architecture Design for Network Management
 
+~~~~
+              ┌──────┐
+              │ User |
+              └───┬──┘
+                1 │ 9
+       ┌──────────│─────────────────┐
+       │ ┌────────┴───┐3,8    ┌───┐ │
+       │2│ MCP Client ├───────┤LLM│ |
+       │ └────────┬───┘4,7    └───┘ │
+       │          │                 |
+       │         5│6                │
+       │          │                 │
+       └──────────│─────────────────┘
+                  │
+       ┌──────────┴───┬─────────────┐
+  ┌────┴─────┐  ┌─────┴─────┐ ┌─────┴────┐
+  │MCP Server│  │ MCP Server│ │MCP Server│
+  └──────────┘  └───────────┘ └──────────┘
+
+~~~~
+
 ## Encapsulating Device Operations into MCP Tools
 
 - Objective: Standardize device operations into modular, reusable tools.
