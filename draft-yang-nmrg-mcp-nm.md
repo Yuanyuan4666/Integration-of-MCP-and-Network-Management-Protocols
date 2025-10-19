@@ -504,11 +504,11 @@ device.
              │ User │
              └───┬──┘                   Step b.LLM for Intent to tools
                1 │ 9                           request translation
-      ┌──────────│─────────────────┐
+      ┌──────────│─────────────────┐           (1,3,4,9)
       │ ┌────────┴───┐3,8    ┌───┐ │
       │2│ MCP Client ├───────┤LLM│ │
       │ └────────┬───┘4,7    └───┘ │   Step c.Close Loop Execution workflow
-      │          │                 │
+      │          │                 │          (5,6,7,8,)
       │         5│6                │
       │          │                 │
       └──────────│─────────────────┘
@@ -571,8 +571,10 @@ device.
   - Full traceability of LLM decisions and tool executions.
 
 # Interworking with the Network Management protocol and YANG data models
+TBD
+
 # MCP Usage Examples
-The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for large scale multi-vendor network management environments, effectively addressing the aforementioned challenges in {{value-mcp-nm}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
+
 
 
 
