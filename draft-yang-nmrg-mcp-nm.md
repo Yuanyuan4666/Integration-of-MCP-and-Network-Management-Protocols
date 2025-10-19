@@ -182,7 +182,7 @@ There are 3 values for MCP coupling with the network management
     o Prompt injection, where malicious instructions embedded in user inputs or tool descriptions could lead to unintended actions by the LLM
     o Tool poisoning, where attackers modify tool definitions, or rug pulls (similar to tool poisoning but occurs post-installation)
     o Tool shadowing, where a malicious server creates a tool with the same name as a legitimate tool from another server to intercept calls
-  * Security enforcement 
+  * Security enforcement
     o MCP itself lacks inherent security enforcement mechanisms, relying heavily on external implementations for authentication and authorization, which were not
       initially  well-defined within the protocol.
   * Identity Management
