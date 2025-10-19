@@ -1228,23 +1228,26 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-interworking-with-the-netwo" class="internal xref">Interworking with the Network Management protocol and YANG data models</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-mcp-usage-examples" class="internal xref">MCP Usage Examples</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-example" class="internal xref">Example</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-example" class="internal xref">Example</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1838,11 +1841,11 @@ device.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
              │ User │
              └───┬──┘                   Step b.LLM for Intent to tools
                1 │ 9                           request translation
-      ┌──────────│─────────────────┐
+      ┌──────────│─────────────────┐           (1,3,4,9)
       │ ┌────────┴───┐3,8    ┌───┐ │
       │2│ MCP Client ├───────┤LLM│ │
       │ └────────┬───┘4,7    └───┘ │   Step c.Close Loop Execution workflow
-      │          │                 │
+      │          │                 │          (5,6,7,8,)
       │         5│6                │
       │          │                 │
       └──────────│─────────────────┘
@@ -2004,19 +2007,25 @@ include the functional description, required parameters of tools.<a href="#secti
       <h2 id="name-interworking-with-the-netwo">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-interworking-with-the-netwo" class="section-name selfRef">Interworking with the Network Management protocol and YANG data models</a>
       </h2>
-<p id="section-8-1"># MCP Usage Examples
-The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for large scale multi-vendor network management environments, effectively addressing the aforementioned challenges in <a href="#value-mcp-nm" class="auto internal xref">Section 3</a>. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">TBD<a href="#section-8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="mcp-usage-examples">
+<section id="section-9">
+      <h2 id="name-mcp-usage-examples">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-mcp-usage-examples" class="section-name selfRef">MCP Usage Examples</a>
+      </h2>
 <div id="example">
-<section id="section-8.1">
+<section id="section-9.1">
         <h3 id="name-example">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-example" class="section-name selfRef">Example</a>
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-example" class="section-name selfRef">Example</a>
         </h3>
-<p id="section-8.1-1">Take multi-vendor network management as an example, the MCP server is deployed locally on the network controller, and the tools are
-integrated into the MCP server. The server provides the following registered tool descriptor information:<a href="#section-8.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1-2">Tools description: It describes the name, use, and parameters of tools.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.1-3">Tools implementation: MCP implementation describes how the tools are invoked.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
-<p id="section-8.1-4">See Tool descriptor information example as follows:<a href="#section-8.1-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-8.1-5">
+<p id="section-9.1-1">Take multi-vendor network management as an example, the MCP server is deployed locally on the network controller, and the tools are
+integrated into the MCP server. The server provides the following registered tool descriptor information:<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.1-2">Tools description: It describes the name, use, and parameters of tools.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
+<p id="section-9.1-3">Tools implementation: MCP implementation describes how the tools are invoked.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
+<p id="section-9.1-4">See Tool descriptor information example as follows:<a href="#section-9.1-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-9.1-5">
 <pre>
 # Tool Descriptor
 [
@@ -2081,12 +2090,12 @@ async def check_status(device_ip: str, metrics: list):
     if "memory" in metrics:
         status["memory"] = get_memory_usage(device_ip)
     return status
-</pre><a href="#section-8.1-5" class="pilcrow">¶</a>
+</pre><a href="#section-9.1-5" class="pilcrow">¶</a>
 </div>
-<p id="section-8.1-6">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
+<p id="section-9.1-6">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
 client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the appropriate tools and responds
-in JSON format as follows:<a href="#section-8.1-6" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-8.1-7">
+in JSON format as follows:<a href="#section-9.1-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-9.1-7">
 <pre>
 {
 "method": "batch_configure_devices",
@@ -2100,11 +2109,11 @@ in JSON format as follows:<a href="#section-8.1-6" class="pilcrow">¶</a></p>
 }
 }
 
-</pre><a href="#section-8.1-7" class="pilcrow">¶</a>
+</pre><a href="#section-9.1-7" class="pilcrow">¶</a>
 </div>
-<p id="section-8.1-8">The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are returned to the MCP client in Json as below and are forwarded to the LLM. The
-LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.<a href="#section-8.1-8" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-8.1-9">
+<p id="section-9.1-8">The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are returned to the MCP client in Json as below and are forwarded to the LLM. The
+LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.<a href="#section-9.1-8" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-9.1-9">
 <pre>
 # Convert to CLI commands of different vendors
 "commands": [
@@ -2152,34 +2161,34 @@ LLM parses the response, generates a natural-language summary, and sends it back
   "192.168.10.2": "Error: no response from the device",
 }
 
-</pre><a href="#section-8.1-9" class="pilcrow">¶</a>
+</pre><a href="#section-9.1-9" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-9">
+<section id="section-10">
       <h2 id="name-iana-considerations">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-9-1">This document has no IANA actions.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-10-1">This document has no IANA actions.<a href="#section-10-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-10">
+<section id="section-11">
       <h2 id="name-security-considerations">
-<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-10-1">The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations could be affected.<a href="#section-10-1" class="pilcrow">¶</a></p>
-<p id="section-10-2">Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.<a href="#section-10-2" class="pilcrow">¶</a></p>
-<p id="section-10-3">For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in the details. Users must verify each LLM operation to prevent unintended hazardous actions.<a href="#section-10-3" class="pilcrow">¶</a></p>
+<p id="section-11-1">The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations could be affected.<a href="#section-11-1" class="pilcrow">¶</a></p>
+<p id="section-11-2">Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.<a href="#section-11-2" class="pilcrow">¶</a></p>
+<p id="section-11-3">For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in the details. Users must verify each LLM operation to prevent unintended hazardous actions.<a href="#section-11-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-normative-references">
-<section id="section-11">
+<section id="section-12">
       <h2 id="name-normative-references">
-<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
 <dt id="RFC2576">[RFC2576]</dt>
