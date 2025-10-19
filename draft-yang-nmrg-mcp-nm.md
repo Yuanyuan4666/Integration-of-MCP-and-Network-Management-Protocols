@@ -278,7 +278,7 @@ of the location of each MCP servers.
  ///FM  PM \\\          ///     \\\            ///     \\\
 |             |       ||  Memory   |         ||           |
 | Routing  ACL|       |             |        |    Templates|
- \\\Policy ///        ||  Database |         ||           |
+ \\\Policy ///        || Database  |         ||           |
     -------             \\\     ///            \\\     ///
                            -----                  -----
 
@@ -337,10 +337,30 @@ Step 2.2: The MCP registry return specific MCP server to the MCP client.
 Step 3: The MCP Client request authorization from the MCP server.
 Step 4: The MCP Client invoke specific tools with authorization.
 
-# Deployment Consideration in Network Management
+# Deployment Consideration in adopting MCP in the Network Management
 
+This section describes MCP deployment requirements for network management environments, followed by implementation scenarios. Key architectural requirements include:
+
+- Function-Specific MCP Servers:
+  To maintain proper architecture and performance with growing tool volumes, servers should be categorized by network management function. Typical categories include
+  network log analysis, device configuration management, energy consumption management, and security operations.
+
+- Secure and Scalable Architecture: The architecture must:
+  * Enforce strict access controls limiting MCP operations to authorized AI models and users
+  * Scale efficiently with increasing network device counts while maintaining performance
+
+- Automated Workflows: MCP implementations should support LLM-coordinated automation of:
+  * Real-time monitoring and diagnostics
+  * Fault remediation workflows
+  * Other common management operations to reduce operator workload
+
+While these core requirements apply universally, operational characteristics vary based on deployment location (on-premises vs. remote). The following subsections detail these deployment scenarios.
 
 ## MCP Communication using Inter Processing Communication
+
+In this network scenario, both the MCP client and the MCP server are deployed within the same network controller.
+The MCP client communicate with the MCP server using inter processing communication. In the meanwhile, the LLM model
+as pre-trained model should also be deployed in the same Network controller.
 
 ~~~~
 
@@ -375,6 +395,11 @@ Step 4: The MCP Client invoke specific tools with authorization.
 
 ## The OSS and the Network Controller Communication using MCP
 
+In this network scenario, the MCP client is deployed in the OSS/BSS while the MCP server
+is deployed in the Network Controller, the MCP client and the MCP server communicated using SSE.
+In the meanwhile, the LLM model can be pre-trained LLM model collocated with the MCP client or 
+the LLM model in the Cloud.
+
 ~~~~
 
             +--------------------------+
@@ -387,7 +412,7 @@ Step 4: The MCP Client invoke specific tools with authorization.
             |  +---+--+Command +----+  |
             +------+-------------------+
                    |
-            |      |
+                   |
             +------+-------------------+
             |Network Controller (Network AI Agent)
             |                          |
@@ -408,6 +433,15 @@ Step 4: The MCP Client invoke specific tools with authorization.
 
 ## The Network Controller and the Network Device Communication using MCP
 
+In this network scenario, The MCP client is deployed in the network controller
+while the MCP server is deployed in the network devices. The MCP client
+communicates with the MCP server using the MCP protocol. LLM model is pre-trained model
+and deployed in the same Network Controller as the MCP client.
+
+Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP
+Server may occupy a large amount of resources, affecting the normal operation of the
+device.
+
 ~~~~
 
                 +--------------------------+
@@ -418,10 +452,10 @@ Step 4: The MCP Client invoke specific tools with authorization.
                 |  |MCP   |Language|LLM |  |
                 |  |Client|------- |    |  |
                 |  +---+--+Command +----+  |
-                +------------+-------------+
-                             |NETCONF/Telemetry/CLI
-        |-----------------+--+------------+
-
+                +------+-------------------+
+                       |NETCONF/CLI
+        +--------------+--+---------------+
+        |                 |               |
     +---+-----+      +----+----+     +----+----+
     |  MCP    |      |  MCP    |     | MCP     |
     | Server1 |      | Server2 |     |Server3  |
@@ -431,6 +465,15 @@ Step 4: The MCP Client invoke specific tools with authorization.
 ~~~~
 
 ## The Network Gateway and the Network Device Communication using MCP
+
+In this network scenario, The MCP client is deployed in the network gateway device
+while the MCP server is deployed in each network devices. The MCP client
+communicates with the MCP server using the MCP protocol. LLM model is pre-trained model
+and deployed in the same Network gateway as the MCP client.
+
+Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP
+Server may occupy a large amount of resources, affecting the normal operation of the
+device.
 
 ~~~~
 
@@ -442,21 +485,18 @@ Step 4: The MCP Client invoke specific tools with authorization.
                |  |MCP   |Language|LLM |  |
                |  |Client|------- |    |  |
                |  +---+--+Command +----+  |
-               +------------+-------------+
-                            |NETCONF/Telemetry/CLI
-       |-----------------+--+------------+
-
-   +---+-----+      +----+----+     +----+----+
-   |  MCP    |      |  MCP    |     | MCP     |
-   | Server1 |      | Server2 |     |Server3  |
-   +---------+      +---------+     +---------+
-   Network Device    Network Device  Network Device
+               +------+-------------+
+                       |NETCONF/CLI
+        +-----------------+---------------+
+        |                 |               |
+    +---+-----+      +----+----+     +----+----+
+    |  MCP    |      |  MCP    |     | MCP     |
+    | Server1 |      | Server2 |     |Server3  |
+    +---------+      +---------+     +---------+
+    Network Device    Network Device  Network Device
 
 ~~~~
 # MCP architecture Design for Network Management
-# Interworking with the Network Management protocol and YANG data models
-# MCP Usage Examples
-The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for large scale multi-vendor network management environments, effectively addressing the aforementioned challenges in {{value-mcp-nm}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
 
 ## Encapsulating Device Operations into MCP Tools
 
@@ -507,6 +547,12 @@ The LLM model with MCP support and its ability to comprehend diverse complex req
 - Benefits:
   - Tools safely retry/rollback.
   - Full traceability of LLM decisions and tool executions.
+
+# Interworking with the Network Management protocol and YANG data models
+# MCP Usage Examples
+The LLM model with MCP support and its ability to comprehend diverse complex requirements and deliver corresponding functionalities, is well-suited for large scale multi-vendor network management environments, effectively addressing the aforementioned challenges in {{value-mcp-nm}}. Therefore, we have introduced the MCP protocol in the network management environments for building an intelligent network management and control platform.
+
+
 
 ## Example
 Take multi-vendor network management as an example, the MCP server is deployed locally on the network controller, and the tools are
@@ -655,190 +701,7 @@ LLM parses the response, generates a natural-language summary, and sends it back
 
 ~~~~
 
-# Deployment Considerations
 
-This section describes MCP deployment requirements for network management environments, followed by implementation scenarios. Key architectural requirements include:
-
-- Function-Specific MCP Servers: To maintain proper architecture and performance with growing tool volumes, servers should be categorized by network management function. Typical categories include network log analysis, device configuration management, energy consumption management, and security operations.
-- Secure and Scalable Architecture: The architecture must:
-  - Enforce strict access controls limiting MCP operations to authorized AI models and users
-  - Scale efficiently with increasing network device counts while maintaining performance
-- Automated Workflows: MCP implementations should support LLM-coordinated automation of:
-  - Real-time monitoring and diagnostics
-  - Fault remediation workflows
-  - Other common management operations to reduce operator workload
-
-While these core requirements apply universally, operational characteristics vary based on deployment location (on-premises vs. remote). The following subsections detail these deployment scenarios.
-
-## MCP hosted within the Network Controller
-
-~~~~
-                  +--------------+
-                  |     User     |
-                  +-------+------+
-                          |
-                  Natural Language
-                 Command  |
-         .................|............................
-         .                |                           .
-         .        +-------+------+       +-----------+.
-         .        |  MCP Client  +-------+  LLM      |.
-         .        +-------+------+       +-----------+.
-         .                |                           .
-         .         Tools Request                      .
-         .                |                           .
-         .        +-------+------+                    .
-         .        |  MCP Server  |       Network      .
-         .        +-------+------+       Controller   .
-         .                |                           .
-         .................|............................
-                          |
-                  Netconf/Telemetry
-      +-------------------+------------------+
-      |                   |                  |
-      |                   |                  |
-+-----+--------+  +-------+------+    +------+-------+
-|   Network    |  |   Network    |    |   Network    |
-|   Device     |  |   Device     |    |   Device     |
-+--------------+  +--------------+    +--------------+
-~~~~
-
-In this senario, the MCP server is deployed within the network controller, which could potentially be a cloud environment.
-The MCP server acts as a protocol converter, transforming NETCONF's XML/YANG models into JSON-RPC 2.0 format for AI system.
-- Scope: The MCP Server, colocated with the MCP Client and LLM model, is hosted within a cloud environment, the network devices stay as it is.
-- Key Characteristics:
-  -  Centralized Management: A single MCP Client instance can manage all network devices in geographically dispersed network.
-  -  Scalability: Cloud-native scaling accommodates dynamic tool registry updates and high request volumes.
-
-## MCP Server Hosted Within the Network Device
-
-~~~~
-                   +--------------+
-                   |     User     |
-                   +-------+------+
-                           |
-                   Natural Language
-                        Command
-+.......................................................+
-|                          |                            |
-|                  +-------+------+       +-----------+ |
-| Network          |  MCP Client  +-------+  LLM      | |
-| Controller       +-------|------+       +-----------+ |
-|                          |                            |
-|                          |                            |
-|...................Tools Request ......................|
-|                          |                            |
-|                          |                            |
-|                          |                            |
-|                          |                            |
-|                          |                            |
-|     +--------------------|--------------------+       |
-|     |                    |                    |       |
-|+----+-------+    +-------|------+     +-------+------+|
-||  MCP       |    |    MCP       |     |    MCP       ||
-|| Server     |    |   Server     |     |   Server     ||
-|+------------+    +--------------+     +--------------+|
-| Network             Network             Network       |
-| Device              Device              Device        |
-|.......................................................|
-
-~~~~
-
-In this senario, the MCP server is deployed within the network devices. The MCP server acts as a protocol
-converter, transforming CLI into JSON-RPC 2.0 format for AI system.
-- Scope: The MCP server is colocated with network devices. The MCP Client operates in a cloud environment, requesting distributed MCP Server via public/private APIs.
-- Key Characteristics:
-  -  Low Latency: Direct access to network devices minimizes tool execution delays
-
-# Impact of integrating MCP on Network Management
-
-~~~~
-
-+------------+-----------------------------+-----------------------+
-|            |   MCP Hosted Within         |   MCP Server Hosted   |
-|            | the Network Controller      | Within Network Device |
-+------------+-----------------------------+-----------------------+
-|            |                             |1.Protocol for Context |
-|Management  |  No impact,reuse            |  Management           |
-|Protocol    |  existing NM Protocols      |2 Including approval   |
-|            |                             | mechanisms where human|
-|            |                             | input is required.    |
-|            |                             |3.Coexist with NM proto|
-|            |                             |in case not all devices|
-|            |                             |support MCP            |
-+------------+-----------------------------+-----------------------+
-|Management  |  Use internal tools and     |  Need to ensure right |
-|   Tools    |  LLMs within the controller |  tools and background |
-|            |  for managing context and   |  info in the network  |
-|            |  decision making            |  device               |
-+------------+-----------------------------+-----------------------+
-|  Task      |  Works with pre-structured  |                       |
-|Management  |  goal driven tasks.         |    Same Rule Apply    |
-|            |  Tasks are usually designed |                       |
-|            |  and pre-defined by client  |                       |
-+------------+-----------------------------+-----------------------+
-|            |  Yes,                       |    Yes                |
-| Stateful   |  Agents can retain context  |                       |
-|Management  |  from previous interaction, |    Same Rule Apply    |
-|            |  enabling continuity in     |                       |
-|            |  long term task or          |                       |
-|            |  conversation               |                       |
--------------+-----------------------------+-----------------------+
-
-~~~~
-
-## MCP Hosted Within the Network Controller
-
-- Pro
-  - Resource utilization efficiency:
-    Controllers usually have stronger computing and storage resources, which can better support the operation of MCP Server and will not have a significant impact
-    on the performance of the network equipment itself.
-
-  - Security:
-    - Security mechanisms can be implemented centrally on the controller, and the overall security can be improved through unified authentication, authorization
-      and audit mechanisms.
-    - Reduces the risk of equipment being exposed to the network and reduces the possibility of being attacked.
-
-  - Protocol adaptability:
-    - Communicating with devices through the NETCONF protocol can better be compatible with existing devices and protocols, reducing the need for equipment
-      modification.
-    - NETCONF protocol has wide support and mature tool chains in the industry, which is easy to develop and maintain.
-
-- Con
-  - Latency and real-time performance:
-    - Since management instructions need to be forwarded through the controller, latency may increase and real-time performance may be affected.
-    - For some scenarios with extremely high real-time requirements, it may not meet the requirements.
-
-  - Protocol conversion complexity:
-    - The MCP protocol needs to be converted to the NETCONF protocol, which increases the complexity and development cost of protocol conversion.
-    - It is necessary to deal with compatibility and consistency issues between different protocols.
-
-## MCP Server Hosted within the Network Device
-
-- Pro
-  - The protocol stack simplification:
-    - If you deploy the MCP Server directly on the network device, you can skip the NETCONF protocol layer and manage the device directly through MCP. This reduces
-      the complexity of protocol conversion and simplifies the overall architecture.
-    - It reduces the development and maintenance costs caused by protocol adaptation, especially when the device manufacturer supports the MCP protocol.
-
-  - Real-time performance and response speed:
-    - The MCP Server is directly deployed on the device, which reduces the transmission latency in the middle and can respond to management instructions faster,
-      which is suitable for scenarios with high real-time requirements.
-
-- Con
-  - Device Resource Consumption:
-    - Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP Server may occupy a large amount of resources, affecting the normal
-      operation of the device.
-    - It is necessary to optimize and expand the hardware and software resources of the device, which increases the complexity of the device.
-
-  - Security and Management Complexity:
-    - Each device needs to manage the security of the MCP server separately (such as authentication, authorization, audit, etc.), which increases the complexity of
-      management.
-    - Each device needs to independently deploy and maintain the MCP Server, which increases the operation and maintenance cost.
-
-  - Incompatible with Legacy devices:
-    - Legacy devices do not have the ability to support MCP servers and still need NETCONF to implement network configuration. This makes it impossible for the
-      network to form a unified control mechanism.
 
 # IANA Considerations
 
