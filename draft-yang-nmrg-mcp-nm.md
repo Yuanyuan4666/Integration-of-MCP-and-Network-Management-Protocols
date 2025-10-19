@@ -218,7 +218,7 @@ Network exposure is the process of making network capabilities, such as data and
   | +---+   +---+ +---+         |  Heart  ||Other APIs||
   |                             <--------->+----------+|
   +-----------------------------+  Beat   +------------+
- 
+
 ~~~~
 
 Step 1: External tools or data source publish a set of APIs to MCP server in the Network Controller.
@@ -259,8 +259,8 @@ Step 3: The MCP client provide available tools list to the IETF Network Manageme
 # MCP Server Discovery
 
 The MCP Server Discovery involves clients querying servers to find available tools, resources, and functions.
-In case of MCP servers are distributed in different locations, MCP Respository can be established to 
-keep track of the location of each MCP servers.
+In case of MCP servers are distributed in different locations, MCP Respository can be established to keep track
+of the location of each MCP servers.
 
 ## MCP core function
 ~~~~
