@@ -499,7 +499,7 @@ device.
 # MCP architecture Design for Network Management
 
 ~~~~
- 
+
              ┌──────┐
              │ User │
              └───┬──┘                   Step b.LLM for Intent to tools
