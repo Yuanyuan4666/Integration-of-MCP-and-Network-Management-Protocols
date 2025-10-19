@@ -575,23 +575,23 @@ Table of Contents
 
    # MCP architecture Design for Network Management
 
-                 ┌──────┐
-                 │ User |
-                 └───┬──┘
-                   1 │ 9
-          ┌──────────│─────────────────┐
-          │ ┌────────┴───┐3,8    ┌───┐ │
-          │2│ MCP Client ├───────┤LLM│ |
-          │ └────────┬───┘4,7    └───┘ │
-          │          │                 |
-          │         5│6                │
-          │          │                 │
-          └──────────│─────────────────┘
-                     │
-          ┌──────────┴───┬─────────────┐
-     ┌────┴─────┐  ┌─────┴─────┐ ┌─────┴────┐
-     │MCP Server│  │ MCP Server│ │MCP Server│
-     └──────────┘  └───────────┘ └──────────┘
+             ┌──────┐
+             │ User │
+             └───┬──┘                   Step b.LLM for Intent to tools
+               1 │ 9                           request translation
+      ┌──────────│─────────────────┐
+      │ ┌────────┴───┐3,8    ┌───┐ │
+      │2│ MCP Client ├───────┤LLM│ │
+      │ └────────┬───┘4,7    └───┘ │   Step c.Close Loop Execution workflow
+      │          │                 │
+      │         5│6                │
+      │          │                 │
+      └──────────│─────────────────┘
+                 │                       Step a.Encapsulating network
+      ┌──────────┴───┬─────────────┐      operations into MCP tools
+ ┌────┴─────┐  ┌─────┴─────┐ ┌─────┴────┐
+ │MCP Server│  │ MCP Server│ │MCP Server|
+ └──────────┘  └───────────┘ └──────────┘
 
 7.5.  Encapsulating Device Operations into MCP Tools
 
