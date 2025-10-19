@@ -83,16 +83,17 @@ Table of Contents
            using MCP
      7.4.  The Network Gateway and the Network Device Communication
            using MCP
-     7.5.  Encapsulating Device Operations into MCP Tools
-     7.6.  LLM for Intent-to-Tool-Request Translation
-     7.7.  Closed-Loop Automation Execution Workflow
-   8.  Interworking with the Network Management protocol and YANG data
+   8.  MCP architecture Design for Network Management
+     8.1.  Encapsulating Device Operations into MCP Tools
+     8.2.  LLM for Intent-to-Tool-Request Translation
+     8.3.  Closed-Loop Automation Execution Workflow
+   9.  Interworking with the Network Management protocol and YANG data
            models
-   9.  MCP Usage Examples
-     9.1.  Device Configuration using MCP+CLI
-   10. IANA Considerations
-   11. Security Considerations
-   12. Normative References
+   10. MCP Usage Examples
+     10.1.  Device Configuration using MCP+CLI
+   11. IANA Considerations
+   12. Security Considerations
+   13. Normative References
    Authors' Addresses
 
 1.  Introduction
@@ -574,7 +575,7 @@ Table of Contents
        +---------+      +---------+     +---------+
        Network Device    Network Device  Network Device
 
-   # MCP architecture Design for Network Management
+8.  MCP architecture Design for Network Management
 
              ┌──────┐
              │ User │
@@ -594,7 +595,7 @@ Table of Contents
  │MCP Server│  │ MCP Server│ │MCP Server|
  └──────────┘  └───────────┘ └──────────┘
 
-7.5.  Encapsulating Device Operations into MCP Tools
+8.1.  Encapsulating Device Operations into MCP Tools
 
    *  Objective: Standardize device operations into modular, reusable
       tools.
@@ -614,7 +615,7 @@ Table of Contents
 
       -  Enabling the plug-and-play integration of new device types.
 
-7.6.  LLM for Intent-to-Tool-Request Translation
+8.2.  LLM for Intent-to-Tool-Request Translation
 
    *  Objective: Allow AI models (such as Claude) to understand natural
       language commands and trigger operations.
@@ -649,7 +650,7 @@ Table of Contents
          format, then return this request to the client, enabling the
          client to properly parse the request.
 
-7.7.  Closed-Loop Automation Execution Workflow
+8.3.  Closed-Loop Automation Execution Workflow
 
    *  Objective: Realize the closed loop of "voice/text commands →
       automatic execution".
@@ -687,7 +688,7 @@ Table of Contents
 
       -  Full traceability of LLM decisions and tool executions.
 
-8.  Interworking with the Network Management protocol and YANG data
+9.  Interworking with the Network Management protocol and YANG data
     models
 
    MCP can be seen as AI protocol and used to invoke AI integrated
@@ -697,9 +698,9 @@ Table of Contents
    invoke CLI capabilities; * Integrated MCP with YANG, allow the MCP
    client invoke YANG interface related capabilities;
 
-9.  MCP Usage Examples
+10.  MCP Usage Examples
 
-9.1.  Device Configuration using MCP+CLI
+10.1.  Device Configuration using MCP+CLI
 
    In this example, MCP server is implemented by Server and expose all
    CLI interfaces and documentation as tools to the MCP Client.  The
@@ -853,11 +854,11 @@ async def check_status(device_ip: str, metrics: list):
   "192.168.10.2": "Error: no response from the device",
 }
 
-10.  IANA Considerations
+11.  IANA Considerations
 
    This document has no IANA actions.
 
-11.  Security Considerations
+12.  Security Considerations
 
    The MCP protocol needs to consider scenarios where either the client
    or server encounters issues, such as crashes.  If one or both parties
@@ -876,7 +877,7 @@ async def check_status(device_ip: str, metrics: list):
    details.  Users must verify each LLM operation to prevent unintended
    hazardous actions.
 
-12.  Normative References
+13.  Normative References
 
    [RFC2576]  Frye, R., Levi, D., Routhier, S., and B. Wijnen,
               "Coexistence between Version 1, Version 2, and Version 3
