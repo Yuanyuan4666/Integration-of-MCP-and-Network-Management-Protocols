@@ -89,7 +89,7 @@ Table of Contents
    8.  Interworking with the Network Management protocol and YANG data
            models
    9.  MCP Usage Examples
-     9.1.  Example
+     9.1.  Device Configuration using MCP+CLI
    10. IANA Considerations
    11. Security Considerations
    12. Normative References
@@ -694,12 +694,15 @@ Table of Contents
 
 9.  MCP Usage Examples
 
-9.1.  Example
+9.1.  Device Configuration using MCP+CLI
 
-   Take multi-vendor network management as an example, the MCP server is
-   deployed locally on the network controller, and the tools are
-   integrated into the MCP server.  The server provides the following
-   registered tool descriptor information:
+   In this example, MCP server is implemented by Server and expose all
+   CLI interfaces and documentation as tools to the MCP Client.  The
+   Nework controller implement the client to interact with MCP server in
+   the Network device.
+
+   The MCP server provides the following registered tool descriptor
+   information:
 
    Tools description: It describes the name, use, and parameters of
    tools.

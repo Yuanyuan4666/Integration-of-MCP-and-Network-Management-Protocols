@@ -1233,7 +1233,7 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-mcp-usage-examples" class="internal xref">MCP Usage Examples</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-example" class="internal xref">Example</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-device-configuration-using-" class="internal xref">Device Configuration using MCP+CLI</a></p>
 </li>
             </ul>
 </li>
@@ -2015,17 +2015,18 @@ include the functional description, required parameters of tools.<a href="#secti
       <h2 id="name-mcp-usage-examples">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-mcp-usage-examples" class="section-name selfRef">MCP Usage Examples</a>
       </h2>
-<div id="example">
+<div id="device-configuration-using-mcpcli">
 <section id="section-9.1">
-        <h3 id="name-example">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-example" class="section-name selfRef">Example</a>
+        <h3 id="name-device-configuration-using-">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-device-configuration-using-" class="section-name selfRef">Device Configuration using MCP+CLI</a>
         </h3>
-<p id="section-9.1-1">Take multi-vendor network management as an example, the MCP server is deployed locally on the network controller, and the tools are
-integrated into the MCP server. The server provides the following registered tool descriptor information:<a href="#section-9.1-1" class="pilcrow">¶</a></p>
-<p id="section-9.1-2">Tools description: It describes the name, use, and parameters of tools.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
-<p id="section-9.1-3">Tools implementation: MCP implementation describes how the tools are invoked.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
-<p id="section-9.1-4">See Tool descriptor information example as follows:<a href="#section-9.1-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-9.1-5">
+<p id="section-9.1-1">In this example, MCP server is implemented by Server and expose all CLI interfaces and documentation as tools to the MCP Client.
+The Nework controller implement the client to interact with MCP server in the Network device.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.1-2">The MCP server provides the following registered tool descriptor information:<a href="#section-9.1-2" class="pilcrow">¶</a></p>
+<p id="section-9.1-3">Tools description: It describes the name, use, and parameters of tools.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
+<p id="section-9.1-4">Tools implementation: MCP implementation describes how the tools are invoked.<a href="#section-9.1-4" class="pilcrow">¶</a></p>
+<p id="section-9.1-5">See Tool descriptor information example as follows:<a href="#section-9.1-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-9.1-6">
 <pre>
 # Tool Descriptor
 [
@@ -2090,12 +2091,11 @@ async def check_status(device_ip: str, metrics: list):
     if "memory" in metrics:
         status["memory"] = get_memory_usage(device_ip)
     return status
-</pre><a href="#section-9.1-5" class="pilcrow">¶</a>
+</pre><a href="#section-9.1-6" class="pilcrow">¶</a>
 </div>
-<p id="section-9.1-6">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
-client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the appropriate tools and responds
-in JSON format as follows:<a href="#section-9.1-6" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-9.1-7">
+<p id="section-9.1-7">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
+client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the appropriate tools and responds in JSON format as follows:<a href="#section-9.1-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-9.1-8">
 <pre>
 {
 "method": "batch_configure_devices",
@@ -2109,11 +2109,10 @@ in JSON format as follows:<a href="#section-9.1-6" class="pilcrow">¶</a></p>
 }
 }
 
-</pre><a href="#section-9.1-7" class="pilcrow">¶</a>
+</pre><a href="#section-9.1-8" class="pilcrow">¶</a>
 </div>
-<p id="section-9.1-8">The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are returned to the MCP client in Json as below and are forwarded to the LLM. The
-LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.<a href="#section-9.1-8" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-9.1-9">
+<p id="section-9.1-9">The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are returned to the MCP client in Json as below and are forwarded to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.<a href="#section-9.1-9" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-9.1-10">
 <pre>
 # Convert to CLI commands of different vendors
 "commands": [
@@ -2161,7 +2160,7 @@ LLM parses the response, generates a natural-language summary, and sends it back
   "192.168.10.2": "Error: no response from the device",
 }
 
-</pre><a href="#section-9.1-9" class="pilcrow">¶</a>
+</pre><a href="#section-9.1-10" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
