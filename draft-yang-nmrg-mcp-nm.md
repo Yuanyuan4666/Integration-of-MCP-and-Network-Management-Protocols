@@ -397,7 +397,7 @@ as pre-trained model should also be deployed in the same Network controller.
 
 In this network scenario, the MCP client is deployed in the OSS/BSS while the MCP server
 is deployed in the Network Controller, the MCP client and the MCP server communicated using SSE.
-In the meanwhile, the LLM model can be pre-trained LLM model collocated with the MCP client or 
+In the meanwhile, the LLM model can be pre-trained LLM model collocated with the MCP client or
 the LLM model in the Cloud.
 
 ~~~~
