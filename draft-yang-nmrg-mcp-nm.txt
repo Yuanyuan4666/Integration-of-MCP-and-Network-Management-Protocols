@@ -5,7 +5,7 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 21 April 2026                                          D. Lopez
+Expires: 22 April 2026                                          D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
@@ -13,7 +13,7 @@ Expires: 21 April 2026                                          D. Lopez
                                                          Orange Research
                                                                  G. Zeng
                                                                   Huawei
-                                                         18 October 2025
+                                                         19 October 2025
 
 
             Applicability of MCP for the Network Management
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 April 2026.
+   This Internet-Draft will expire on 22 April 2026.
 
 Copyright Notice
 
@@ -108,8 +108,8 @@ Table of Contents
 
    The application of MCP for the network management is meant to
    refactor network management operation and network capabilities as
-   tools and provide more agile and extensible architecture to expose
-   these AI integration capabilities.
+   tools and provide more agile and extensible architecture to expose or
+   consume these AI integration capabilities.
 
    With integration of MCP into the network management system, it allow
    you develop various rich AI driven network applications, realize
