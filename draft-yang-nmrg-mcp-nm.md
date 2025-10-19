@@ -575,12 +575,12 @@ TBD
 
 # MCP Usage Examples
 
+## Device Configuration using MCP+CLI
 
+In this example, MCP server is implemented by Server and expose all CLI interfaces and documentation as tools to the MCP Client.
+The Nework controller implement the client to interact with MCP server in the Network device.
 
-
-## Example
-Take multi-vendor network management as an example, the MCP server is deployed locally on the network controller, and the tools are
-integrated into the MCP server. The server provides the following registered tool descriptor information:
+The MCP server provides the following registered tool descriptor information:
 
 Tools description: It describes the name, use, and parameters of tools.
 
@@ -655,8 +655,7 @@ async def check_status(device_ip: str, metrics: list):
 ~~~~
 
 Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
-client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the appropriate tools and responds
-in JSON format as follows:
+client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the appropriate tools and responds in JSON format as follows:
 
 ~~~~
 {
@@ -673,8 +672,7 @@ in JSON format as follows:
 
 ~~~~
 
-The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are returned to the MCP client in Json as below and are forwarded to the LLM. The
-LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.
+The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are returned to the MCP client in Json as below and are forwarded to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.
 
 ~~~~
 # Convert to CLI commands of different vendors
