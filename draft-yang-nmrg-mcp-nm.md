@@ -571,7 +571,11 @@ device.
   - Full traceability of LLM decisions and tool executions.
 
 # Interworking with the Network Management protocol and YANG data models
-TBD
+
+MCP can be seen as AI protocol and used to invoke AI integrated capabilities. MCP is not in the position to replace the network management and YANG data model.
+Instead, it can be integrated together, e.g.,
+* Integrated MCP with CLI, allow the MCP client invoke CLI capabilities;
+* Integrated MCP with YANG, allow the MCP client invoke YANG interface related capabilities;
 
 # MCP Usage Examples
 
