@@ -162,6 +162,33 @@ There are 3 values for MCP coupling with the network management
   * Making network architecture really agile and friendly for innovation
   * Decoupling network management functions into network agents and network tools
 
+# The high level Challenges in adopting MCP in NM
+
+- Protocol Design
+  * Error Handling
+    o Although MCP provides basic error codes, MCP does not yet enforce a entire error-handling mechanism, and its scope is currently limited to discovery and invocation,
+    omitting crucial aspects like tool governance, versioning, or lifecycle management.
+  * Stateful
+    o The protocol's reliance on stateful Server-Sent Events (SSE) can create significant complexities when integrating with inherently stateless REST APIs,
+      requiring developers to manage state externally. This can be particularly challenging for remote MCP servers due to network latency and instability,
+      complicating load balancing and horizontal scaling efforts.
+  * Context Handling
+    o There are also concerns that multiple active MCP connections could consume significant tokens in the LLM's context window. This can directly impact an LLM's
+      performance, slowing down responses and potentially hindering its ability to maintain focus and reason effectively over extended or complex interactions.
+
+- Security Consideration
+  * Malicious Actors
+    The protocol's ability to grant LLMs access to external systems introduces potential vulnerabilities that require careful consideration
+    o Prompt injection, where malicious instructions embedded in user inputs or tool descriptions could lead to unintended actions by the LLM
+    o Tool poisoning, where attackers modify tool definitions, or rug pulls (similar to tool poisoning but occurs post-installation)
+    o Tool shadowing, where a malicious server creates a tool with the same name as a legitimate tool from another server to intercept calls
+  * Security enforcement 
+    o MCP itself lacks inherent security enforcement mechanisms, relying heavily on external implementations for authentication and authorization, which were not
+      initially  well-defined within the protocol.
+  * Identity Management
+    o Determining clear identity management - whether requests originate from the end user, the AI agent, or a shared system account - remains an area needing
+      clearer definition.
+
 # MCP for Network Exposure
 
 ~~~~
