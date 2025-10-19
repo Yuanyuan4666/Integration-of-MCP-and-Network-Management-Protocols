@@ -68,28 +68,29 @@ Table of Contents
      2.1.  MCP
      2.2.  Others
    3.  The values of coupling MCP with the network management
-   4.  MCP for Network Exposure
-   5.  MCP Server Discovery
-   6.  Deployment Consideration in Network Management
-     6.1.  MCP Communication using IPC
-     6.2.  The OSS and the Network Controller Communication using MCP
-     6.3.  The Network Controller and the Network Device Communication
+   4.  The high level Challenges in adopting MCP in NM
+   5.  MCP for Network Exposure
+   6.  MCP Server Discovery
+   7.  Deployment Consideration in Network Management
+     7.1.  MCP Communication using IPC
+     7.2.  The OSS and the Network Controller Communication using MCP
+     7.3.  The Network Controller and the Network Device Communication
            using MCP
-     6.4.  The Network Gateway and the Network Device Communication
+     7.4.  The Network Gateway and the Network Device Communication
            using MCP
-     6.5.  Encapsulating Device Operations into MCP Tools
-     6.6.  LLM for Intent-to-Tool-Request Translation
-     6.7.  Closed-Loop Automation Execution Workflow
-     6.8.  Example
-   7.  Deployment Considerations
-     7.1.  MCP hosted within the Network Controller
-     7.2.  MCP Server Hosted Within the Network Device
-   8.  Impact of integrating MCP on Network Management
-     8.1.  MCP Hosted Within the Network Controller
-     8.2.  MCP Server Hosted within the Network Device
-   9.  IANA Considerations
-   10. Security Considerations
-   11. Normative References
+     7.5.  Encapsulating Device Operations into MCP Tools
+     7.6.  LLM for Intent-to-Tool-Request Translation
+     7.7.  Closed-Loop Automation Execution Workflow
+     7.8.  Example
+   8.  Deployment Considerations
+     8.1.  MCP hosted within the Network Controller
+     8.2.  MCP Server Hosted Within the Network Device
+   9.  Impact of integrating MCP on Network Management
+     9.1.  MCP Hosted Within the Network Controller
+     9.2.  MCP Server Hosted within the Network Device
+   10. IANA Considerations
+   11. Security Considerations
+   12. Normative References
    Authors' Addresses
 
 1.  Introduction
@@ -213,7 +214,55 @@ Table of Contents
       -  Decoupling network management functions into network agents and
          network tools
 
-4.  MCP for Network Exposure
+4.  The high level Challenges in adopting MCP in NM
+
+   *  Protocol Design
+
+      -  Error Handling o Although MCP provides basic error codes, MCP
+         does not yet enforce a entire error-handling mechanism, and its
+         scope is currently limited to discovery and invocation,
+         omitting crucial aspects like tool governance, versioning, or
+         lifecycle management.
+
+      -  Stateful o The protocol's reliance on stateful Server-Sent
+         Events (SSE) can create significant complexities when
+         integrating with inherently stateless REST APIs, requiring
+         developers to manage state externally.  This can be
+         particularly challenging for remote MCP servers due to network
+         latency and instability, complicating load balancing and
+         horizontal scaling efforts.
+
+      -  Context Handling o There are also concerns that multiple active
+         MCP connections could consume significant tokens in the LLM's
+         context window.  This can directly impact an LLM's performance,
+         slowing down responses and potentially hindering its ability to
+         maintain focus and reason effectively over extended or complex
+         interactions.
+
+   *  Security Consideration
+
+      -  Malicious Actors The protocol's ability to grant LLMs access to
+         external systems introduces potential vulnerabilities that
+         require careful consideration o Prompt injection, where
+         malicious instructions embedded in user inputs or tool
+         descriptions could lead to unintended actions by the LLM o Tool
+         poisoning, where attackers modify tool definitions, or rug
+         pulls (similar to tool poisoning but occurs post-installation)
+         o Tool shadowing, where a malicious server creates a tool with
+         the same name as a legitimate tool from another server to
+         intercept calls
+
+      -  Security enforcement o MCP itself lacks inherent security
+         enforcement mechanisms, relying heavily on external
+         implementations for authentication and authorization, which
+         were not initially well-defined within the protocol.
+
+      -  Identity Management o Determining clear identity management -
+         whether requests originate from the end user, the AI agent, or
+         a shared system account - remains an area needing clearer
+         definition.
+
+5.  MCP for Network Exposure
 
           3rd Party
      +------------------+
@@ -257,7 +306,7 @@ Table of Contents
                              |                              |
                              +------------------------------+
 
-5.  MCP Server Discovery
+6.  MCP Server Discovery
 
              +------------+ 2.Discovery ---------------+
              | Agents     +-----------+      MCP       |
@@ -307,9 +356,9 @@ Table of Contents
             +------------------+-------------|-------------|
                                |             |             |
 
-6.  Deployment Consideration in Network Management
+7.  Deployment Consideration in Network Management
 
-6.1.  MCP Communication using IPC
+7.1.  MCP Communication using IPC
 
               +----------------------------+
               |                            |
@@ -338,7 +387,7 @@ Table of Contents
     | Device  |      | Device  |     |Device   |
     +---------+      +---------+     +---------+
 
-6.2.  The OSS and the Network Controller Communication using MCP
+7.2.  The OSS and the Network Controller Communication using MCP
 
                +--------------------------+
                |                          |
@@ -367,7 +416,7 @@ Table of Contents
    | Device  |      | Device  |     |Device   |
    +---------+      +---------+     +---------+
 
-6.3.  The Network Controller and the Network Device Communication using
+7.3.  The Network Controller and the Network Device Communication using
       MCP
 
                    +--------------------------+
@@ -388,7 +437,7 @@ Table of Contents
        +---------+      +---------+     +---------+
        Network Device    Network Device  Network Device
 
-6.4.  The Network Gateway and the Network Device Communication using MCP
+7.4.  The Network Gateway and the Network Device Communication using MCP
 
                   +--------------------------+
                   |Network Gateway    (Network AI Agent)
@@ -418,7 +467,7 @@ Table of Contents
    protocol in the network management environments for building an
    intelligent network management and control platform.
 
-6.5.  Encapsulating Device Operations into MCP Tools
+7.5.  Encapsulating Device Operations into MCP Tools
 
    *  Objective: Standardize device operations into modular, reusable
       tools.
@@ -438,7 +487,7 @@ Table of Contents
 
       -  Enabling the plug-and-play integration of new device types.
 
-6.6.  LLM for Intent-to-Tool-Request Translation
+7.6.  LLM for Intent-to-Tool-Request Translation
 
    *  Objective: Allow AI models (such as Claude) to understand natural
       language commands and trigger operations.
@@ -473,7 +522,7 @@ Table of Contents
          format, then return this request to the client, enabling the
          client to properly parse the request.
 
-6.7.  Closed-Loop Automation Execution Workflow
+7.7.  Closed-Loop Automation Execution Workflow
 
    *  Objective: Realize the closed loop of "voice/text commands →
       automatic execution".
@@ -511,7 +560,7 @@ Table of Contents
 
       -  Full traceability of LLM decisions and tool executions.
 
-6.8.  Example
+7.8.  Example
 
    Take multi-vendor network management as an example, the MCP server is
    deployed locally on the network controller, and the tools are
@@ -662,7 +711,7 @@ async def check_status(device_ip: str, metrics: list):
   "192.168.10.2": "Error: no response from the device",
 }
 
-7.  Deployment Considerations
+8.  Deployment Considerations
 
    This section describes MCP deployment requirements for network
    management environments, followed by implementation scenarios.  Key
@@ -696,7 +745,7 @@ async def check_status(device_ip: str, metrics: list):
    remote).  The following subsections detail these deployment
    scenarios.
 
-7.1.  MCP hosted within the Network Controller
+8.1.  MCP hosted within the Network Controller
 
                      +--------------+
                      |     User     |
@@ -738,7 +787,7 @@ async def check_status(device_ip: str, metrics: list):
    network.  - Scalability: Cloud-native scaling accommodates dynamic
    tool registry updates and high request volumes.
 
-7.2.  MCP Server Hosted Within the Network Device
+8.2.  MCP Server Hosted Within the Network Device
 
                       +--------------+
                       |     User     |
@@ -777,7 +826,7 @@ async def check_status(device_ip: str, metrics: list):
    private APIs. - Key Characteristics: - Low Latency: Direct access to
    network devices minimizes tool execution delays
 
-8.  Impact of integrating MCP on Network Management
+9.  Impact of integrating MCP on Network Management
 
    +------------+-----------------------------+-----------------------+
    |            |   MCP Hosted Within         |   MCP Server Hosted   |
@@ -810,7 +859,7 @@ async def check_status(device_ip: str, metrics: list):
    |            |  conversation               |                       |
    -------------+-----------------------------+-----------------------+
 
-8.1.  MCP Hosted Within the Network Controller
+9.1.  MCP Hosted Within the Network Controller
 
    *  Pro
 
@@ -858,7 +907,7 @@ async def check_status(device_ip: str, metrics: list):
          o  It is necessary to deal with compatibility and consistency
             issues between different protocols.
 
-8.2.  MCP Server Hosted within the Network Device
+9.2.  MCP Server Hosted within the Network Device
 
    *  Pro
 
@@ -909,11 +958,11 @@ async def check_status(device_ip: str, metrics: list):
             configuration.  This makes it impossible for the network to
             form a unified control mechanism.
 
-9.  IANA Considerations
+10.  IANA Considerations
 
    This document has no IANA actions.
 
-10.  Security Considerations
+11.  Security Considerations
 
    The MCP protocol needs to consider scenarios where either the client
    or server encounters issues, such as crashes.  If one or both parties
@@ -932,7 +981,7 @@ async def check_status(device_ip: str, metrics: list):
    details.  Users must verify each LLM operation to prevent unintended
    hazardous actions.
 
-11.  Normative References
+12.  Normative References
 
    [RFC2576]  Frye, R., Levi, D., Routhier, S., and B. Wijnen,
               "Coexistence between Version 1, Version 2, and Version 3
