@@ -73,7 +73,7 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
 
    The application of MCP for the network management is meant to refactor
    network management operation and network capabilities as tools and provide more agile
-   and extensible architecture to expose these AI integration capabilities.
+   and extensible architecture to expose or consume these AI integration capabilities.
 
    With integration of MCP into the network management system, it allow you
    develop various rich AI driven network applications, realize intent
