@@ -5,7 +5,7 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 22 April 2026                                          D. Lopez
+Expires: 1 May 2026                                             D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
@@ -13,7 +13,7 @@ Expires: 22 April 2026                                          D. Lopez
                                                          Orange Research
                                                                  G. Zeng
                                                                   Huawei
-                                                         19 October 2025
+                                                         28 October 2025
 
 
             Applicability of MCP for the Network Management
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 April 2026.
+   This Internet-Draft will expire on 1 May 2026.
 
 Copyright Notice
 
