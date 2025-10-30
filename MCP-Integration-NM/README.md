@@ -9,7 +9,7 @@ This project consists of two main files that implement an MCP (Model Context Pro
 
 ## Features
 
-- Support for managing network devices via CLI and NETCONF protocols
+- Support for managing network devices (Huawei-router as an example)via CLI and NETCONF protocols
 - Integration with Ollama large language model for intelligent tool calling
 - Rich set of network device operation tools
 - Support for real-time device configuration and status queries
@@ -23,7 +23,6 @@ This project consists of two main files that implement an MCP (Model Context Pro
 
 2. **Ollama**
    - Download: https://ollama.com/download/windows
-   - Reference: [Ollama Installation Guide](https://ollama.com/download/windows)
 
 3. **Anaconda**
    - Download: https://www.anaconda.com/products/distribution
