@@ -56,19 +56,19 @@ class MCPClient:
             name = tool_call["function"]["name"]
             args = json.loads(tool_call["function"]["arguments"])
 
-            # 如果是 connect_and_get_config 工具，确保提供完整参数
+            
             if name == "connect_and_get_config":
-                # 检查参数是否完整，如果不完整则补充
+                
                 if "config" not in args or not args["config"]:
                     args["config"] = {
                         "host": "192.168.45.11",
                         "port": 22,
-                        "username": "Rfvbgt#123",        # 修改为正确的用户名
-                        "password": "Chasdfgh_123",      # 修改为正确的密码
+                        "username": "Rfvbgt#123",       
+                        "password": "Chasdfgh_123",      
                         "hostkey_verify": False
                     }
                 else:
-                    # 确保必需的字段都存在
+                    
                     required_fields = ['host', 'port', 'username', 'password']
                     for field in required_fields:
                         if field not in args["config"]:
@@ -77,9 +77,9 @@ class MCPClient:
                             elif field == 'port':
                                 args["config"][field] = 22
                             elif field == 'username':
-                                args["config"][field] = "Rfvbgt#123"      # 修改为正确的用户名
+                                args["config"][field] = "Rfvbgt#123"      
                             elif field == 'password':
-                                args["config"][field] = "Chasdfgh_123"    # 修改为正确的密码
+                                args["config"][field] = "Chasdfgh_123"    
 
             try:
                 result = await self.session.call_tool(name, args)
@@ -97,7 +97,7 @@ class MCPClient:
                     "content": result.content[0].text
                 })
             except Exception as e:
-                # 如果工具调用失败，将错误信息添加到消息中
+                
                 error_message = f"Error executing tool {name}: {str(e)}"
                 messages.append({
                     "role": "assistant",
@@ -256,4 +256,5 @@ if __name__ == "__main__":
         DEBUG_FLAG = True
 
     asyncio.run(main())
+
 
