@@ -30,18 +30,18 @@ This project consists of two main files that implement an MCP (Model Context Pro
 ## Installation Steps
 
 ### 1. Create Virtual Environment
-conda create -n test python=3.11
-conda activate test
+- conda create -n test python=3.11
+- conda activate test
 ### 2. Install Dependencies
-pip install mcp
-pip install FastMCP
-pip install fastapi>=0.68.0
-pip install uvicorn>=0.15.0
-pip install openai>=1.108
-pip install paramiko>=2.7.2
-pip install pydantic>=1.8.2
-pip install requests
-pip install ncclient
+- pip install mcp
+- pip install FastMCP
+- pip install fastapi>=0.68.0
+- pip install uvicorn>=0.15.0
+- pip install openai>=1.108
+- pip install paramiko>=2.7.2
+- pip install pydantic>=1.8.2
+- pip install requests
+- pip install ncclient
 ## Running Methods
 
 ### 1. Start MCP Server
