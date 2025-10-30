@@ -30,11 +30,9 @@ This project consists of two main files that implement an MCP (Model Context Pro
 ## Installation Steps
 
 ### 1. Create Virtual Environment
-bash
 conda create -n test python=3.11
 conda activate test
 ### 2. Install Dependencies
-bash
 pip install mcp
 pip install FastMCP
 pip install fastapi>=0.68.0
@@ -47,13 +45,10 @@ pip install ncclient
 ## Running Methods
 
 ### 1. Start MCP Server
-bash
 python mcp_cli_netconf_server.py
 ### 2. Start MCP Client
-bash
-python mcp_client.py
+python mcp_cli_netconf_client.py
 ### Debug Mode
-bash
 python mcp_client.py -d
 ## Tool Function Description
 
