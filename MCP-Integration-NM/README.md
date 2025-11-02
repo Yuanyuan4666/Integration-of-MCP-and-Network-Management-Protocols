@@ -96,14 +96,7 @@ python mcp_client.py -d
 
 **Returns**: Interface brief status table
 
-#### 7. DisMethSts
-**Function**: View MEth management port status
-
-**Parameters**: command - MEth status display command
-
-**Returns**: Management interface status information
-
-#### 8. disp_port_loopback
+#### 7. disp_port_loopback
 **Function**: Display port loopback mode
 
 **Parameters**: command - Loopback mode display command
@@ -112,7 +105,7 @@ python mcp_client.py -d
 
 ### Configuration Deployment Tools
 
-#### 9. CfgIssuance
+#### 8. CfgIssuance
 **Function**: Configuration deployment tool supporting system view and interface view configuration
 
 **Parameters**:
@@ -121,29 +114,6 @@ python mcp_client.py -d
 - mtu - MTU value
 
 **Returns**: Configuration execution result
-
-#### 10. CreateBasicACL
-**Function**: Create basic ACL and add rules
-
-**Parameters**: acl_number - ACL number (default 2001)
-
-**Returns**: ACL configuration result
-
-### Information Query Tools
-
-#### 11. query_vrf_info
-**Function**: Query VRF instance information
-
-**Parameters**: command - VRF query command
-
-**Returns**: VRF information in JSON format
-
-#### 12. disp_lldp_local_info
-**Function**: Display device local LLDP information
-
-**Parameters**: command - LLDP information display command
-
-**Returns**: LLDP information in JSON format
 
 ## Usage Examples
 
