@@ -138,100 +138,6 @@ def connect_and_get_config(config: dict) -> dict:
         logger.error(f"NETCONF connection or configuration retrieval failed: {e}")
         raise
 
-@mcp.tool(name="query_vrf_info",
-    description="Query VRF instance information",
-    title="Query VRF Instance Information")
-def query_vrf_info(command: str) -> str:
-    """
-    Query VRF instance information.
-    
-    Supported command formats:
-    - display vpn-instance [vpn-instance-name]
-    
-    Return fixed format JSON result:
-    {
-      "vpn-instance-name": "CUSTOMER_A",
-      "route-distinguisher": "100:1",
-      "vpn-target": [
-        {
-          "vpn-target": "100:1",
-          "export-extcommunity": true
-        },
-        {
-          "vpn-target": "100:1",
-          "import-extcommunity": true
-        }
-      ]
-    }
-    """
-    
-    return json.dumps({
-        "vpn-instance-name": "CUSTOMER_A",
-        "route-distinguisher": "100:1",
-        "vpn-target": [
-            {
-                "vpn-target": "100:1",
-                "export-extcommunity": True
-            },
-            {
-                "vpn-target": "100:1",
-                "import-extcommunity": True
-            }
-        ]
-    }, indent=2)
-
-@mcp.tool(
-    name="CreateBasicACL",
-    description="Create basic ACL and add rules",
-    title="Create Basic ACL"
-)
-def create_basic_acl(acl_number: int = 2001) -> str:
-    """
-    Create basic ACL and add default rules:
-    1. Allow 192.168.1.0/24 network segment
-    2. Deny all other source IPs
-    
-    Parameters:
-    acl_number: ACL number (default is 2001)
-    
-    Return configuration result string
-    """
-    # Configuration command list
-    commands = [
-        f"system-view",
-        f"display acl {acl_number}",
-        f"acl number {acl_number}",
-        f"rule 5 permit source 192.168.1.0 0.0.0.255",
-        f"rule 10 deny source any",
-        "commit",
-        f"display acl {acl_number}",
-        "return"
-    ]
-    
-    try:
-        if global_session_id is None:
-            raise ValueError("Not logged in, please log in to the device first.")
-            
-        # Send configuration request
-        response = requests.post(
-            "http://localhost:8000/api/execute",
-            json={
-                "session_id": global_session_id,
-                "commands": commands
-            }
-        )
-        response.raise_for_status()
-        
-        # Return success result
-        return f"ACL {acl_number} configuration successful:\n" \
-               "- Rule 5: Allow 192.168.1.0/24\n" \
-               "- Rule 10: Deny all other source IPs"
-               
-    except requests.exceptions.RequestException as e:
-        return f"Configuration failed: Network error - {str(e)}"
-    except Exception as e:
-        return f"Configuration failed: {str(e)}"
-
 
 @mcp.tool(
     name="DisplayCurrentConfiguration",
@@ -283,61 +189,6 @@ def DisplayCurrentConfiguration() -> str:
             detail=f"Failed to get configuration: {str(e)}"
         )
 
-@mcp.tool(name="disp_lldp_local_info",
-    description="Display device local LLDP information",
-    title="Display device local LLDP information")
-def disp_lldp_local_info(command: str) -> str:
-    """
-    Display device local LLDP information.
-    
-    Supported command formats:
-    - display lldp/local-info/
-    
-    Returns fixed format JSON result:
-    {
-      "chassis-id-sub-type": "mac-address",
-      "chassis-id": "e8f6-5494-04a0",
-      "system-name": "e8f6-5494-04a0",
-      "system-description": "Huawei AP...",
-      "up-time": "2025-10-21T14:17:03+00:00",
-      "management-addresss": {
-        "management-address": [
-          {
-            "type": "ipv4",
-            "value": "169.254.1.1",
-            "length": 5,
-            "if-sub-type": "if-index",
-            "if-id": 10001,
-            "": "1.3.6.1.4.1.2011.5.25.41.1.2.1.1.1"
-          }
-        ]
-      },
-      "system-capabilities-supported": ["wlan-access-point"],
-      "system-capabilities-enabled": ["wlan-access-point"]
-    }
-    """
-    # Directly return predefined JSON result
-    return json.dumps({
-        "chassis-id-sub-type": "mac-address",
-        "chassis-id": "e8f6-5494-04a0",
-        "system-name": "e8f6-5494-04a0",
-        "system-description": "Huawei AP\r\nHuawei YunShan OS\r\nVersion 1.25.0.1 (AirEngine 6700 V600R025C10)\r\nCopyright (C) 2021-2025 Huawei Technologies Co., Ltd.\r\nHUAWEI AirEngine6776-57T\r\nCurrent Work Mode: CLOUD",
-        "up-time": "2025-10-21T14:17:03+00:00",
-        "management-addresss": {
-            "management-address": [
-                {
-                    "type": "ipv4",
-                    "value": "169.254.1.1",
-                    "length": 5,
-                    "if-sub-type": "if-index",
-                    "if-id": 10001,
-                    "oid": "1.3.6.1.4.1.2011.5.25.41.1.2.1.1.1"
-                }
-            ]
-        },
-        "system-capabilities-supported": ["wlan-access-point"],
-        "system-capabilities-enabled": ["wlan-access-point"]
-    }, indent=2)  # Use indent=2 to beautify JSON output
 
 @mcp.tool(
     name="CfgIssuance",
@@ -826,3 +677,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
