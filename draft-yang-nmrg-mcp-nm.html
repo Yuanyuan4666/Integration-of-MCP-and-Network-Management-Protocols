@@ -1236,24 +1236,24 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-interworking-with-the-netwo" class="internal xref">Interworking with the Network Management protocol and YANG data models</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-mcp-usage-examples" class="internal xref">MCP Usage Examples</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-mcp-usage-examples" class="internal xref">MCP Usage Examples</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-device-configuration-using-" class="internal xref">Device Configuration using MCP+CLI</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
+                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-device-configuration-using-" class="internal xref">Device Configuration using MCP+CLI</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -2000,23 +2000,62 @@ Instead, it can be integrated together, e.g.,
 * Integrated MCP with YANG, allow the MCP client invoke YANG interface related capabilities;<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="mcp-usage-examples">
+<div id="iana-considerations">
 <section id="section-10">
+      <h2 id="name-iana-considerations">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-10-1">This document has no IANA actions.<a href="#section-10-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-11">
+      <h2 id="name-security-considerations">
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-11-1">The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations could be affected.<a href="#section-11-1" class="pilcrow">¶</a></p>
+<p id="section-11-2">Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.<a href="#section-11-2" class="pilcrow">¶</a></p>
+<p id="section-11-3">For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in the details. Users must verify each LLM operation to prevent unintended hazardous actions.<a href="#section-11-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-normative-references">
+<section id="section-12">
+      <h2 id="name-normative-references">
+<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+      </h2>
+<dl class="references">
+<dt id="RFC2576">[RFC2576]</dt>
+      <dd>
+<span class="refAuthor">Frye, R.</span>, <span class="refAuthor">Levi, D.</span>, <span class="refAuthor">Routhier, S.</span>, and <span class="refAuthor">B. Wijnen</span>, <span class="refTitle">"Coexistence between Version 1, Version 2, and Version 3 of the Internet-standard Network Management Framework"</span>, <span class="seriesInfo">RFC 2576</span>, <span class="seriesInfo">DOI 10.17487/RFC2576</span>, <time datetime="2000-03" class="refDate">March 2000</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2576">https://www.rfc-editor.org/rfc/rfc2576</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6241">[RFC6241]</dt>
+      <dd>
+<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8040">[RFC8040]</dt>
+    <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="usage">
+<section id="appendix-A">
       <h2 id="name-mcp-usage-examples">
-<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-mcp-usage-examples" class="section-name selfRef">MCP Usage Examples</a>
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-mcp-usage-examples" class="section-name selfRef">MCP Usage Examples</a>
       </h2>
 <div id="device-configuration-using-mcpcli">
-<section id="section-10.1">
+<section id="appendix-A.1">
         <h3 id="name-device-configuration-using-">
-<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-device-configuration-using-" class="section-name selfRef">Device Configuration using MCP+CLI</a>
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-device-configuration-using-" class="section-name selfRef">Device Configuration using MCP+CLI</a>
         </h3>
-<p id="section-10.1-1">In this example, MCP server is implemented by Server and expose all CLI interfaces and documentation as tools to the MCP Client.
-The Nework controller implement the client to interact with MCP server in the Network device.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
-<p id="section-10.1-2">The MCP server provides the following registered tool descriptor information:<a href="#section-10.1-2" class="pilcrow">¶</a></p>
-<p id="section-10.1-3">Tools description: It describes the name, use, and parameters of tools.<a href="#section-10.1-3" class="pilcrow">¶</a></p>
-<p id="section-10.1-4">Tools implementation: MCP implementation describes how the tools are invoked.<a href="#section-10.1-4" class="pilcrow">¶</a></p>
-<p id="section-10.1-5">See Tool descriptor information example as follows:<a href="#section-10.1-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-10.1-6">
+<p id="appendix-A.1-1">In this example, The network element implement the MCP Server and exposes all CLI interfaces and documentation as tools to the MCP Client.
+The Nework controller implements the MCP client and interact with MCP server in the Network element.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-2">The MCP server provides the following registered tool descriptor information:<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-3">Tools description: It describes the name, use, and parameters of tools.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-4">Tools implementation: MCP implementation describes how the tools are invoked.<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-5">See Tool descriptor information example as follows:<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.1-6">
 <pre>
 # Tool Descriptor
 [
@@ -2081,11 +2120,12 @@ async def check_status(device_ip: str, metrics: list):
     if "memory" in metrics:
         status["memory"] = get_memory_usage(device_ip)
     return status
-</pre><a href="#section-10.1-6" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1-6" class="pilcrow">¶</a>
 </div>
-<p id="section-10.1-7">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
-client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the appropriate tools and responds in JSON format as follows:<a href="#section-10.1-7" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-10.1-8">
+<p id="appendix-A.1-7">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
+client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the
+appropriate tools and responds in JSON format as follows:<a href="#appendix-A.1-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.1-8">
 <pre>
 {
 "method": "batch_configure_devices",
@@ -2099,10 +2139,12 @@ client retrieves the necessary tooling descriptor information from the MCP serve
 }
 }
 
-</pre><a href="#section-10.1-8" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1-8" class="pilcrow">¶</a>
 </div>
-<p id="section-10.1-9">The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are returned to the MCP client in Json as below and are forwarded to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.<a href="#section-10.1-9" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-10.1-10">
+<p id="appendix-A.1-9">The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are
+returned to the MCP client in Json as below and are forwarded to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back
+to the client for final presentation to the user.<a href="#appendix-A.1-9" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.1-10">
 <pre>
 # Convert to CLI commands of different vendors
 "commands": [
@@ -2150,53 +2192,14 @@ client retrieves the necessary tooling descriptor information from the MCP serve
   "192.168.10.2": "Error: no response from the device",
 }
 
-</pre><a href="#section-10.1-10" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1-10" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
-</section>
-</div>
-<div id="iana-considerations">
-<section id="section-11">
-      <h2 id="name-iana-considerations">
-<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
-      </h2>
-<p id="section-11-1">This document has no IANA actions.<a href="#section-11-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="security-considerations">
-<section id="section-12">
-      <h2 id="name-security-considerations">
-<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
-      </h2>
-<p id="section-12-1">The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations could be affected.<a href="#section-12-1" class="pilcrow">¶</a></p>
-<p id="section-12-2">Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.<a href="#section-12-2" class="pilcrow">¶</a></p>
-<p id="section-12-3">For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in the details. Users must verify each LLM operation to prevent unintended hazardous actions.<a href="#section-12-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="sec-normative-references">
-<section id="section-13">
-      <h2 id="name-normative-references">
-<a href="#section-13" class="section-number selfRef">13. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-      </h2>
-<dl class="references">
-<dt id="RFC2576">[RFC2576]</dt>
-      <dd>
-<span class="refAuthor">Frye, R.</span>, <span class="refAuthor">Levi, D.</span>, <span class="refAuthor">Routhier, S.</span>, and <span class="refAuthor">B. Wijnen</span>, <span class="refTitle">"Coexistence between Version 1, Version 2, and Version 3 of the Internet-standard Network Management Framework"</span>, <span class="seriesInfo">RFC 2576</span>, <span class="seriesInfo">DOI 10.17487/RFC2576</span>, <time datetime="2000-03" class="refDate">March 2000</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2576">https://www.rfc-editor.org/rfc/rfc2576</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6241">[RFC6241]</dt>
-      <dd>
-<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8040">[RFC8040]</dt>
-    <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-</dl>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-A">
+<section id="appendix-B">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>

@@ -89,11 +89,11 @@ Table of Contents
      8.3.  Closed-Loop Automation Execution Workflow
    9.  Interworking with the Network Management protocol and YANG data
            models
-   10. MCP Usage Examples
-     10.1.  Device Configuration using MCP+CLI
-   11. IANA Considerations
-   12. Security Considerations
-   13. Normative References
+   10. IANA Considerations
+   11. Security Considerations
+   12. Normative References
+   Appendix A.  MCP Usage Examples
+     A.1.  Device Configuration using MCP+CLI
    Authors' Addresses
 
 1.  Introduction
@@ -674,14 +674,54 @@ Table of Contents
    invoke CLI capabilities; * Integrated MCP with YANG, allow the MCP
    client invoke YANG interface related capabilities;
 
-10.  MCP Usage Examples
+10.  IANA Considerations
 
-10.1.  Device Configuration using MCP+CLI
+   This document has no IANA actions.
 
-   In this example, MCP server is implemented by Server and expose all
-   CLI interfaces and documentation as tools to the MCP Client.  The
-   Nework controller implement the client to interact with MCP server in
-   the Network device.
+11.  Security Considerations
+
+   The MCP protocol needs to consider scenarios where either the client
+   or server encounters issues, such as crashes.  If one or both parties
+   go offline during communication, the entire process may remain stuck
+   waiting for messages, potentially leading to an infinite loop.
+   Furthermore, certain tool operations may be interrupted, and some
+   irreversible network management operations could be affected.
+
+   Due to network latency, some operations might not return in time, yet
+   from the user's perspective, these operations may appear either
+   unexecuted or failed.  If the user then initiates another tool
+   request to the server, problems may occur.
+
+   For complex network management workflows, while LLM's tool invocation
+   process may generally function correctly, issues can arise in the
+   details.  Users must verify each LLM operation to prevent unintended
+   hazardous actions.
+
+12.  Normative References
+
+   [RFC2576]  Frye, R., Levi, D., Routhier, S., and B. Wijnen,
+              "Coexistence between Version 1, Version 2, and Version 3
+              of the Internet-standard Network Management Framework",
+              RFC 2576, DOI 10.17487/RFC2576, March 2000,
+              <https://www.rfc-editor.org/rfc/rfc2576>.
+
+   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
+              and A. Bierman, Ed., "Network Configuration Protocol
+              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
+              <https://www.rfc-editor.org/rfc/rfc6241>.
+
+   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
+              Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
+              <https://www.rfc-editor.org/rfc/rfc8040>.
+
+Appendix A.  MCP Usage Examples
+
+A.1.  Device Configuration using MCP+CLI
+
+   In this example, The network element implement the MCP Server and
+   exposes all CLI interfaces and documentation as tools to the MCP
+   Client.  The Nework controller implements the MCP client and interact
+   with MCP server in the Network element.
 
    The MCP server provides the following registered tool descriptor
    information:
@@ -829,46 +869,6 @@ async def check_status(device_ip: str, metrics: list):
   "192.168.10.1": "Configure Successfully, take 2.3 seconds",
   "192.168.10.2": "Error: no response from the device",
 }
-
-11.  IANA Considerations
-
-   This document has no IANA actions.
-
-12.  Security Considerations
-
-   The MCP protocol needs to consider scenarios where either the client
-   or server encounters issues, such as crashes.  If one or both parties
-   go offline during communication, the entire process may remain stuck
-   waiting for messages, potentially leading to an infinite loop.
-   Furthermore, certain tool operations may be interrupted, and some
-   irreversible network management operations could be affected.
-
-   Due to network latency, some operations might not return in time, yet
-   from the user's perspective, these operations may appear either
-   unexecuted or failed.  If the user then initiates another tool
-   request to the server, problems may occur.
-
-   For complex network management workflows, while LLM's tool invocation
-   process may generally function correctly, issues can arise in the
-   details.  Users must verify each LLM operation to prevent unintended
-   hazardous actions.
-
-13.  Normative References
-
-   [RFC2576]  Frye, R., Levi, D., Routhier, S., and B. Wijnen,
-              "Coexistence between Version 1, Version 2, and Version 3
-              of the Internet-standard Network Management Framework",
-              RFC 2576, DOI 10.17487/RFC2576, March 2000,
-              <https://www.rfc-editor.org/rfc/rfc2576>.
-
-   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
-              and A. Bierman, Ed., "Network Configuration Protocol
-              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
-              <https://www.rfc-editor.org/rfc/rfc6241>.
-
-   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
-              Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
-              <https://www.rfc-editor.org/rfc/rfc8040>.
 
 Authors' Addresses
 
