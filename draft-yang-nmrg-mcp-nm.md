@@ -552,12 +552,26 @@ Instead, it can be integrated together, e.g.,
 * Integrated MCP with CLI, allow the MCP client invoke CLI capabilities;
 * Integrated MCP with YANG, allow the MCP client invoke YANG interface related capabilities;
 
-# MCP Usage Examples
+# IANA Considerations
+
+This document has no IANA actions.
+
+# Security Considerations
+
+The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations could be affected.
+
+Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.
+
+For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in the details. Users must verify each LLM operation to prevent unintended hazardous actions.
+
+--- back
+
+# MCP Usage Examples {#usage}
 
 ## Device Configuration using MCP+CLI
 
-In this example, MCP server is implemented by Server and expose all CLI interfaces and documentation as tools to the MCP Client.
-The Nework controller implement the client to interact with MCP server in the Network device.
+In this example, The network element implement the MCP Server and exposes all CLI interfaces and documentation as tools to the MCP Client.
+The Nework controller implements the MCP client and interact with MCP server in the Network element.
 
 The MCP server provides the following registered tool descriptor information:
 
@@ -634,7 +648,8 @@ async def check_status(device_ip: str, metrics: list):
 ~~~~
 
 Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
-client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the appropriate tools and responds in JSON format as follows:
+client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the
+appropriate tools and responds in JSON format as follows:
 
 ~~~~
 {
@@ -651,7 +666,9 @@ client retrieves the necessary tooling descriptor information from the MCP serve
 
 ~~~~
 
-The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are returned to the MCP client in Json as below and are forwarded to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.
+The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are
+returned to the MCP client in Json as below and are forwarded to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back
+to the client for final presentation to the user.
 
 ~~~~
 # Convert to CLI commands of different vendors
@@ -701,20 +718,3 @@ The MCP server responds to the call instruction, converts it into the below CLIs
 }
 
 ~~~~
-
-
-
-# IANA Considerations
-
-This document has no IANA actions.
-
-# Security Considerations
-
-The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations could be affected.
-
-Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.
-
-For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in the details. Users must verify each LLM operation to prevent unintended hazardous actions.
-
---- back
-
