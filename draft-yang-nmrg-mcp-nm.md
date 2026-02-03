@@ -392,7 +392,7 @@ device.
 
 ~~~~
 
-## Standalone MCP server to Expose APIs and tools to the Network Controller 
+## Standalone MCP server to Expose APIs and tools to the Network Controller
 
 In this network scenario, The MCP client is deployed in the network controller
 while the MCP server is deployed standalone to manage all the network elements.
