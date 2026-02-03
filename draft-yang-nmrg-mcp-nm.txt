@@ -78,9 +78,10 @@ Table of Contents
    7.  Deployment Consideration in adopting MCP in the Network
            Management
      7.1.  Network Element Inter-Communication using MCP
-     7.2.  Standalone MCP server to Expose APIs and tools to the
+     7.2.  Network Controller consumes API or Data source using MCP
+     7.3.  Standalone MCP server to Expose APIs and tools to the
            Network Controller
-     7.3.  The Network Gateway/Controller and the Network Element
+     7.4.  The Network Gateway/Controller and the Network Element
            Communication using MCP
    8.  MCP architecture Design for Network Management
      8.1.  Encapsulating Device Operations into MCP Tools
@@ -447,11 +448,11 @@ Table of Contents
 
 7.1.  Network Element Inter-Communication using MCP
 
-   In this network scenario, The MCP client is deployed in one smart
+   In this network scenario, the MCP client is deployed in one smart
    network element while the MCP server is deployed in another smart
    network element.  The MCP client communicates with the MCP server
    using the MCP protocol and invoke specific tools and get access to
-   specific data in the network element as a data source. . In addition,
+   specific data in the network element as a data source.  In addition,
    human operator can use nature language to interact with smart network
    element to investigate protocol troubleshooting information.
 
@@ -474,7 +475,34 @@ Table of Contents
      +-------------------------+     +-------------------------+
        Smart Network Element           Smart Network Element
 
-7.2.  Standalone MCP server to Expose APIs and tools to the Network
+7.2.  Network Controller consumes API or Data source using MCP
+
+   In this network scenario, the MCP client is deployed in the network
+   controller while the MCP server is deployed in either the 3rd party
+   managment system or external data source.  The MCP client
+   communicates with the MCP server using the MCP protocol and invoke
+   specific tools and get access to specific data in the 3rd party
+   management system or external data source.
+
+   +------------------------+     +------------+
+   |                        |     | 3rd party  |
+   |   Network Controller   |     | Management |
+   |              +-------+ |     |    System  |
+   |              |  MCP  +-+--+  |+----------+|
+   |              | Client+-+--+--->MCP Server||
+   |              +-------+ |  |  |+----------+|
+   |                        |  |  +------------+
+   |                        |  |
+   |                        |  |  +------------+
+   |                        |  |  |            |
+   |                        |  |  |Data Source |
+   |                        |  |  |+----------+|
+   |                        |  |--->MCP Server||
+   |                        |     |+----------+|
+   |                        |     |            |
+   +------------------------+     +------------+
+
+7.3.  Standalone MCP server to Expose APIs and tools to the Network
       Controller
 
    In this network scenario, The MCP client is deployed in the network
@@ -508,7 +536,7 @@ Table of Contents
    +-------------+                               +----------+
    Network Element                             Network Element
 
-7.3.  The Network Gateway/Controller and the Network Element
+7.4.  The Network Gateway/Controller and the Network Element
       Communication using MCP
 
    In this network scenario, The MCP client is deployed in the network

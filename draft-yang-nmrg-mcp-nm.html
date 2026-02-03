@@ -1208,10 +1208,13 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
                 <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-network-element-inter-commu" class="internal xref">Network Element Inter-Communication using MCP</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-standalone-mcp-server-to-ex" class="internal xref">Standalone MCP server to Expose APIs and tools to the Network Controller</a></p>
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-network-controller-consumes" class="internal xref">Network Controller consumes API or Data source using MCP</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-the-network-gateway-control" class="internal xref">The Network Gateway/Controller and the Network Element Communication using MCP</a></p>
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-standalone-mcp-server-to-ex" class="internal xref">Standalone MCP server to Expose APIs and tools to the Network Controller</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
+                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-the-network-gateway-control" class="internal xref">The Network Gateway/Controller and the Network Element Communication using MCP</a></p>
 </li>
             </ul>
 </li>
@@ -1695,9 +1698,9 @@ network log analysis, device configuration management, energy consumption manage
         <h3 id="name-network-element-inter-commu">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-network-element-inter-commu" class="section-name selfRef">Network Element Inter-Communication using MCP</a>
         </h3>
-<p id="section-7.1-1">In this network scenario, The MCP client is deployed in one smart network element
+<p id="section-7.1-1">In this network scenario, the MCP client is deployed in one smart network element
 while the MCP server is deployed in another smart network element. The MCP client
-communicates with the MCP server using the MCP protocol and invoke specific tools and get access to specific data in the network element as a data source. .
+communicates with the MCP server using the MCP protocol and invoke specific tools and get access to specific data in the network element as a data source.
 In addition, human operator can use nature language to interact with smart network element to investigate protocol troubleshooting information.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1-2">Network element usually have limited resources (CPU, memory, etc.). Deploying MCP
 Client together with SLM may occupy a large amount of resources, affecting the normal operation of the
@@ -1724,19 +1727,53 @@ device.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="standalone-mcp-server-to-expose-apis-and-tools-to-the-network-controller">
+<div id="network-controller-consumes-api-or-data-source-using-mcp">
 <section id="section-7.2">
-        <h3 id="name-standalone-mcp-server-to-ex">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-standalone-mcp-server-to-ex" class="section-name selfRef">Standalone MCP server to Expose APIs and tools to the Network Controller</a>
+        <h3 id="name-network-controller-consumes">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-network-controller-consumes" class="section-name selfRef">Network Controller consumes API or Data source using MCP</a>
         </h3>
-<p id="section-7.2-1">In this network scenario, The MCP client is deployed in the network controller
+<p id="section-7.2-1">In this network scenario, the MCP client is deployed in the network controller
+while the MCP server is deployed in either the 3rd party managment system or
+external data source. The MCP client communicates with the MCP server using
+the MCP protocol and invoke specific tools and get access to specific data in
+the 3rd party management system or external data source.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.2-2">
+<pre>
++------------------------+     +------------+
+|                        |     | 3rd party  |
+|   Network Controller   |     | Management |
+|              +-------+ |     |    System  |
+|              |  MCP  +-+--+  |+----------+|
+|              | Client+-+--+---&gt;MCP Server||
+|              +-------+ |  |  |+----------+|
+|                        |  |  +------------+
+|                        |  |
+|                        |  |  +------------+
+|                        |  |  |            |
+|                        |  |  |Data Source |
+|                        |  |  |+----------+|
+|                        |  |---&gt;MCP Server||
+|                        |     |+----------+|
+|                        |     |            |
++------------------------+     +------------+
+
+</pre><a href="#section-7.2-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="standalone-mcp-server-to-expose-apis-and-tools-to-the-network-controller">
+<section id="section-7.3">
+        <h3 id="name-standalone-mcp-server-to-ex">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-standalone-mcp-server-to-ex" class="section-name selfRef">Standalone MCP server to Expose APIs and tools to the Network Controller</a>
+        </h3>
+<p id="section-7.3-1">In this network scenario, The MCP client is deployed in the network controller
 while the MCP server is deployed standalone to manage all the network elements.
 The network elements will be refactored as data source or tools so that MCP client
 can directly consume these APIs or data sources.
 Alternatively, the network elements can be traditional network elements. MCP server
 will serve as protocol adaptor to translate MCP protocol into traditional network management
-protocols such as NETCONF, gNMI.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-7.2-2">
+protocols such as NETCONF, gNMI.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.3-2">
 <pre>
                   +----------------------+
                   |                      |
@@ -1760,23 +1797,23 @@ protocols such as NETCONF, gNMI.<a href="#section-7.2-1" class="pilcrow">¶</a><
 +-------------+                               +----------+
 Network Element                             Network Element
 
-</pre><a href="#section-7.2-2" class="pilcrow">¶</a>
+</pre><a href="#section-7.3-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="the-network-gatewaycontroller-and-the-network-element-communication-using-mcp">
-<section id="section-7.3">
+<section id="section-7.4">
         <h3 id="name-the-network-gateway-control">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-the-network-gateway-control" class="section-name selfRef">The Network Gateway/Controller and the Network Element Communication using MCP</a>
+<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-the-network-gateway-control" class="section-name selfRef">The Network Gateway/Controller and the Network Element Communication using MCP</a>
         </h3>
-<p id="section-7.3-1">In this network scenario, The MCP client is deployed in the network gateway device
+<p id="section-7.4-1">In this network scenario, The MCP client is deployed in the network gateway device
 while the MCP server is deployed in each network devices. The MCP client
 communicates with the MCP server using the MCP protocol. LLM model is pre-trained model
-and deployed in the same Network gateway as the MCP client.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.3-2">Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP
+and deployed in the same Network gateway as the MCP client.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
+<p id="section-7.4-2">Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP
 Server may occupy a large amount of resources, affecting the normal operation of the
-device.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-7.3-3">
+device.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.4-3">
 <pre>
       +------------------------+
       |   Network Controller/  |
@@ -1798,7 +1835,7 @@ device.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
  +------------+     +-------------+
 Network Element      Network Element
 
-</pre><a href="#section-7.3-3" class="pilcrow">¶</a>
+</pre><a href="#section-7.4-3" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
