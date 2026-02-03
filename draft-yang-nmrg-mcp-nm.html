@@ -1521,10 +1521,10 @@ o Determining clear identity management - whether requests originate from the en
 
 </pre><a href="#section-5.1-1" class="pilcrow">¶</a>
 </div>
-<p id="section-5.1-2">Step 1: External tools or data source publish a set of APIs to MCP server in the Network Controller.
-Step 2: MCP client send specific tools request to discover tools and MCP Server provide authorization to the MCP client.
-Step 3: After sucessful authorization, MCP server return API list corresponding to tools request sent by the MCP client.
-Step 4: MCP Client invokes tools with authorization.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">Step 1: External tools or data source publish a set of APIs to MCP server in the Network Controller.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">Step 2: MCP client send specific tools request to discover tools and MCP Server provide authorization to the MCP client.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">Step 3: After sucessful authorization, MCP server return API list corresponding to tools request sent by the MCP client.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1-5">Step 4: MCP Client invokes tools with authorization.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="the-network-controller-consumes-external-sources">
@@ -1555,11 +1555,11 @@ Step 4: MCP Client invokes tools with authorization.<a href="#section-5.1-2" cla
 
 </pre><a href="#section-5.2-1" class="pilcrow">¶</a>
 </div>
-<p id="section-5.2-2">Step 0: MCP Client is preconfigured with the MCP Server address.
-Step 1: IETF Network Management AI Agent sends a MCP Service Request to
-        the MCP client within the Network Controller.
-Step 2: The MCP client discover tools provided by the external MCP server.
-Step 3: The MCP client provide available tools list to the IETF Network Management AI Agent.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">Step 0: MCP Client is preconfigured with the MCP Server address.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">Step 1: IETF Network Management AI Agent sends a MCP Service Request to
+        the MCP client within the Network Controller.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-4">Step 2: The MCP client discover tools provided by the external MCP server.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+<p id="section-5.2-5">Step 3: The MCP client provide available tools list to the IETF Network Management AI Agent.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1647,12 +1647,12 @@ of the location of each MCP servers.<a href="#section-6-1" class="pilcrow">¶</a
 </pre><a href="#section-6.2-1" class="pilcrow">¶</a>
 </div>
 <p id="section-6.2-2">Step 0: The MCP Server syncs up on the info of tools, upon tools is added or removed, tools changes
-        will be automatically syned up with the MCP server.
-Step 1: Each new MCP server will register to the centralized MCP registry.
-Step 2.1: MCP Client send the MCP service request to the MCP registry for specific capability.
-Step 2.2: The MCP registry return specific MCP server to the MCP client.
-Step 3: The MCP Client request authorization from the MCP server.
-Step 4: The MCP Client invoke specific tools with authorization.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+        will be automatically syned up with the MCP server.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">Step 1: Each new MCP server will register to the centralized MCP registry.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-4">Step 2.1: MCP Client send the MCP service request to the MCP registry for specific capability.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2-5">Step 2.2: The MCP registry return specific MCP server to the MCP client.<a href="#section-6.2-5" class="pilcrow">¶</a></p>
+<p id="section-6.2-6">Step 3: The MCP Client request authorization from the MCP server.<a href="#section-6.2-6" class="pilcrow">¶</a></p>
+<p id="section-6.2-7">Step 4: The MCP Client invoke specific tools with authorization.<a href="#section-6.2-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2101,20 +2101,10 @@ the details. Users must verify each LLM operation to prevent unintended hazardou
 
 </pre><a href="#appendix-A.1-1" class="pilcrow">¶</a>
 </div>
-<ol start="1" type="1" class="normal type-1" id="appendix-A.1-2">
-<li id="appendix-A.1-2.1">
-            <p id="appendix-A.1-2.1.1">When ISIS neighbour establishment fails, the network maintenance engineer queries the fault cause via natural language in the CLI interface.<a href="#appendix-A.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li id="appendix-A.1-2.2">
-            <p id="appendix-A.1-2.2.1">A small model deployed on the device's CPU understands the user's intent and matches the fault pattern.<a href="#appendix-A.1-2.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li id="appendix-A.1-2.3">
-            <p id="appendix-A.1-2.3.1">Troubleshooting scripts are invoked to locate the root cause of the fault.<a href="#appendix-A.1-2.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li id="appendix-A.1-2.4">
-            <p id="appendix-A.1-2.4.1">The query is repeated until service operations get back to normal.<a href="#appendix-A.1-2.4.1" class="pilcrow">¶</a></p>
-</li>
-        </ol>
+<p id="appendix-A.1-2">Step 1. When ISIS neighbour establishment fails, the network maintenance engineer queries the fault cause via natural language in the CLI interface.<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-3">Step 2. A small model deployed on the device's CPU understands the user's intent and matches the fault pattern.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-4">Step 3. Troubleshooting scripts are invoked to locate the root cause of the fault.<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-5">Step 4. The query is repeated until service operations get back to normal.<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="device-configuration-using-mcpcli">
