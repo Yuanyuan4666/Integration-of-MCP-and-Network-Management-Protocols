@@ -568,6 +568,50 @@ For complex network management workflows, while LLM's tool invocation process ma
 
 # MCP Usage Examples {#usage}
 
+## Routing Protocol Troubleshooting using Embeded SLM Model and Nature Language Interface
+
+~~~~
+
++-----------------------------------------------------------------+
+| Smart Network Element                                           |
+|                                                                 |
+| +-------------------------------------------------------------+ |
+| |  Dev  Env: Offline Generate fault location workflow code    | |
+| |                                                             | |
+| |      +----------+                         +---------+       | |
+| |      | Expert   | +----------+            |fault    |       | |
+| |      |experience| | Protocol |  +-----+   |Locating |       | |
+| |      |accumulate+-> Knowledge+--> LLM +--->Workflow |       | |
+| |      | protocol | |   RAG    |  +-----+   |  Code   |       | |
+| |      |  fault   | +----------+            +----+----+       | |
+| |      +----------+                              |            | |
+| +------------------------------------------------+------------+ |
+|                                                  |              |
+|                                                  |              |
+|                                                  |              |
+| +------------------------------------------------+------------+ |
+| |OPS Env:Online Nature Language Interaction------V-------+    | |
+| |                             +----------+Troubleshooting|    | |
+| |                             |          |  Package Build|    | |
+| |                             |          +---------------+    | |
+| |+--------+              +----V---+    +-------------+        | |
+| ||  User  |  +-------+   |Intent  |    | Execute     |        | |
+| || Nature |  | Device|   |Parse   |    |Workflow     |        | |
+| ||Language+-->  SLM  +--->Fault   +---->  Script     |        | |
+| || Prompt |  |  ONNX |   |Pattern |    |Locating root|        | |
+| |+--------+  +-------+   |Match   |    |  Cause      |        | |
+| |                        +--------+    +-------------+        | |
+| |                                                             | |
+| +-------------------------------------------------------------+ |
++-----------------------------------------------------------------+
+ 
+~~~~
+
+1. When ISIS neighbour establishment fails, the network maintenance engineer queries the fault cause via natural language in the CLI interface.
+2. A small model deployed on the device's CPU understands the user's intent and matches the fault pattern.
+3. Troubleshooting scripts are invoked to locate the root cause of the fault.
+4. The query is repeated until service operations get back to normal.
+
 ## Device Configuration using MCP+CLI
 
 In this example, The network element implement the MCP Server and exposes all CLI interfaces and documentation as tools to the MCP Client.
