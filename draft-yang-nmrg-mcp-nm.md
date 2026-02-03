@@ -495,28 +495,6 @@ Network Element      Network Element
 
 # MCP architecture Design for Network Management
 
-~~~~
-
-             ┌──────┐
-             │ User │
-             └───┬──┘                   Step b.LLM for Intent to tools
-               1 │ 9                           request translation
-      ┌──────────│─────────────────┐           (1,3,4,9)
-      │ ┌────────┴───┐3,8    ┌───┐ │
-      │2│ MCP Client ├───────┤LLM│ │
-      │ └────────┬───┘4,7    └───┘ │   Step c.Close Loop Execution workflow
-      │          │                 │          (5,6,7,8,)
-      │         5│6                │
-      │          │                 │
-      └──────────│─────────────────┘
-                 │                       Step a.Encapsulating network
-      ┌──────────┴───┬─────────────┐      operations into MCP tools
- ┌────┴─────┐  ┌─────┴─────┐ ┌─────┴────┐
- │MCP Server│  │ MCP Server│ │MCP Server|
- └──────────┘  └───────────┘ └──────────┘
-
-~~~~
-
 ## Encapsulating Device Operations into MCP Tools
 
 - Objective: Standardize device operations into modular, reusable tools.
