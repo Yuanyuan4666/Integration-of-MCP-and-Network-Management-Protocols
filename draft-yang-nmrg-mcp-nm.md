@@ -539,7 +539,8 @@ Network Element      Network Element
 
   - Tool Execution: The MCP Server executes the translated commands on target devices and returns results to the client.
 
-  - Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.
+  - Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the
+    LLM for summarization.
 
 - Benefits:
   - Tools safely retry/rollback.
@@ -547,9 +548,11 @@ Network Element      Network Element
 
 # Interworking with the Network Management protocol and YANG data models
 
-MCP can be seen as AI protocol and used to invoke AI integrated capabilities. MCP is not in the position to replace the network management and YANG data model.
-Instead, it can be integrated together, e.g.,
+MCP can be seen as AI protocol and used to invoke AI integrated capabilities. MCP is not in the position to replace the
+network management and YANG data model. Instead, it can be integrated together, e.g.,
+
 * Integrated MCP with CLI, allow the MCP client invoke CLI capabilities;
+
 * Integrated MCP with YANG, allow the MCP client invoke YANG interface related capabilities;
 
 # IANA Considerations
@@ -558,15 +561,64 @@ This document has no IANA actions.
 
 # Security Considerations
 
-The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations could be affected.
+The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one
+or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading
+to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations
+could be affected.
 
-Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.
+Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear
+either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.
 
-For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in the details. Users must verify each LLM operation to prevent unintended hazardous actions.
+For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in
+the details. Users must verify each LLM operation to prevent unintended hazardous actions.
 
 --- back
 
 # MCP Usage Examples {#usage}
+
+## Routing Protocol Troubleshooting using Embeded SLM Model and Nature Language Interface
+
+~~~~
+
++-----------------------------------------------------------------+
+| Smart Network Element                                           |
+|                                                                 |
+| +-------------------------------------------------------------+ |
+| |  Dev  Env: Offline Generate fault location workflow code    | |
+| |                                                             | |
+| |      +----------+                         +---------+       | |
+| |      | Expert   | +----------+            |fault    |       | |
+| |      |experience| | Protocol |  +-----+   |Locating |       | |
+| |      |accumulate+-> Knowledge+--> LLM +--->Workflow |       | |
+| |      | protocol | |   RAG    |  +-----+   |  Code   |       | |
+| |      |  fault   | +----------+            +----+----+       | |
+| |      +----------+                              |            | |
+| +------------------------------------------------+------------+ |
+|                                                  |              |
+|                                                  |              |
+|                                                  |              |
+| +------------------------------------------------+------------+ |
+| |OPS Env:Online Nature Language Interaction------V-------+    | |
+| |                             +----------+Troubleshooting|    | |
+| |                             |          |  Package Build|    | |
+| |                             |          +---------------+    | |
+| |+--------+              +----V---+    +-------------+        | |
+| ||  User  |  +-------+   |Intent  |    | Execute     |        | |
+| || Nature |  | Device|   |Parse   |    |Workflow     |        | |
+| ||Language+-->  SLM  +--->Fault   +---->  Script     |        | |
+| || Prompt |  |  ONNX |   |Pattern |    |Locating root|        | |
+| |+--------+  +-------+   |Match   |    |  Cause      |        | |
+| |                        +--------+    +-------------+        | |
+| |                                                             | |
+| +-------------------------------------------------------------+ |
++-----------------------------------------------------------------+
+
+~~~~
+
+1. When ISIS neighbour establishment fails, the network maintenance engineer queries the fault cause via natural language in the CLI interface.
+2. A small model deployed on the device's CPU understands the user's intent and matches the fault pattern.
+3. Troubleshooting scripts are invoked to locate the root cause of the fault.
+4. The query is repeated until service operations get back to normal.
 
 ## Device Configuration using MCP+CLI
 
