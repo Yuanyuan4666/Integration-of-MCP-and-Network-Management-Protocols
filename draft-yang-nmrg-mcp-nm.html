@@ -1248,7 +1248,10 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
             <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-mcp-usage-examples" class="internal xref">MCP Usage Examples</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
-                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-device-configuration-using-" class="internal xref">Device Configuration using MCP+CLI</a></p>
+                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-routing-protocol-troublesho" class="internal xref">Routing Protocol Troubleshooting using Embeded SLM Model and Nature Language Interface</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
+                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-device-configuration-using-" class="internal xref">Device Configuration using MCP+CLI</a></p>
 </li>
             </ul>
 </li>
@@ -1969,7 +1972,8 @@ include the functional description, required parameters of tools.<a href="#secti
                 <p id="section-8.3-1.2.2.4.1">Tool Execution: The MCP Server executes the translated commands on target devices and returns results to the client.<a href="#section-8.3-1.2.2.4.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-8.3-1.2.2.5">
-                <p id="section-8.3-1.2.2.5.1">Result Aggregation &amp; Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.<a href="#section-8.3-1.2.2.5.1" class="pilcrow">¶</a></p>
+                <p id="section-8.3-1.2.2.5.1">Result Aggregation &amp; Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the
+LLM for summarization.<a href="#section-8.3-1.2.2.5.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
@@ -1994,10 +1998,16 @@ include the functional description, required parameters of tools.<a href="#secti
       <h2 id="name-interworking-with-the-netwo">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-interworking-with-the-netwo" class="section-name selfRef">Interworking with the Network Management protocol and YANG data models</a>
       </h2>
-<p id="section-9-1">MCP can be seen as AI protocol and used to invoke AI integrated capabilities. MCP is not in the position to replace the network management and YANG data model.
-Instead, it can be integrated together, e.g.,
-* Integrated MCP with CLI, allow the MCP client invoke CLI capabilities;
-* Integrated MCP with YANG, allow the MCP client invoke YANG interface related capabilities;<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">MCP can be seen as AI protocol and used to invoke AI integrated capabilities. MCP is not in the position to replace the
+network management and YANG data model. Instead, it can be integrated together, e.g.,<a href="#section-9-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-9-2.1">
+          <p id="section-9-2.1.1">Integrated MCP with CLI, allow the MCP client invoke CLI capabilities;<a href="#section-9-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-9-2.2">
+          <p id="section-9-2.2.1">Integrated MCP with YANG, allow the MCP client invoke YANG interface related capabilities;<a href="#section-9-2.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 </section>
 </div>
 <div id="iana-considerations">
@@ -2013,9 +2023,14 @@ Instead, it can be integrated together, e.g.,
       <h2 id="name-security-considerations">
 <a href="#section-11" class="section-number selfRef">11. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-11-1">The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations could be affected.<a href="#section-11-1" class="pilcrow">¶</a></p>
-<p id="section-11-2">Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.<a href="#section-11-2" class="pilcrow">¶</a></p>
-<p id="section-11-3">For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in the details. Users must verify each LLM operation to prevent unintended hazardous actions.<a href="#section-11-3" class="pilcrow">¶</a></p>
+<p id="section-11-1">The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one
+or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading
+to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations
+could be affected.<a href="#section-11-1" class="pilcrow">¶</a></p>
+<p id="section-11-2">Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear
+either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.<a href="#section-11-2" class="pilcrow">¶</a></p>
+<p id="section-11-3">For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in
+the details. Users must verify each LLM operation to prevent unintended hazardous actions.<a href="#section-11-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-normative-references">
@@ -2044,18 +2059,76 @@ Instead, it can be integrated together, e.g.,
       <h2 id="name-mcp-usage-examples">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-mcp-usage-examples" class="section-name selfRef">MCP Usage Examples</a>
       </h2>
-<div id="device-configuration-using-mcpcli">
+<div id="routing-protocol-troubleshooting-using-embeded-slm-model-and-nature-language-interface">
 <section id="appendix-A.1">
-        <h3 id="name-device-configuration-using-">
-<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-device-configuration-using-" class="section-name selfRef">Device Configuration using MCP+CLI</a>
+        <h3 id="name-routing-protocol-troublesho">
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-routing-protocol-troublesho" class="section-name selfRef">Routing Protocol Troubleshooting using Embeded SLM Model and Nature Language Interface</a>
         </h3>
-<p id="appendix-A.1-1">In this example, The network element implement the MCP Server and exposes all CLI interfaces and documentation as tools to the MCP Client.
-The Nework controller implements the MCP client and interact with MCP server in the Network element.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-2">The MCP server provides the following registered tool descriptor information:<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-3">Tools description: It describes the name, use, and parameters of tools.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-4">Tools implementation: MCP implementation describes how the tools are invoked.<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-5">See Tool descriptor information example as follows:<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.1-6">
+<div class="alignLeft art-text artwork" id="appendix-A.1-1">
+<pre>
++-----------------------------------------------------------------+
+| Smart Network Element                                           |
+|                                                                 |
+| +-------------------------------------------------------------+ |
+| |  Dev  Env: Offline Generate fault location workflow code    | |
+| |                                                             | |
+| |      +----------+                         +---------+       | |
+| |      | Expert   | +----------+            |fault    |       | |
+| |      |experience| | Protocol |  +-----+   |Locating |       | |
+| |      |accumulate+-&gt; Knowledge+--&gt; LLM +---&gt;Workflow |       | |
+| |      | protocol | |   RAG    |  +-----+   |  Code   |       | |
+| |      |  fault   | +----------+            +----+----+       | |
+| |      +----------+                              |            | |
+| +------------------------------------------------+------------+ |
+|                                                  |              |
+|                                                  |              |
+|                                                  |              |
+| +------------------------------------------------+------------+ |
+| |OPS Env:Online Nature Language Interaction------V-------+    | |
+| |                             +----------+Troubleshooting|    | |
+| |                             |          |  Package Build|    | |
+| |                             |          +---------------+    | |
+| |+--------+              +----V---+    +-------------+        | |
+| ||  User  |  +-------+   |Intent  |    | Execute     |        | |
+| || Nature |  | Device|   |Parse   |    |Workflow     |        | |
+| ||Language+--&gt;  SLM  +---&gt;Fault   +----&gt;  Script     |        | |
+| || Prompt |  |  ONNX |   |Pattern |    |Locating root|        | |
+| |+--------+  +-------+   |Match   |    |  Cause      |        | |
+| |                        +--------+    +-------------+        | |
+| |                                                             | |
+| +-------------------------------------------------------------+ |
++-----------------------------------------------------------------+
+
+</pre><a href="#appendix-A.1-1" class="pilcrow">¶</a>
+</div>
+<ol start="1" type="1" class="normal type-1" id="appendix-A.1-2">
+<li id="appendix-A.1-2.1">
+            <p id="appendix-A.1-2.1.1">When ISIS neighbour establishment fails, the network maintenance engineer queries the fault cause via natural language in the CLI interface.<a href="#appendix-A.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="appendix-A.1-2.2">
+            <p id="appendix-A.1-2.2.1">A small model deployed on the device's CPU understands the user's intent and matches the fault pattern.<a href="#appendix-A.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="appendix-A.1-2.3">
+            <p id="appendix-A.1-2.3.1">Troubleshooting scripts are invoked to locate the root cause of the fault.<a href="#appendix-A.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="appendix-A.1-2.4">
+            <p id="appendix-A.1-2.4.1">The query is repeated until service operations get back to normal.<a href="#appendix-A.1-2.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+</section>
+</div>
+<div id="device-configuration-using-mcpcli">
+<section id="appendix-A.2">
+        <h3 id="name-device-configuration-using-">
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-device-configuration-using-" class="section-name selfRef">Device Configuration using MCP+CLI</a>
+        </h3>
+<p id="appendix-A.2-1">In this example, The network element implement the MCP Server and exposes all CLI interfaces and documentation as tools to the MCP Client.
+The Nework controller implements the MCP client and interact with MCP server in the Network element.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-2">The MCP server provides the following registered tool descriptor information:<a href="#appendix-A.2-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-3">Tools description: It describes the name, use, and parameters of tools.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-4">Tools implementation: MCP implementation describes how the tools are invoked.<a href="#appendix-A.2-4" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-5">See Tool descriptor information example as follows:<a href="#appendix-A.2-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.2-6">
 <pre>
 # Tool Descriptor
 [
@@ -2120,12 +2193,12 @@ async def check_status(device_ip: str, metrics: list):
     if "memory" in metrics:
         status["memory"] = get_memory_usage(device_ip)
     return status
-</pre><a href="#appendix-A.1-6" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.2-6" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-7">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
+<p id="appendix-A.2-7">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
 client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the
-appropriate tools and responds in JSON format as follows:<a href="#appendix-A.1-7" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.1-8">
+appropriate tools and responds in JSON format as follows:<a href="#appendix-A.2-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.2-8">
 <pre>
 {
 "method": "batch_configure_devices",
@@ -2139,12 +2212,12 @@ appropriate tools and responds in JSON format as follows:<a href="#appendix-A.1-
 }
 }
 
-</pre><a href="#appendix-A.1-8" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.2-8" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-9">The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are
+<p id="appendix-A.2-9">The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are
 returned to the MCP client in Json as below and are forwarded to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back
-to the client for final presentation to the user.<a href="#appendix-A.1-9" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.1-10">
+to the client for final presentation to the user.<a href="#appendix-A.2-9" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.2-10">
 <pre>
 # Convert to CLI commands of different vendors
 "commands": [
@@ -2192,7 +2265,7 @@ to the client for final presentation to the user.<a href="#appendix-A.1-9" class
   "192.168.10.2": "Error: no response from the device",
 }
 
-</pre><a href="#appendix-A.1-10" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.2-10" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
