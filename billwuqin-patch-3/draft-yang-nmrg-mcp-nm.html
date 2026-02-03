@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>Applicability of MCP for the Network Management</title>
+<meta content="Yuanyuan Yang" name="author">
+<meta content="Qin Wu" name="author">
+<meta content="Diego Lopez" name="author">
+<meta content="Nathalie Romo Moreno" name="author">
+<meta content="Lionel Tailhardat" name="author">
+<meta content="Guanming Zeng" name="author">
+<meta content="
+       The application of MCP in the network management field is meant to refactor network management operation and network capabilities as tools and provide more agile
+and extensible architecture to expose these AI integration capabilities. This document discusses the applicability of MCP to the network management plane in the
+IP network that utilizes IETF technologies.It explores MCP for network exposure, multiple MCP server discovery generic workflow and deployment scenarios. 
+    " name="description">
+<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="large language model" name="keyword">
+<meta content="model context protocol" name="keyword">
+<meta content="draft-yang-nmrg-mcp-nm-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.31.0
+    Python 3.12.12
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.1
+    intervaltree 3.2.1
+    Jinja2 3.1.6
+    lxml 6.0.2
+    platformdirs 4.5.1
+    pycountry 24.6.1
+    PyYAML 6.0.3
+    requests 2.32.5
+    wcwidth 0.3.0
+-->
+<link href="draft-yang-nmrg-mcp-nm.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+section {
+  clear: both;
+}
+.section-number {
+  padding-right: 0.5em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 680;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+  & :is(ol, ul) {
+    margin-left: 1em;
+  }
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+  & li {
+    margin-top: 0.5em;
+  }
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  margin: 0 0 0 2em;
+  & li {
+    margin: 0;
+    & :first-child { margin-top: 0; }
+    & :last-child { margin-bottom: 0; }
+  }
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+  &.olPercent {
+    --indent: 5ch;
+    & > dt {
+      min-width: calc(var(--indent) - 2ch);
+    }
+  }
+  &.olPercent > dt {
+    float: none;
+  }
+
+  dl > dd > & {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
+}
+dl:not(.dlNewline) > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+  & > :is(:first-child, .break:first-child + *) {
+    margin-top: 0;
+  }
+  & > :is(:last-child) {
+    margin-bottom: 0;
+  }
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+  caption-side: bottom;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: auto;
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+  &[href] {
+    color: var(--pilcrow-weak);
+    &:hover { text-decoration: none; }
+  }
+}
+@media not print {
+  :hover > a.pilcrow, a.pilcrow:focus {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+  & dt {
+    width: var(--identifier-width);
+    min-width: var(--identifier-width);
+    clear: left;
+    float: left;
+    text-align: right;
+    margin-right: 1ch;
+  }
+  & dd {
+    margin: 0;
+    margin-left: calc(1em + var(--identifier-width)) !important;
+    min-width: 5em;
+  }
+  & .authors {
+    & .author {
+      display: inline-block;
+      margin-right: 1.5em;
+    }
+    & .org {
+      font-style: italic;
+    }
+  }
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+
+  & nav {
+    & ul {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    & li {
+      line-height: 1.3em;
+      margin: 2px 0;
+      padding-left: 1.2em;
+      text-indent: -1.2em;
+    }
+  }
+  & a.xref {
+    white-space: normal;
+  }
+}
+
+.references {
+  & > dt {
+    text-align: right;
+    font-weight: bold;
+    min-width: 10ch;
+    margin-right: 1.5ch;
+    &:target::before {
+      content: "⇒";
+      margin: 0 10px 0 -25px;
+    }
+  }
+  & > dd {
+    margin-left: 12ch !important;
+    overflow: visible;
+    & .refInstance {
+      margin-bottom: 0.8em;
+    }
+    & .ascii {
+      margin-bottom: 0.25em;
+    }
+  }
+}
+
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  max-width: 20em;
+  margin: 1em auto 1em 0;
+
+  & .nameRole {
+    font-weight: 700;
+    margin-left: 0;
+  }
+  & .label {
+    margin: 0.5em 0;
+  }
+  & .type {
+    display: none;
+  }
+  & .alternative-contact {
+    margin: 0.5em 0 0.25em 0;
+  }
+  & .non-ascii {
+    margin: 0 0 0 2em;
+  }
+  & div.left {
+    text-align: left;
+  }
+  & div.right {
+    text-align: right;
+  }
+}
+
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+/* Comments */
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+    & > ul { margin-bottom: 2em; }
+    & ul {
+      margin: 0 0 0 4px;
+      & :is(p, li) {
+        margin: 2px 0;
+      }
+    }
+  }
+  #toc a.toplink {
+    float: right;
+  }
+}
+@media not screen {
+  #toc a.toplink {
+    display: none;
+  }
+}
+
+
+/* TOC layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+    &::before { /* css hamburger */
+      float: right;
+      position: relative;
+      width: 1em;
+      height: 1px;
+      left: -164px;
+      margin: 8px 0 0 0;
+      background: white none repeat scroll 0 0;
+      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+      content: "";
+    }
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active {
+    opacity: 1;
+    & nav { display: block; }
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:is(:link, :focus, :hover),
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin: 2px 0.5em 0;
+  }
+}
+
+/* TOC layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+  #toc a.toplink {
+    margin: 8px 0.5em 0;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">Applicability of MCP for the Network Man</td>
+<td class="right">February 2026</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Yang, et al.</td>
+<td class="center">Expires 7 August 2026</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Network Management Working Group</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-yang-nmrg-mcp-nm-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2026-02-03" class="published">3 February 2026</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2026-08-07">7 August 2026</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">Y. Yang</div>
+<div class="org">Huawei</div>
+</div>
+<div class="author">
+      <div class="author-name">Q. Wu</div>
+<div class="org">Huawei</div>
+</div>
+<div class="author">
+      <div class="author-name">D. Lopez</div>
+<div class="org">Telefonica</div>
+</div>
+<div class="author">
+      <div class="author-name">N. R. Moreno</div>
+<div class="org">Deutsche Telekom</div>
+</div>
+<div class="author">
+      <div class="author-name">L. Tailhardat</div>
+<div class="org">Orange Research</div>
+</div>
+<div class="author">
+      <div class="author-name">G. Zeng</div>
+<div class="org">Huawei</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">Applicability of MCP for the Network Management</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">The application of MCP in the network management field is meant to refactor network management operation and network capabilities as tools and provide more agile
+and extensible architecture to expose these AI integration capabilities. This document discusses the applicability of MCP to the network management plane in the
+IP network that utilizes IETF technologies.It explores MCP for network exposure, multiple MCP server discovery generic workflow and deployment scenarios.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 7 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2026 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-terminology-notation-conven" class="internal xref">Terminology &amp; Notation Conventions</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-mcp" class="internal xref">MCP</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-others" class="internal xref">Others</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-the-values-of-coupling-mcp-" class="internal xref">The values of coupling MCP with the network management</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-the-high-level-challenges-i" class="internal xref">The high level Challenges in adopting MCP in NM</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-mcp-for-network-exposure" class="internal xref">MCP for Network Exposure</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-the-third-party-as-ietf-net" class="internal xref">The Third Party as IETF network Exposure Consumer</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-the-network-controller-cons" class="internal xref">The Network Controller Consumes external sources</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-mcp-server-discovery" class="internal xref">MCP Server Discovery</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-mcp-core-function" class="internal xref">MCP core function</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-procedure-for-multi-mcp-ser" class="internal xref">Procedure for Multi-MCP servers Discovery</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-deployment-consideration-in" class="internal xref">Deployment Consideration in adopting MCP in the Network Management</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-network-element-inter-commu" class="internal xref">Network Element Inter-Communication using MCP</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-standalone-mcp-server-to-ex" class="internal xref">Standalone MCP server to Expose APIs and tools to the Network Controller</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-the-network-gateway-control" class="internal xref">The Network Gateway/Controller and the Network Element Communication using MCP</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-mcp-architecture-design-for" class="internal xref">MCP architecture Design for Network Management</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-encapsulating-device-operat" class="internal xref">Encapsulating Device Operations into MCP Tools</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-llm-for-intent-to-tool-requ" class="internal xref">LLM for Intent-to-Tool-Request Translation</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
+                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-closed-loop-automation-exec" class="internal xref">Closed-Loop Automation Execution Workflow</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-interworking-with-the-netwo" class="internal xref">Interworking with the Network Management protocol and YANG data models</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-mcp-usage-examples" class="internal xref">MCP Usage Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-device-configuration-using-" class="internal xref">Device Configuration using MCP+CLI</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">The Model Context Protocol (MCP) decouples LLMs from tools and provides
+   a standardized way for LLMs to access and utilize information from different
+   data sources and tools, making it easier to build AI applications that can
+   interact with external LLM models and software tools and enable workflows automation.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">MCP has seen rapid adoption across both startups and enterprises since it announced
+   in November 2024. Key use cases include AI coding assistants in IDEs, data analysis
+   tools that can query databases, and productivity tools that can interact with services
+   like Slack or Google Drive.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">The application of MCP for the network management is meant to refactor
+   network management operation and network capabilities as tools and provide more agile
+   and extensible architecture to expose or consume these AI integration capabilities.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">With integration of MCP into the network management system, it allow you
+   develop various rich AI driven network applications, realize intent
+   based networks management, automate workflows in the multi-vendor
+   heterogeneous network platform. By establishing standard
+   interfaces for tool encapsulation, intent translation, and closed-
+   loop execution within the network management system, MCP enables the network
+   management system to have:<a href="#section-1-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1-5.1">
+          <p id="section-1-5.1.1">Unified operation abstraction through normalized MCP tool
+definitions<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-5.2">
+          <p id="section-1-5.2.1">Seamless LLM integration via the structured protocol<a href="#section-1-5.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-5.3">
+          <p id="section-1-5.3.1">Automation Execution Ability<a href="#section-1-5.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-1-6">This document discusses the applicability of MCP to the network
+   management plane in the IP network that utilizes IETF technologies.
+   It explores MCP for network exposure, multiple MCP server discovery generic workflow and
+   deployment scenarios.<a href="#section-1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="terminology-notation-conventions">
+<section id="section-2">
+      <h2 id="name-terminology-notation-conven">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-terminology-notation-conven" class="section-name selfRef">Terminology &amp; Notation Conventions</a>
+      </h2>
+<p id="section-2-1">The following terms are used throughout this document:<a href="#section-2-1" class="pilcrow">¶</a></p>
+<div id="mcp">
+<section id="section-2.1">
+        <h3 id="name-mcp">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-mcp" class="section-name selfRef">MCP</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-2.1-1.1">
+            <p id="section-2.1-1.1.1"><strong>MCP Protocol</strong>: MCP is an open standard designed to facilitate communication between LLMs and external data sources or tools.<a href="#section-2.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.1-1.2">
+            <p id="section-2.1-1.2.1"><strong>MCP Host</strong>: The entity initiating the LLM request.<a href="#section-2.1-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.1-1.3">
+            <p id="section-2.1-1.3.1"><strong>MCP Client</strong>: A built-in module within a host, specifically designed for interaction with the MCP server.<a href="#section-2.1-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.1-1.4">
+            <p id="section-2.1-1.4.1"><strong>MCP Server</strong>: A dedicated server that interacts with MCP clients and provides tools.<a href="#section-2.1-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.1-1.5">
+            <p id="section-2.1-1.5.1"><strong>CLI</strong>: Command Line Interface<a href="#section-2.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="others">
+<section id="section-2.2">
+        <h3 id="name-others">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-others" class="section-name selfRef">Others</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-2.2-1.1">
+            <p id="section-2.2-1.1.1"><strong>LLM</strong>: Large Language Model<a href="#section-2.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.2-1.2">
+            <p id="section-2.2-1.2.1"><strong>NETCONF</strong>: Network Configuration Protocol <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span><a href="#section-2.2-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.2-1.3">
+            <p id="section-2.2-1.3.1"><strong>RESTCONF</strong>: RESTful Network Configuration Protocol <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span><a href="#section-2.2-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.2-1.4">
+            <p id="section-2.2-1.4.1"><strong>SNMP</strong>: A Simple Network Management Protocol <span>[<a href="#RFC2576" class="cite xref">RFC2576</a>]</span><a href="#section-2.2-1.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="value-mcp-nm">
+<section id="section-3">
+      <h2 id="name-the-values-of-coupling-mcp-">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-the-values-of-coupling-mcp-" class="section-name selfRef">The values of coupling MCP with the network management</a>
+      </h2>
+<div class="alignLeft art-text artwork" id="section-3-1">
+<pre>
+ +---------------+        +---------------+
+ |               |        |               |
+ |  3rd Party    |        |  3rd-party
+ |  AI Agent     |        | Tools/Contents|
+ +-----/---\-----+        +---------------+
+       |   |                   |   |
+       |   | ----------------- \   /
+      ///////                 \\\\\\\
+    ||                               ||
+  ||                                   ||
+   |          MCP Eco-system           |
+    ||                               ||
+      \\\\\\\                 ///////
+       /   \ -----------------  |   |
+       |   |                    |   |
+ +---------------+       +----- \---/----+
+ |               |       |               |
+ |  Network MCP  |       |  In-Network   |
+ |   Server      |       |     Service   |
+(network exposure)    (e.g.,Digital assistant)
+ +---------------+       +---------------+
+        /   \                   /   \
+        |   |                   |   |
+ +------+---+-------------------+---+----+
+ |                                       |
+ |       Network Intelligence            |
+ |                                       |
+ |  Agentic + MCP Architecture Paradigm  |
+ |                                       |
+ +---------------------------------------+
+
+</pre><a href="#section-3-1" class="pilcrow">¶</a>
+</div>
+<p id="section-3-2">There are 3 values for MCP coupling with the network management<a href="#section-3-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-3.1">
+          <p id="section-3-3.1.1">Network MCP Server support<a href="#section-3-3.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-3.1.2.1">
+              <p id="section-3-3.1.2.1.1">Exposing network capabilities as MCP Servers for 3rd-party AI Agents &amp; applications<a href="#section-3-3.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</li>
+        <li class="normal" id="section-3-3.2">
+          <p id="section-3-3.2.1">In Network Service<a href="#section-3-3.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-3.2.2.1">
+              <p id="section-3-3.2.2.1.1">Empowering network services by leveraging MCP ecosystem tools &amp; contents<a href="#section-3-3.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3-3.2.2.2">
+              <p id="section-3-3.2.2.2.1">Network service as a unified interface to various and rich capabilities for network users<a href="#section-3-3.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</li>
+        <li class="normal" id="section-3-3.3">
+          <p id="section-3-3.3.1">Network Management Intelligence<a href="#section-3-3.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-3.3.2.1">
+              <p id="section-3-3.3.2.1.1">Making network architecture really agile and friendly for innovation<a href="#section-3-3.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3-3.3.2.2">
+              <p id="section-3-3.3.2.2.1">Decoupling network management functions into network agents and network tools<a href="#section-3-3.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</li>
+      </ul>
+</section>
+</div>
+<div id="the-high-level-challenges-in-adopting-mcp-in-nm">
+<section id="section-4">
+      <h2 id="name-the-high-level-challenges-i">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-the-high-level-challenges-i" class="section-name selfRef">The high level Challenges in adopting MCP in NM</a>
+      </h2>
+<ul class="normal">
+<li class="normal" id="section-4-1.1">
+          <p id="section-4-1.1.1">Protocol Design<a href="#section-4-1.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4-1.1.2.1">
+              <p id="section-4-1.1.2.1.1">Error Handling
+o Although MCP provides basic error codes, MCP does not yet enforce a entire error-handling mechanism, and its scope is currently limited to discovery and invocation,
+omitting crucial aspects like tool governance, versioning, or lifecycle management.<a href="#section-4-1.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4-1.1.2.2">
+              <p id="section-4-1.1.2.2.1">Stateful
+o The protocol's reliance on stateful Server-Sent Events (SSE) can create significant complexities when integrating with inherently stateless REST APIs,
+  requiring developers to manage state externally. This can be particularly challenging for remote MCP servers due to network latency and instability,
+  complicating load balancing and horizontal scaling efforts.<a href="#section-4-1.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4-1.1.2.3">
+              <p id="section-4-1.1.2.3.1">Context Handling
+o There are also concerns that multiple active MCP connections could consume significant tokens in the LLM's context window. This can directly impact an LLM's
+  performance, slowing down responses and potentially hindering its ability to maintain focus and reason effectively over extended or complex interactions.<a href="#section-4-1.1.2.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</li>
+        <li class="normal" id="section-4-1.2">
+          <p id="section-4-1.2.1">Security Consideration<a href="#section-4-1.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4-1.2.2.1">
+              <p id="section-4-1.2.2.1.1">Malicious Actors
+The protocol's ability to grant LLMs access to external systems introduces potential vulnerabilities that require careful consideration
+o Prompt injection, where malicious instructions embedded in user inputs or tool descriptions could lead to unintended actions by the LLM
+o Tool poisoning, where attackers modify tool definitions, or rug pulls (similar to tool poisoning but occurs post-installation)
+o Tool shadowing, where a malicious server creates a tool with the same name as a legitimate tool from another server to intercept calls<a href="#section-4-1.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4-1.2.2.2">
+              <p id="section-4-1.2.2.2.1">Security enforcement
+o MCP itself lacks inherent security enforcement mechanisms, relying heavily on external implementations for authentication and authorization, which were not
+  initially  well-defined within the protocol.<a href="#section-4-1.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4-1.2.2.3">
+              <p id="section-4-1.2.2.3.1">Identity Management
+o Determining clear identity management - whether requests originate from the end user, the AI agent, or a shared system account - remains an area needing
+  clearer definition.<a href="#section-4-1.2.2.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</li>
+      </ul>
+</section>
+</div>
+<div id="mcp-for-network-exposure">
+<section id="section-5">
+      <h2 id="name-mcp-for-network-exposure">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-mcp-for-network-exposure" class="section-name selfRef">MCP for Network Exposure</a>
+      </h2>
+<p id="section-5-1">Network exposure is the process of making network capabilities, such as data and connectivity services, available to external users, applications, and developers through secure APIs. It allows for more agility and the creation of programmable networks. The MCP can be used to expose network capabilities to AI applications or consume external sources for LLMs.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<div id="the-third-party-as-ietf-network-exposure-consumer">
+<section id="section-5.1">
+        <h3 id="name-the-third-party-as-ietf-net">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-the-third-party-as-ietf-net" class="section-name selfRef">The Third Party as IETF network Exposure Consumer</a>
+        </h3>
+<div class="alignLeft art-text artwork" id="section-5.1-1">
+<pre>
+       3rd Party
+  +------------------+
+  |     Consumer     |
+  |   +------------+ |
+  |   |            | |       4. Authoriz and Consume
+  |   | MCP Client &lt;-+------------------------+
+  +---+-+-------^--+-+                        |
+    2.Discover  |3. List of                   |
+    and Authz   | Available APIs              |
+        |       |                             |
+        |       |                             |
+  +---+-V-------+--+------------+         +---V--------+
+  |   | MCP Server |            |         |Tools       |
+  |   +------------+            |1.Publish|+----------+|
+  |                             &lt;---------+|Simulation||
+  |   Network Exposure Agent    |         ||  API     ||
+  |   /Network Controller       |4. Authz |+----------+|
+  | +---+   +---+ +---+         &lt;---------&gt;            |
+  | |NF1|   |NF2| |NF3| ...     |         |+----------+|
+  | +---+   +---+ +---+         |  Heart  ||Other APIs||
+  |                             &lt;---------&gt;+----------+|
+  +-----------------------------+  Beat   +------------+
+
+</pre><a href="#section-5.1-1" class="pilcrow">¶</a>
+</div>
+<p id="section-5.1-2">Step 1: External tools or data source publish a set of APIs to MCP server in the Network Controller.
+Step 2: MCP client send specific tools request to discover tools and MCP Server provide authorization to the MCP client.
+Step 3: After sucessful authorization, MCP server return API list corresponding to tools request sent by the MCP client.
+Step 4: MCP Client invokes tools with authorization.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="the-network-controller-consumes-external-sources">
+<section id="section-5.2">
+        <h3 id="name-the-network-controller-cons">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-the-network-controller-cons" class="section-name selfRef">The Network Controller Consumes external sources</a>
+        </h3>
+<div class="alignLeft art-text artwork" id="section-5.2-1">
+<pre>
+                               +---------------+
+                               |  Data Source  |
+                               | +-----------+ |
+                               | | MCP Server| |
+                               +-+-----^-----+-+
+                                       |2. Consume external sources
+                                       |
+                          +------+-----V-----+-----------+
+                          |      | MCP Client|0.Preconfig MCP
+  +--------------+        |      +-----------+  Server Address
+  |     IETF     |1.MCP Service Request                  |
+  |   Network    +--------&gt;                              |
+  |  Management  |3.MCP Service Response                 |
+  |  AI Agents   &lt;--------+                              |
+  +--------------+        |                              |
+                          |       Network Controller     |
+                          |                              |
+                          +------------------------------+
+
+</pre><a href="#section-5.2-1" class="pilcrow">¶</a>
+</div>
+<p id="section-5.2-2">Step 0: MCP Client is preconfigured with the MCP Server address.
+Step 1: IETF Network Management AI Agent sends a MCP Service Request to
+        the MCP client within the Network Controller.
+Step 2: The MCP client discover tools provided by the external MCP server.
+Step 3: The MCP client provide available tools list to the IETF Network Management AI Agent.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="mcp-server-discovery">
+<section id="section-6">
+      <h2 id="name-mcp-server-discovery">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-mcp-server-discovery" class="section-name selfRef">MCP Server Discovery</a>
+      </h2>
+<p id="section-6-1">The MCP Server Discovery involves clients querying servers to find available tools, resources, and functions.
+In case of MCP servers are distributed in different locations, MCP Respository can be established to keep track
+of the location of each MCP servers.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<div id="mcp-core-function">
+<section id="section-6.1">
+        <h3 id="name-mcp-core-function">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-mcp-core-function" class="section-name selfRef">MCP core function</a>
+        </h3>
+<div class="alignLeft art-text artwork" id="section-6.1-1">
+<pre>
+          +------------+ 2.Discovery ---------------+
+          | Agents     +-----------+      MCP       |
+          |(MCP Client)+-----------+   Respository  |
+          +-+----------+ 3. Authz  +--------^-------+
+            |4. Consume                     |1.Registration
+            | +-------------+---------------+-------+-
+ +----------V-+       +-----+-------+        +------+------+
+ |MCP Server 1|       |MCP Server 2 |        | MCP Server 3|
+ +------------+       +-------------+        +-------------+
+    -------                -----                  -----
+ ///FM  PM \\\          ///     \\\            ///     \\\
+|             |       ||  Memory   |         ||           |
+| Routing  ACL|       |             |        |    Templates|
+ \\\Policy ///        || Database  |         ||           |
+    -------             \\\     ///            \\\     ///
+                           -----                  -----
+
+</pre><a href="#section-6.1-1" class="pilcrow">¶</a>
+</div>
+<p id="section-6.1-2">• MCP Repository:
+  * Maintain the description of MCP servers
+  * Support MCP server discovery for Client.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">• MCP client: consuming the services provided by MCP servers<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-4">• MCP servers: including authentication/session/policy tools, the
+  memory/prompts used for Agents<a href="#section-6.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="procedure-for-multi-mcp-servers-discovery">
+<section id="section-6.2">
+        <h3 id="name-procedure-for-multi-mcp-ser">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-procedure-for-multi-mcp-ser" class="section-name selfRef">Procedure for Multi-MCP servers Discovery</a>
+        </h3>
+<div class="alignLeft art-text artwork" id="section-6.2-1">
+<pre>
+ +------------------+    +----------+   +-------+     +------+
+ |Network Management|    |          |   |       |     |      |
+ |    AI Agent      |    |  MCP     |   | MCP   |     |Tools |
+ |   (MCP Client)   |    |Repository|   |Servers|     |      |
+ +---------+--------+    +----+-----+   +---+---+     +---+--+
+           |                  |             | 0. Sync the info of tools
+           |                  |             |&lt;------------+
+           |                  |1. Registration            |
+           |                  |&lt;------------+             |
+           |                  |             |             |
+           |    +-------------+----------+  |             |
+           |    |       Repository       |  |             |
+           |    |MCP Server1:ID 1, Capability, Tools      |
+           |    |                        |  |             |
+           |    |MCP Server2:ID 2, Capability, Tools      |
+           |    +------------- ----------+  |             |
+           | 2.1 Discovery    |             |             |
+           +------------------&gt;             |             |
+           |           +------+------+      |             |
+           |           | Search for  |      |             |
+           |           | Proper MCP  |      |             |
+           |           | Server      |      |             |
+                       +-------------+      |             |
+           | 2.2 Address of MCP Server      |             |
+           &lt;------------------+             |             |
+              3. oAuth Authz                |             |
+           &lt;-------------------------------&gt;|             |
+           |  4. Consume Tools/Resources/Prompts          |
+           +------------------+-------------|-------------|
+                              |             |             |
+
+</pre><a href="#section-6.2-1" class="pilcrow">¶</a>
+</div>
+<p id="section-6.2-2">Step 0: The MCP Server syncs up on the info of tools, upon tools is added or removed, tools changes
+        will be automatically syned up with the MCP server.
+Step 1: Each new MCP server will register to the centralized MCP registry.
+Step 2.1: MCP Client send the MCP service request to the MCP registry for specific capability.
+Step 2.2: The MCP registry return specific MCP server to the MCP client.
+Step 3: The MCP Client request authorization from the MCP server.
+Step 4: The MCP Client invoke specific tools with authorization.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="deployment-consideration-in-adopting-mcp-in-the-network-management">
+<section id="section-7">
+      <h2 id="name-deployment-consideration-in">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-deployment-consideration-in" class="section-name selfRef">Deployment Consideration in adopting MCP in the Network Management</a>
+      </h2>
+<p id="section-7-1">This section describes MCP deployment requirements for network management environments, followed by implementation scenarios. Key architectural requirements include:<a href="#section-7-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7-2.1">
+          <p id="section-7-2.1.1">Function-Specific MCP Servers:
+To maintain proper architecture and performance with growing tool volumes, servers should be categorized by network management functions. Typical categories include
+network log analysis, device configuration management, energy consumption management, and security operations, etc.<a href="#section-7-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-7-2.2">
+          <p id="section-7-2.2.1">Secure and Scalable Architecture: The architecture must:<a href="#section-7-2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7-2.2.2.1">
+              <p id="section-7-2.2.2.1.1">Enforce strict access controls limiting MCP operations to authorized AI models and users<a href="#section-7-2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-7-2.2.2.2">
+              <p id="section-7-2.2.2.2.1">Scale efficiently with increasing number of network devices while maintaining performance<a href="#section-7-2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</li>
+        <li class="normal" id="section-7-2.3">
+          <p id="section-7-2.3.1">Automated Workflows: MCP implementations should support LLM-coordinated automation of:<a href="#section-7-2.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7-2.3.2.1">
+              <p id="section-7-2.3.2.1.1">Real-time monitoring and diagnostics<a href="#section-7-2.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-7-2.3.2.2">
+              <p id="section-7-2.3.2.2.1">Fault remediation workflows<a href="#section-7-2.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-7-2.3.2.3">
+              <p id="section-7-2.3.2.3.1">Other common management operations to reduce operator workload<a href="#section-7-2.3.2.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</li>
+      </ul>
+<p id="section-7-3">While these core requirements apply universally, operational characteristics vary based on deployment location. The following subsections detail these deployment scenarios.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<div id="network-element-inter-communication-using-mcp">
+<section id="section-7.1">
+        <h3 id="name-network-element-inter-commu">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-network-element-inter-commu" class="section-name selfRef">Network Element Inter-Communication using MCP</a>
+        </h3>
+<p id="section-7.1-1">In this network scenario, The MCP client is deployed in one smart network element
+while the MCP server is deployed in another smart network element. The MCP client
+communicates with the MCP server using the MCP protocol and invoke specific tools and get access to specific data in the network element as a data source. .
+In addition, human operator can use nature language to interact with smart network element to investigate protocol troubleshooting information.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1-2">Network element usually have limited resources (CPU, memory, etc.). Deploying MCP
+Client together with SLM may occupy a large amount of resources, affecting the normal operation of the
+device.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.1-3">
+<pre>
+         Human Operator
+              |
+              |
+          Nature Language                Data Source
+  +-----------+-------------+     +-------------------------+
+  |   +-------+----------+  |     |   +------------------+  |
+  |   |Routing Protocol  |  |     |   |Routing Protocol  |  |
+  |   |       Agent      |  |     |   |       Agent      |  |
+  |   |+---+ +----------+|  |     |   | +----------+     |  |
+  |   ||SLM| |MCP Client++--+-----+---+-&gt;MCP Server|     |  |
+  |   |+---+ +----------+|  |     |   | +----------+     |  |
+  |   +------------------+  |     |   +------------------+  |
+  +-------------------------+     +-------------------------+
+    Smart Network Element           Smart Network Element
+
+
+</pre><a href="#section-7.1-3" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="standalone-mcp-server-to-expose-apis-and-tools-to-the-network-controller">
+<section id="section-7.2">
+        <h3 id="name-standalone-mcp-server-to-ex">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-standalone-mcp-server-to-ex" class="section-name selfRef">Standalone MCP server to Expose APIs and tools to the Network Controller</a>
+        </h3>
+<p id="section-7.2-1">In this network scenario, The MCP client is deployed in the network controller
+while the MCP server is deployed standalone to manage all the network elements.
+The network elements will be refactored as data source or tools so that MCP client
+can directly consume these APIs or data sources.
+Alternatively, the network elements can be traditional network elements. MCP server
+will serve as protocol adaptor to translate MCP protocol into traditional network management
+protocols such as NETCONF, gNMI.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.2-2">
+<pre>
+                  +----------------------+
+                  |                      |
+                  |   Network Controller |
+                  |                      |
+                  |    +------------+    |
+                  |    |            |    |
+         +--------+----| MCP Client +----+----------+
+         |        |    |            |    |          |
+         |        |    +-----+------+    |          |
+         |        +----------+-----------+          |
+         |                   |                      |
+         |    +--------------V---------------+      |
+         |    |         MCP Server           |      |
+         |    +--------^-------------^-------+      |
+         V             |             |              V
++-------------+        |             |        +----------+
+|             |        |             |        |          |
+| Data Source |--------+-            |--------+  Tools   |
+|             |                               |          |
++-------------+                               +----------+
+Network Element                             Network Element
+
+</pre><a href="#section-7.2-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="the-network-gatewaycontroller-and-the-network-element-communication-using-mcp">
+<section id="section-7.3">
+        <h3 id="name-the-network-gateway-control">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-the-network-gateway-control" class="section-name selfRef">The Network Gateway/Controller and the Network Element Communication using MCP</a>
+        </h3>
+<p id="section-7.3-1">In this network scenario, The MCP client is deployed in the network gateway device
+while the MCP server is deployed in each network devices. The MCP client
+communicates with the MCP server using the MCP protocol. LLM model is pre-trained model
+and deployed in the same Network gateway as the MCP client.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.3-2">Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP
+Server may occupy a large amount of resources, affecting the normal operation of the
+device.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.3-3">
+<pre>
+      +------------------------+
+      |   Network Controller/  |
+      |   Network Gateway      |
+      |                        |
+      |        Nature          |
+      | +------Language------+ |
+      | |  MCP  |     | LLM  | |
+      | | Client|-----|      | |
+      | +-+-----+     +------+ |
+      |   |MCP                 |
+      +---+--------------------+
+          +----------------+
+ +--------+---+     +------+------+
+ |  +-----++  |     |  +---+--+   |
+ |  | MCP ||  |     |  | MCP  |   |
+ |  |Server|  |     |  |Server|   |
+ |  +------+  |     |  +------+   |
+ +------------+     +-------------+
+Network Element      Network Element
+
+</pre><a href="#section-7.3-3" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="mcp-architecture-design-for-network-management">
+<section id="section-8">
+      <h2 id="name-mcp-architecture-design-for">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-mcp-architecture-design-for" class="section-name selfRef">MCP architecture Design for Network Management</a>
+      </h2>
+<div class="alignLeft art-text artwork" id="section-8-1">
+<pre>
+             ┌──────┐
+             │ User │
+             └───┬──┘                   Step b.LLM for Intent to tools
+               1 │ 9                           request translation
+      ┌──────────│─────────────────┐           (1,3,4,9)
+      │ ┌────────┴───┐3,8    ┌───┐ │
+      │2│ MCP Client ├───────┤LLM│ │
+      │ └────────┬───┘4,7    └───┘ │   Step c.Close Loop Execution workflow
+      │          │                 │          (5,6,7,8,)
+      │         5│6                │
+      │          │                 │
+      └──────────│─────────────────┘
+                 │                       Step a.Encapsulating network
+      ┌──────────┴───┬─────────────┐      operations into MCP tools
+ ┌────┴─────┐  ┌─────┴─────┐ ┌─────┴────┐
+ │MCP Server│  │ MCP Server│ │MCP Server|
+ └──────────┘  └───────────┘ └──────────┘
+
+</pre><a href="#section-8-1" class="pilcrow">¶</a>
+</div>
+<div id="encapsulating-device-operations-into-mcp-tools">
+<section id="section-8.1">
+        <h3 id="name-encapsulating-device-operat">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-encapsulating-device-operat" class="section-name selfRef">Encapsulating Device Operations into MCP Tools</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-8.1-1.1">
+            <p id="section-8.1-1.1.1">Objective: Standardize device operations into modular, reusable tools.<a href="#section-8.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.1-1.2">
+            <p id="section-8.1-1.2.1">Implementation:<a href="#section-8.1-1.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.1-1.2.2.1">
+                <p id="section-8.1-1.2.2.1.1">Tool Abstraction: Vendor-specific commands are wrapped into discrete MCP Tools with uniform schemas.<a href="#section-8.1-1.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.2.2.2">
+                <p id="section-8.1-1.2.2.2.1">Tool Registry: A centralized database stores MCP Tools with metadata (e.g., names, descriptions, parameters).<a href="#section-8.1-1.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-8.1-1.3">
+            <p id="section-8.1-1.3.1">Benefits:<a href="#section-8.1-1.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.1-1.3.2.1">
+                <p id="section-8.1-1.3.2.1.1">Eliminates manual translation of commands across different vendors<a href="#section-8.1-1.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.3.2.2">
+                <p id="section-8.1-1.3.2.2.1">Enabling the plug-and-play integration of new device types.<a href="#section-8.1-1.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+        </ul>
+</section>
+</div>
+<div id="llm-for-intent-to-tool-request-translation">
+<section id="section-8.2">
+        <h3 id="name-llm-for-intent-to-tool-requ">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-llm-for-intent-to-tool-requ" class="section-name selfRef">LLM for Intent-to-Tool-Request Translation</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-8.2-1.1">
+            <p id="section-8.2-1.1.1">Objective: Allow AI models (such as Claude) to understand natural language commands and trigger operations.<a href="#section-8.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.2-1.2">
+            <p id="section-8.2-1.2.1">Workflow:<a href="#section-8.2-1.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.2-1.2.2.1">
+                <p id="section-8.2-1.2.2.1.1">Intent Recognition: The LLM first analyzes the user's natural language query to identify：<a href="#section-8.2-1.2.2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.2-1.2.2.1.2.1">
+                    <p id="section-8.2-1.2.2.1.2.1.1">The user's intent or goal<a href="#section-8.2-1.2.2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-8.2-1.2.2.1.2.2">
+                    <p id="section-8.2-1.2.2.1.2.2.1">Required actions or operations<a href="#section-8.2-1.2.2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-8.2-1.2.2.1.2.3">
+                    <p id="section-8.2-1.2.2.1.2.3.1">Entities, parameters, and constraints mentioned<a href="#section-8.2-1.2.2.1.2.3.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-8.2-1.2.2.1.2.4">
+                    <p id="section-8.2-1.2.2.1.2.4.1">Context from previous interactions<a href="#section-8.2-1.2.2.1.2.4.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-8.2-1.2.2.2">
+                <p id="section-8.2-1.2.2.2.1">Tool Discovery and Toolchain Generation: The LLM access tool descriptions provided by MCP servers, and matches the identified intent with available tools.<a href="#section-8.2-1.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.2-1.2.2.3">
+                <p id="section-8.2-1.2.2.3.1">Parameter Extraction and Mapping: The LLM maps natural language references to structured parameter names and extracts relevant information from the user
+query.<a href="#section-8.2-1.2.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.2-1.2.2.4">
+                <p id="section-8.2-1.2.2.4.1">Structured Invocation Generation: The LLM generates properly formatted tool calls following MCP's protocol.<a href="#section-8.2-1.2.2.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-8.2-1.3">
+            <p id="section-8.2-1.3.1">Benefits:<a href="#section-8.2-1.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.2-1.3.2.1">
+                <p id="section-8.2-1.3.2.1.1">Bridge natural language to tool invocation requests in a fixed format, then return this request to the client, enabling
+the client to properly parse the request.<a href="#section-8.2-1.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+        </ul>
+</section>
+</div>
+<div id="closed-loop-automation-execution-workflow">
+<section id="section-8.3">
+        <h3 id="name-closed-loop-automation-exec">
+<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-closed-loop-automation-exec" class="section-name selfRef">Closed-Loop Automation Execution Workflow</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-8.3-1.1">
+            <p id="section-8.3-1.1.1">Objective: Realize the closed loop of "voice/text commands → automatic execution".<a href="#section-8.3-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-1.2">
+            <p id="section-8.3-1.2.1">A general workflow is as follows:<a href="#section-8.3-1.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-1.2.2.1">
+                <p id="section-8.3-1.2.2.1.1">User Input Submission: An operator submits a natural language request to the MCP client. And The MCP client
+forwards this request to the LLM.<a href="#section-8.3-1.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.3-1.2.2.2">
+                <p id="section-8.3-1.2.2.2.1">LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured
+request to the MCP client, which queries the MCP Server to retrieve the available tools. The information would
+include the functional description, required parameters of tools.<a href="#section-8.3-1.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.3-1.2.2.3">
+                <p id="section-8.3-1.2.2.3.1">LLM Toolchain Decision:<a href="#section-8.3-1.2.2.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-1.2.2.3.2.1">
+                    <p id="section-8.3-1.2.2.3.2.1.1">The LLM evaluates the context and if tools are required, select and sequence tools.<a href="#section-8.3-1.2.2.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-8.3-1.2.2.3.2.2">
+                    <p id="section-8.3-1.2.2.3.2.2.1">The decision is sent back to the MCP Client and then MCP Client will execute tools via server.<a href="#section-8.3-1.2.2.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-8.3-1.2.2.4">
+                <p id="section-8.3-1.2.2.4.1">Tool Execution: The MCP Server executes the translated commands on target devices and returns results to the client.<a href="#section-8.3-1.2.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.3-1.2.2.5">
+                <p id="section-8.3-1.2.2.5.1">Result Aggregation &amp; Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the LLM for summarization.<a href="#section-8.3-1.2.2.5.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-8.3-1.3">
+            <p id="section-8.3-1.3.1">Benefits:<a href="#section-8.3-1.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-1.3.2.1">
+                <p id="section-8.3-1.3.2.1.1">Tools safely retry/rollback.<a href="#section-8.3-1.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.3-1.3.2.2">
+                <p id="section-8.3-1.3.2.2.1">Full traceability of LLM decisions and tool executions.<a href="#section-8.3-1.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="interworking-with-the-network-management-protocol-and-yang-data-models">
+<section id="section-9">
+      <h2 id="name-interworking-with-the-netwo">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-interworking-with-the-netwo" class="section-name selfRef">Interworking with the Network Management protocol and YANG data models</a>
+      </h2>
+<p id="section-9-1">MCP can be seen as AI protocol and used to invoke AI integrated capabilities. MCP is not in the position to replace the network management and YANG data model.
+Instead, it can be integrated together, e.g.,
+* Integrated MCP with CLI, allow the MCP client invoke CLI capabilities;
+* Integrated MCP with YANG, allow the MCP client invoke YANG interface related capabilities;<a href="#section-9-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="mcp-usage-examples">
+<section id="section-10">
+      <h2 id="name-mcp-usage-examples">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-mcp-usage-examples" class="section-name selfRef">MCP Usage Examples</a>
+      </h2>
+<div id="device-configuration-using-mcpcli">
+<section id="section-10.1">
+        <h3 id="name-device-configuration-using-">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-device-configuration-using-" class="section-name selfRef">Device Configuration using MCP+CLI</a>
+        </h3>
+<p id="section-10.1-1">In this example, MCP server is implemented by Server and expose all CLI interfaces and documentation as tools to the MCP Client.
+The Nework controller implement the client to interact with MCP server in the Network device.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+<p id="section-10.1-2">The MCP server provides the following registered tool descriptor information:<a href="#section-10.1-2" class="pilcrow">¶</a></p>
+<p id="section-10.1-3">Tools description: It describes the name, use, and parameters of tools.<a href="#section-10.1-3" class="pilcrow">¶</a></p>
+<p id="section-10.1-4">Tools implementation: MCP implementation describes how the tools are invoked.<a href="#section-10.1-4" class="pilcrow">¶</a></p>
+<p id="section-10.1-5">See Tool descriptor information example as follows:<a href="#section-10.1-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-10.1-6">
+<pre>
+# Tool Descriptor
+[
+  {
+    "name": "batch_configure_devices",
+    "description": "Batch Configure Network Devices"，
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "device_ips": {"type": "array", "items": {"type": "string"}, "description": "Device IP List"}，
+        "commands": {"type": "array", "items": {"type": "string"}, "description": "CLI Sequence"}，
+        "credential_id": {"type": "string", "description": "Credential ID"}
+      }，
+      "required": ["device_ips", "commands"]
+    }
+  },
+  {
+    "name": "check_device_status",
+    "description": "Check the Status of Network Devices"，
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "device_ip": {"type": "string"},
+        "metrics": {"type": "array", "items": {"enum": ["cpu", "memory", "interface"]}}
+      }
+    }
+  }
+]
+# Tool Implementation
+from netmiko import ConnectHandler
+from mcp_server import McpServer
+
+app = FastAPI()
+server = McpServer(app)
+
+#Connection Pool Management
+devices = {
+    "192.168.1.1": {"device_type": "VendorA-XYZ"，"credential": "admin:XYZ@password"},
+    "192.168.1.2": {"device_type": "VendorB-ABC","credential":"admin:ABC@passowrd"}
+     ....
+}
+
+@server.tool("batch_configure_devices")
+async def batch_config(device_ips: list,commands: list,credential_id: str):
+    results = {}
+    for ip in device_ips:
+        conn = ConnectHandler(
+            ip = ip,
+            username = devices[ip]["credential"].split(':')[0],
+            password = devices[ip]["credential"].split(':')[1],
+            device_type = devices[ip]["device_type"]
+        )
+        output = conn.send_config_set(commands)
+        results[ip] = output
+    return {"success": True, "details": results)
+
+@server.tool("check_device_status")
+async def check_status(device_ip: str, metrics: list):
+    status = {}
+    if "cpu" in metrics:
+        status["cpu"] = get_cpu_usage (device_ip)
+    if "memory" in metrics:
+        status["memory"] = get_memory_usage(device_ip)
+    return status
+</pre><a href="#section-10.1-6" class="pilcrow">¶</a>
+</div>
+<p id="section-10.1-7">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
+client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the appropriate tools and responds in JSON format as follows:<a href="#section-10.1-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-10.1-8">
+<pre>
+{
+"method": "batch_configure_devices",
+"params": {
+   "device_ips":["192.168.10.1",....,"192.168.10.10"],
+   "command": [
+     "router ospf 100",
+     "network 192.168.0.0 0.0.255.255 area 0"
+   ]
+ }
+}
+}
+
+</pre><a href="#section-10.1-8" class="pilcrow">¶</a>
+</div>
+<p id="section-10.1-9">The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are returned to the MCP client in Json as below and are forwarded to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back to the client for final presentation to the user.<a href="#section-10.1-9" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-10.1-10">
+<pre>
+# Convert to CLI commands of different vendors
+"commands": [
+    "system-view",
+    "ospf {{process_id}}",
+    "area {{area_id}}",
+    "network {{network_address}} {{wildcard_mask}}"
+  ]
+
+"commands": [
+    "configure terminal",
+    "router ospf {{process_id}}",
+    "network {{network_address}} {{wildcard_mask}} area {{area_id}}",
+    "end",
+    "write memory"
+  ]
+
+#Feedbacks received by the MCP client of different vendors
+{
+    "status": "success",
+    "message": "OSPF configuration applied successfully on device 192.168.10.1",
+    "commands_executed": [
+        "system-view",
+        "ospf 100",
+        "area 0.0.0.0",
+        "network 192.168.10.0 0.0.0.255"
+    ]
+}
+
+{
+    "status": "success",
+    "message": "OSPF configuration applied successfully on device 192.168.10.1",
+    "commands_executed": [
+        "configure terminal",
+        "router ospf 100",
+        "network 192.168.10.0 0.0.0.255 area 0",
+        "end",
+        "write memory"
+    ]
+}
+
+# Natural lanauge summary of success or failure:
+{
+  "192.168.10.1": "Configure Successfully, take 2.3 seconds",
+  "192.168.10.2": "Error: no response from the device",
+}
+
+</pre><a href="#section-10.1-10" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-11">
+      <h2 id="name-iana-considerations">
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-11-1">This document has no IANA actions.<a href="#section-11-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-12">
+      <h2 id="name-security-considerations">
+<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-12-1">The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations could be affected.<a href="#section-12-1" class="pilcrow">¶</a></p>
+<p id="section-12-2">Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.<a href="#section-12-2" class="pilcrow">¶</a></p>
+<p id="section-12-3">For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in the details. Users must verify each LLM operation to prevent unintended hazardous actions.<a href="#section-12-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-normative-references">
+<section id="section-13">
+      <h2 id="name-normative-references">
+<a href="#section-13" class="section-number selfRef">13. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+      </h2>
+<dl class="references">
+<dt id="RFC2576">[RFC2576]</dt>
+      <dd>
+<span class="refAuthor">Frye, R.</span>, <span class="refAuthor">Levi, D.</span>, <span class="refAuthor">Routhier, S.</span>, and <span class="refAuthor">B. Wijnen</span>, <span class="refTitle">"Coexistence between Version 1, Version 2, and Version 3 of the Internet-standard Network Management Framework"</span>, <span class="seriesInfo">RFC 2576</span>, <span class="seriesInfo">DOI 10.17487/RFC2576</span>, <time datetime="2000-03" class="refDate">March 2000</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2576">https://www.rfc-editor.org/rfc/rfc2576</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6241">[RFC6241]</dt>
+      <dd>
+<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8040">[RFC8040]</dt>
+    <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-A">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Yuanyuan Yang</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div dir="auto" class="left"><span class="country-name">China</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:yangyuanyuan55@huawei.com" class="email">yangyuanyuan55@huawei.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Qin Wu</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div dir="auto" class="left"><span class="country-name">China</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:bill.wu@huawei.com" class="email">bill.wu@huawei.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Diego Lopez</span></div>
+<div dir="auto" class="left"><span class="org">Telefonica</span></div>
+<div dir="auto" class="left"><span class="country-name">Spain</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:diego.r.lopez@telefonica.com" class="email">diego.r.lopez@telefonica.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Nathalie Romo Moreno</span></div>
+<div dir="auto" class="left"><span class="org">Deutsche Telekom</span></div>
+<div dir="auto" class="left"><span class="country-name">Germany</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:nathalie.romo-moreno@telekom.de" class="email">nathalie.romo-moreno@telekom.de</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Lionel Tailhardat</span></div>
+<div dir="auto" class="left"><span class="org">Orange Research</span></div>
+<div dir="auto" class="left"><span class="country-name">France</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:lionel.tailhardat@orange.com" class="email">lionel.tailhardat@orange.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Guanming Zeng</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div dir="auto" class="left"><span class="country-name">China</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:zengguanming@huawei.com" class="email">zengguanming@huawei.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
