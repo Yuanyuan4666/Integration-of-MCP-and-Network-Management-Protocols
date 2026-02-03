@@ -363,9 +363,9 @@ While these core requirements apply universally, operational characteristics var
 
 ## Network Element Inter-Communication using MCP
 
-In this network scenario, The MCP client is deployed in one smart network element
+In this network scenario, the MCP client is deployed in one smart network element
 while the MCP server is deployed in another smart network element. The MCP client
-communicates with the MCP server using the MCP protocol and invoke specific tools and get access to specific data in the network element as a data source. .
+communicates with the MCP server using the MCP protocol and invoke specific tools and get access to specific data in the network element as a data source.
 In addition, human operator can use nature language to interact with smart network element to investigate protocol troubleshooting information.
 
 Network element usually have limited resources (CPU, memory, etc.). Deploying MCP
@@ -389,6 +389,36 @@ device.
   +-------------------------+     +-------------------------+
     Smart Network Element           Smart Network Element
 
+
+~~~~
+
+## Network Controller consumes API or Data source using MCP
+
+In this network scenario, the MCP client is deployed in the network controller
+while the MCP server is deployed in either the 3rd party managment system or
+external data source. The MCP client communicates with the MCP server using
+the MCP protocol and invoke specific tools and get access to specific data in
+the 3rd party management system or external data source.
+
+~~~~
+
++------------------------+     +------------+
+|                        |     | 3rd party  |
+|   Network Controller   |     | Management |
+|              +-------+ |     |    System  |
+|              |  MCP  +-+--+  |+----------+|
+|              | Client+-+--+--->MCP Server||
+|              +-------+ |  |  |+----------+|
+|                        |  |  +------------+
+|                        |  |
+|                        |  |  +------------+
+|                        |  |  |            |
+|                        |  |  |Data Source |
+|                        |  |  |+----------+|
+|                        |  |--->MCP Server||
+|                        |     |+----------+|
+|                        |     |            |
++------------------------+     +------------+
 
 ~~~~
 
