@@ -227,8 +227,11 @@ Network exposure is the process of making network capabilities, such as data and
 ~~~~
 
 Step 1: External tools or data source publish a set of APIs to MCP server in the Network Controller.
+
 Step 2: MCP client send specific tools request to discover tools and MCP Server provide authorization to the MCP client.
+
 Step 3: After sucessful authorization, MCP server return API list corresponding to tools request sent by the MCP client.
+
 Step 4: MCP Client invokes tools with authorization.
 
 ## The Network Controller Consumes external sources
@@ -256,9 +259,12 @@ Step 4: MCP Client invokes tools with authorization.
 ~~~~
 
 Step 0: MCP Client is preconfigured with the MCP Server address.
+
 Step 1: IETF Network Management AI Agent sends a MCP Service Request to
         the MCP client within the Network Controller.
+
 Step 2: The MCP client discover tools provided by the external MCP server.
+
 Step 3: The MCP client provide available tools list to the IETF Network Management AI Agent.
 
 # MCP Server Discovery
@@ -336,10 +342,15 @@ of the location of each MCP servers.
 
 Step 0: The MCP Server syncs up on the info of tools, upon tools is added or removed, tools changes
         will be automatically syned up with the MCP server.
+
 Step 1: Each new MCP server will register to the centralized MCP registry.
+
 Step 2.1: MCP Client send the MCP service request to the MCP registry for specific capability.
+
 Step 2.2: The MCP registry return specific MCP server to the MCP client.
+
 Step 3: The MCP Client request authorization from the MCP server.
+
 Step 4: The MCP Client invoke specific tools with authorization.
 
 # Deployment Consideration in adopting MCP in the Network Management
@@ -615,10 +626,13 @@ the details. Users must verify each LLM operation to prevent unintended hazardou
 
 ~~~~
 
-1. When ISIS neighbour establishment fails, the network maintenance engineer queries the fault cause via natural language in the CLI interface.
-2. A small model deployed on the device's CPU understands the user's intent and matches the fault pattern.
-3. Troubleshooting scripts are invoked to locate the root cause of the fault.
-4. The query is repeated until service operations get back to normal.
+Step 1. When ISIS neighbour establishment fails, the network maintenance engineer queries the fault cause via natural language in the CLI interface.
+
+Step 2. A small model deployed on the device's CPU understands the user's intent and matches the fault pattern.
+
+Step 3. Troubleshooting scripts are invoked to locate the root cause of the fault.
+
+Step 4. The query is repeated until service operations get back to normal.
 
 ## Device Configuration using MCP+CLI
 
