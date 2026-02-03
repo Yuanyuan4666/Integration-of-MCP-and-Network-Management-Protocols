@@ -5,7 +5,7 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 6 May 2026                                             D. Lopez
+Expires: 7 August 2026                                          D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
@@ -13,7 +13,7 @@ Expires: 6 May 2026                                             D. Lopez
                                                          Orange Research
                                                                  G. Zeng
                                                                   Huawei
-                                                         2 November 2025
+                                                         3 February 2026
 
 
             Applicability of MCP for the Network Management
@@ -45,11 +45,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 May 2026.
+   This Internet-Draft will expire on 7 August 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -77,12 +77,11 @@ Table of Contents
      6.2.  Procedure for Multi-MCP servers Discovery
    7.  Deployment Consideration in adopting MCP in the Network
            Management
-     7.1.  MCP Communication using Inter Processing Communication
-     7.2.  The OSS and the Network Controller Communication using MCP
-     7.3.  The Network Controller and the Network Device Communication
-           using MCP
-     7.4.  The Network Gateway and the Network Device Communication
-           using MCP
+     7.1.  Network Element Inter-Communication using MCP
+     7.2.  Standalone MCP server to Expose APIs and tools to the
+           Network Controller
+     7.3.  The Network Gateway/Controller and the Network Element
+           Communication using MCP
    8.  MCP architecture Design for Network Management
      8.1.  Encapsulating Device Operations into MCP Tools
      8.2.  LLM for Intent-to-Tool-Request Translation
@@ -197,9 +196,12 @@ Table of Contents
     |                                       |
     +---------------------------------------+
 
-   There are 3 values for MCP coupling with the network management -
-   Network MCP Server support * Exposing network capabilities as MCP
-   Servers for 3rd-party AI Agents & applications
+   There are 3 values for MCP coupling with the network management
+
+   *  Network MCP Server support
+
+      -  Exposing network capabilities as MCP Servers for 3rd-party AI
+         Agents & applications
 
    *  In Network Service
 
@@ -418,17 +420,17 @@ Table of Contents
 
    *  Function-Specific MCP Servers: To maintain proper architecture and
       performance with growing tool volumes, servers should be
-      categorized by network management function.  Typical categories
+      categorized by network management functions.  Typical categories
       include network log analysis, device configuration management,
-      energy consumption management, and security operations.
+      energy consumption management, and security operations, etc.
 
    *  Secure and Scalable Architecture: The architecture must:
 
       -  Enforce strict access controls limiting MCP operations to
          authorized AI models and users
 
-      -  Scale efficiently with increasing network device counts while
-         maintaining performance
+      -  Scale efficiently with increasing number of network devices
+         while maintaining performance
 
    *  Automated Workflows: MCP implementations should support LLM-
       coordinated automation of:
@@ -440,112 +442,74 @@ Table of Contents
       -  Other common management operations to reduce operator workload
 
    While these core requirements apply universally, operational
-   characteristics vary based on deployment location (on-premises vs.
-   remote).  The following subsections detail these deployment
-   scenarios.
+   characteristics vary based on deployment location.  The following
+   subsections detail these deployment scenarios.
 
-7.1.  MCP Communication using Inter Processing Communication
+7.1.  Network Element Inter-Communication using MCP
 
-   In this network scenario, both the MCP client and the MCP server are
-   deployed within the same network controller.  The MCP client
-   communicate with the MCP server using inter processing communication.
-   In the meanwhile, the LLM model as pre-trained model should also be
-   deployed in the same Network controller.
+   In this network scenario, The MCP client is deployed in one smart
+   network element while the MCP server is deployed in another smart
+   network element.  The MCP client communicates with the MCP server
+   using the MCP protocol and invoke specific tools and get access to
+   specific data in the network element as a data source. . In addition,
+   human operator can use nature language to interact with smart network
+   element to investigate protocol troubleshooting information.
 
-              +----------------------------+
-              |                            |
-              |        OSS/BSS             |
-              |                            |
-              +----------------------------+
+   Network element usually have limited resources (CPU, memory, etc.).
+   Deploying MCP Client together with SLM may occupy a large amount of
+   resources, affecting the normal operation of the device.
 
+            Human Operator
+                 |
+                 |
+             Nature Language                Data Source
+     +-----------+-------------+     +-------------------------+
+     |   +-------+----------+  |     |   +------------------+  |
+     |   |Routing Protocol  |  |     |   |Routing Protocol  |  |
+     |   |       Agent      |  |     |   |       Agent      |  |
+     |   |+---+ +----------+|  |     |   | +----------+     |  |
+     |   ||SLM| |MCP Client++--+-----+---+->MCP Server|     |  |
+     |   |+---+ +----------+|  |     |   | +----------+     |  |
+     |   +------------------+  |     |   +------------------+  |
+     +-------------------------+     +-------------------------+
+       Smart Network Element           Smart Network Element
 
-                +--------------------------+
-                |Network Controller (Network AI Agent)
-                |                          |
-                |  +------+Natrual +----+  |
-                |  |MCP   |Language|LLM |  |
-                |  |Client|------- |    |  |
-                |  +---+--+Command +----+  |
-                |      |                   |
-                |  +---+--+                |
-                |  |MCP   |                |
-                |  |Server|                |
-                |  +------+                |
-                +------------+-------------+
-                             |NETCONF/Telemetry/CLI
-        |-----------------+--+------------+
-    +---+-----+      +----+----+     +----+----+
-    | Network |      | Network |     |Network  |
-    | Device  |      | Device  |     |Device   |
-    +---------+      +---------+     +---------+
-
-7.2.  The OSS and the Network Controller Communication using MCP
-
-   In this network scenario, the MCP client is deployed in the OSS/BSS
-   while the MCP server is deployed in the Network Controller, the MCP
-   client and the MCP server communicated using SSE.  In the meanwhile,
-   the LLM model can be pre-trained LLM model collocated with the MCP
-   client or the LLM model in the Cloud.
-
-               +--------------------------+
-               |                          |
-               |      OSS/BSS             |
-               |                          |
-               |  +------+Natrual +----+- |
-               |  |MCP   |Language|LLM |  |
-               |  |Client|------- |    |  |
-               |  +---+--+Command +----+  |
-               +------+-------------------+
-                      |
-                      |
-               +------+-------------------+
-               |Network Controller (Network AI Agent)
-               |                          |
-               |      |                   |
-               |  +---+--+                |
-               |  |MCP   |                |
-               |  |Server|                |
-               |  +------+                |
-               +------------+-------------+
-                            |NETCONF/Telemetry/CLI
-       |-----------------+--+------------+
-   +---+-----+      +----+----+     +----+----+
-   | Network |      | Network |     |Network  |
-   | Device  |      | Device  |     |Device   |
-   +---------+      +---------+     +---------+
-
-7.3.  The Network Controller and the Network Device Communication using
-      MCP
+7.2.  Standalone MCP server to Expose APIs and tools to the Network
+      Controller
 
    In this network scenario, The MCP client is deployed in the network
-   controller while the MCP server is deployed in the network devices.
-   The MCP client communicates with the MCP server using the MCP
-   protocol.  LLM model is pre-trained model and deployed in the same
-   Network Controller as the MCP client.
+   controller while the MCP server is deployed standalone to manage all
+   the network elements.  The network elements will be refactored as
+   data source or tools so that MCP client can directly consume these
+   APIs or data sources.  Alternatively, the network elements can be
+   traditional network elements.  MCP server will serve as protocol
+   adaptor to translate MCP protocol into traditional network management
+   protocols such as NETCONF, gNMI.
 
-   Network devices usually have limited resources (CPU, memory, etc.).
-   Deploying MCP Server may occupy a large amount of resources,
-   affecting the normal operation of the device.
+                     +----------------------+
+                     |                      |
+                     |   Network Controller |
+                     |                      |
+                     |    +------------+    |
+                     |    |            |    |
+            +--------+----| MCP Client +----+----------+
+            |        |    |            |    |          |
+            |        |    +-----+------+    |          |
+            |        +----------+-----------+          |
+            |                   |                      |
+            |    +--------------V---------------+      |
+            |    |         MCP Server           |      |
+            |    +--------^-------------^-------+      |
+            V             |             |              V
+   +-------------+        |             |        +----------+
+   |             |        |             |        |          |
+   | Data Source |--------+-            |--------+  Tools   |
+   |             |                               |          |
+   +-------------+                               +----------+
+   Network Element                             Network Element
 
-                   +--------------------------+
-                   |Network Controller (Network AI Agent)
-                   |                          |
-                   |                          |
-                   |  +------+Natrual +----+  |
-                   |  |MCP   |Language|LLM |  |
-                   |  |Client|------- |    |  |
-                   |  +---+--+Command +----+  |
-                   +------+-------------------+
-                          |NETCONF/CLI
-           +--------------+--+---------------+
-           |                 |               |
-       +---+-----+      +----+----+     +----+----+
-       |  MCP    |      |  MCP    |     | MCP     |
-       | Server1 |      | Server2 |     |Server3  |
-       +---------+      +---------+     +---------+
-       Network Device    Network Device  Network Device
-
-7.4.  The Network Gateway and the Network Device Communication using MCP
+7.3.  The Network Gateway/Controller and the Network Element
+      Communication using MCP
 
    In this network scenario, The MCP client is deployed in the network
    gateway device while the MCP server is deployed in each network
@@ -557,23 +521,25 @@ Table of Contents
    Deploying MCP Server may occupy a large amount of resources,
    affecting the normal operation of the device.
 
-                  +--------------------------+
-                  |Network Gateway    (Network AI Agent)
-                  |                          |
-                  |                          |
-                  |  +------+Natrual +----+  |
-                  |  |MCP   |Language|LLM |  |
-                  |  |Client|------- |    |  |
-                  |  +---+--+Command +----+  |
-                  +------+-------------+
-                          |NETCONF/CLI
-           +-----------------+---------------+
-           |                 |               |
-       +---+-----+      +----+----+     +----+----+
-       |  MCP    |      |  MCP    |     | MCP     |
-       | Server1 |      | Server2 |     |Server3  |
-       +---------+      +---------+     +---------+
-       Network Device    Network Device  Network Device
+         +------------------------+
+         |   Network Controller/  |
+         |   Network Gateway      |
+         |                        |
+         |        Nature          |
+         | +------Language------+ |
+         | |  MCP  |     | LLM  | |
+         | | Client|-----|      | |
+         | +-+-----+     +------+ |
+         |   |MCP                 |
+         +---+--------------------+
+             +----------------+
+    +--------+---+     +------+------+
+    |  +-----++  |     |  +---+--+   |
+    |  | MCP ||  |     |  | MCP  |   |
+    |  |Server|  |     |  |Server|   |
+    |  +------+  |     |  +------+   |
+    +------------+     +-------------+
+   Network Element      Network Element
 
 8.  MCP architecture Design for Network Management
 

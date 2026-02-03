@@ -25,14 +25,14 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
     Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
-    intervaltree 3.1.0
+    intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 5.3.1
-    platformdirs 4.5.0
+    lxml 6.0.2
+    platformdirs 4.5.1
     pycountry 24.6.1
-    PyYAML 6.0.2
+    PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.2.14
+    wcwidth 0.3.0
 -->
 <link href="draft-yang-nmrg-mcp-nm.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -573,6 +573,7 @@ aside, blockquote {
 }
 blockquote {
   margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
 }
 cite {
   display: block;
@@ -643,7 +644,7 @@ a.pilcrow {
   }
 }
 @media not print {
-  :hover > a.pilcrow {
+  :hover > a.pilcrow, a.pilcrow:focus {
     opacity: 1;
   }
   a.pilcrow[href]:hover {
@@ -1051,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Applicability of MCP for the Network Man</td>
-<td class="right">November 2025</td>
+<td class="right">February 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Yang, et al.</td>
-<td class="center">Expires 6 May 2026</td>
+<td class="center">Expires 7 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1068,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-yang-nmrg-mcp-nm-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-11-02" class="published">2 November 2025</time>
+<time datetime="2026-02-03" class="published">3 February 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-05-06">6 May 2026</time></dd>
+<dd class="expires"><time datetime="2026-08-07">7 August 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1129,7 +1130,7 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1138,7 +1139,7 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2025 IETF Trust and the persons identified as the
+            Copyright (c) 2026 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1204,16 +1205,13 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-deployment-consideration-in" class="internal xref">Deployment Consideration in adopting MCP in the Network Management</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-mcp-communication-using-int" class="internal xref">MCP Communication using Inter Processing Communication</a></p>
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-network-element-inter-commu" class="internal xref">Network Element Inter-Communication using MCP</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-the-oss-and-the-network-con" class="internal xref">The OSS and the Network Controller Communication using MCP</a></p>
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-standalone-mcp-server-to-ex" class="internal xref">Standalone MCP server to Expose APIs and tools to the Network Controller</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-the-network-controller-and-" class="internal xref">The Network Controller and the Network Device Communication using MCP</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
-                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-the-network-gateway-and-the" class="internal xref">The Network Gateway and the Network Device Communication using MCP</a></p>
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-the-network-gateway-control" class="internal xref">The Network Gateway/Controller and the Network Element Communication using MCP</a></p>
 </li>
             </ul>
 </li>
@@ -1392,29 +1390,35 @@ definitions<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
 
 </pre><a href="#section-3-1" class="pilcrow">¶</a>
 </div>
-<p id="section-3-2">There are 3 values for MCP coupling with the network management
-- Network MCP Server support
-  * Exposing network capabilities as MCP Servers for 3rd-party AI Agents &amp; applications<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-2">There are 3 values for MCP coupling with the network management<a href="#section-3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-3.1">
-          <p id="section-3-3.1.1">In Network Service<a href="#section-3-3.1.1" class="pilcrow">¶</a></p>
+          <p id="section-3-3.1.1">Network MCP Server support<a href="#section-3-3.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-3.1.2.1">
-              <p id="section-3-3.1.2.1.1">Empowering network services by leveraging MCP ecosystem tools &amp; contents<a href="#section-3-3.1.2.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-3-3.1.2.2">
-              <p id="section-3-3.1.2.2.1">Network service as a unified interface to various and rich capabilities for network users<a href="#section-3-3.1.2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3-3.1.2.1.1">Exposing network capabilities as MCP Servers for 3rd-party AI Agents &amp; applications<a href="#section-3-3.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </li>
         <li class="normal" id="section-3-3.2">
-          <p id="section-3-3.2.1">Network Management Intelligence<a href="#section-3-3.2.1" class="pilcrow">¶</a></p>
+          <p id="section-3-3.2.1">In Network Service<a href="#section-3-3.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-3.2.2.1">
-              <p id="section-3-3.2.2.1.1">Making network architecture really agile and friendly for innovation<a href="#section-3-3.2.2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-3-3.2.2.1.1">Empowering network services by leveraging MCP ecosystem tools &amp; contents<a href="#section-3-3.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3-3.2.2.2">
-              <p id="section-3-3.2.2.2.1">Decoupling network management functions into network agents and network tools<a href="#section-3-3.2.2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3-3.2.2.2.1">Network service as a unified interface to various and rich capabilities for network users<a href="#section-3-3.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</li>
+        <li class="normal" id="section-3-3.3">
+          <p id="section-3-3.3.1">Network Management Intelligence<a href="#section-3-3.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-3.3.2.1">
+              <p id="section-3-3.3.2.1.1">Making network architecture really agile and friendly for innovation<a href="#section-3-3.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3-3.3.2.2">
+              <p id="section-3-3.3.2.2.1">Decoupling network management functions into network agents and network tools<a href="#section-3-3.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </li>
@@ -1656,8 +1660,8 @@ Step 4: The MCP Client invoke specific tools with authorization.<a href="#sectio
 <ul class="normal">
 <li class="normal" id="section-7-2.1">
           <p id="section-7-2.1.1">Function-Specific MCP Servers:
-To maintain proper architecture and performance with growing tool volumes, servers should be categorized by network management function. Typical categories include
-network log analysis, device configuration management, energy consumption management, and security operations.<a href="#section-7-2.1.1" class="pilcrow">¶</a></p>
+To maintain proper architecture and performance with growing tool volumes, servers should be categorized by network management functions. Typical categories include
+network log analysis, device configuration management, energy consumption management, and security operations, etc.<a href="#section-7-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-7-2.2">
           <p id="section-7-2.2.1">Secure and Scalable Architecture: The architecture must:<a href="#section-7-2.2.1" class="pilcrow">¶</a></p>
@@ -1666,7 +1670,7 @@ network log analysis, device configuration management, energy consumption manage
               <p id="section-7-2.2.2.1.1">Enforce strict access controls limiting MCP operations to authorized AI models and users<a href="#section-7-2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-7-2.2.2.2">
-              <p id="section-7-2.2.2.2.1">Scale efficiently with increasing network device counts while maintaining performance<a href="#section-7-2.2.2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-7-2.2.2.2.1">Scale efficiently with increasing number of network devices while maintaining performance<a href="#section-7-2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </li>
@@ -1685,159 +1689,116 @@ network log analysis, device configuration management, energy consumption manage
           </ul>
 </li>
       </ul>
-<p id="section-7-3">While these core requirements apply universally, operational characteristics vary based on deployment location (on-premises vs. remote). The following subsections detail these deployment scenarios.<a href="#section-7-3" class="pilcrow">¶</a></p>
-<div id="mcp-communication-using-inter-processing-communication">
+<p id="section-7-3">While these core requirements apply universally, operational characteristics vary based on deployment location. The following subsections detail these deployment scenarios.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<div id="network-element-inter-communication-using-mcp">
 <section id="section-7.1">
-        <h3 id="name-mcp-communication-using-int">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-mcp-communication-using-int" class="section-name selfRef">MCP Communication using Inter Processing Communication</a>
+        <h3 id="name-network-element-inter-commu">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-network-element-inter-commu" class="section-name selfRef">Network Element Inter-Communication using MCP</a>
         </h3>
-<p id="section-7.1-1">In this network scenario, both the MCP client and the MCP server are deployed within the same network controller.
-The MCP client communicate with the MCP server using inter processing communication. In the meanwhile, the LLM model
-as pre-trained model should also be deployed in the same Network controller.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-7.1-2">
+<p id="section-7.1-1">In this network scenario, The MCP client is deployed in one smart network element
+while the MCP server is deployed in another smart network element. The MCP client
+communicates with the MCP server using the MCP protocol and invoke specific tools and get access to specific data in the network element as a data source. .
+In addition, human operator can use nature language to interact with smart network element to investigate protocol troubleshooting information.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1-2">Network element usually have limited resources (CPU, memory, etc.). Deploying MCP
+Client together with SLM may occupy a large amount of resources, affecting the normal operation of the
+device.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.1-3">
 <pre>
-           +----------------------------+
-           |                            |
-           |        OSS/BSS             |
-           |                            |
-           +----------------------------+
+         Human Operator
+              |
+              |
+          Nature Language                Data Source
+  +-----------+-------------+     +-------------------------+
+  |   +-------+----------+  |     |   +------------------+  |
+  |   |Routing Protocol  |  |     |   |Routing Protocol  |  |
+  |   |       Agent      |  |     |   |       Agent      |  |
+  |   |+---+ +----------+|  |     |   | +----------+     |  |
+  |   ||SLM| |MCP Client++--+-----+---+-&gt;MCP Server|     |  |
+  |   |+---+ +----------+|  |     |   | +----------+     |  |
+  |   +------------------+  |     |   +------------------+  |
+  +-------------------------+     +-------------------------+
+    Smart Network Element           Smart Network Element
 
 
-             +--------------------------+
-             |Network Controller (Network AI Agent)
-             |                          |
-             |  +------+Natrual +----+  |
-             |  |MCP   |Language|LLM |  |
-             |  |Client|------- |    |  |
-             |  +---+--+Command +----+  |
-             |      |                   |
-             |  +---+--+                |
-             |  |MCP   |                |
-             |  |Server|                |
-             |  +------+                |
-             +------------+-------------+
-                          |NETCONF/Telemetry/CLI
-     |-----------------+--+------------+
- +---+-----+      +----+----+     +----+----+
- | Network |      | Network |     |Network  |
- | Device  |      | Device  |     |Device   |
- +---------+      +---------+     +---------+
-
-</pre><a href="#section-7.1-2" class="pilcrow">¶</a>
+</pre><a href="#section-7.1-3" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
-<div id="the-oss-and-the-network-controller-communication-using-mcp">
+<div id="standalone-mcp-server-to-expose-apis-and-tools-to-the-network-controller">
 <section id="section-7.2">
-        <h3 id="name-the-oss-and-the-network-con">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-the-oss-and-the-network-con" class="section-name selfRef">The OSS and the Network Controller Communication using MCP</a>
+        <h3 id="name-standalone-mcp-server-to-ex">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-standalone-mcp-server-to-ex" class="section-name selfRef">Standalone MCP server to Expose APIs and tools to the Network Controller</a>
         </h3>
-<p id="section-7.2-1">In this network scenario, the MCP client is deployed in the OSS/BSS while the MCP server
-is deployed in the Network Controller, the MCP client and the MCP server communicated using SSE.
-In the meanwhile, the LLM model can be pre-trained LLM model collocated with the MCP client or
-the LLM model in the Cloud.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">In this network scenario, The MCP client is deployed in the network controller
+while the MCP server is deployed standalone to manage all the network elements.
+The network elements will be refactored as data source or tools so that MCP client
+can directly consume these APIs or data sources.
+Alternatively, the network elements can be traditional network elements. MCP server
+will serve as protocol adaptor to translate MCP protocol into traditional network management
+protocols such as NETCONF, gNMI.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-7.2-2">
 <pre>
-            +--------------------------+
-            |                          |
-            |      OSS/BSS             |
-            |                          |
-            |  +------+Natrual +----+- |
-            |  |MCP   |Language|LLM |  |
-            |  |Client|------- |    |  |
-            |  +---+--+Command +----+  |
-            +------+-------------------+
-                   |
-                   |
-            +------+-------------------+
-            |Network Controller (Network AI Agent)
-            |                          |
-            |      |                   |
-            |  +---+--+                |
-            |  |MCP   |                |
-            |  |Server|                |
-            |  +------+                |
-            +------------+-------------+
-                         |NETCONF/Telemetry/CLI
-    |-----------------+--+------------+
-+---+-----+      +----+----+     +----+----+
-| Network |      | Network |     |Network  |
-| Device  |      | Device  |     |Device   |
-+---------+      +---------+     +---------+
+                  +----------------------+
+                  |                      |
+                  |   Network Controller |
+                  |                      |
+                  |    +------------+    |
+                  |    |            |    |
+         +--------+----| MCP Client +----+----------+
+         |        |    |            |    |          |
+         |        |    +-----+------+    |          |
+         |        +----------+-----------+          |
+         |                   |                      |
+         |    +--------------V---------------+      |
+         |    |         MCP Server           |      |
+         |    +--------^-------------^-------+      |
+         V             |             |              V
++-------------+        |             |        +----------+
+|             |        |             |        |          |
+| Data Source |--------+-            |--------+  Tools   |
+|             |                               |          |
++-------------+                               +----------+
+Network Element                             Network Element
 
 </pre><a href="#section-7.2-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
-<div id="the-network-controller-and-the-network-device-communication-using-mcp">
+<div id="the-network-gatewaycontroller-and-the-network-element-communication-using-mcp">
 <section id="section-7.3">
-        <h3 id="name-the-network-controller-and-">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-the-network-controller-and-" class="section-name selfRef">The Network Controller and the Network Device Communication using MCP</a>
+        <h3 id="name-the-network-gateway-control">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-the-network-gateway-control" class="section-name selfRef">The Network Gateway/Controller and the Network Element Communication using MCP</a>
         </h3>
-<p id="section-7.3-1">In this network scenario, The MCP client is deployed in the network controller
-while the MCP server is deployed in the network devices. The MCP client
+<p id="section-7.3-1">In this network scenario, The MCP client is deployed in the network gateway device
+while the MCP server is deployed in each network devices. The MCP client
 communicates with the MCP server using the MCP protocol. LLM model is pre-trained model
-and deployed in the same Network Controller as the MCP client.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+and deployed in the same Network gateway as the MCP client.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.3-2">Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP
 Server may occupy a large amount of resources, affecting the normal operation of the
 device.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-7.3-3">
 <pre>
-                +--------------------------+
-                |Network Controller (Network AI Agent)
-                |                          |
-                |                          |
-                |  +------+Natrual +----+  |
-                |  |MCP   |Language|LLM |  |
-                |  |Client|------- |    |  |
-                |  +---+--+Command +----+  |
-                +------+-------------------+
-                       |NETCONF/CLI
-        +--------------+--+---------------+
-        |                 |               |
-    +---+-----+      +----+----+     +----+----+
-    |  MCP    |      |  MCP    |     | MCP     |
-    | Server1 |      | Server2 |     |Server3  |
-    +---------+      +---------+     +---------+
-    Network Device    Network Device  Network Device
+      +------------------------+
+      |   Network Controller/  |
+      |   Network Gateway      |
+      |                        |
+      |        Nature          |
+      | +------Language------+ |
+      | |  MCP  |     | LLM  | |
+      | | Client|-----|      | |
+      | +-+-----+     +------+ |
+      |   |MCP                 |
+      +---+--------------------+
+          +----------------+
+ +--------+---+     +------+------+
+ |  +-----++  |     |  +---+--+   |
+ |  | MCP ||  |     |  | MCP  |   |
+ |  |Server|  |     |  |Server|   |
+ |  +------+  |     |  +------+   |
+ +------------+     +-------------+
+Network Element      Network Element
 
 </pre><a href="#section-7.3-3" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-<div id="the-network-gateway-and-the-network-device-communication-using-mcp">
-<section id="section-7.4">
-        <h3 id="name-the-network-gateway-and-the">
-<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-the-network-gateway-and-the" class="section-name selfRef">The Network Gateway and the Network Device Communication using MCP</a>
-        </h3>
-<p id="section-7.4-1">In this network scenario, The MCP client is deployed in the network gateway device
-while the MCP server is deployed in each network devices. The MCP client
-communicates with the MCP server using the MCP protocol. LLM model is pre-trained model
-and deployed in the same Network gateway as the MCP client.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
-<p id="section-7.4-2">Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP
-Server may occupy a large amount of resources, affecting the normal operation of the
-device.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-7.4-3">
-<pre>
-               +--------------------------+
-               |Network Gateway    (Network AI Agent)
-               |                          |
-               |                          |
-               |  +------+Natrual +----+  |
-               |  |MCP   |Language|LLM |  |
-               |  |Client|------- |    |  |
-               |  +---+--+Command +----+  |
-               +------+-------------+
-                       |NETCONF/CLI
-        +-----------------+---------------+
-        |                 |               |
-    +---+-----+      +----+----+     +----+----+
-    |  MCP    |      |  MCP    |     | MCP     |
-    | Server1 |      | Server2 |     |Server3  |
-    +---------+      +---------+     +---------+
-    Network Device    Network Device  Network Device
-
-</pre><a href="#section-7.4-3" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
