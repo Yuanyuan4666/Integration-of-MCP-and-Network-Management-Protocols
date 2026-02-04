@@ -40,6 +40,12 @@ author:
   organization: Orange Research
   country: France
   email: lionel.tailhardat@orange.com
+
+contributor:
+ -
+    fullname: Qiufang Ma
+    organization: Huawei
+    email: maqiufang1@huawei.com
  -
    fullname: Guanming Zeng
    organization: Huawei
