@@ -5,15 +5,13 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 7 August 2026                                          D. Lopez
+Expires: 8 August 2026                                          D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
                                                            L. Tailhardat
                                                          Orange Research
-                                                                 G. Zeng
-                                                                  Huawei
-                                                         3 February 2026
+                                                         4 February 2026
 
 
             Applicability of MCP for the Network Management
@@ -45,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 August 2026.
+   This Internet-Draft will expire on 8 August 2026.
 
 Copyright Notice
 
@@ -96,6 +94,7 @@ Table of Contents
      A.1.  Routing Protocol Troubleshooting using Embeded SLM Model
            and Nature Language Interface
      A.2.  Device Configuration using MCP+CLI
+   Contributors
    Authors' Addresses
 
 1.  Introduction
@@ -941,6 +940,19 @@ async def check_status(device_ip: str, metrics: list):
   "192.168.10.2": "Error: no response from the device",
 }
 
+Contributors
+
+   Qiufang Ma
+   Huawei
+   Email: maqiufang1@huawei.com
+
+
+   Guanming Zeng
+   Huawei
+   China
+   Email: zengguanming@huawei.com
+
+
 Authors' Addresses
 
    Yuanyuan Yang
@@ -971,9 +983,3 @@ Authors' Addresses
    Orange Research
    France
    Email: lionel.tailhardat@orange.com
-
-
-   Guanming Zeng
-   Huawei
-   China
-   Email: zengguanming@huawei.com
