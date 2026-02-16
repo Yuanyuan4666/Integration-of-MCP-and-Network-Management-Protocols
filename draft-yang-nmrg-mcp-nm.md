@@ -194,7 +194,7 @@ There are 3 values for MCP coupling with the network management
     o There are also concerns that multiple active MCP connections could consume significant tokens in the
       LLM's context window. This can directly impact an LLM's performance, slowing down responses and
       potentially hindering its ability to maintain focus and reason effectively over extended or complex
-     interactions.
+      interactions.
 
 - Security Consideration
 
@@ -202,13 +202,13 @@ There are 3 values for MCP coupling with the network management
 
     The protocol's ability to grant LLMs access to external systems introduces potential vulnerabilities that require careful consideration
 
-    o Prompt injection, where malicious instructions embedded in user inputs or tool descriptions could lead to unintended actions by the LLM
+    o Prompt injection, where malicious instructions embedded in user inputs or tool descriptions could lead to unintended actions by the LLM;
 
-    o Tool poisoning, where attackers odify tool definitions, or rug pulls (similar to tool poisoning but occurs post-installation)
+    o Tool poisoning, where attackers odify tool definitions, or rug pulls (similar to tool poisoning but occurs post-installation);
 
-    o Tool shadowing, where a malicious server creates a tool with the same name as a legitimate tool from another server to intercept calls
+    o Tool shadowing, where a malicious server creates a tool with the same name as a legitimate tool from another server to intercept calls;
 
-  * Security enforcemen
+  * Security enforcement
 
     o MCP itself lacks inherent security enforcement mechanisms, relying heavily on external implementations for authentication and authorization, which were not
       initially  well-defined within the protocol.
