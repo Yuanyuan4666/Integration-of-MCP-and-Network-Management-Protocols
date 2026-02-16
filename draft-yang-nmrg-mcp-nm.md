@@ -190,7 +190,7 @@ There are 3 values for MCP coupling with the network management
       complicating load balancing and horizontal scaling efforts.
 
   * Context Handling
- 
+
     o There are also concerns that multiple active MCP connections could consume significant tokens in the
       LLM's context window. This can directly impact an LLM's performance, slowing down responses and
       potentially hindering its ability to maintain focus and reason effectively over extended or complex
