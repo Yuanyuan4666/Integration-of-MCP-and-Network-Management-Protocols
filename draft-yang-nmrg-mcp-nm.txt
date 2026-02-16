@@ -5,13 +5,13 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 8 August 2026                                          D. Lopez
+Expires: 20 August 2026                                         D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
                                                            L. Tailhardat
                                                          Orange Research
-                                                         4 February 2026
+                                                        16 February 2026
 
 
             Applicability of MCP for the Network Management
@@ -24,9 +24,10 @@ Abstract
    tools and provide more agile and extensible architecture to expose
    these AI integration capabilities.  This document discusses the
    applicability of MCP to the network management plane in the IP
-   network that utilizes IETF technologies.It explores MCP for network
-   exposure, multiple MCP server discovery generic workflow and
-   deployment scenarios.
+   network that utilizes IETF technologies.  It explores MCP for network
+   exposure, multiple MCP server discovery, communication between
+   Network Elements or between the Network element and the Network
+   Controller/Network Gateway.
 
 Status of This Memo
 
@@ -43,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 August 2026.
+   This Internet-Draft will expire on 20 August 2026.
 
 Copyright Notice
 
@@ -133,8 +134,9 @@ Table of Contents
 
    This document discusses the applicability of MCP to the network
    management plane in the IP network that utilizes IETF technologies.
-   It explores MCP for network exposure, multiple MCP server discovery
-   generic workflow and deployment scenarios.
+   It explores MCP for network exposure, multiple MCP server discovery,
+   communication between Network Elements or between the Network element
+   and the Network Controller/Network Gateway.
 
 2.  Terminology & Notation Conventions
 
