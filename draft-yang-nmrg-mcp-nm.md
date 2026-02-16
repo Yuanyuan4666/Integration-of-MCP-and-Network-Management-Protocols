@@ -183,14 +183,14 @@ There are 3 values for MCP coupling with the network management
       governance, versioning, or lifecycle management.
 
   * Stateful
-  
+
     o The protocol's reliance on stateful Server-Sent Events (SSE) can create significant complexities when
       integrating with inherently stateless REST APIs, requiring developers to manage state externally. This
       can be particularly challenging for remote MCP servers due to network latency and instability,
       complicating load balancing and horizontal scaling efforts.
 
   * Context Handling
-  
+ 
     o There are also concerns that multiple active MCP connections could consume significant tokens in the
       LLM's context window. This can directly impact an LLM's performance, slowing down responses and
       potentially hindering its ability to maintain focus and reason effectively over extended or complex
@@ -203,9 +203,9 @@ There are 3 values for MCP coupling with the network management
     The protocol's ability to grant LLMs access to external systems introduces potential vulnerabilities that require careful consideration
 
     o Prompt injection, where malicious instructions embedded in user inputs or tool descriptions could lead to unintended actions by the LLM
- 
+
     o Tool poisoning, where attackers odify tool definitions, or rug pulls (similar to tool poisoning but occurs post-installation)
- 
+
     o Tool shadowing, where a malicious server creates a tool with the same name as a legitimate tool from another server to intercept calls
 
   * Security enforcemen
