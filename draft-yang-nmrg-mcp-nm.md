@@ -61,7 +61,8 @@ informative:
 
 The application of MCP in the network management field is meant to refactor network management operation and network capabilities as tools and provide more agile
 and extensible architecture to expose these AI integration capabilities. This document discusses the applicability of MCP to the network management plane in the
-IP network that utilizes IETF technologies.It explores MCP for network exposure, multiple MCP server discovery generic workflow and deployment scenarios.
+IP network that utilizes IETF technologies. It explores MCP for network exposure, multiple MCP server discovery, communication between Network Elements or between
+the Network element and the Network Controller/Network Gateway.
 
 --- middle
 
@@ -98,8 +99,10 @@ IP network that utilizes IETF technologies.It explores MCP for network exposure,
 
    This document discusses the applicability of MCP to the network
    management plane in the IP network that utilizes IETF technologies.
-   It explores MCP for network exposure, multiple MCP server discovery generic workflow and
-   deployment scenarios.
+   It explores MCP for network exposure, multiple MCP server discovery,
+   communication between Network Elements or between the Network element
+   and the Network Controller/Network Gateway.
+
 
 # Terminology & Notation Conventions
 
@@ -368,12 +371,17 @@ This section describes MCP deployment requirements for network management enviro
   network log analysis, device configuration management, energy consumption management, and security operations, etc.
 
 - Secure and Scalable Architecture: The architecture must:
+
   * Enforce strict access controls limiting MCP operations to authorized AI models and users
+
   * Scale efficiently with increasing number of network devices while maintaining performance
 
 - Automated Workflows: MCP implementations should support LLM-coordinated automation of:
+
   * Real-time monitoring and diagnostics
+
   * Fault remediation workflows
+
   * Other common management operations to reduce operator workload
 
 While these core requirements apply universally, operational characteristics vary based on deployment location. The following subsections detail these deployment scenarios.
