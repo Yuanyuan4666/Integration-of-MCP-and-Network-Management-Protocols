@@ -593,7 +593,7 @@ network management and YANG data model. Instead, it can be integrated together, 
 
 * Integrated MCP with CLI, allow the MCP client invoke CLI capabilities;
 
-* Integrated MCP with YANG, allow the MCP client invoke YANG interface related capabilities;
+* Integrated MCP with YANG, allow YANG being consumed by MCP client or allow the MCP client invoke YANG interface related capabilities;
 
 # IANA Considerations
 
