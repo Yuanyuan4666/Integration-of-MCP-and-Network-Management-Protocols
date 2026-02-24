@@ -1641,11 +1641,11 @@ MCP Respository can be established to keep track of the location of each MCP ser
 
 </pre><a href="#section-6.1-1" class="pilcrow">¶</a>
 </div>
-<p id="section-6.1-2">• MCP Repository:
+<p id="section-6.1-2">o MCP Repository:
   * Maintain the description of MCP servers
   * Support MCP server discovery for Client.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.1-3">• MCP client: consuming the services provided by MCP servers<a href="#section-6.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.1-4">• MCP servers: including authentication/session/policy tools, the
+<p id="section-6.1-3">o MCP client: consuming the services provided by MCP servers<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-4">o MCP servers: including authentication/session/policy tools, the
   memory/prompts used for Agents<a href="#section-6.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2199,12 +2199,12 @@ implements the MCP client and interact with MCP server in the Network element.<a
 [
   {
     "name": "batch_configure_devices",
-    "description": "Batch Configure Network Devices"，
+    "description": "Batch Configure Network Devices",
     "parameters": {
       "type": "object",
       "properties": {
-        "device_ips": {"type": "array", "items": {"type": "string"}, "description": "Device IP List"}，
-        "commands": {"type": "array", "items": {"type": "string"}, "description": "CLI Sequence"}，
+        "device_ips": {"type": "array", "items": {"type": "string"}, "description": "Device IP List"},
+        "commands": {"type": "array", "items": {"type": "string"}, "description": "CLI Sequence"},
         "credential_id": {"type": "string", "description": "Credential ID"}
       }，
       "required": ["device_ips", "commands"]
@@ -2212,7 +2212,7 @@ implements the MCP client and interact with MCP server in the Network element.<a
   },
   {
     "name": "check_device_status",
-    "description": "Check the Status of Network Devices"，
+    "description": "Check the Status of Network Devices",
     "parameters": {
       "type": "object",
       "properties": {
