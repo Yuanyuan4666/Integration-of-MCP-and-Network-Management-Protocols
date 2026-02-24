@@ -59,10 +59,13 @@ informative:
 
 --- abstract
 
-The application of MCP in the network management field is meant to refactor network management operation and network capabilities as tools and provide more agile
-and extensible architecture to expose these AI integration capabilities. This document discusses the applicability of MCP to the network management plane in the
-IP network that utilizes IETF technologies. It explores MCP for network exposure, multiple MCP server discovery, communication between Network Elements or between
-the Network element and the Network Controller/Network Gateway.
+The application of MCP in the network management field is meant to refactor network
+management operation and network capabilities as tools and provide more agile and
+extensible architecture to expose these AI integration capabilities. This document
+discusses the applicability of MCP to the network management plane in the IP network
+that utilizes IETF technologies. It explores MCP for network exposure, multiple MCP
+server discovery, communication between Network Elements or between the Network
+element and the Network Controller/Network Gateway.
 
 --- middle
 
@@ -71,24 +74,26 @@ the Network element and the Network Controller/Network Gateway.
    The Model Context Protocol (MCP) decouples LLMs from tools and provides
    a standardized way for LLMs to access and utilize information from different
    data sources and tools, making it easier to build AI applications that can
-   interact with external LLM models and software tools and enable workflows automation.
+   interact with external LLM models and software tools and enable workflows
+   automation.
 
-   MCP has seen rapid adoption across both startups and enterprises since it announced
-   in November 2024. Key use cases include AI coding assistants in IDEs, data analysis
-   tools that can query databases, and productivity tools that can interact with services
-   like Slack or Google Drive.
+   MCP has seen rapid adoption across both startups and enterprises since it
+   announced in November 2024. Key use cases include AI coding assistants in
+   IDEs, data analysis tools that can query databases, and productivity tools
+   that can interact with services like Slack or Google Drive.
 
    The application of MCP for the network management is meant to refactor
-   network management operation and network capabilities as tools and provide more agile
-   and extensible architecture to expose or consume these AI integration capabilities.
+   network management operation and network capabilities as tools and provide
+   more agile and extensible architecture to expose or consume these AI
+   integration capabilities.
 
-   With integration of MCP into the network management system, it allow you
-   develop various rich AI driven network applications, realize intent
+   With integration of MCP into the network management system, it allow
+   you develop various rich AI driven network applications, realize intent
    based networks management, automate workflows in the multi-vendor
-   heterogeneous network platform. By establishing standard
-   interfaces for tool encapsulation, intent translation, and closed-
-   loop execution within the network management system, MCP enables the network
-   management system to have:
+   heterogeneous network platform. By establishing standard interfaces for
+   tool encapsulation, intent translation, and closed-loop execution within
+   the network management system, MCP enables the network management system
+   to have:
 
    -  Unified operation abstraction through normalized MCP tool
       definitions
@@ -106,13 +111,16 @@ the Network element and the Network Controller/Network Gateway.
 
 # Terminology & Notation Conventions
 
+{::boilerplate bcp14-tagged}
 The following terms are used throughout this document:
 
 ## MCP
 
-- **MCP Protocol**: MCP is an open standard designed to facilitate communication between LLMs and external data sources or tools.
+- **MCP Protocol**: MCP is an open standard designed to facilitate communication
+                    between LLMs and external data sources or tools.
 - **MCP Host**: The entity initiating the LLM request.
-- **MCP Client**: A built-in module within a host, specifically designed for interaction with the MCP server.
+- **MCP Client**: A built-in module within a host, specifically designed for
+                  interaction with the MCP server.
 - **MCP Server**: A dedicated server that interacts with MCP clients and provides tools.
 - **CLI**: Command Line Interface
 
@@ -121,7 +129,7 @@ The following terms are used throughout this document:
 - **LLM**: Large Language Model
 - **NETCONF**: Network Configuration Protocol {{!RFC6241}}
 - **RESTCONF**: RESTful Network Configuration Protocol {{!RFC8040}}
-- **SNMP**: A Simple Network Management Protocol {{!RFC2576}}
+- **SNMP**: A Simple Network Management Protocol {{!RFC3584}}
 
 # The values of coupling MCP with the network management {#value-mcp-nm}
 
@@ -178,49 +186,59 @@ There are 3 values for MCP coupling with the network management
 
   * Error Handling
 
-    o Although MCP provides basic error codes, MCP does not yet enforce a entire error-handling mechanism,
-      and its scope is currently limited to discovery and invocation, omitting crucial aspects like tool
-      governance, versioning, or lifecycle management.
+    o Although MCP provides basic error codes, MCP does not yet enforce a entire
+      error-handling mechanism, and its scope is currently limited to discovery and
+      invocation, omitting crucial aspects like tool governance, versioning, or
+       lifecycle management.
 
   * Stateful
 
-    o The protocol's reliance on stateful Server-Sent Events (SSE) can create significant complexities when
-      integrating with inherently stateless REST APIs, requiring developers to manage state externally. This
-      can be particularly challenging for remote MCP servers due to network latency and instability,
-      complicating load balancing and horizontal scaling efforts.
+    o The protocol's reliance on stateful Server-Sent Events (SSE) can create
+      significant complexities when integrating with inherently stateless REST APIs,
+      requiring developers to manage state externally. This can be particularly challenging
+      for remote MCP servers due to network latency and instability, complicating load
+      balancing and horizontal scaling efforts.
 
   * Context Handling
 
-    o There are also concerns that multiple active MCP connections could consume significant tokens in the
-      LLM's context window. This can directly impact an LLM's performance, slowing down responses and
-      potentially hindering its ability to maintain focus and reason effectively over extended or complex
-      interactions.
+    o There are also concerns that multiple active MCP connections could consume
+      significant tokens in the LLM's context window. This can directly impact an
+      LLM's performance, slowing down responses and potentially hindering its ability
+      to maintain focus and reason effectively over extended or complex interactions.
 
 - Security Consideration
 
   * Malicious Actors
 
-    The protocol's ability to grant LLMs access to external systems introduces potential vulnerabilities that require careful consideration
+    The protocol's ability to grant LLMs access to external systems introduces potential
+    vulnerabilities that require careful consideration
 
-    o Prompt injection, where malicious instructions embedded in user inputs or tool descriptions could lead to unintended actions by the LLM;
+    o Prompt injection, where malicious instructions embedded in user inputs or tool
+      descriptions could lead to unintended actions by the LLM;
 
-    o Tool poisoning, where attackers odify tool definitions, or rug pulls (similar to tool poisoning but occurs post-installation);
+    o Tool poisoning, where attackers odify tool definitions, or rug pulls (similar to
+      tool poisoning but occurs post-installation);
 
-    o Tool shadowing, where a malicious server creates a tool with the same name as a legitimate tool from another server to intercept calls;
+    o Tool shadowing, where a malicious server creates a tool with the same name as a
+      legitimate tool from another server to intercept calls;
 
   * Security enforcement
 
-    o MCP itself lacks inherent security enforcement mechanisms, relying heavily on external implementations for authentication and authorization, which were not
-      initially  well-defined within the protocol.
+    o MCP itself lacks inherent security enforcement mechanisms, relying heavily on external
+      implementations for authentication and authorization, which were not initially
+      well-defined within the protocol.
 
   * Identity Management
 
-    o Determining clear identity management - whether requests originate from the end user, the AI agent, or a shared system account - remains an area needing
-      clearer definition.
+    o Determining clear identity management - whether requests originate from the end user,
+      the AI agent, or a shared system account - remains an area needing clearer definition.
 
 # MCP for Network Exposure
 
-Network exposure is the process of making network capabilities, such as data and connectivity services, available to external users, applications, and developers through secure APIs. It allows for more agility and the creation of programmable networks. The MCP can be used to expose network capabilities to AI applications or consume external sources for LLMs.
+Network exposure is the process of making network capabilities, such as data and connectivity
+services, available to external users, applications, and developers through secure APIs. It
+allows for more agility and the creation of programmable networks. The MCP can be used to expose
+network capabilities to AI applications or consume external sources for LLMs.
 
 ## The Third Party as IETF network Exposure Consumer
 ~~~~
@@ -250,11 +268,14 @@ Network exposure is the process of making network capabilities, such as data and
 
 ~~~~
 
-Step 1: External tools or data source publish a set of APIs to MCP server in the Network Controller.
+Step 1: External tools or data source publish a set of APIs to MCP server in the Network
+        Controller.
 
-Step 2: MCP client send specific tools request to discover tools and MCP Server provide authorization to the MCP client.
+Step 2: MCP client send specific tools request to discover tools and MCP Server provide
+        authorization to the MCP client.
 
-Step 3: After sucessful authorization, MCP server return API list corresponding to tools request sent by the MCP client.
+Step 3: After sucessful authorization, MCP server return API list corresponding to tools
+        request sent by the MCP client.
 
 Step 4: MCP Client invokes tools with authorization.
 
@@ -289,13 +310,14 @@ Step 1: IETF Network Management AI Agent sends a MCP Service Request to
 
 Step 2: The MCP client discover tools provided by the external MCP server.
 
-Step 3: The MCP client provide available tools list to the IETF Network Management AI Agent.
+Step 3: The MCP client provide available tools list to the IETF Network Management
+        AI Agent.
 
 # MCP Server Discovery
 
-The MCP Server Discovery involves clients querying servers to find available tools, resources, and functions.
-In case of MCP servers are distributed in different locations, MCP Respository can be established to keep track
-of the location of each MCP servers.
+The MCP Server Discovery involves clients querying servers to find available tools,
+resources, and functions. In case of MCP servers are distributed in different locations,
+MCP Respository can be established to keep track of the location of each MCP servers.
 
 ## MCP core function
 ~~~~
@@ -364,8 +386,8 @@ of the location of each MCP servers.
 
 ~~~~
 
-Step 0: The MCP Server syncs up on the info of tools, upon tools is added or removed, tools changes
-        will be automatically syned up with the MCP server.
+Step 0: The MCP Server syncs up on the info of tools, upon tools is added or removed,
+        tools changes will be automatically syned up with the MCP server.
 
 Step 1: Each new MCP server will register to the centralized MCP registry.
 
@@ -379,11 +401,14 @@ Step 4: The MCP Client invoke specific tools with authorization.
 
 # Deployment Consideration in adopting MCP in the Network Management
 
-This section describes MCP deployment requirements for network management environments, followed by implementation scenarios. Key architectural requirements include:
+This section describes MCP deployment requirements for network management environments,
+followed by implementation scenarios. Key architectural requirements include:
 
 - Function-Specific MCP Servers:
-  To maintain proper architecture and performance with growing tool volumes, servers should be categorized by network management functions. Typical categories include
-  network log analysis, device configuration management, energy consumption management, and security operations, etc.
+  To maintain proper architecture and performance with growing tool volumes, servers
+  should be categorized by network management functions. Typical categories include
+  network log analysis, device configuration management, energy consumption management,
+  and security operations, etc.
 
 - Secure and Scalable Architecture: The architecture must:
 
@@ -399,18 +424,21 @@ This section describes MCP deployment requirements for network management enviro
 
   * Other common management operations to reduce operator workload
 
-While these core requirements apply universally, operational characteristics vary based on deployment location. The following subsections detail these deployment scenarios.
+While these core requirements apply universally, operational characteristics vary based
+on deployment location. The following subsections detail these deployment scenarios.
 
 ## Network Element Inter-Communication using MCP
 
 In this network scenario, the MCP client is deployed in one smart network element
 while the MCP server is deployed in another smart network element. The MCP client
-communicates with the MCP server using the MCP protocol and invoke specific tools and get access to specific data in the network element as a data source.
-In addition, human operator can use nature language to interact with smart network element to investigate protocol troubleshooting information.
+communicates with the MCP server using the MCP protocol and invoke specific tools
+and get access to specific data in the network element as a data source.
+In addition, human operator can use nature language to interact with smart network
+element to investigate protocol troubleshooting information.
 
 Network element usually have limited resources (CPU, memory, etc.). Deploying MCP
-Client together with SLM may occupy a large amount of resources, affecting the normal operation of the
-device.
+Client together with SLM may occupy a large amount of resources, affecting the
+normal operation of the device.
 
 ~~~~
 
@@ -466,11 +494,11 @@ the 3rd party management system or external data source.
 
 In this network scenario, The MCP client is deployed in the network controller
 while the MCP server is deployed standalone to manage all the network elements.
-The network elements will be refactored as data source or tools so that MCP client
-can directly consume these APIs or data sources.
-Alternatively, the network elements can be traditional network elements. MCP server
-will serve as protocol adaptor to translate MCP protocol into traditional network management
-protocols such as NETCONF, gNMI.
+The network elements will be refactored as data source or tools so that MCP
+client can directly consume these APIs or data sources.
+Alternatively, the network elements can be traditional network elements. MCP
+server will serve as protocol adaptor to translate MCP protocol into traditional
+network management protocols such as NETCONF, gNMI.
 
 ~~~~
 
@@ -539,47 +567,60 @@ Network Element      Network Element
 
 - Objective: Standardize device operations into modular, reusable tools.
 - Implementation:
-  - Tool Abstraction: Vendor-specific commands are wrapped into discrete MCP Tools with uniform schemas.
-  - Tool Registry: A centralized database stores MCP Tools with metadata (e.g., names, descriptions, parameters).
+  - Tool Abstraction: Vendor-specific commands are wrapped into discrete MCP
+    Tools with uniform schemas.
+  - Tool Registry: A centralized database stores MCP Tools with metadata
+    (e.g., names, descriptions, parameters).
 - Benefits:
   - Eliminates manual translation of commands across different vendors
   - Enabling the plug-and-play integration of new device types.
 
 ## LLM for Intent-to-Tool-Request Translation
 
-- Objective: Allow AI models (such as Claude) to understand natural language commands and trigger operations.
+- Objective: Allow AI models (such as Claude) to understand natural language
+             commands and trigger operations.
 - Workflow:
   - Intent Recognition: The LLM first analyzes the user's natural language query to identify：
     - The user's intent or goal
     - Required actions or operations
     - Entities, parameters, and constraints mentioned
     - Context from previous interactions
-  - Tool Discovery and Toolchain Generation: The LLM access tool descriptions provided by MCP servers, and matches the identified intent with available tools.
-  - Parameter Extraction and Mapping: The LLM maps natural language references to structured parameter names and extracts relevant information from the user
-    query.
-  - Structured Invocation Generation: The LLM generates properly formatted tool calls following MCP's protocol.
+
+  - Tool Discovery and Toolchain Generation: The LLM access tool descriptions provided by MCP
+    servers, and matches the identified intent with available tools.
+
+  - Parameter Extraction and Mapping: The LLM maps natural language references to structured
+    parameter names and extracts relevant information from the user query.
+
+  - Structured Invocation Generation: The LLM generates properly formatted tool calls following
+    MCP's protocol.
+
 - Benefits:
-     -  Bridge natural language to tool invocation requests in a fixed format, then return this request to the client, enabling
-        the client to properly parse the request.
+     -  Bridge natural language to tool invocation requests in a fixed format, then return this
+        request to the client, enabling the client to properly parse the request.
 
 ## Closed-Loop Automation Execution Workflow
 
 - Objective: Realize the closed loop of "voice/text commands → automatic execution".
 - A general workflow is as follows:
-  - User Input Submission: An operator submits a natural language request to the MCP client. And The MCP client
-    forwards this request to the LLM.
+  - User Input Submission: An operator submits a natural language request to the MCP
+    client. And The MCP client forwards this request to the LLM.
 
-  - LLM Intent Processing: The LLM parses the input, identifies the operational intent, and forwards a structured
-    request to the MCP client, which queries the MCP Server to retrieve the available tools. The information would
-    include the functional description, required parameters of tools.
+  - LLM Intent Processing: The LLM parses the input, identifies the operational intent,
+    and forwards a structured request to the MCP client, which queries the MCP Server to
+    retrieve the available tools. The information would include the functional description,
+    required parameters of tools.
 
   - LLM Toolchain Decision:
     - The LLM evaluates the context and if tools are required, select and sequence tools.
-    - The decision is sent back to the MCP Client and then MCP Client will execute tools via server.
+    - The decision is sent back to the MCP Client and then MCP Client will execute tools
+      via server.
 
-  - Tool Execution: The MCP Server executes the translated commands on target devices and returns results to the client.
+  - Tool Execution: The MCP Server executes the translated commands on target devices and
+    returns results to the client.
 
-  - Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs) and forwards them to the
+  - Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs)
+    and forwards them to the
     LLM for summarization.
 
 - Benefits:
@@ -588,12 +629,14 @@ Network Element      Network Element
 
 # Interworking with the Network Management protocol and YANG data models
 
-MCP can be seen as AI protocol and used to invoke AI integrated capabilities. MCP is not in the position to replace the
-network management and YANG data model. Instead, it can be integrated together, e.g.,
+MCP can be seen as AI protocol and used to invoke AI integrated capabilities. MCP is
+not in the position to replace the network management and YANG data model. Instead,
+it can be integrated together, e.g.,
 
 * Integrated MCP with CLI, allow the MCP client invoke CLI capabilities;
 
-* Integrated MCP with YANG, allow YANG being consumed by MCP client or allow the MCP client invoke YANG interface related capabilities;
+* Integrated MCP with YANG, allow YANG being consumed by MCP client or allow the
+  MCP client invoke YANG interface related capabilities;
 
 # IANA Considerations
 
@@ -601,16 +644,20 @@ This document has no IANA actions.
 
 # Security Considerations
 
-The MCP protocol needs to consider scenarios where either the client or server encounters issues, such as crashes. If one
-or both parties go offline during communication, the entire process may remain stuck waiting for messages, potentially leading
-to an infinite loop. Furthermore, certain tool operations may be interrupted, and some irreversible network management operations
+The MCP protocol needs to consider scenarios where either the client or server
+encounters issues, such as crashes. If one or both parties go offline during
+communication, the entire process may remain stuck waiting for messages,
+potentially leading to an infinite loop. Furthermore, certain tool operations
+may be interrupted, and some irreversible network management operations
 could be affected.
 
-Due to network latency, some operations might not return in time, yet from the user's perspective, these operations may appear
-either unexecuted or failed. If the user then initiates another tool request to the server, problems may occur.
+Due to network latency, some operations might not return in time, yet from
+the user's perspective, these operations may appear either unexecuted or failed.
+If the user then initiates another tool request to the server, problems may occur.
 
-For complex network management workflows, while LLM's tool invocation process may generally function correctly, issues can arise in
-the details. Users must verify each LLM operation to prevent unintended hazardous actions.
+For complex network management workflows, while LLM's tool invocation process may
+generally function correctly, issues can arise in the details. Users must verify
+each LLM operation to prevent unintended hazardous actions.
 
 --- back
 
@@ -655,9 +702,11 @@ the details. Users must verify each LLM operation to prevent unintended hazardou
 
 ~~~~
 
-Step 1. When ISIS neighbour establishment fails, the network maintenance engineer queries the fault cause via natural language in the CLI interface.
+Step 1. When ISIS neighbour establishment fails, the network maintenance engineer
+        queries the fault cause via natural language in the CLI interface.
 
-Step 2. A small model deployed on the device's CPU understands the user's intent and matches the fault pattern.
+Step 2. A small model deployed on the device's CPU understands the user's intent
+        and matches the fault pattern.
 
 Step 3. Troubleshooting scripts are invoked to locate the root cause of the fault.
 
@@ -665,8 +714,9 @@ Step 4. The query is repeated until service operations get back to normal.
 
 ## Device Configuration using MCP+CLI
 
-In this example, The network element implement the MCP Server and exposes all CLI interfaces and documentation as tools to the MCP Client.
-The Nework controller implements the MCP client and interact with MCP server in the Network element.
+In this example, The network element implement the MCP Server and exposes all CLI
+interfaces and documentation as tools to the MCP Client. The Nework controller
+implements the MCP client and interact with MCP server in the Network element.
 
 The MCP server provides the following registered tool descriptor information:
 
@@ -742,8 +792,10 @@ async def check_status(device_ip: str, metrics: list):
     return status
 ~~~~
 
-Suppose a user submits a request (via the client) such as "Configure OSPF Area 0 with process ID 100 for all core switches in the Beijing data center," the MCP
-client retrieves the necessary tooling descriptor information from the MCP server and forwards it along with the request to the LLM. The LLM determines the
+Suppose a user submits a request (via the client) such as "Configure OSPF Area 0
+with process ID 100 for all core switches in the Beijing data center," the MCP
+client retrieves the necessary tooling descriptor information from the MCP server
+and forwards it along with the request to the LLM. The LLM determines the
 appropriate tools and responds in JSON format as follows:
 
 ~~~~
@@ -761,8 +813,10 @@ appropriate tools and responds in JSON format as follows:
 
 ~~~~
 
-The MCP server responds to the call instruction, converts it into the below CLIs of different vendors, and then the devices execute the CLIs. The results are
-returned to the MCP client in Json as below and are forwarded to the LLM. The LLM parses the response, generates a natural-language summary, and sends it back
+The MCP server responds to the call instruction, converts it into the below CLIs
+of different vendors, and then the devices execute the CLIs. The results are
+returned to the MCP client in Json as below and are forwarded to the LLM. The
+LLM parses the response, generates a natural-language summary, and sends it back
 to the client for final presentation to the user.
 
 ~~~~
