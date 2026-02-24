@@ -340,13 +340,13 @@ MCP Respository can be established to keep track of the location of each MCP ser
                            -----                  -----
 
 ~~~~
-• MCP Repository:
+o MCP Repository:
   * Maintain the description of MCP servers
   * Support MCP server discovery for Client.
 
-• MCP client: consuming the services provided by MCP servers
+o MCP client: consuming the services provided by MCP servers
 
-• MCP servers: including authentication/session/policy tools, the
+o MCP servers: including authentication/session/policy tools, the
   memory/prompts used for Agents
 
 ## Procedure for Multi-MCP servers Discovery
@@ -731,12 +731,12 @@ See Tool descriptor information example as follows:
 [
   {
     "name": "batch_configure_devices",
-    "description": "Batch Configure Network Devices"，
+    "description": "Batch Configure Network Devices",
     "parameters": {
       "type": "object",
       "properties": {
-        "device_ips": {"type": "array", "items": {"type": "string"}, "description": "Device IP List"}，
-        "commands": {"type": "array", "items": {"type": "string"}, "description": "CLI Sequence"}，
+        "device_ips": {"type": "array", "items": {"type": "string"}, "description": "Device IP List"},
+        "commands": {"type": "array", "items": {"type": "string"}, "description": "CLI Sequence"},
         "credential_id": {"type": "string", "description": "Credential ID"}
       }，
       "required": ["device_ips", "commands"]
@@ -744,7 +744,7 @@ See Tool descriptor information example as follows:
   },
   {
     "name": "check_device_status",
-    "description": "Check the Status of Network Devices"，
+    "description": "Check the Status of Network Devices",
     "parameters": {
       "type": "object",
       "properties": {
