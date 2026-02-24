@@ -5,13 +5,13 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 20 August 2026                                         D. Lopez
+Expires: 28 August 2026                                         D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
                                                            L. Tailhardat
                                                          Orange Research
-                                                        16 February 2026
+                                                        24 February 2026
 
 
             Applicability of MCP for the Network Management
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 August 2026.
+   This Internet-Draft will expire on 28 August 2026.
 
 Copyright Notice
 
@@ -709,8 +709,9 @@ Table of Contents
    *  Integrated MCP with CLI, allow the MCP client invoke CLI
       capabilities;
 
-   *  Integrated MCP with YANG, allow the MCP client invoke YANG
-      interface related capabilities;
+   *  Integrated MCP with YANG, allow YANG being consumed by MCP client
+      or allow the MCP client invoke YANG interface related
+      capabilities;
 
 10.  IANA Considerations
 
