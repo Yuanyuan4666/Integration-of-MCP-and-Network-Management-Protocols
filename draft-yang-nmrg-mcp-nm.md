@@ -735,10 +735,21 @@ See Tool descriptor information example as follows:
     "parameters": {
       "type": "object",
       "properties": {
-        "device_ips": {"type": "array", "items": {"type": "string"}, "description": "Device IP List"},
-        "commands": {"type": "array", "items": {"type": "string"}, "description": "CLI Sequence"},
-        "credential_id": {"type": "string", "description": "Credential ID"}
-      }，
+        "device_ips": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Device IP List"
+        },
+        "commands": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "CLI Sequence"
+        },
+        "credential_id": {
+          "type": "string",
+          "description": "Credential ID"
+        }
+      },
       "required": ["device_ips", "commands"]
     }
   },
@@ -749,8 +760,12 @@ See Tool descriptor information example as follows:
       "type": "object",
       "properties": {
         "device_ip": {"type": "string"},
-        "metrics": {"type": "array", "items": {"enum": ["cpu", "memory", "interface"]}}
-      }
+        "metrics": {
+          "type": "array",
+          "items": {"enum": ["cpu", "memory", "interface"]}
+        }
+      },
+      "required": ["device_ip"]
     }
   }
 ]
@@ -763,9 +778,15 @@ server = McpServer(app)
 
 #Connection Pool Management
 devices = {
-    "192.168.1.1": {"device_type": "VendorA-XYZ"，"credential": "admin:XYZ@password"},
-    "192.168.1.2": {"device_type": "VendorB-ABC","credential":"admin:ABC@passowrd"}
-     ....
+    "192.168.1.1": {
+        "device_type": "VendorA-XYZ",
+        "credential": "admin:XYZ@password"
+    },
+    "192.168.1.2": {
+        "device_type": "VendorB-ABC",
+        "credential": "admin:ABC@passowrd"
+    },
+    ...
 }
 
 @server.tool("batch_configure_devices")
@@ -839,7 +860,8 @@ to the client for final presentation to the user.
 #Feedbacks received by the MCP client of different vendors
 {
     "status": "success",
-    "message": "OSPF configuration applied successfully on device 192.168.10.1",
+    "message": "OSPF configuration applied successfully on device
+                192.168.10.1",
     "commands_executed": [
         "system-view",
         "ospf 100",
@@ -850,7 +872,8 @@ to the client for final presentation to the user.
 
 {
     "status": "success",
-    "message": "OSPF configuration applied successfully on device 192.168.10.1",
+    "message": "OSPF configuration applied successfully on device
+                192.168.10.1",
     "commands_executed": [
         "configure terminal",
         "router ospf 100",
