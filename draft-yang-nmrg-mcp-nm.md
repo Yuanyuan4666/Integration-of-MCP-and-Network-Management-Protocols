@@ -216,7 +216,7 @@ There are 3 values for MCP coupling with the network management
     o Prompt injection, where malicious instructions embedded in user inputs or tool
       descriptions could lead to unintended actions by the LLM;
 
-    o Tool poisoning, where attackers odify tool definitions, or rug pulls (similar to
+    o Tool poisoning, where attackers modify tool definitions, or rug pulls (similar to
       tool poisoning but occurs post-installation);
 
     o Tool shadowing, where a malicious server creates a tool with the same name as a
@@ -274,7 +274,7 @@ Step 1: External tools or data source publish a set of APIs to MCP server in the
 Step 2: MCP client send specific tools request to discover tools and MCP Server provide
         authorization to the MCP client.
 
-Step 3: After sucessful authorization, MCP server return API list corresponding to tools
+Step 3: After successful authorization, MCP server return API list corresponding to tools
         request sent by the MCP client.
 
 Step 4: MCP Client invokes tools with authorization.
@@ -317,14 +317,14 @@ Step 3: The MCP client provide available tools list to the IETF Network Manageme
 
 The MCP Server Discovery involves clients querying servers to find available tools,
 resources, and functions. In case of MCP servers are distributed in different locations,
-MCP Respository can be established to keep track of the location of each MCP servers.
+MCP Repository can be established to keep track of the location of each MCP servers.
 
 ## MCP core function
 ~~~~
 
           +------------+ 2.Discovery ---------------+
           | Agents     +-----------+      MCP       |
-          |(MCP Client)+-----------+   Respository  |
+          |(MCP Client)+-----------+   Repository  |
           +-+----------+ 3. Authz  +--------^-------+
             |4. Consume                     |1.Registration
             | +-------------+---------------+-------+-
@@ -387,7 +387,7 @@ o MCP servers: including authentication/session/policy tools, the
 ~~~~
 
 Step 0: The MCP Server syncs up on the info of tools, upon tools is added or removed,
-        tools changes will be automatically syned up with the MCP server.
+        tools changes will be automatically synced up with the MCP server.
 
 Step 1: Each new MCP server will register to the centralized MCP registry.
 
@@ -463,7 +463,7 @@ normal operation of the device.
 ## Network Controller consumes API or Data source using MCP
 
 In this network scenario, the MCP client is deployed in the network controller
-while the MCP server is deployed in either the 3rd party managment system or
+while the MCP server is deployed in either the 3rd party management system or
 external data source. The MCP client communicates with the MCP server using
 the MCP protocol and invoke specific tools and get access to specific data in
 the 3rd party management system or external data source.
@@ -663,7 +663,7 @@ each LLM operation to prevent unintended hazardous actions.
 
 # MCP Usage Examples {#usage}
 
-## Routing Protocol Troubleshooting using Embeded SLM Model and Nature Language Interface
+## Routing Protocol Troubleshooting using Embedded SLM Model and Nature Language Interface
 
 ~~~~
 
@@ -715,7 +715,7 @@ Step 4. The query is repeated until service operations get back to normal.
 ## Device Configuration using MCP+CLI
 
 In this example, The network element implement the MCP Server and exposes all CLI
-interfaces and documentation as tools to the MCP Client. The Nework controller
+interfaces and documentation as tools to the MCP Client. The Network controller
 implements the MCP client and interact with MCP server in the Network element.
 
 The MCP server provides the following registered tool descriptor information:
@@ -784,7 +784,7 @@ devices = {
     },
     "192.168.1.2": {
         "device_type": "VendorB-ABC",
-        "credential": "admin:ABC@passowrd"
+        "credential": "admin:ABC@password"
     },
     ...
 }
@@ -836,7 +836,7 @@ appropriate tools and responds in JSON format as follows:
 
 The MCP server responds to the call instruction, converts it into the below CLIs
 of different vendors, and then the devices execute the CLIs. The results are
-returned to the MCP client in Json as below and are forwarded to the LLM. The
+returned to the MCP client in JSON as below and are forwarded to the LLM. The
 LLM parses the response, generates a natural-language summary, and sends it back
 to the client for final presentation to the user.
 
@@ -883,7 +883,7 @@ to the client for final presentation to the user.
     ]
 }
 
-# Natural lanauge summary of success or failure:
+# Natural language summary of success or failure:
 {
   "192.168.10.1": "Configure Successfully, take 2.3 seconds",
   "192.168.10.2": "Error: no response from the device",
