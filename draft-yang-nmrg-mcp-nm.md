@@ -78,7 +78,7 @@ element and the Network Controller/Network Gateway.
    automation.
 
    MCP has seen rapid adoption across both startups and enterprises since it
-   announced in November 2024. Key use cases include AI coding assistants in
+   was announced in November 2024. Key use cases include AI coding assistants in
    IDEs, data analysis tools that can query databases, and productivity tools
    that can interact with services like Slack or Google Drive.
 
@@ -87,9 +87,9 @@ element and the Network Controller/Network Gateway.
    more agile and extensible architecture to expose or consume these AI
    integration capabilities.
 
-   With integration of MCP into the network management system, it allow
-   you develop various rich AI driven network applications, realize intent
-   based networks management, automate workflows in the multi-vendor
+   With integration of MCP into the network management system, it allows
+   you to develop various rich AI-driven network applications, realize intent
+   based network management, automate workflows in the multi-vendor
    heterogeneous network platform. By establishing standard interfaces for
    tool encapsulation, intent translation, and closed-loop execution within
    the network management system, MCP enables the network management system
@@ -271,10 +271,10 @@ network capabilities to AI applications or consume external sources for LLMs.
 Step 1: External tools or data source publish a set of APIs to MCP server in the Network
         Controller.
 
-Step 2: MCP client send specific tools request to discover tools and MCP Server provide
+Step 2: MCP client sends a specific tool request to discover tools and MCP Server provides
         authorization to the MCP client.
 
-Step 3: After successful authorization, MCP server return API list corresponding to tools
+Step 3: After successful authorization, MCP server returns the API list corresponding to the tool
         request sent by the MCP client.
 
 Step 4: MCP Client invokes tools with authorization.
@@ -308,15 +308,15 @@ Step 0: MCP Client is preconfigured with the MCP Server address.
 Step 1: IETF Network Management AI Agent sends a MCP Service Request to
         the MCP client within the Network Controller.
 
-Step 2: The MCP client discover tools provided by the external MCP server.
+Step 2: The MCP client discovers tools provided by the external MCP server.
 
-Step 3: The MCP client provide available tools list to the IETF Network Management
+Step 3: The MCP client provides the available tools list to the IETF Network Management
         AI Agent.
 
 # MCP Server Discovery
 
 The MCP Server Discovery involves clients querying servers to find available tools,
-resources, and functions. In case of MCP servers are distributed in different locations,
+resources, and functions. In case MCP servers are distributed in different locations,
 MCP Repository can be established to keep track of the location of each MCP servers.
 
 ## MCP core function
@@ -386,18 +386,18 @@ o MCP servers: including authentication/session/policy tools, the
 
 ~~~~
 
-Step 0: The MCP Server syncs up on the info of tools, upon tools is added or removed,
+Step 0: The MCP Server syncs up on the info of tools, when tools are added or removed,
         tools changes will be automatically synced up with the MCP server.
 
 Step 1: Each new MCP server will register to the centralized MCP registry.
 
-Step 2.1: MCP Client send the MCP service request to the MCP registry for specific capability.
+Step 2.1: MCP Client sends the MCP service request to the MCP registry for specific capability.
 
-Step 2.2: The MCP registry return specific MCP server to the MCP client.
+Step 2.2: The MCP registry returns a specific MCP server to the MCP client.
 
 Step 3: The MCP Client request authorization from the MCP server.
 
-Step 4: The MCP Client invoke specific tools with authorization.
+Step 4: The MCP Client invokes specific tools with authorization.
 
 # Deployment Consideration in adopting MCP in the Network Management
 
@@ -431,12 +431,12 @@ on deployment location. The following subsections detail these deployment scenar
 
 In this network scenario, the MCP client is deployed in one smart network element
 while the MCP server is deployed in another smart network element. The MCP client
-communicates with the MCP server using the MCP protocol and invoke specific tools
-and get access to specific data in the network element as a data source.
+communicates with the MCP server using the MCP protocol and invokes specific tools
+and gets access to specific data in the network element as a data source.
 In addition, human operator can use natural language to interact with smart network
 element to investigate protocol troubleshooting information.
 
-Network element usually have limited resources (CPU, memory, etc.). Deploying MCP
+Network elements usually have limited resources (CPU, memory, etc.). Deploying MCP
 Client together with SLM may occupy a large amount of resources, affecting the
 normal operation of the device.
 
@@ -465,7 +465,7 @@ normal operation of the device.
 In this network scenario, the MCP client is deployed in the network controller
 while the MCP server is deployed in either the 3rd party management system or
 external data source. The MCP client communicates with the MCP server using
-the MCP protocol and invoke specific tools and get access to specific data in
+the MCP protocol and invokes specific tools and gets access to specific data in
 the 3rd party management system or external data source.
 
 ~~~~
@@ -492,7 +492,7 @@ the 3rd party management system or external data source.
 
 ## Standalone MCP server to Expose APIs and tools to the Network Controller
 
-In this network scenario, The MCP client is deployed in the network controller
+In this network scenario, the MCP client is deployed in the network controller
 while the MCP server is deployed standalone to manage all the network elements.
 The network elements will be refactored as data source or tools so that MCP
 client can directly consume these APIs or data sources.
@@ -528,9 +528,9 @@ Network Element                             Network Element
 
 ## The Network Gateway/Controller and the Network Element Communication using MCP
 
-In this network scenario, The MCP client is deployed in the network gateway device
-while the MCP server is deployed in each network devices. The MCP client
-communicates with the MCP server using the MCP protocol. LLM model is pre-trained model
+In this network scenario, the MCP client is deployed in the network gateway device
+while the MCP server is deployed in each network device. The MCP client
+communicates with the MCP server using the MCP protocol. The LLM is a pre-trained model
 and deployed in the same Network gateway as the MCP client.
 
 Network devices usually have limited resources (CPU, memory, etc.). Deploying MCP
@@ -573,7 +573,7 @@ Network Element      Network Element
     (e.g., names, descriptions, parameters).
 - Benefits:
   - Eliminates manual translation of commands across different vendors
-  - Enabling the plug-and-play integration of new device types.
+  - Enables the plug-and-play integration of new device types.
 
 ## LLM for Intent-to-Tool-Request Translation
 
@@ -586,7 +586,7 @@ Network Element      Network Element
     - Entities, parameters, and constraints mentioned
     - Context from previous interactions
 
-  - Tool Discovery and Toolchain Generation: The LLM access tool descriptions provided by MCP
+  - Tool Discovery and Toolchain Generation: The LLM accesses tool descriptions provided by MCP
     servers, and matches the identified intent with available tools.
 
   - Parameter Extraction and Mapping: The LLM maps natural language references to structured
@@ -604,7 +604,7 @@ Network Element      Network Element
 - Objective: Realize the closed loop of "voice/text commands → automatic execution".
 - A general workflow is as follows:
   - User Input Submission: An operator submits a natural language request to the MCP
-    client. And The MCP client forwards this request to the LLM.
+    client. And the MCP client forwards this request to the LLM.
 
   - LLM Intent Processing: The LLM parses the input, identifies the operational intent,
     and forwards a structured request to the MCP client, which queries the MCP Server to
@@ -612,7 +612,7 @@ Network Element      Network Element
     required parameters of tools.
 
   - LLM Toolchain Decision:
-    - The LLM evaluates the context and if tools are required, select and sequence tools.
+    - The LLM evaluates the context and if tools are required, selects and sequences tools.
     - The decision is sent back to the MCP Client and then MCP Client will execute tools
       via server.
 
@@ -714,7 +714,7 @@ Step 4. The query is repeated until service operations get back to normal.
 
 ## Device Configuration using MCP+CLI
 
-In this example, The network element implement the MCP Server and exposes all CLI
+In this example, the network element implements the MCP Server and exposes all CLI
 interfaces and documentation as tools to the MCP Client. The Network controller
 implements the MCP client and interact with MCP server in the Network element.
 
