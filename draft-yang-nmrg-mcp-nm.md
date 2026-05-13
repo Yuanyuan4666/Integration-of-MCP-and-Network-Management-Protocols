@@ -801,7 +801,7 @@ async def batch_config(device_ips: list,commands: list,credential_id: str):
         )
         output = conn.send_config_set(commands)
         results[ip] = output
-    return {"success": True, "details": results)
+    return {"success": True, "details": results}
 
 @server.tool("check_device_status")
 async def check_status(device_ip: str, metrics: list):
