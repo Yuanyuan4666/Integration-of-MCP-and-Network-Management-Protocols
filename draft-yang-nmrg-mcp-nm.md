@@ -433,7 +433,7 @@ In this network scenario, the MCP client is deployed in one smart network elemen
 while the MCP server is deployed in another smart network element. The MCP client
 communicates with the MCP server using the MCP protocol and invoke specific tools
 and get access to specific data in the network element as a data source.
-In addition, human operator can use nature language to interact with smart network
+In addition, human operator can use natural language to interact with smart network
 element to investigate protocol troubleshooting information.
 
 Network element usually have limited resources (CPU, memory, etc.). Deploying MCP
@@ -445,7 +445,7 @@ normal operation of the device.
          Human Operator
               |
               |
-          Nature Language                Data Source
+          Natural Language               Data Source
   +-----------+-------------+     +-------------------------+
   |   +-------+----------+  |     |   +------------------+  |
   |   |Routing Protocol  |  |     |   |Routing Protocol  |  |
@@ -543,7 +543,7 @@ device.
       |   Network Controller/  |
       |   Network Gateway      |
       |                        |
-      |        Nature          |
+      |        Natural         |
       | +------Language------+ |
       | |  MCP  |     | LLM  | |
       | | Client|-----|      | |
@@ -663,7 +663,7 @@ each LLM operation to prevent unintended hazardous actions.
 
 # MCP Usage Examples {#usage}
 
-## Routing Protocol Troubleshooting using Embedded SLM Model and Nature Language Interface
+## Routing Protocol Troubleshooting using Embedded SLM Model and Natural Language Interface
 
 ~~~~
 
@@ -685,7 +685,7 @@ each LLM operation to prevent unintended hazardous actions.
 |                                                  |              |
 |                                                  |              |
 | +------------------------------------------------+------------+ |
-| |OPS Env:Online Nature Language Interaction------V-------+    | |
+| |OPS Env:Online Natural Language Interaction------V-------+    | |
 | |                             +----------+Troubleshooting|    | |
 | |                             |          |  Package Build|    | |
 | |                             |          +---------------+    | |
