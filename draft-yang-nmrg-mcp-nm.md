@@ -40,6 +40,11 @@ author:
   organization: Orange Research
   country: France
   email: lionel.tailhardat@orange.com
+ -
+  fullname: Shailesh Prabhu
+  organization: Nokia
+  country: India
+  email: shailesh.prabhu@nokia.com
 
 contributor:
  -
