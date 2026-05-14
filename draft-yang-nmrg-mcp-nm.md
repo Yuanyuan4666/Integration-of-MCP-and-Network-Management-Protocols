@@ -411,25 +411,19 @@ network-management-specific capability metadata may improve
 operational safety, interoperability, and automated decision-making.
 
 MCP repositories and MCP servers may associate tools with metadata
-describing the operational characteristics and constraints of the
-exposed capability. Such metadata may include the operation type,
-operational scope, supported management protocols, authorization
-requirements, rollback support capability, operational risk level,
-capability freshness timestamp, synchronization status, and human
-approval requirements for high-impact operations. This information
-may assist MCP clients, AI agents, and orchestration systems in
-evaluating the suitability, applicability, and operational safety of
-a tool prior to authorization and invocation.
+describing both functional capabilities and operational constraints
+of the exposed capability. Functional capability metadata may
+include operation type, operational scope, supported management
+protocols, rollback support capability, and operational risk level.
+Operational constraint metadata may include authorization
+requirements, human approval requirements, freshness indicators, and
+synchronization version information.
 
-Capability metadata may additionally help reduce unsafe or unintended
-operations by enabling MCP clients and AI agents to better understand
-the operational constraints associated with network management
-actions. Capability freshness information may assist in avoiding
-stale, outdated, or unreachable MCP services in large-scale
-distributed network management deployments. Operational risk
-classification may further support policy-driven execution workflows,
-including human-in-the-loop approval mechanisms for service-impacting
-or irreversible operations.
+Such metadata may assist MCP clients, AI agents, and orchestration
+systems in evaluating the suitability, applicability, and
+operational safety of MCP tools prior to authorization and
+invocation, particularly in large-scale distributed network
+management deployments.
 
 # Deployment Consideration in adopting MCP in the Network Management
 
