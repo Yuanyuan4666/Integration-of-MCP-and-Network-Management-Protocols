@@ -659,11 +659,7 @@ For complex network management workflows, while LLM's tool invocation process ma
 generally function correctly, issues can arise in the details. Users must verify
 each LLM operation to prevent unintended hazardous actions.
 
-Capability metadata associated with MCP-exposed network management tools may
-assist MCP clients, AI agents, and orchestration systems in evaluating operational
-risk, authorization requirements, rollback capabilities, and approval policies
-prior to tool invocation. Such metadata may help reduce unsafe or unintended
-operations in AI-assisted network management environments.
+Capability metadata associated with MCP-exposed network management tools may assist MCP clients and AI agents in evaluating operational risk, rollback capabilities, and approval requirements prior to tool invocation. Orchestration systems may use such metadata to enforce authorization, approval, and policy constraints as part of the execution workflow. This distinction can help reduce unsafe or unintended operations in AI-assisted network management environments by allowing clients and agents to consume metadata for planning, while enforcement points apply policy controls before execution.
 
 --- back
 
