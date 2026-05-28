@@ -412,12 +412,15 @@ operational safety, interoperability, and automated decision-making.
 
 MCP repositories and MCP servers may associate tools with metadata
 describing both functional capabilities and operational constraints
-of the exposed capability. Functional capability metadata may
-include operation type, operational scope, supported management
-protocols, rollback support capability, and operational risk level.
-Operational constraint metadata may include authorization
-requirements, human approval requirements, freshness indicators, and
-synchronization version information.
+of the exposed capability as follows:
+
+- Functional capability metadata:
+  operation type, operational scope, supported management
+  protocols, rollback support capability, and operational risk level.
+
+- Operational constraint metadata
+  authorization requirements, human approval requirements, freshness indicators, and
+  synchronization version information.
 
 Such metadata may assist MCP clients, AI agents, and orchestration
 systems in evaluating the suitability, applicability, and
