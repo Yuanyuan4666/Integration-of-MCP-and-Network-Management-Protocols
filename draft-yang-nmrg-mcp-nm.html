@@ -1201,6 +1201,9 @@ element and the Network Controller/Network Gateway.<a href="#section-abstract-1"
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-procedure-for-multi-mcp-ser" class="internal xref">Procedure for Multi-MCP servers Discovery</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-network-management-capabili" class="internal xref">Network Management Capability Metadata</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
@@ -1694,6 +1697,41 @@ MCP Repository can be established to keep track of the location of each MCP serv
 <p id="section-6.2-5">Step 2.2: The MCP registry returns a specific MCP server to the MCP client.<a href="#section-6.2-5" class="pilcrow">¶</a></p>
 <p id="section-6.2-6">Step 3: The MCP Client request authorization from the MCP server.<a href="#section-6.2-6" class="pilcrow">¶</a></p>
 <p id="section-6.2-7">Step 4: The MCP Client invokes specific tools with authorization.<a href="#section-6.2-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="network-management-capability-metadata">
+<section id="section-6.3">
+        <h3 id="name-network-management-capabili">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-network-management-capabili" class="section-name selfRef">Network Management Capability Metadata</a>
+        </h3>
+<p id="section-6.3-1">In MCP-based network management environments, exposed tools may
+represent operationally sensitive network management actions,
+including telemetry retrieval, diagnostics, configuration
+modification, service provisioning, policy updates, or device
+control operations. While the MCP repository maintains information
+about MCP servers, tools, and capabilities, additional
+network-management-specific capability metadata may improve
+operational safety, interoperability, and automated decision-making.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">MCP repositories and MCP servers may associate tools with metadata
+describing both functional capabilities and operational constraints
+of the exposed capability as follows:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3-3.1">
+            <p id="section-6.3-3.1.1">Functional capability metadata:
+operation type, operational scope, supported management
+protocols, rollback support capability, and operational risk level.<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.3-3.2">
+            <p id="section-6.3-3.2.1">Operational constraint metadata
+authorization requirements, human approval requirements, freshness indicators, and
+synchronization version information.<a href="#section-6.3-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-6.3-4">Such metadata may assist MCP clients, AI agents, and orchestration
+systems in evaluating the suitability, applicability, and
+operational safety of MCP tools prior to authorization and
+invocation, particularly in large-scale distributed network
+management deployments.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
