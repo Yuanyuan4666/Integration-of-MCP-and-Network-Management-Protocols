@@ -656,7 +656,7 @@ Network Element      Network Element
   - LLM Intent Processing: The LLM parses the input and identifies the operational intent. The MCP client then quiries the MCP server via HTTP GET to retrieve the registered tools and their associated schemas.
 
   - Tool Discovery and Context Retrieval:
-    - If the LLM requires network knowledge or baseline history to process the intent, it invokesthe respective tool. Taking RAG tool as an example, this tool may generate a query embedding and perform a top-K similarity search against the vector database. 
+    - If the LLM requires network knowledge or baseline history to process the intent, it invokes the respective tool. Taking RAG tool as an example, this tool may generate a query embedding and perform a top-K similarity search against the vector database.
     - The retrieved document or memory records are returned to the LLM as a structured prompt context.
 
   - Tool Decision and Execution:
