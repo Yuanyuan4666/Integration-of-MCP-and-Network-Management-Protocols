@@ -5,13 +5,15 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 28 August 2026                                         D. Lopez
+Expires: 1 January 2027                                         D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
                                                            L. Tailhardat
                                                          Orange Research
-                                                        24 February 2026
+                                                               S. Prabhu
+                                                                   Nokia
+                                                            30 June 2026
 
 
             Applicability of MCP for the Network Management
@@ -44,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 August 2026.
+   This Internet-Draft will expire on 1 January 2027.
 
 Copyright Notice
 
@@ -74,6 +76,7 @@ Table of Contents
    6.  MCP Server Discovery
      6.1.  MCP core function
      6.2.  Procedure for Multi-MCP servers Discovery
+     6.3.  Network Management Capability Metadata
    7.  Deployment Consideration in adopting MCP in the Network
            Management
      7.1.  Network Element Inter-Communication using MCP
@@ -92,8 +95,8 @@ Table of Contents
    11. Security Considerations
    12. Normative References
    Appendix A.  MCP Usage Examples
-     A.1.  Routing Protocol Troubleshooting using Embeded SLM Model
-           and Nature Language Interface
+     A.1.  Routing Protocol Troubleshooting using Embedded SLM Model
+           and Natural Language Interface
      A.2.  Device Configuration using MCP+CLI
    Contributors
    Authors' Addresses
@@ -107,19 +110,19 @@ Table of Contents
    and software tools and enable workflows automation.
 
    MCP has seen rapid adoption across both startups and enterprises
-   since it announced in November 2024.  Key use cases include AI coding
-   assistants in IDEs, data analysis tools that can query databases, and
-   productivity tools that can interact with services like Slack or
-   Google Drive.
+   since it was announced in November 2024.  Key use cases include AI
+   coding assistants in IDEs, data analysis tools that can query
+   databases, and productivity tools that can interact with services
+   like Slack or Google Drive.
 
    The application of MCP for the network management is meant to
    refactor network management operation and network capabilities as
    tools and provide more agile and extensible architecture to expose or
    consume these AI integration capabilities.
 
-   With integration of MCP into the network management system, it allow
-   you develop various rich AI driven network applications, realize
-   intent based networks management, automate workflows in the multi-
+   With integration of MCP into the network management system, it allows
+   you to develop various rich AI-driven network applications, realize
+   intent based network management, automate workflows in the multi-
    vendor heterogeneous network platform.  By establishing standard
    interfaces for tool encapsulation, intent translation, and closed-
    loop execution within the network management system, MCP enables the
@@ -271,7 +274,7 @@ Table of Contents
          user inputs or tool descriptions could lead to unintended
          actions by the LLM;
 
-         o Tool poisoning, where attackers odify tool definitions, or
+         o Tool poisoning, where attackers modify tool definitions, or
          rug pulls (similar to tool poisoning but occurs post-
          installation);
 
@@ -329,11 +332,11 @@ Table of Contents
    Step 1: External tools or data source publish a set of APIs to MCP
    server in the Network Controller.
 
-   Step 2: MCP client send specific tools request to discover tools and
-   MCP Server provide authorization to the MCP client.
+   Step 2: MCP client sends a specific tool request to discover tools
+   and MCP Server provides authorization to the MCP client.
 
-   Step 3: After sucessful authorization, MCP server return API list
-   corresponding to tools request sent by the MCP client.
+   Step 3: After successful authorization, MCP server returns the API
+   list corresponding to the tool request sent by the MCP client.
 
    Step 4: MCP Client invokes tools with authorization.
 
@@ -363,24 +366,24 @@ Table of Contents
    Step 1: IETF Network Management AI Agent sends a MCP Service Request
    to the MCP client within the Network Controller.
 
-   Step 2: The MCP client discover tools provided by the external MCP
+   Step 2: The MCP client discovers tools provided by the external MCP
    server.
 
-   Step 3: The MCP client provide available tools list to the IETF
+   Step 3: The MCP client provides the available tools list to the IETF
    Network Management AI Agent.
 
 6.  MCP Server Discovery
 
    The MCP Server Discovery involves clients querying servers to find
-   available tools, resources, and functions.  In case of MCP servers
-   are distributed in different locations, MCP Respository can be
-   established to keep track of the location of each MCP servers.
+   available tools, resources, and functions.  In case MCP servers are
+   distributed in different locations, MCP Repository can be established
+   to keep track of the location of each MCP servers.
 
 6.1.  MCP core function
 
              +------------+ 2.Discovery ---------------+
              | Agents     +-----------+      MCP       |
-             |(MCP Client)+-----------+   Respository  |
+             |(MCP Client)+-----------+   Repository  |
              +-+----------+ 3. Authz  +--------^-------+
                |4. Consume                     |1.Registration
                | +-------------+---------------+-------+-
@@ -395,12 +398,12 @@ Table of Contents
        -------             \\\     ///            \\\     ///
                               -----                  -----
 
-   • MCP Repository: * Maintain the description of MCP servers * Support
+   o MCP Repository: * Maintain the description of MCP servers * Support
    MCP server discovery for Client.
 
-   • MCP client: consuming the services provided by MCP servers
+   o MCP client: consuming the services provided by MCP servers
 
-   • MCP servers: including authentication/session/policy tools, the
+   o MCP servers: including authentication/session/policy tools, the
    memory/prompts used for Agents
 
 6.2.  Procedure for Multi-MCP servers Discovery
@@ -436,22 +439,51 @@ Table of Contents
             +------------------+-------------|-------------|
                                |             |             |
 
-   Step 0: The MCP Server syncs up on the info of tools, upon tools is
-   added or removed, tools changes will be automatically syned up with
+   Step 0: The MCP Server syncs up on the info of tools, when tools are
+   added or removed, tools changes will be automatically synced up with
    the MCP server.
 
    Step 1: Each new MCP server will register to the centralized MCP
    registry.
 
-   Step 2.1: MCP Client send the MCP service request to the MCP registry
-   for specific capability.
+   Step 2.1: MCP Client sends the MCP service request to the MCP
+   registry for specific capability.
 
-   Step 2.2: The MCP registry return specific MCP server to the MCP
+   Step 2.2: The MCP registry returns a specific MCP server to the MCP
    client.
 
    Step 3: The MCP Client request authorization from the MCP server.
 
-   Step 4: The MCP Client invoke specific tools with authorization.
+   Step 4: The MCP Client invokes specific tools with authorization.
+
+6.3.  Network Management Capability Metadata
+
+   In MCP-based network management environments, exposed tools may
+   represent operationally sensitive network management actions,
+   including telemetry retrieval, diagnostics, configuration
+   modification, service provisioning, policy updates, or device control
+   operations.  While the MCP repository maintains information about MCP
+   servers, tools, and capabilities, additional network-management-
+   specific capability metadata may improve operational safety,
+   interoperability, and automated decision-making.
+
+   MCP repositories and MCP servers may associate tools with metadata
+   describing both functional capabilities and operational constraints
+   of the exposed capability as follows:
+
+   *  Functional capability metadata: operation type, operational scope,
+      supported management protocols, rollback support capability, and
+      operational risk level.
+
+   *  Operational constraint metadata authorization requirements, human
+      approval requirements, freshness indicators, and synchronization
+      version information.
+
+   Such metadata may assist MCP clients, AI agents, and orchestration
+   systems in evaluating the suitability, applicability, and operational
+   safety of MCP tools prior to authorization and invocation,
+   particularly in large-scale distributed network management
+   deployments.
 
 7.  Deployment Consideration in adopting MCP in the Network Management
 
@@ -491,19 +523,19 @@ Table of Contents
    In this network scenario, the MCP client is deployed in one smart
    network element while the MCP server is deployed in another smart
    network element.  The MCP client communicates with the MCP server
-   using the MCP protocol and invoke specific tools and get access to
+   using the MCP protocol and invokes specific tools and gets access to
    specific data in the network element as a data source.  In addition,
-   human operator can use nature language to interact with smart network
-   element to investigate protocol troubleshooting information.
+   human operator can use natural language to interact with smart
+   network element to investigate protocol troubleshooting information.
 
-   Network element usually have limited resources (CPU, memory, etc.).
+   Network elements usually have limited resources (CPU, memory, etc.).
    Deploying MCP Client together with SLM may occupy a large amount of
    resources, affecting the normal operation of the device.
 
             Human Operator
                  |
                  |
-             Nature Language                Data Source
+             Natural Language               Data Source
      +-----------+-------------+     +-------------------------+
      |   +-------+----------+  |     |   +------------------+  |
      |   |Routing Protocol  |  |     |   |Routing Protocol  |  |
@@ -519,9 +551,9 @@ Table of Contents
 
    In this network scenario, the MCP client is deployed in the network
    controller while the MCP server is deployed in either the 3rd party
-   managment system or external data source.  The MCP client
-   communicates with the MCP server using the MCP protocol and invoke
-   specific tools and get access to specific data in the 3rd party
+   management system or external data source.  The MCP client
+   communicates with the MCP server using the MCP protocol and invokes
+   specific tools and gets access to specific data in the 3rd party
    management system or external data source.
 
    +------------------------+     +------------+
@@ -545,44 +577,62 @@ Table of Contents
 7.3.  Standalone MCP server to Expose APIs and tools to the Network
       Controller
 
-   In this network scenario, The MCP client is deployed in the network
+   In this network scenario, the MCP client is deployed in the network
    controller while the MCP server is deployed standalone to manage all
-   the network elements.  The network elements will be refactored as
-   data source or tools so that MCP client can directly consume these
-   APIs or data sources.  Alternatively, the network elements can be
-   traditional network elements.  MCP server will serve as protocol
-   adaptor to translate MCP protocol into traditional network management
-   protocols such as NETCONF, gNMI.
+   the network elements.  For legacy networks, native MCP implementation
+   on individual Network Elements can be redundant or resource-
+   constrained.  Instead, pre-existing network automation scripts (e.g.,
+   Python scripts powered by pyATS or Netmiko) can be directly
+   refactored as MCP tools.
 
-                     +----------------------+
-                     |                      |
-                     |   Network Controller |
-                     |                      |
-                     |    +------------+    |
-                     |    |            |    |
-            +--------+----| MCP Client +----+----------+
-            |        |    |            |    |          |
-            |        |    +-----+------+    |          |
-            |        +----------+-----------+          |
-            |                   |                      |
-            |    +--------------V---------------+      |
-            |    |         MCP Server           |      |
-            |    +--------^-------------^-------+      |
-            V             |             |              V
-   +-------------+        |             |        +----------+
-   |             |        |             |        |          |
-   | Data Source |--------+-            |--------+  Tools   |
-   |             |                               |          |
-   +-------------+                               +----------+
-   Network Element                             Network Element
+   In this scenario, the standalone MCP server or Network Controller
+   hosts these scripts and exposes them to the MCP client via
+   standardized tool descriptors.  When an AI agent requests a device
+   operation, the MCP server invokes the corresponding Python script via
+   local shell execution or tool pools.  This approach achieves direct
+   device control and backward compatibility without modifying the
+   legacy device control plane.
+
+                        +----------------------+
+                        |                      |
+                        |   Network Controller |
+                        |                      |
+                        |    +------------+    |
+                        |    |            |    |
+               +--------+----| MCP Client +----+----------+
+               |        |    |            |    |          |
+               |        |    +-----+------+    |          |
+               |        +----------+-----------+          |
+               |                   |                      |
+               |    +--------------V---------------+      |
+               |    |         MCP Server           |      |
+               |    +--------^-------------^-------+      |
+               V             |             |              V
+      +-------------+        |             |        +-------------+
+      |             |        |             |        |             |
+      | Data Source |--------+-            |--------+    Tools    |
+      |             |                               |             |
+      +------+------+                               +------+------+
+             |                                             |
+      (Telemetry/gNMI)                              (CLI/FastCLI/Shell)
+             |                                             |
+      +------V---------------------------------------------V------+
+      |    Automation & Adaption Scripts (e.g., Python, pyATS)   |
+      +------------------------------+----------------------------+
+                                     |
+                                     V
+                              +--------------+
+                              | Legacy Device|
+                              +--------------+
+                              Network Element
 
 7.4.  The Network Gateway/Controller and the Network Element
       Communication using MCP
 
-   In this network scenario, The MCP client is deployed in the network
+   In this network scenario, the MCP client is deployed in the network
    gateway device while the MCP server is deployed in each network
-   devices.  The MCP client communicates with the MCP server using the
-   MCP protocol.  LLM model is pre-trained model and deployed in the
+   device.  The MCP client communicates with the MCP server using the
+   MCP protocol.  The LLM is a pre-trained model and deployed in the
    same Network gateway as the MCP client.
 
    Network devices usually have limited resources (CPU, memory, etc.).
@@ -593,7 +643,7 @@ Table of Contents
          |   Network Controller/  |
          |   Network Gateway      |
          |                        |
-         |        Nature          |
+         |        Natural         |
          | +------Language------+ |
          | |  MCP  |     | LLM  | |
          | | Client|-----|      | |
@@ -629,7 +679,7 @@ Table of Contents
       -  Eliminates manual translation of commands across different
          vendors
 
-      -  Enabling the plug-and-play integration of new device types.
+      -  Enables the plug-and-play integration of new device types.
 
 8.2.  LLM for Intent-to-Tool-Request Translation
 
@@ -649,7 +699,15 @@ Table of Contents
 
          o  Context from previous interactions
 
-      -  Tool Discovery and Toolchain Generation: The LLM access tool
+      -  Network Entity Object Extraction：The LLM or a apecialized sub-
+         module extracts network-specificsemantic entities (e.g.,Device
+         Names, Interface IDs, Protocal Instances, VRF contexts) from
+         the input.  These extracted entities are mapped onto a network
+         semantic graph or topology data model to ensure that the
+         paramenters paased to the MCP tool correspond to valid,
+         existing operational assets.
+
+      -  Tool Discovery and Toolchain Generation: The LLM accesses tool
          descriptions provided by MCP servers, and matches the
          identified intent with available tools.
 
@@ -669,34 +727,45 @@ Table of Contents
 8.3.  Closed-Loop Automation Execution Workflow
 
    *  Objective: Realize the closed loop of "voice/text commands →
-      automatic execution".
+      automatic execution" leveraging local memory and tools.
 
    *  A general workflow is as follows:
 
       -  User Input Submission: An operator submits a natural language
-         request to the MCP client.  And The MCP client forwards this
-         request to the LLM.
+         request to the MCP client, which forwards the query to the LLM.
 
-      -  LLM Intent Processing: The LLM parses the input, identifies the
-         operational intent, and forwards a structured request to the
-         MCP client, which queries the MCP Server to retrieve the
-         available tools.  The information would include the functional
-         description, required parameters of tools.
+      -  LLM Intent Processing: The LLM parses the input and identifies
+         the operational intent.  The MCP client then quiries the MCP
+         server via HTTP GET to retrieve the registered tools and their
+         associated schemas.
 
-      -  LLM Toolchain Decision:
+      -  Tool Discovery and Context Retrieval:
 
-         o  The LLM evaluates the context and if tools are required,
-            select and sequence tools.
+         o  If the LLM requires network knowledge or baseline history to
+            process the intent, it invokes the respective tool.  Taking
+            RAG tool as an example, this tool may generate a query
+            embedding and perform a top-K similarity search against the
+            vector database.
 
-         o  The decision is sent back to the MCP Client and then MCP
-            Client will execute tools via server.
+         o  The retrieved document or memory records are returned to the
+            LLM as a structured prompt context.
 
-      -  Tool Execution: The MCP Server executes the translated commands
-         on target devices and returns results to the client.
+      -  Tool Decision and Execution:
 
-      -  Result Aggregation & Feedback: The MCP Client collates tool
-         outputs (success/failure logs) and forwards them to the LLM for
-         summarization.
+         o  The LLM evaluates the context, determines the execution
+            sequence, and returns a structured post request to the MCP
+            client.  The MCP client executes the toolchain via HTTP
+            POST.
+
+         o  For configuration and diagnostic tasks, the MCP server
+            invokes respective tool to parse parameters and capture
+            stdout/stderr outputs.
+
+      -  Result Aggregation & Feedback: The MCP client collates the JSON
+         outputs (e.g., success or error messages) and forwards them to
+         the LLM for summarization.  The execution logs and final
+         decisions are persisted as Markdown files in the long-term
+         memory module on a certain retention cycle.
 
    *  Benefits:
 
@@ -742,6 +811,16 @@ Table of Contents
    details.  Users must verify each LLM operation to prevent unintended
    hazardous actions.
 
+   Capability metadata associated with MCP-exposed network management
+   tools may assist MCP clients and AI agents in evaluating operational
+   risk, rollback capabilities, and approval requirements prior to tool
+   invocation.  Orchestration systems may use such metadata to enforce
+   authorization, approval, and policy constraints as part of the
+   execution workflow.  This distinction can help reduce unsafe or
+   unintended operations in AI-assisted network management environments
+   by allowing clients and agents to consume metadata for planning,
+   while enforcement points apply policy controls before execution.
+
 12.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -770,8 +849,8 @@ Table of Contents
 
 Appendix A.  MCP Usage Examples
 
-A.1.  Routing Protocol Troubleshooting using Embeded SLM Model and
-      Nature Language Interface
+A.1.  Routing Protocol Troubleshooting using Embedded SLM Model and
+      Natural Language Interface
 
    +-----------------------------------------------------------------+
    | Smart Network Element                                           |
@@ -791,7 +870,7 @@ A.1.  Routing Protocol Troubleshooting using Embeded SLM Model and
    |                                                  |              |
    |                                                  |              |
    | +------------------------------------------------+------------+ |
-   | |OPS Env:Online Nature Language Interaction------V-------+    | |
+   | |OPS Env:Online Natural Language Interaction------V-------+    | |
    | |                             +----------+Troubleshooting|    | |
    | |                             |          |  Package Build|    | |
    | |                             |          +---------------+    | |
@@ -821,10 +900,10 @@ A.1.  Routing Protocol Troubleshooting using Embeded SLM Model and
 
 A.2.  Device Configuration using MCP+CLI
 
-   In this example, The network element implement the MCP Server and
+   In this example, the network element implements the MCP Server and
    exposes all CLI interfaces and documentation as tools to the MCP
-   Client.  The Nework controller implements the MCP client and interact
-   with MCP server in the Network element.
+   Client.  The Network controller implements the MCP client and
+   interact with MCP server in the Network element.
 
    The MCP server provides the following registered tool descriptor
    information:
@@ -841,26 +920,41 @@ A.2.  Device Configuration using MCP+CLI
 [
   {
     "name": "batch_configure_devices",
-    "description": "Batch Configure Network Devices"，
+    "description": "Batch Configure Network Devices",
     "parameters": {
       "type": "object",
       "properties": {
-        "device_ips": {"type": "array", "items": {"type": "string"}, "description": "Device IP List"}，
-        "commands": {"type": "array", "items": {"type": "string"}, "description": "CLI Sequence"}，
-        "credential_id": {"type": "string", "description": "Credential ID"}
-      }，
+        "device_ips": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Device IP List"
+        },
+        "commands": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "CLI Sequence"
+        },
+        "credential_id": {
+          "type": "string",
+          "description": "Credential ID"
+        }
+      },
       "required": ["device_ips", "commands"]
     }
   },
   {
     "name": "check_device_status",
-    "description": "Check the Status of Network Devices"，
+    "description": "Check the Status of Network Devices",
     "parameters": {
       "type": "object",
       "properties": {
         "device_ip": {"type": "string"},
-        "metrics": {"type": "array", "items": {"enum": ["cpu", "memory", "interface"]}}
-      }
+        "metrics": {
+          "type": "array",
+          "items": {"enum": ["cpu", "memory", "interface"]}
+        }
+      },
+      "required": ["device_ip"]
     }
   }
 ]
@@ -873,9 +967,15 @@ server = McpServer(app)
 
 #Connection Pool Management
 devices = {
-    "192.168.1.1": {"device_type": "VendorA-XYZ"，"credential": "admin:XYZ@password"},
-    "192.168.1.2": {"device_type": "VendorB-ABC","credential":"admin:ABC@passowrd"}
-     ....
+    "192.168.1.1": {
+        "device_type": "VendorA-XYZ",
+        "credential": "admin:XYZ@password"
+    },
+    "192.168.1.2": {
+        "device_type": "VendorB-ABC",
+        "credential": "admin:ABC@password"
+    },
+    ...
 }
 
 @server.tool("batch_configure_devices")
@@ -890,7 +990,7 @@ async def batch_config(device_ips: list,commands: list,credential_id: str):
         )
         output = conn.send_config_set(commands)
         results[ip] = output
-    return {"success": True, "details": results)
+    return {"success": True, "details": results}
 
 @server.tool("check_device_status")
 async def check_status(device_ip: str, metrics: list):
@@ -922,56 +1022,58 @@ async def check_status(device_ip: str, metrics: list):
 
    The MCP server responds to the call instruction, converts it into the
    below CLIs of different vendors, and then the devices execute the
-   CLIs.  The results are returned to the MCP client in Json as below
+   CLIs.  The results are returned to the MCP client in JSON as below
    and are forwarded to the LLM.  The LLM parses the response, generates
    a natural-language summary, and sends it back to the client for final
    presentation to the user.
 
-# Convert to CLI commands of different vendors
-"commands": [
-    "system-view",
-    "ospf {{process_id}}",
-    "area {{area_id}}",
-    "network {{network_address}} {{wildcard_mask}}"
-  ]
+   # Convert to CLI commands of different vendors
+   "commands": [
+       "system-view",
+       "ospf {{process_id}}",
+       "area {{area_id}}",
+       "network {{network_address}} {{wildcard_mask}}"
+     ]
 
-"commands": [
-    "configure terminal",
-    "router ospf {{process_id}}",
-    "network {{network_address}} {{wildcard_mask}} area {{area_id}}",
-    "end",
-    "write memory"
-  ]
+   "commands": [
+       "configure terminal",
+       "router ospf {{process_id}}",
+       "network {{network_address}} {{wildcard_mask}} area {{area_id}}",
+       "end",
+       "write memory"
+     ]
 
-#Feedbacks received by the MCP client of different vendors
-{
-    "status": "success",
-    "message": "OSPF configuration applied successfully on device 192.168.10.1",
-    "commands_executed": [
-        "system-view",
-        "ospf 100",
-        "area 0.0.0.0",
-        "network 192.168.10.0 0.0.0.255"
-    ]
-}
+   #Feedbacks received by the MCP client of different vendors
+   {
+       "status": "success",
+       "message": "OSPF configuration applied successfully on device
+                   192.168.10.1",
+       "commands_executed": [
+           "system-view",
+           "ospf 100",
+           "area 0.0.0.0",
+           "network 192.168.10.0 0.0.0.255"
+       ]
+   }
 
-{
-    "status": "success",
-    "message": "OSPF configuration applied successfully on device 192.168.10.1",
-    "commands_executed": [
-        "configure terminal",
-        "router ospf 100",
-        "network 192.168.10.0 0.0.0.255 area 0",
-        "end",
-        "write memory"
-    ]
-}
+   {
+       "status": "success",
+       "message": "OSPF configuration applied successfully on device
+                   192.168.10.1",
+       "commands_executed": [
+           "configure terminal",
+           "router ospf 100",
+           "network 192.168.10.0 0.0.0.255 area 0",
+           "end",
+           "write memory"
+       ]
+   }
 
-# Natural lanauge summary of success or failure:
-{
-  "192.168.10.1": "Configure Successfully, take 2.3 seconds",
-  "192.168.10.2": "Error: no response from the device",
-}
+   # Natural language summary of success or failure:
+   {
+     "192.168.10.1": "Configure Successfully, take 2.3 seconds",
+     "192.168.10.2": "Error: no response from the device",
+   }
 
 Contributors
 
@@ -1016,3 +1118,9 @@ Authors' Addresses
    Orange Research
    France
    Email: lionel.tailhardat@orange.com
+
+
+   Shailesh Prabhu
+   Nokia
+   India
+   Email: shailesh.prabhu@nokia.com
