@@ -632,7 +632,7 @@ Network Element      Network Element
     - Context from previous interactions
 
   - Network Entity Object Extraction：The LLM or a apecialized sub-module extracts network-specificsemantic entities (e.g.,Device Names, Interface IDs, Protocal Instances, VRF contexts) from the input. These extracted entities are mapped onto a network semantic graph or topology data model to ensure that the paramenters paased to the MCP tool correspond to valid, existing operational assets.
-    
+
   - Tool Discovery and Toolchain Generation: The LLM accesses tool descriptions provided by MCP
     servers, and matches the identified intent with available tools.
 
