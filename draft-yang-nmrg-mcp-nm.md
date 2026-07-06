@@ -528,35 +528,46 @@ the 3rd party management system or external data source.
 
 In this network scenario, the MCP client is deployed in the network controller
 while the MCP server is deployed standalone to manage all the network elements.
-The network elements will be refactored as data source or tools so that MCP
-client can directly consume these APIs or data sources.
-Alternatively, the network elements can be traditional network elements. MCP
-server will serve as protocol adaptor to translate MCP protocol into traditional
-network management protocols such as NETCONF, gNMI.
+For legacy networks, native MCP implementation on individual Network Elements can be redundant or resource-constrained. Instead, pre-existing network automation scripts (e.g., Python scripts powered by pyATS or Netmiko) can be directly refactored as MCP tools.
+
+In this scenario, the standalone MCP server or Network Controller hosts these scripts and exposes them to the MCP client via standardized tool descriptors. When an AI agent requests a device operation, the MCP server invokes the corresponding Python script via local shell execution or tool pools. This approach achieves direct device control and backward compatibility without modifying the legacy device control plane.
 
 ~~~~
 
-                  +----------------------+
-                  |                      |
-                  |   Network Controller |
-                  |                      |
-                  |    +------------+    |
-                  |    |            |    |
-         +--------+----| MCP Client +----+----------+
-         |        |    |            |    |          |
-         |        |    +-----+------+    |          |
-         |        +----------+-----------+          |
-         |                   |                      |
-         |    +--------------V---------------+      |
-         |    |         MCP Server           |      |
-         |    +--------^-------------^-------+      |
-         V             |             |              V
-+-------------+        |             |        +----------+
-|             |        |             |        |          |
-| Data Source |--------+-            |--------+  Tools   |
-|             |                               |          |
-+-------------+                               +----------+
-Network Element                             Network Element
+
+
+                     +----------------------+
+                     |                      |
+                     |   Network Controller |
+                     |                      |
+                     |    +------------+    |
+                     |    |            |    |
+            +--------+----| MCP Client +----+----------+
+            |        |    |            |    |          |
+            |        |    +-----+------+    |          |
+            |        +----------+-----------+          |
+            |                   |                      |
+            |    +--------------V---------------+      |
+            |    |         MCP Server           |      |
+            |    +--------^-------------^-------+      |
+            V             |             |              V
+   +-------------+        |             |        +-------------+
+   |             |        |             |        |             |
+   | Data Source |--------+-            |--------+    Tools    |
+   |             |                               |             |
+   +------+------+                               +------+------+
+          |                                             |
+   (Telemetry/gNMI)                              (CLI/FastCLI/Shell)
+          |                                             |
+   +------V---------------------------------------------V------+
+   |    Automation & Adaption Scripts (e.g., Python, pyATS)   |
+   +------------------------------+----------------------------+
+                                  |
+                                  V
+                           +--------------+
+                           | Legacy Device|
+                           +--------------+
+                           Network Element
 
 ~~~~
 
@@ -620,6 +631,8 @@ Network Element      Network Element
     - Entities, parameters, and constraints mentioned
     - Context from previous interactions
 
+  - Network Entity Object Extraction：The LLM or a apecialized sub-module extracts network-specificsemantic entities (e.g.,Device Names, Interface IDs, Protocal Instances, VRF contexts) from the input. These extracted entities are mapped onto a network semantic graph or topology data model to ensure that the paramenters paased to the MCP tool correspond to valid, existing operational assets.
+
   - Tool Discovery and Toolchain Generation: The LLM accesses tool descriptions provided by MCP
     servers, and matches the identified intent with available tools.
 
@@ -635,27 +648,24 @@ Network Element      Network Element
 
 ## Closed-Loop Automation Execution Workflow
 
-- Objective: Realize the closed loop of "voice/text commands → automatic execution".
+- Objective: Realize the closed loop of "voice/text commands → automatic execution" leveraging local memory and tools.
 - A general workflow is as follows:
   - User Input Submission: An operator submits a natural language request to the MCP
-    client. And the MCP client forwards this request to the LLM.
+    client, which forwards the query to the LLM.
 
-  - LLM Intent Processing: The LLM parses the input, identifies the operational intent,
-    and forwards a structured request to the MCP client, which queries the MCP Server to
-    retrieve the available tools. The information would include the functional description,
-    required parameters of tools.
+  - LLM Intent Processing: The LLM parses the input and identifies the operational intent. The MCP client then quiries the MCP server via HTTP GET to retrieve the registered tools and their associated schemas.
 
-  - LLM Toolchain Decision:
-    - The LLM evaluates the context and if tools are required, selects and sequences tools.
-    - The decision is sent back to the MCP Client and then MCP Client will execute tools
-      via server.
+  - Tool Discovery and Context Retrieval:
+    - If the LLM requires network knowledge or baseline history to process the intent, it invokes the respective tool. Taking RAG tool as an example, this tool may generate a query embedding and perform a top-K similarity search against the vector database.
+    - The retrieved document or memory records are returned to the LLM as a structured prompt context.
 
-  - Tool Execution: The MCP Server executes the translated commands on target devices and
-    returns results to the client.
-
-  - Result Aggregation & Feedback: The MCP Client collates tool outputs (success/failure logs)
-    and forwards them to the
-    LLM for summarization.
+  - Tool Decision and Execution:
+      - The LLM evaluates the context, determines the execution sequence, and returns a structured post request to the MCP client. The MCP client executes the toolchain via HTTP POST.
+      - For configuration and diagnostic tasks, the MCP server invokes respective tool to parse parameters and capture stdout/stderr outputs.
+  - Result Aggregation & Feedback: The MCP client collates
+the JSON outputs (e.g., success or error messages) and forwards them to
+the LLM for summarization. The execution logs and final decisions are persisted as
+Markdown files in the long-term memory module on a certain retention cycle.
 
 - Benefits:
   - Tools safely retry/rollback.
