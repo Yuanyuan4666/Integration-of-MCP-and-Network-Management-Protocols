@@ -142,7 +142,7 @@ The following terms are used throughout this document:
 
  +---------------+        +---------------+
  |               |        |               |
- |  3rd Party    |        |  3rd-party
+ |  3rd Party    |        |  3rd-party    |   
  |  AI Agent     |        | Tools/Contents|
  +-----/---\-----+        +---------------+
        |   |                   |   |
@@ -191,25 +191,16 @@ There are 3 values for MCP coupling with the network management
 
   * Error Handling
 
-    o Although MCP provides basic error codes, MCP does not yet enforce a entire
-      error-handling mechanism, and its scope is currently limited to discovery and
-      invocation, omitting crucial aspects like tool governance, versioning, or
-       lifecycle management.
+    o MCP distinguishes protocol errors from tool execution errors. Network management tools still need to report operation-specific failures, including partial execution of command sequences.
+    
 
   * Stateful
 
-    o The protocol's reliance on stateful Server-Sent Events (SSE) can create
-      significant complexities when integrating with inherently stateless REST APIs,
-      requiring developers to manage state externally. This can be particularly challenging
-      for remote MCP servers due to network latency and instability, complicating load
-      balancing and horizontal scaling efforts.
+    o MCP supports stdio and Streamable HTTP. Streamable HTTP can use SSE and optional session identifiers; it does not require every exchange to use SSE. Implementations need to distinguish MCP session state from device CLI session state. 
 
   * Context Handling
 
-    o There are also concerns that multiple active MCP connections could consume
-      significant tokens in the LLM's context window. This can directly impact an
-      LLM's performance, slowing down responses and potentially hindering its ability
-      to maintain focus and reason effectively over extended or complex interactions.
+    o Tool descriptions, retrieved documents, and tool results from multiple MCP servers can increase the amount of content supplied to the LLM. The host needs to select relevant content and limit its size to manage context-window usage.
 
 - Security Consideration
 
@@ -229,9 +220,7 @@ There are 3 values for MCP coupling with the network management
 
   * Security enforcement
 
-    o MCP itself lacks inherent security enforcement mechanisms, relying heavily on external
-      implementations for authentication and authorization, which were not initially
-      well-defined within the protocol.
+    o MCP defines an authorization framework for HTTP-based transports. Network management implementations still need to enforce permissions for the requested device and operation.
 
   * Identity Management
 
@@ -598,13 +587,15 @@ device.
           +----------------+
  +--------+---+     +------+------+
  |  +-----++  |     |  +---+--+   |
- |  | MCP ||  |     |  | MCP  |   |
+ |  | MCP  |  |     |  | MCP  |   |
  |  |Server|  |     |  |Server|   |
  |  +------+  |     |  +------+   |
  +------------+     +-------------+
 Network Element      Network Element
 
 ~~~~
+
+
 
 # MCP architecture Design for Network Management
 
