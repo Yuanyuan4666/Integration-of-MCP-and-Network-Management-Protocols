@@ -93,17 +93,14 @@ element and the Network Controller/Network Gateway.
    integration capabilities.
 
    With integration of MCP into the network management system, it allows
-   you to develop various rich AI-driven network applications, realize intent
+   you to develop various AI-driven network applications, realize intent
    based network management, automate workflows in the multi-vendor
-   heterogeneous network platform. By establishing standard interfaces for
-   tool encapsulation, intent translation, and closed-loop execution within
-   the network management system, MCP enables the network management system
-   to have:
+   heterogeneous network platform. By providing a common interface for tool discovery and invocation, MCP can support:
 
    -  Unified operation abstraction through normalized MCP tool
       definitions
 
-   - Seamless LLM integration via the structured protocol
+   - LLM integration through structured tool descriptions and calls
 
    - Automation Execution Ability
 
@@ -123,10 +120,10 @@ The following terms are used throughout this document:
 
 - **MCP Protocol**: MCP is an open standard designed to facilitate communication
                     between LLMs and external data sources or tools.
-- **MCP Host**: The entity initiating the LLM request.
+- **MCP Host**: An application that manages MCP clients and coordinates model interaction and tool use.
 - **MCP Client**: A built-in module within a host, specifically designed for
                   interaction with the MCP server.
-- **MCP Server**: A dedicated server that interacts with MCP clients and provides tools.
+- **MCP Server**: A component that exposes tools, resources, or prompts to MCP clients.
 - **CLI**: Command Line Interface
 
 ## Others
@@ -175,7 +172,7 @@ The following terms are used throughout this document:
 There are 3 values for MCP coupling with the network management
 
 - Network MCP Server support
-  * Exposing network capabilities as MCP Servers for 3rd-party AI Agents & applications
+  * Exposing network capabilities as tools provided by MCP Servers for 3rd-party AI Agents & applications
 
 - In Network Service
   * Empowering network services by leveraging MCP ecosystem tools & contents
@@ -215,8 +212,7 @@ There are 3 values for MCP coupling with the network management
     o Tool poisoning, where attackers modify tool definitions, or rug pulls (similar to
       tool poisoning but occurs post-installation);
 
-    o Tool shadowing, where a malicious server creates a tool with the same name as a
-      legitimate tool from another server to intercept calls;
+    o Tool shadowing, where tools from different servers are confused during selection or routing. Hosts need to retain the association between a tool and its source server;
 
   * Security enforcement
 
@@ -344,7 +340,7 @@ o MCP servers: including authentication/session/policy tools, the
   memory/prompts used for Agents
 
 ## Procedure for Multi-MCP servers Discovery
-
+The following procedure illustrates a registry-based deployment. Registration and synchronization mechanisms are deployment-specific. 
 ~~~~
 
  +------------------+    +----------+   +-------+     +------+
@@ -595,13 +591,17 @@ Network Element      Network Element
 
 ~~~~
 
+## **Co-located Agent and MCP Server within a Network Element**
 
+An agent and an MCP server can run on the same network element. The agent uses an MCP client to invoke local tools for device operations or documentation retrieval. A local HTTP deployment can bind the server to the loopback address. Binding to loopback limits network exposure but does not establish the identity or permissions of local callers.
+
+The server can dispatch requests to local plugins. A CLI plugin can invoke a local command adapter, while a retrieval plugin queries a documentation backend. Device-internal communication remains behind these plugins. The client-server interface follows MCP; the plugin interface and device-internal messages are implementation-specific. Appendix A.3 illustrates this arrangement.
 
 # MCP architecture Design for Network Management
 
 ## Encapsulating Device Operations into MCP Tools
 
-- Objective: Standardize device operations into modular, reusable tools.
+- Objective: Expose device operations through tool descriptions and callable implementations.
 - Implementation:
   - Tool Abstraction: Vendor-specific commands are wrapped into discrete MCP
     Tools with uniform schemas.
@@ -610,6 +610,18 @@ Network Element      Network Element
 - Benefits:
   - Eliminates manual translation of commands across different vendors
   - Enables the plug-and-play integration of new device types.
+
+  - Objective: Expose device operations through tool descriptions and callable implementations.**
+- Implementation:
+  - Tool Description: Define the tool name, description, input schema, and, where provided, output schema.
+  - Local Tool Registry: Maintain a mapping between tool names, descriptions, and execution handlers. This can be an in-memory table; it is separate from the repository used to discover MCP servers.
+  - Plugin Loading: One implementation option is to load configured shared libraries at server startup. Each plugin provides an initialization entry point and an execution handler. The server registers a tool after loading and initializing its implementation. Shared libraries and their calling conventions are local implementation choices.
+  - Schema Consistency: Check that configuration-derived tool descriptions match the parameters and results handled by the plugin. Validate invocation arguments before dispatch.
+  - Execution: Dispatch the request to the registered handler and map its output or failure into an MCP tool result. Handlers need to support concurrent calls safely, or the server needs to serialize calls to them.
+- Benefits:
+  - Tool implementations can be maintained separately from request dispatch and logging.
+  - Vendor-specific command handling remains in the tool implementation. A common tool interface does not by itself translate commands between vendors.
+
 
 ## LLM for Intent-to-Tool-Request Translation
 
@@ -637,30 +649,18 @@ Network Element      Network Element
      -  Bridge natural language to tool invocation requests in a fixed format, then return this
         request to the client, enabling the client to properly parse the request.
 
-## Closed-Loop Automation Execution Workflow
+## Tool Invocation and Execution Workflow
 
-- Objective: Realize the closed loop of "voice/text commands → automatic execution" leveraging local memory and tools.
-- A general workflow is as follows:
-  - User Input Submission: An operator submits a natural language request to the MCP
-    client, which forwards the query to the LLM.
+This workflow separates documentation retrieval from device execution. It does not assume automatic recovery or rollback.
+- Tool Discovery: After MCP initialization, the client obtains tool descriptions with `tools/list`. The host provides relevant descriptions and the operator's request to the LLM.
+- Context Retrieval: If documentation is needed, the host invokes a retrieval tool through the MCP client. The tool can query a local backend or an existing retrieval service and return relevant document excerpts. Retrieval supplies context; it does not execute device commands or authorize configuration changes.
+- Tool Selection: The LLM proposes the next tool and its arguments. The host applies permission and approval checks before invocation. An informational question can be answered from retrieved material without calling a device configuration tool.
+- Device Execution: The client sends a `tools/call` request. The server validates the arguments and dispatches them to the selected handler. A CLI handler can invoke a local command adapter and capture its output and error information.
+- Result Handling: The server returns the result or execution error. The host can display the result directly or supply it to the LLM for explanation. Command output alone does not establish that the requested network state has been reached.
+- Logging: The server records each tool invocation. Request and session identifiers can correlate calls with execution records. Log format and retention are implementation choices. Such records document tool execution; they do not necessarily capture the model's reasoning.
+These steps use MCP methods rather than dedicated REST paths. With Streamable HTTP, `tools/list` and `tools/call` are JSON-RPC messages sent by HTTP POST to the MCP endpoint. A custom such as `GET /tools` or `POST /execute` API requires adaptation before it can serve a standard MCP client.
 
-  - LLM Intent Processing: The LLM parses the input and identifies the operational intent. The MCP client then quiries the MCP server via HTTP GET to retrieve the registered tools and their associated schemas.
-
-  - Tool Discovery and Context Retrieval:
-    - If the LLM requires network knowledge or baseline history to process the intent, it invokes the respective tool. Taking RAG tool as an example, this tool may generate a query embedding and perform a top-K similarity search against the vector database.
-    - The retrieved document or memory records are returned to the LLM as a structured prompt context.
-
-  - Tool Decision and Execution:
-      - The LLM evaluates the context, determines the execution sequence, and returns a structured post request to the MCP client. The MCP client executes the toolchain via HTTP POST.
-      - For configuration and diagnostic tasks, the MCP server invokes respective tool to parse parameters and capture stdout/stderr outputs.
-  - Result Aggregation & Feedback: The MCP client collates
-the JSON outputs (e.g., success or error messages) and forwards them to
-the LLM for summarization. The execution logs and final decisions are persisted as
-Markdown files in the long-term memory module on a certain retention cycle.
-
-- Benefits:
-  - Tools safely retry/rollback.
-  - Full traceability of LLM decisions and tool executions.
+A closed-loop workflow additionally requires checks of the resulting device state. Retry and rollback depend on the operation and backend support; they are not guaranteed by MCP tool invocation.
 
 # Interworking with the Network Management protocol and YANG data models
 
@@ -669,6 +669,9 @@ not in the position to replace the network management and YANG data model. Inste
 it can be integrated together, e.g.,
 
 * Integrated MCP with CLI, allow the MCP client invoke CLI capabilities;
+For a device-local implementation, a CLI tool can invoke an adapter executable. The adapter sends the command to an existing device component through a socket; that component forwards it to the CLI execution component using the device's internal messaging interface. Command output returns through the adapter to the tool. This reuses the existing CLI execution path.
+
+The socket type, internal message format, and plugin calling convention are implementation details, not MCP messages. The MCP server maps tool requests to this path and returns MCP tool results. Authorization, command parsing, and execution errors need to be handled at the relevant boundaries.
 
 * Integrated MCP with YANG, allow YANG being consumed by MCP client or allow the
   MCP client invoke YANG interface related capabilities;
@@ -696,11 +699,19 @@ each LLM operation to prevent unintended hazardous actions.
 
 Capability metadata associated with MCP-exposed network management tools may assist MCP clients and AI agents in evaluating operational risk, rollback capabilities, and approval requirements prior to tool invocation. Orchestration systems may use such metadata to enforce authorization, approval, and policy constraints as part of the execution workflow. This distinction can help reduce unsafe or unintended operations in AI-assisted network management environments by allowing clients and agents to consume metadata for planning, while enforcement points apply policy controls before execution.
 
+Loading native tool plugins places executable code inside the server process. Plugin files and their configuration need protection against unauthorized modification. Native plugins loaded into the server process do not, by themselves, provide an isolation boundary; a plugin failure can affect the server.
+
+CLI tools need to validate command parameters and apply operation permissions before execution. Passing model-generated strings to a shell introduces command-injection risk. Implementations should avoid unnecessary shell interpretation and define how command sequences are handled when one command fails.
+
+Caller names and session identifiers supplied in request metadata are useful for correlation but do not prove caller identity. Authorization decisions need to use authenticated identity and applicable policy. Logs should exclude credentials and protect sensitive command output. Retrieved documentation should be treated as input data, not as authority to change device configuration.
+
 --- back
 
 # MCP Usage Examples {#usage}
 
 ## Routing Protocol Troubleshooting using Embedded SLM Model and Natural Language Interface
+
+The figure shows a troubleshooting workflow. To integrate this workflow with MCP, the troubleshooting application can use an MCP client to invoke scripts exposed as tools by an MCP server. This is a possible integration point; the figure does not specify the MCP roles or transport.
 
 ~~~~
 
