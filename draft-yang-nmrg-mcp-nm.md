@@ -774,8 +774,9 @@ Tools implementation: MCP implementation describes how the tools are invoked.
 
 See Tool descriptor information example as follows:
 
+Tool Descriptor:
+
 ~~~~
-# Tool Descriptor
 [
   {
     "name": "batch_configure_devices",
@@ -817,7 +818,11 @@ See Tool descriptor information example as follows:
     }
   }
 ]
-# Tool Implementation
+~~~~
+
+Tool Implementation
+
+~~~~
 from netmiko import ConnectHandler
 from mcp_server import McpServer
 
