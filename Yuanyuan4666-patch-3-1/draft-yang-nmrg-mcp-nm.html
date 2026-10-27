@@ -20,24 +20,24 @@ that utilizes IETF technologies. It explores MCP for network exposure, multiple 
 server discovery, communication between Network Elements or between the Network
 element and the Network Controller/Network Gateway. 
     " name="description">
-<meta content="xml2rfc 3.34.0" name="generator">
+<meta content="xml2rfc 3.34.1" name="generator">
 <meta content="large language model" name="keyword">
 <meta content="model context protocol" name="keyword">
 <meta content="draft-yang-nmrg-mcp-nm-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.34.0
-    Python 3.14.5
-    ConfigArgParse 1.7.5
+  xml2rfc 3.34.1
+    Python 3.14.8
+    ConfigArgParse 1.8.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.0
+    platformdirs 4.13.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.2
+    wcwidth 0.9.2
 -->
 <link href="draft-yang-nmrg-mcp-nm.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -73,7 +73,6 @@ element and the Network Controller/Network Gateway.
   src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: italic;
@@ -122,7 +121,6 @@ element and the Network Controller/Network Gateway.
   src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: normal;
@@ -187,7 +185,6 @@ element and the Network Controller/Network Gateway.
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 }
 
 @font-face {
@@ -1056,11 +1053,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Applicability of MCP for the Network Man</td>
-<td class="right">July 2026</td>
+<td class="right">October 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Yang, et al.</td>
-<td class="center">Expires 7 January 2027</td>
+<td class="center">Expires 30 April 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1073,12 +1070,12 @@ svg {
 <dd class="internet-draft">draft-yang-nmrg-mcp-nm-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-06" class="published">6 July 2026</time>
+<time datetime="2026-10-27" class="published">27 October 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-07">7 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-04-30">30 April 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1138,7 +1135,7 @@ element and the Network Controller/Network Gateway.<a href="#section-abstract-1"
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1227,6 +1224,9 @@ element and the Network Controller/Network Gateway.<a href="#section-abstract-1"
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
                 <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-the-network-gateway-control" class="internal xref">The Network Gateway/Controller and the Network Element Communication using MCP</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5">
+                <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="auto internal xref">7.5</a>.  <a href="#name-co-located-agent-and-mcp-se" class="internal xref"><strong>Co-located Agent and MCP Server within a Network Element</strong></a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
@@ -1239,7 +1239,7 @@ element and the Network Controller/Network Gateway.<a href="#section-abstract-1"
                 <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-llm-for-intent-to-tool-requ" class="internal xref">LLM for Intent-to-Tool-Request Translation</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
-                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-closed-loop-automation-exec" class="internal xref">Closed-Loop Automation Execution Workflow</a></p>
+                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-tool-invocation-and-executi" class="internal xref">Tool Invocation and Execution Workflow</a></p>
 </li>
             </ul>
 </li>
@@ -1295,19 +1295,16 @@ element and the Network Controller/Network Gateway.<a href="#section-abstract-1"
    more agile and extensible architecture to expose or consume these AI
    integration capabilities.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">With integration of MCP into the network management system, it allows
-   you to develop various rich AI-driven network applications, realize intent
+   you to develop various AI-driven network applications, realize intent
    based network management, automate workflows in the multi-vendor
-   heterogeneous network platform. By establishing standard interfaces for
-   tool encapsulation, intent translation, and closed-loop execution within
-   the network management system, MCP enables the network management system
-   to have:<a href="#section-1-4" class="pilcrow">¶</a></p>
+   heterogeneous network platform. By providing a common interface for tool discovery and invocation, MCP can support:<a href="#section-1-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-5.1">
           <p id="section-1-5.1.1">Unified operation abstraction through normalized MCP tool
 definitions<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-5.2">
-          <p id="section-1-5.2.1">Seamless LLM integration via the structured protocol<a href="#section-1-5.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-5.2.1">LLM integration through structured tool descriptions and calls<a href="#section-1-5.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-5.3">
           <p id="section-1-5.3.1">Automation Execution Ability<a href="#section-1-5.3.1" class="pilcrow">¶</a></p>
@@ -1341,14 +1338,14 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                   between LLMs and external data sources or tools.<a href="#section-2.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.2">
-            <p id="section-2.1-1.2.1"><strong>MCP Host</strong>: The entity initiating the LLM request.<a href="#section-2.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="section-2.1-1.2.1"><strong>MCP Host</strong>: An application that manages MCP clients and coordinates model interaction and tool use.<a href="#section-2.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.3">
             <p id="section-2.1-1.3.1"><strong>MCP Client</strong>: A built-in module within a host, specifically designed for
                 interaction with the MCP server.<a href="#section-2.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.4">
-            <p id="section-2.1-1.4.1"><strong>MCP Server</strong>: A dedicated server that interacts with MCP clients and provides tools.<a href="#section-2.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="section-2.1-1.4.1"><strong>MCP Server</strong>: A component that exposes tools, resources, or prompts to MCP clients.<a href="#section-2.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.5">
             <p id="section-2.1-1.5.1"><strong>CLI</strong>: Command Line Interface<a href="#section-2.1-1.5.1" class="pilcrow">¶</a></p>
@@ -1388,7 +1385,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <pre>
  +---------------+        +---------------+
  |               |        |               |
- |  3rd Party    |        |  3rd-party
+ |  3rd Party    |        |  3rd-party    |
  |  AI Agent     |        | Tools/Contents|
  +-----/---\-----+        +---------------+
        |   |                   |   |
@@ -1425,7 +1422,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <p id="section-3-3.1.1">Network MCP Server support<a href="#section-3-3.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-3.1.2.1">
-              <p id="section-3-3.1.2.1.1">Exposing network capabilities as MCP Servers for 3rd-party AI Agents &amp; applications<a href="#section-3-3.1.2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-3-3.1.2.1.1">Exposing network capabilities as tools provided by MCP Servers for 3rd-party AI Agents &amp; applications<a href="#section-3-3.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </li>
@@ -1466,27 +1463,17 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <li class="normal" id="section-4-1.1.2.1">
               <p id="section-4-1.1.2.1.1">Error Handling<a href="#section-4-1.1.2.1.1" class="pilcrow">¶</a></p>
 <p id="section-4-1.1.2.1.2">
-o Although MCP provides basic error codes, MCP does not yet enforce a entire
-  error-handling mechanism, and its scope is currently limited to discovery and
-  invocation, omitting crucial aspects like tool governance, versioning, or
-   lifecycle management.<a href="#section-4-1.1.2.1.2" class="pilcrow">¶</a></p>
+o MCP distinguishes protocol errors from tool execution errors. Network management tools still need to report operation-specific failures, including partial execution of command sequences.<a href="#section-4-1.1.2.1.2" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4-1.1.2.2">
               <p id="section-4-1.1.2.2.1">Stateful<a href="#section-4-1.1.2.2.1" class="pilcrow">¶</a></p>
 <p id="section-4-1.1.2.2.2">
-o The protocol's reliance on stateful Server-Sent Events (SSE) can create
-  significant complexities when integrating with inherently stateless REST APIs,
-  requiring developers to manage state externally. This can be particularly challenging
-  for remote MCP servers due to network latency and instability, complicating load
-  balancing and horizontal scaling efforts.<a href="#section-4-1.1.2.2.2" class="pilcrow">¶</a></p>
+o MCP supports stdio and Streamable HTTP. Streamable HTTP can use SSE and optional session identifiers; it does not require every exchange to use SSE. Implementations need to distinguish MCP session state from device CLI session state.<a href="#section-4-1.1.2.2.2" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4-1.1.2.3">
               <p id="section-4-1.1.2.3.1">Context Handling<a href="#section-4-1.1.2.3.1" class="pilcrow">¶</a></p>
 <p id="section-4-1.1.2.3.2">
-o There are also concerns that multiple active MCP connections could consume
-  significant tokens in the LLM's context window. This can directly impact an
-  LLM's performance, slowing down responses and potentially hindering its ability
-  to maintain focus and reason effectively over extended or complex interactions.<a href="#section-4-1.1.2.3.2" class="pilcrow">¶</a></p>
+o Tool descriptions, retrieved documents, and tool results from multiple MCP servers can increase the amount of content supplied to the LLM. The host needs to select relevant content and limit its size to manage context-window usage.<a href="#section-4-1.1.2.3.2" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </li>
@@ -1505,15 +1492,12 @@ o Prompt injection, where malicious instructions embedded in user inputs or tool
 o Tool poisoning, where attackers modify tool definitions, or rug pulls (similar to
   tool poisoning but occurs post-installation);<a href="#section-4-1.2.2.1.4" class="pilcrow">¶</a></p>
 <p id="section-4-1.2.2.1.5">
-o Tool shadowing, where a malicious server creates a tool with the same name as a
-  legitimate tool from another server to intercept calls;<a href="#section-4-1.2.2.1.5" class="pilcrow">¶</a></p>
+o Tool shadowing, where tools from different servers are confused during selection or routing. Hosts need to retain the association between a tool and its source server;<a href="#section-4-1.2.2.1.5" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4-1.2.2.2">
               <p id="section-4-1.2.2.2.1">Security enforcement<a href="#section-4-1.2.2.2.1" class="pilcrow">¶</a></p>
 <p id="section-4-1.2.2.2.2">
-o MCP itself lacks inherent security enforcement mechanisms, relying heavily on external
-  implementations for authentication and authorization, which were not initially
-  well-defined within the protocol.<a href="#section-4-1.2.2.2.2" class="pilcrow">¶</a></p>
+o MCP defines an authorization framework for HTTP-based transports. Network management implementations still need to enforce permissions for the requested device and operation.<a href="#section-4-1.2.2.2.2" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4-1.2.2.3">
               <p id="section-4-1.2.2.3.1">Identity Management<a href="#section-4-1.2.2.3.1" class="pilcrow">¶</a></p>
@@ -1661,7 +1645,8 @@ MCP Repository can be established to keep track of the location of each MCP serv
         <h3 id="name-procedure-for-multi-mcp-ser">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-procedure-for-multi-mcp-ser" class="section-name selfRef">Procedure for Multi-MCP servers Discovery</a>
         </h3>
-<div class="alignLeft art-text artwork" id="section-6.2-1">
+<p id="section-6.2-1">The following procedure illustrates a registry-based deployment. Registration and synchronization mechanisms are deployment-specific.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2-2">
 <pre>
  +------------------+    +----------+   +-------+     +------+
  |Network Management|    |          |   |       |     |      |
@@ -1694,15 +1679,15 @@ MCP Repository can be established to keep track of the location of each MCP serv
            +------------------+-------------|-------------|
                               |             |             |
 
-</pre><a href="#section-6.2-1" class="pilcrow">¶</a>
+</pre><a href="#section-6.2-2" class="pilcrow">¶</a>
 </div>
-<p id="section-6.2-2">Step 0: The MCP Server syncs up on the info of tools, when tools are added or removed,
-        tools changes will be automatically synced up with the MCP server.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
-<p id="section-6.2-3">Step 1: Each new MCP server will register to the centralized MCP registry.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
-<p id="section-6.2-4">Step 2.1: MCP Client sends the MCP service request to the MCP registry for specific capability.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
-<p id="section-6.2-5">Step 2.2: The MCP registry returns a specific MCP server to the MCP client.<a href="#section-6.2-5" class="pilcrow">¶</a></p>
-<p id="section-6.2-6">Step 3: The MCP Client request authorization from the MCP server.<a href="#section-6.2-6" class="pilcrow">¶</a></p>
-<p id="section-6.2-7">Step 4: The MCP Client invokes specific tools with authorization.<a href="#section-6.2-7" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">Step 0: The MCP Server syncs up on the info of tools, when tools are added or removed,
+        tools changes will be automatically synced up with the MCP server.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-4">Step 1: Each new MCP server will register to the centralized MCP registry.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2-5">Step 2.1: MCP Client sends the MCP service request to the MCP registry for specific capability.<a href="#section-6.2-5" class="pilcrow">¶</a></p>
+<p id="section-6.2-6">Step 2.2: The MCP registry returns a specific MCP server to the MCP client.<a href="#section-6.2-6" class="pilcrow">¶</a></p>
+<p id="section-6.2-7">Step 3: The MCP Client request authorization from the MCP server.<a href="#section-6.2-7" class="pilcrow">¶</a></p>
+<p id="section-6.2-8">Step 4: The MCP Client invokes specific tools with authorization.<a href="#section-6.2-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="network-management-capability-metadata">
@@ -1933,7 +1918,7 @@ device.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
           +----------------+
  +--------+---+     +------+------+
  |  +-----++  |     |  +---+--+   |
- |  | MCP ||  |     |  | MCP  |   |
+ |  | MCP  |  |     |  | MCP  |   |
  |  |Server|  |     |  |Server|   |
  |  +------+  |     |  +------+   |
  +------------+     +-------------+
@@ -1941,6 +1926,15 @@ Network Element      Network Element
 
 </pre><a href="#section-7.4-3" class="pilcrow">¶</a>
 </div>
+</section>
+</div>
+<div id="co-located-agent-and-mcp-server-within-a-network-element">
+<section id="section-7.5">
+        <h3 id="name-co-located-agent-and-mcp-se">
+<a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-co-located-agent-and-mcp-se" class="section-name selfRef"><strong>Co-located Agent and MCP Server within a Network Element</strong></a>
+        </h3>
+<p id="section-7.5-1">An agent and an MCP server can run on the same network element. The agent uses an MCP client to invoke local tools for device operations or documentation retrieval. A local HTTP deployment can bind the server to the loopback address. Binding to loopback limits network exposure but does not establish the identity or permissions of local callers.<a href="#section-7.5-1" class="pilcrow">¶</a></p>
+<p id="section-7.5-2">The server can dispatch requests to local plugins. A CLI plugin can invoke a local command adapter, while a retrieval plugin queries a documentation backend. Device-internal communication remains behind these plugins. The client-server interface follows MCP; the plugin interface and device-internal messages are implementation-specific. Appendix A.3 illustrates this arrangement.<a href="#section-7.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1957,7 +1951,7 @@ Network Element      Network Element
         </h3>
 <ul class="normal">
 <li class="normal" id="section-8.1-1.1">
-            <p id="section-8.1-1.1.1">Objective: Standardize device operations into modular, reusable tools.<a href="#section-8.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.1-1.1.1">Objective: Expose device operations through tool descriptions and callable implementations.<a href="#section-8.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.1-1.2">
             <p id="section-8.1-1.2.1">Implementation:<a href="#section-8.1-1.2.1" class="pilcrow">¶</a></p>
@@ -1980,6 +1974,40 @@ Tools with uniform schemas.<a href="#section-8.1-1.2.2.1.1" class="pilcrow">¶</
 </li>
               <li class="normal" id="section-8.1-1.3.2.2">
                 <p id="section-8.1-1.3.2.2.1">Enables the plug-and-play integration of new device types.<a href="#section-8.1-1.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.3.2.3">
+                <p id="section-8.1-1.3.2.3.1">Objective: Expose device operations through tool descriptions and callable implementations.**<a href="#section-8.1-1.3.2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-8.1-1.4">
+            <p id="section-8.1-1.4.1">Implementation:<a href="#section-8.1-1.4.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.1-1.4.2.1">
+                <p id="section-8.1-1.4.2.1.1">Tool Description: Define the tool name, description, input schema, and, where provided, output schema.<a href="#section-8.1-1.4.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.4.2.2">
+                <p id="section-8.1-1.4.2.2.1">Local Tool Registry: Maintain a mapping between tool names, descriptions, and execution handlers. This can be an in-memory table; it is separate from the repository used to discover MCP servers.<a href="#section-8.1-1.4.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.4.2.3">
+                <p id="section-8.1-1.4.2.3.1">Plugin Loading: One implementation option is to load configured shared libraries at server startup. Each plugin provides an initialization entry point and an execution handler. The server registers a tool after loading and initializing its implementation. Shared libraries and their calling conventions are local implementation choices.<a href="#section-8.1-1.4.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.4.2.4">
+                <p id="section-8.1-1.4.2.4.1">Schema Consistency: Check that configuration-derived tool descriptions match the parameters and results handled by the plugin. Validate invocation arguments before dispatch.<a href="#section-8.1-1.4.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.4.2.5">
+                <p id="section-8.1-1.4.2.5.1">Execution: Dispatch the request to the registered handler and map its output or failure into an MCP tool result. Handlers need to support concurrent calls safely, or the server needs to serialize calls to them.<a href="#section-8.1-1.4.2.5.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-8.1-1.5">
+            <p id="section-8.1-1.5.1">Benefits:<a href="#section-8.1-1.5.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.1-1.5.2.1">
+                <p id="section-8.1-1.5.2.1.1">Tool implementations can be maintained separately from request dispatch and logging.<a href="#section-8.1-1.5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.5.2.2">
+                <p id="section-8.1-1.5.2.2.1">Vendor-specific command handling remains in the tool implementation. A common tool interface does not by itself translate commands between vendors.<a href="#section-8.1-1.5.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
@@ -2045,67 +2073,20 @@ request to the client, enabling the client to properly parse the request.<a href
         </ul>
 </section>
 </div>
-<div id="closed-loop-automation-execution-workflow">
+<div id="tool-invocation-and-execution-workflow">
 <section id="section-8.3">
-        <h3 id="name-closed-loop-automation-exec">
-<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-closed-loop-automation-exec" class="section-name selfRef">Closed-Loop Automation Execution Workflow</a>
+        <h3 id="name-tool-invocation-and-executi">
+<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-tool-invocation-and-executi" class="section-name selfRef">Tool Invocation and Execution Workflow</a>
         </h3>
-<ul class="normal">
-<li class="normal" id="section-8.3-1.1">
-            <p id="section-8.3-1.1.1">Objective: Realize the closed loop of "voice/text commands → automatic execution" leveraging local memory and tools.<a href="#section-8.3-1.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.3-1.2">
-            <p id="section-8.3-1.2.1">A general workflow is as follows:<a href="#section-8.3-1.2.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-8.3-1.2.2.1">
-                <p id="section-8.3-1.2.2.1.1">User Input Submission: An operator submits a natural language request to the MCP
-client, which forwards the query to the LLM.<a href="#section-8.3-1.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-8.3-1.2.2.2">
-                <p id="section-8.3-1.2.2.2.1">LLM Intent Processing: The LLM parses the input and identifies the operational intent. The MCP client then quiries the MCP server via HTTP GET to retrieve the registered tools and their associated schemas.<a href="#section-8.3-1.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-8.3-1.2.2.3">
-                <p id="section-8.3-1.2.2.3.1">Tool Discovery and Context Retrieval:<a href="#section-8.3-1.2.2.3.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-8.3-1.2.2.3.2.1">
-                    <p id="section-8.3-1.2.2.3.2.1.1">If the LLM requires network knowledge or baseline history to process the intent, it invokes the respective tool. Taking RAG tool as an example, this tool may generate a query embedding and perform a top-K similarity search against the vector database.<a href="#section-8.3-1.2.2.3.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="normal" id="section-8.3-1.2.2.3.2.2">
-                    <p id="section-8.3-1.2.2.3.2.2.1">The retrieved document or memory records are returned to the LLM as a structured prompt context.<a href="#section-8.3-1.2.2.3.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-              <li class="normal" id="section-8.3-1.2.2.4">
-                <p id="section-8.3-1.2.2.4.1">Tool Decision and Execution:<a href="#section-8.3-1.2.2.4.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-8.3-1.2.2.4.2.1">
-                    <p id="section-8.3-1.2.2.4.2.1.1">The LLM evaluates the context, determines the execution sequence, and returns a structured post request to the MCP client. The MCP client executes the toolchain via HTTP POST.<a href="#section-8.3-1.2.2.4.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="normal" id="section-8.3-1.2.2.4.2.2">
-                    <p id="section-8.3-1.2.2.4.2.2.1">For configuration and diagnostic tasks, the MCP server invokes respective tool to parse parameters and capture stdout/stderr outputs.<a href="#section-8.3-1.2.2.4.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-              <li class="normal" id="section-8.3-1.2.2.5">
-                <p id="section-8.3-1.2.2.5.1">Result Aggregation &amp; Feedback: The MCP client collates
-the JSON outputs (e.g., success or error messages) and forwards them to
-the LLM for summarization. The execution logs and final decisions are persisted as
-Markdown files in the long-term memory module on a certain retention cycle.<a href="#section-8.3-1.2.2.5.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-</li>
-          <li class="normal" id="section-8.3-1.3">
-            <p id="section-8.3-1.3.1">Benefits:<a href="#section-8.3-1.3.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-8.3-1.3.2.1">
-                <p id="section-8.3-1.3.2.1.1">Tools safely retry/rollback.<a href="#section-8.3-1.3.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-8.3-1.3.2.2">
-                <p id="section-8.3-1.3.2.2.1">Full traceability of LLM decisions and tool executions.<a href="#section-8.3-1.3.2.2.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-</li>
-        </ul>
+<p id="section-8.3-1">This workflow separates documentation retrieval from device execution. It does not assume automatic recovery or rollback.
+- Tool Discovery: After MCP initialization, the client obtains tool descriptions with <code>tools/list</code>. The host provides relevant descriptions and the operator's request to the LLM.
+- Context Retrieval: If documentation is needed, the host invokes a retrieval tool through the MCP client. The tool can query a local backend or an existing retrieval service and return relevant document excerpts. Retrieval supplies context; it does not execute device commands or authorize configuration changes.
+- Tool Selection: The LLM proposes the next tool and its arguments. The host applies permission and approval checks before invocation. An informational question can be answered from retrieved material without calling a device configuration tool.
+- Device Execution: The client sends a <code>tools/call</code> request. The server validates the arguments and dispatches them to the selected handler. A CLI handler can invoke a local command adapter and capture its output and error information.
+- Result Handling: The server returns the result or execution error. The host can display the result directly or supply it to the LLM for explanation. Command output alone does not establish that the requested network state has been reached.
+- Logging: The server records each tool invocation. Request and session identifiers can correlate calls with execution records. Log format and retention are implementation choices. Such records document tool execution; they do not necessarily capture the model's reasoning.
+These steps use MCP methods rather than dedicated REST paths. With Streamable HTTP, <code>tools/list</code> and <code>tools/call</code> are JSON-RPC messages sent by HTTP POST to the MCP endpoint. A custom such as <code>GET /tools</code> or <code>POST /execute</code> API requires adaptation before it can serve a standard MCP client.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+<p id="section-8.3-2">A closed-loop workflow additionally requires checks of the resulting device state. Retry and rollback depend on the operation and backend support; they are not guaranteed by MCP tool invocation.<a href="#section-8.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2120,11 +2101,15 @@ not in the position to replace the network management and YANG data model. Inste
 it can be integrated together, e.g.,<a href="#section-9-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-9-2.1">
-          <p id="section-9-2.1.1">Integrated MCP with CLI, allow the MCP client invoke CLI capabilities;<a href="#section-9-2.1.1" class="pilcrow">¶</a></p>
+          <p id="section-9-2.1.1">Integrated MCP with CLI, allow the MCP client invoke CLI capabilities;
+For a device-local implementation, a CLI tool can invoke an adapter executable. The adapter sends the command to an existing device component through a socket; that component forwards it to the CLI execution component using the device's internal messaging interface. Command output returns through the adapter to the tool. This reuses the existing CLI execution path.<a href="#section-9-2.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-9-2.2">
-          <p id="section-9-2.2.1">Integrated MCP with YANG, allow YANG being consumed by MCP client or allow the
-MCP client invoke YANG interface related capabilities;<a href="#section-9-2.2.1" class="pilcrow">¶</a></p>
+      </ul>
+<p id="section-9-3">The socket type, internal message format, and plugin calling convention are implementation details, not MCP messages. The MCP server maps tool requests to this path and returns MCP tool results. Authorization, command parsing, and execution errors need to be handled at the relevant boundaries.<a href="#section-9-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-9-4.1">
+          <p id="section-9-4.1.1">Integrated MCP with YANG, allow YANG being consumed by MCP client or allow the
+MCP client invoke YANG interface related capabilities;<a href="#section-9-4.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -2155,6 +2140,9 @@ If the user then initiates another tool request to the server, problems may occu
 generally function correctly, issues can arise in the details. Users must verify
 each LLM operation to prevent unintended hazardous actions.<a href="#section-11-3" class="pilcrow">¶</a></p>
 <p id="section-11-4">Capability metadata associated with MCP-exposed network management tools may assist MCP clients and AI agents in evaluating operational risk, rollback capabilities, and approval requirements prior to tool invocation. Orchestration systems may use such metadata to enforce authorization, approval, and policy constraints as part of the execution workflow. This distinction can help reduce unsafe or unintended operations in AI-assisted network management environments by allowing clients and agents to consume metadata for planning, while enforcement points apply policy controls before execution.<a href="#section-11-4" class="pilcrow">¶</a></p>
+<p id="section-11-5">Loading native tool plugins places executable code inside the server process. Plugin files and their configuration need protection against unauthorized modification. Native plugins loaded into the server process do not, by themselves, provide an isolation boundary; a plugin failure can affect the server.<a href="#section-11-5" class="pilcrow">¶</a></p>
+<p id="section-11-6">CLI tools need to validate command parameters and apply operation permissions before execution. Passing model-generated strings to a shell introduces command-injection risk. Implementations should avoid unnecessary shell interpretation and define how command sequences are handled when one command fails.<a href="#section-11-6" class="pilcrow">¶</a></p>
+<p id="section-11-7">Caller names and session identifiers supplied in request metadata are useful for correlation but do not prove caller identity. Authorization decisions need to use authenticated identity and applicable policy. Logs should exclude credentials and protect sensitive command output. Retrieved documentation should be treated as input data, not as authority to change device configuration.<a href="#section-11-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-normative-references">
@@ -2196,7 +2184,8 @@ each LLM operation to prevent unintended hazardous actions.<a href="#section-11-
         <h3 id="name-routing-protocol-troublesho">
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-routing-protocol-troublesho" class="section-name selfRef">Routing Protocol Troubleshooting using Embedded SLM Model and Natural Language Interface</a>
         </h3>
-<div class="alignLeft art-text artwork" id="appendix-A.1-1">
+<p id="appendix-A.1-1">The figure shows a troubleshooting workflow. To integrate this workflow with MCP, the troubleshooting application can use an MCP client to invoke scripts exposed as tools by an MCP server. This is a possible integration point; the figure does not specify the MCP roles or transport.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.1-2">
 <pre>
 +-----------------------------------------------------------------+
 | Smart Network Element                                           |
@@ -2231,14 +2220,14 @@ each LLM operation to prevent unintended hazardous actions.<a href="#section-11-
 | +-------------------------------------------------------------+ |
 +-----------------------------------------------------------------+
 
-</pre><a href="#appendix-A.1-1" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1-2" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-2">Step 1. When ISIS neighbour establishment fails, the network maintenance engineer
-        queries the fault cause via natural language in the CLI interface.<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-3">Step 2. A small model deployed on the device's CPU understands the user's intent
-        and matches the fault pattern.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-4">Step 3. Troubleshooting scripts are invoked to locate the root cause of the fault.<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-5">Step 4. The query is repeated until service operations get back to normal.<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-3">Step 1. When ISIS neighbour establishment fails, the network maintenance engineer
+        queries the fault cause via natural language in the CLI interface.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-4">Step 2. A small model deployed on the device's CPU understands the user's intent
+        and matches the fault pattern.<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-5">Step 3. Troubleshooting scripts are invoked to locate the root cause of the fault.<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-6">Step 4. The query is repeated until service operations get back to normal.<a href="#appendix-A.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="device-configuration-using-mcpcli">
@@ -2253,9 +2242,9 @@ implements the MCP client and interact with MCP server in the Network element.<a
 <p id="appendix-A.2-3">Tools description: It describes the name, use, and parameters of tools.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
 <p id="appendix-A.2-4">Tools implementation: MCP implementation describes how the tools are invoked.<a href="#appendix-A.2-4" class="pilcrow">¶</a></p>
 <p id="appendix-A.2-5">See Tool descriptor information example as follows:<a href="#appendix-A.2-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.2-6">
+<p id="appendix-A.2-6">Tool Descriptor:<a href="#appendix-A.2-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.2-7">
 <pre>
-# Tool Descriptor
 [
   {
     "name": "batch_configure_devices",
@@ -2297,7 +2286,11 @@ implements the MCP client and interact with MCP server in the Network element.<a
     }
   }
 ]
-# Tool Implementation
+</pre><a href="#appendix-A.2-7" class="pilcrow">¶</a>
+</div>
+<p id="appendix-A.2-8">Tool Implementation<a href="#appendix-A.2-8" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.2-9">
+<pre>
 from netmiko import ConnectHandler
 from mcp_server import McpServer
 
@@ -2339,14 +2332,14 @@ async def check_status(device_ip: str, metrics: list):
     if "memory" in metrics:
         status["memory"] = get_memory_usage(device_ip)
     return status
-</pre><a href="#appendix-A.2-6" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.2-9" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.2-7">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0
+<p id="appendix-A.2-10">Suppose a user submits a request (via the client) such as "Configure OSPF Area 0
 with process ID 100 for all core switches in the Beijing data center," the MCP
 client retrieves the necessary tooling descriptor information from the MCP server
 and forwards it along with the request to the LLM. The LLM determines the
-appropriate tools and responds in JSON format as follows:<a href="#appendix-A.2-7" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.2-8">
+appropriate tools and responds in JSON format as follows:<a href="#appendix-A.2-10" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.2-11">
 <pre>
 {
 "method": "batch_configure_devices",
@@ -2360,14 +2353,14 @@ appropriate tools and responds in JSON format as follows:<a href="#appendix-A.2-
 }
 }
 
-</pre><a href="#appendix-A.2-8" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.2-11" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.2-9">The MCP server responds to the call instruction, converts it into the below CLIs
+<p id="appendix-A.2-12">The MCP server responds to the call instruction, converts it into the below CLIs
 of different vendors, and then the devices execute the CLIs. The results are
 returned to the MCP client in JSON as below and are forwarded to the LLM. The
 LLM parses the response, generates a natural-language summary, and sends it back
-to the client for final presentation to the user.<a href="#appendix-A.2-9" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.2-10">
+to the client for final presentation to the user.<a href="#appendix-A.2-12" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.2-13">
 <pre>
 # Convert to CLI commands of different vendors
 "commands": [
@@ -2417,7 +2410,7 @@ to the client for final presentation to the user.<a href="#appendix-A.2-9" class
   "192.168.10.2": "Error: no response from the device",
 }
 
-</pre><a href="#appendix-A.2-10" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.2-13" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
