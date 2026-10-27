@@ -139,7 +139,7 @@ The following terms are used throughout this document:
 
  +---------------+        +---------------+
  |               |        |               |
- |  3rd Party    |        |  3rd-party    | 
+ |  3rd Party    |        |  3rd-party    |
  |  AI Agent     |        | Tools/Contents|
  +-----/---\-----+        +---------------+
        |   |                   |   |
