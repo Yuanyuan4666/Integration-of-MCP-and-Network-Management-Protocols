@@ -340,7 +340,9 @@ o MCP servers: including authentication/session/policy tools, the
   memory/prompts used for Agents
 
 ## Procedure for Multi-MCP servers Discovery
+
 The following procedure illustrates a registry-based deployment. Registration and synchronization mechanisms are deployment-specific.
+
 ~~~~
 
  +------------------+    +----------+   +-------+     +------+
