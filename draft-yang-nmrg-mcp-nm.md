@@ -139,7 +139,7 @@ The following terms are used throughout this document:
 
  +---------------+        +---------------+
  |               |        |               |
- |  3rd Party    |        |  3rd-party    |   
+ |  3rd Party    |        |  3rd-party    | 
  |  AI Agent     |        | Tools/Contents|
  +-----/---\-----+        +---------------+
        |   |                   |   |
@@ -189,11 +189,11 @@ There are 3 values for MCP coupling with the network management
   * Error Handling
 
     o MCP distinguishes protocol errors from tool execution errors. Network management tools still need to report operation-specific failures, including partial execution of command sequences.
-    
+
 
   * Stateful
 
-    o MCP supports stdio and Streamable HTTP. Streamable HTTP can use SSE and optional session identifiers; it does not require every exchange to use SSE. Implementations need to distinguish MCP session state from device CLI session state. 
+    o MCP supports stdio and Streamable HTTP. Streamable HTTP can use SSE and optional session identifiers; it does not require every exchange to use SSE. Implementations need to distinguish MCP session state from device CLI session state.
 
   * Context Handling
 
@@ -340,7 +340,7 @@ o MCP servers: including authentication/session/policy tools, the
   memory/prompts used for Agents
 
 ## Procedure for Multi-MCP servers Discovery
-The following procedure illustrates a registry-based deployment. Registration and synchronization mechanisms are deployment-specific. 
+The following procedure illustrates a registry-based deployment. Registration and synchronization mechanisms are deployment-specific.
 ~~~~
 
  +------------------+    +----------+   +-------+     +------+
