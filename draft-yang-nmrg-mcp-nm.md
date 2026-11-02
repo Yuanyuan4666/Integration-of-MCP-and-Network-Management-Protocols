@@ -120,10 +120,10 @@ The following terms are used throughout this document:
 
 - **MCP Protocol**: MCP is an open standard designed to facilitate communication
                     between LLMs and external data sources or tools.
-- **MCP Host**: An application that manages MCP clients and coordinates model interaction and tool use.
+- **MCP Host**: The entity initiating the LLM request.
 - **MCP Client**: A built-in module within a host, specifically designed for
                   interaction with the MCP server.
-- **MCP Server**: A component that exposes tools, resources, or prompts to MCP clients.
+- **MCP Server**: A dedicated entity that exposes tools, resources, or prompts to MCP clients.
 - **CLI**: Command Line Interface
 
 ## Others
@@ -597,7 +597,17 @@ Network Element      Network Element
 
 ## Encapsulating Device Operations into MCP Tools
 
-  - Objective: Expose device operations through tool descriptions and callable implementations.**
+- Objective: Expose device operations through tool descriptions and tool calls.
+- Implementation:
+  - Tool Abstraction: Vendor-specific commands are wrapped into discrete MCP
+    Tools with uniform schemas.
+  - Tool Registry: A centralized database stores MCP Tools with metadata
+    (e.g., names, descriptions, parameters).
+- Benefits:
+  - Eliminates manual translation of commands across different vendors
+  - Enables the plug-and-play integration of new device types.
+
+  - Objective: Expose device operations through tool descriptions and tool calls.**
 - Implementation:
   - Tool Description: Define the tool name, description, input schema, and, where provided, output schema.
   - Local Tool Registry: Maintain a mapping between tool names, descriptions, and execution handlers. This can be an in-memory table; it is separate from the repository used to discover MCP servers.
