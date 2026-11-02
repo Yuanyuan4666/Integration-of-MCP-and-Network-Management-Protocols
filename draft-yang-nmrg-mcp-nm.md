@@ -123,7 +123,7 @@ The following terms are used throughout this document:
 - **MCP Host**: The entity initiating the LLM request.
 - **MCP Client**: A built-in module within a host, specifically designed for
                   interaction with the MCP server.
-- **MCP Server**: A component that exposes tools, resources, or prompts to MCP clients.
+- **MCP Server**: A dedicated entity that exposes tools, resources, or prompts to MCP clients.
 - **CLI**: Command Line Interface
 
 ## Others
