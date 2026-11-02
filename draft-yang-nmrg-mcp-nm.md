@@ -593,25 +593,9 @@ Network Element      Network Element
 
 ~~~~
 
-## **Co-located Agent and MCP Server within a Network Element**
-
-An agent and an MCP server can run on the same network element. The agent uses an MCP client to invoke local tools for device operations or documentation retrieval. A local HTTP deployment can bind the server to the loopback address. Binding to loopback limits network exposure but does not establish the identity or permissions of local callers.
-
-The server can dispatch requests to local plugins. A CLI plugin can invoke a local command adapter, while a retrieval plugin queries a documentation backend. Device-internal communication remains behind these plugins. The client-server interface follows MCP; the plugin interface and device-internal messages are implementation-specific. Appendix A.3 illustrates this arrangement.
-
 # MCP architecture Design for Network Management
 
 ## Encapsulating Device Operations into MCP Tools
-
-- Objective: Expose device operations through tool descriptions and callable implementations.
-- Implementation:
-  - Tool Abstraction: Vendor-specific commands are wrapped into discrete MCP
-    Tools with uniform schemas.
-  - Tool Registry: A centralized database stores MCP Tools with metadata
-    (e.g., names, descriptions, parameters).
-- Benefits:
-  - Eliminates manual translation of commands across different vendors
-  - Enables the plug-and-play integration of new device types.
 
   - Objective: Expose device operations through tool descriptions and callable implementations.**
 - Implementation:
@@ -761,6 +745,12 @@ Step 2. A small model deployed on the device's CPU understands the user's intent
 Step 3. Troubleshooting scripts are invoked to locate the root cause of the fault.
 
 Step 4. The query is repeated until service operations get back to normal.
+
+### MCP Integration
+
+The troubleshooting application and MCP server can run on the same network element. In Step 3, the application uses an MCP client to invoke troubleshooting scripts exposed as tools by the server. The server executes the selected script and returns its result.
+
+Scripts can access existing device CLI functions through a local command adapter. The client-server interface follows MCP; script execution and device-internal communication are implementation-specific.
 
 ## Device Configuration using MCP+CLI
 
