@@ -613,7 +613,7 @@ The server can dispatch requests to local plugins. A CLI plugin can invoke a loc
   - Eliminates manual translation of commands across different vendors
   - Enables the plug-and-play integration of new device types.
 
-  - Objective: Expose device operations through tool descriptions and callable implementations.**
+  - Objective: Expose device operations through tool descriptions and tool calls.**
 - Implementation:
   - Tool Description: Define the tool name, description, input schema, and, where provided, output schema.
   - Local Tool Registry: Maintain a mapping between tool names, descriptions, and execution handlers. This can be an in-memory table; it is separate from the repository used to discover MCP servers.
