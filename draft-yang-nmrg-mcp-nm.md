@@ -120,7 +120,7 @@ The following terms are used throughout this document:
 
 - **MCP Protocol**: MCP is an open standard designed to facilitate communication
                     between LLMs and external data sources or tools.
-- **MCP Host**: An application that manages MCP clients and coordinates model interaction and tool use.
+- **MCP Host**: The entity initiating the LLM request.
 - **MCP Client**: A built-in module within a host, specifically designed for
                   interaction with the MCP server.
 - **MCP Server**: A component that exposes tools, resources, or prompts to MCP clients.
