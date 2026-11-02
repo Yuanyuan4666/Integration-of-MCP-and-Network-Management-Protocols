@@ -603,7 +603,7 @@ The server can dispatch requests to local plugins. A CLI plugin can invoke a loc
 
 ## Encapsulating Device Operations into MCP Tools
 
-- Objective: Expose device operations through tool descriptions and callable implementations.
+- Objective: Expose device operations through tool descriptions and tool calls.
 - Implementation:
   - Tool Abstraction: Vendor-specific commands are wrapped into discrete MCP
     Tools with uniform schemas.
