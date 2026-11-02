@@ -1340,14 +1340,14 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                   between LLMs and external data sources or tools.<a href="#section-2.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.2">
-            <p id="section-2.1-1.2.1"><strong>MCP Host</strong>: An application that manages MCP clients and coordinates model interaction and tool use.<a href="#section-2.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="section-2.1-1.2.1"><strong>MCP Host</strong>: The entity initiating the LLM request.<a href="#section-2.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.3">
             <p id="section-2.1-1.3.1"><strong>MCP Client</strong>: A built-in module within a host, specifically designed for
                 interaction with the MCP server.<a href="#section-2.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.4">
-            <p id="section-2.1-1.4.1"><strong>MCP Server</strong>: A component that exposes tools, resources, or prompts to MCP clients.<a href="#section-2.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="section-2.1-1.4.1"><strong>MCP Server</strong>: A dedicated entity that exposes tools, resources, or prompts to MCP clients.<a href="#section-2.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.5">
             <p id="section-2.1-1.5.1"><strong>CLI</strong>: Command Line Interface<a href="#section-2.1-1.5.1" class="pilcrow">¶</a></p>
@@ -1944,25 +1944,18 @@ Network Element      Network Element
         </h3>
 <ul class="normal">
 <li class="normal" id="section-8.1-1.1">
-            <p id="section-8.1-1.1.1">Objective: Expose device operations through tool descriptions and callable implementations.**<a href="#section-8.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.1-1.1.1">Objective: Expose device operations through tool descriptions and tool calls.<a href="#section-8.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.1-1.2">
             <p id="section-8.1-1.2.1">Implementation:<a href="#section-8.1-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-8.1-1.2.2.1">
-                <p id="section-8.1-1.2.2.1.1">Tool Description: Define the tool name, description, input schema, and, where provided, output schema.<a href="#section-8.1-1.2.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-8.1-1.2.2.1.1">Tool Abstraction: Vendor-specific commands are wrapped into discrete MCP
+Tools with uniform schemas.<a href="#section-8.1-1.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-8.1-1.2.2.2">
-                <p id="section-8.1-1.2.2.2.1">Local Tool Registry: Maintain a mapping between tool names, descriptions, and execution handlers. This can be an in-memory table; it is separate from the repository used to discover MCP servers.<a href="#section-8.1-1.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-8.1-1.2.2.3">
-                <p id="section-8.1-1.2.2.3.1">Plugin Loading: One implementation option is to load configured shared libraries at server startup. Each plugin provides an initialization entry point and an execution handler. The server registers a tool after loading and initializing its implementation. Shared libraries and their calling conventions are local implementation choices.<a href="#section-8.1-1.2.2.3.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-8.1-1.2.2.4">
-                <p id="section-8.1-1.2.2.4.1">Schema Consistency: Check that configuration-derived tool descriptions match the parameters and results handled by the plugin. Validate invocation arguments before dispatch.<a href="#section-8.1-1.2.2.4.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-8.1-1.2.2.5">
-                <p id="section-8.1-1.2.2.5.1">Execution: Dispatch the request to the registered handler and map its output or failure into an MCP tool result. Handlers need to support concurrent calls safely, or the server needs to serialize calls to them.<a href="#section-8.1-1.2.2.5.1" class="pilcrow">¶</a></p>
+                <p id="section-8.1-1.2.2.2.1">Tool Registry: A centralized database stores MCP Tools with metadata
+(e.g., names, descriptions, parameters).<a href="#section-8.1-1.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
@@ -1970,10 +1963,44 @@ Network Element      Network Element
             <p id="section-8.1-1.3.1">Benefits:<a href="#section-8.1-1.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-8.1-1.3.2.1">
-                <p id="section-8.1-1.3.2.1.1">Tool implementations can be maintained separately from request dispatch and logging.<a href="#section-8.1-1.3.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-8.1-1.3.2.1.1">Eliminates manual translation of commands across different vendors<a href="#section-8.1-1.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-8.1-1.3.2.2">
-                <p id="section-8.1-1.3.2.2.1">Vendor-specific command handling remains in the tool implementation. A common tool interface does not by itself translate commands between vendors.<a href="#section-8.1-1.3.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-8.1-1.3.2.2.1">Enables the plug-and-play integration of new device types.<a href="#section-8.1-1.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.3.2.3">
+                <p id="section-8.1-1.3.2.3.1">Objective: Expose device operations through tool descriptions and tool calls.**<a href="#section-8.1-1.3.2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-8.1-1.4">
+            <p id="section-8.1-1.4.1">Implementation:<a href="#section-8.1-1.4.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.1-1.4.2.1">
+                <p id="section-8.1-1.4.2.1.1">Tool Description: Define the tool name, description, input schema, and, where provided, output schema.<a href="#section-8.1-1.4.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.4.2.2">
+                <p id="section-8.1-1.4.2.2.1">Local Tool Registry: Maintain a mapping between tool names, descriptions, and execution handlers. This can be an in-memory table; it is separate from the repository used to discover MCP servers.<a href="#section-8.1-1.4.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.4.2.3">
+                <p id="section-8.1-1.4.2.3.1">Plugin Loading: One implementation option is to load configured shared libraries at server startup. Each plugin provides an initialization entry point and an execution handler. The server registers a tool after loading and initializing its implementation. Shared libraries and their calling conventions are local implementation choices.<a href="#section-8.1-1.4.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.4.2.4">
+                <p id="section-8.1-1.4.2.4.1">Schema Consistency: Check that configuration-derived tool descriptions match the parameters and results handled by the plugin. Validate invocation arguments before dispatch.<a href="#section-8.1-1.4.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.4.2.5">
+                <p id="section-8.1-1.4.2.5.1">Execution: Dispatch the request to the registered handler and map its output or failure into an MCP tool result. Handlers need to support concurrent calls safely, or the server needs to serialize calls to them.<a href="#section-8.1-1.4.2.5.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-8.1-1.5">
+            <p id="section-8.1-1.5.1">Benefits:<a href="#section-8.1-1.5.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.1-1.5.2.1">
+                <p id="section-8.1-1.5.2.1.1">Tool implementations can be maintained separately from request dispatch and logging.<a href="#section-8.1-1.5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-8.1-1.5.2.2">
+                <p id="section-8.1-1.5.2.2.1">Vendor-specific command handling remains in the tool implementation. A common tool interface does not by itself translate commands between vendors.<a href="#section-8.1-1.5.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
