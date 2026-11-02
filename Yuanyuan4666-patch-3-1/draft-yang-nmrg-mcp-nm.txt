@@ -5,7 +5,7 @@
 Network Management Working Group                                 Y. Yang
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 30 April 2027                                          D. Lopez
+Expires: 6 May 2027                                             D. Lopez
                                                               Telefonica
                                                             N. R. Moreno
                                                         Deutsche Telekom
@@ -13,7 +13,7 @@ Expires: 30 April 2027                                          D. Lopez
                                                          Orange Research
                                                                S. Prabhu
                                                                    Nokia
-                                                         27 October 2026
+                                                         2 November 2026
 
 
             Applicability of MCP for the Network Management
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 April 2027.
+   This Internet-Draft will expire on 6 May 2027.
 
 Copyright Notice
 
@@ -155,8 +155,7 @@ Table of Contents
    *  *MCP Protocol*: MCP is an open standard designed to facilitate
       communication between LLMs and external data sources or tools.
 
-   *  *MCP Host*: An application that manages MCP clients and
-      coordinates model interaction and tool use.
+   *  *MCP Host*: The entity initiating the LLM request.
 
    *  *MCP Client*: A built-in module within a host, specifically
       designed for interaction with the MCP server.
@@ -677,7 +676,7 @@ Table of Contents
 8.1.  Encapsulating Device Operations into MCP Tools
 
    *  Objective: Expose device operations through tool descriptions and
-      callable implementations.
+      tool calls.
 
    *  Implementation:
 
