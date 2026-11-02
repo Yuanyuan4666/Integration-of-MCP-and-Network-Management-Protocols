@@ -1224,9 +1224,6 @@ element and the Network Controller/Network Gateway.<a href="#section-abstract-1"
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
                 <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-the-network-gateway-control" class="internal xref">The Network Gateway/Controller and the Network Element Communication using MCP</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5">
-                <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="auto internal xref">7.5</a>.  <a href="#name-co-located-agent-and-mcp-se" class="internal xref"><strong>Co-located Agent and MCP Server within a Network Element</strong></a></p>
-</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
@@ -1260,6 +1257,11 @@ element and the Network Controller/Network Gateway.<a href="#section-abstract-1"
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
                 <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-routing-protocol-troublesho" class="internal xref">Routing Protocol Troubleshooting using Embedded SLM Model and Natural Language Interface</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1.2.1">
+                    <p id="section-toc.1-1.13.2.1.2.1.1"><a href="#appendix-A.1.1" class="auto internal xref">A.1.1</a>.  <a href="#name-mcp-integration" class="internal xref">MCP Integration</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
                 <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-device-configuration-using-" class="internal xref">Device Configuration using MCP+CLI</a></p>
@@ -1345,7 +1347,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                 interaction with the MCP server.<a href="#section-2.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.4">
-            <p id="section-2.1-1.4.1"><strong>MCP Server</strong>: A component that exposes tools, resources, or prompts to MCP clients.<a href="#section-2.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="section-2.1-1.4.1"><strong>MCP Server</strong>: A dedicated entity that exposes tools, resources, or prompts to MCP clients.<a href="#section-2.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.5">
             <p id="section-2.1-1.5.1"><strong>CLI</strong>: Command Line Interface<a href="#section-2.1-1.5.1" class="pilcrow">¶</a></p>
@@ -1928,15 +1930,6 @@ Network Element      Network Element
 </div>
 </section>
 </div>
-<div id="co-located-agent-and-mcp-server-within-a-network-element">
-<section id="section-7.5">
-        <h3 id="name-co-located-agent-and-mcp-se">
-<a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-co-located-agent-and-mcp-se" class="section-name selfRef"><strong>Co-located Agent and MCP Server within a Network Element</strong></a>
-        </h3>
-<p id="section-7.5-1">An agent and an MCP server can run on the same network element. The agent uses an MCP client to invoke local tools for device operations or documentation retrieval. A local HTTP deployment can bind the server to the loopback address. Binding to loopback limits network exposure but does not establish the identity or permissions of local callers.<a href="#section-7.5-1" class="pilcrow">¶</a></p>
-<p id="section-7.5-2">The server can dispatch requests to local plugins. A CLI plugin can invoke a local command adapter, while a retrieval plugin queries a documentation backend. Device-internal communication remains behind these plugins. The client-server interface follows MCP; the plugin interface and device-internal messages are implementation-specific. Appendix A.3 illustrates this arrangement.<a href="#section-7.5-2" class="pilcrow">¶</a></p>
-</section>
-</div>
 </section>
 </div>
 <div id="mcp-architecture-design-for-network-management">
@@ -2228,6 +2221,15 @@ each LLM operation to prevent unintended hazardous actions.<a href="#section-11-
         and matches the fault pattern.<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-5">Step 3. Troubleshooting scripts are invoked to locate the root cause of the fault.<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-6">Step 4. The query is repeated until service operations get back to normal.<a href="#appendix-A.1-6" class="pilcrow">¶</a></p>
+<div id="mcp-integration">
+<section id="appendix-A.1.1">
+          <h4 id="name-mcp-integration">
+<a href="#appendix-A.1.1" class="section-number selfRef">A.1.1. </a><a href="#name-mcp-integration" class="section-name selfRef">MCP Integration</a>
+          </h4>
+<p id="appendix-A.1.1-1">The troubleshooting application and MCP server can run on the same network element. In Step 3, the application uses an MCP client to invoke troubleshooting scripts exposed as tools by the server. The server executes the selected script and returns its result.<a href="#appendix-A.1.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1.1-2">Scripts can access existing device CLI functions through a local command adapter. The client-server interface follows MCP; script execution and device-internal communication are implementation-specific.<a href="#appendix-A.1.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="device-configuration-using-mcpcli">

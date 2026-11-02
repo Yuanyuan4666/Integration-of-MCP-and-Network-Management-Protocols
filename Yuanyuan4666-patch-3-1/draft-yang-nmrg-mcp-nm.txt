@@ -85,7 +85,6 @@ Table of Contents
            Network Controller
      7.4.  The Network Gateway/Controller and the Network Element
            Communication using MCP
-     7.5.  *Co-located Agent and MCP Server within a Network Element*
    8.  MCP architecture Design for Network Management
      8.1.  Encapsulating Device Operations into MCP Tools
      8.2.  LLM for Intent-to-Tool-Request Translation
@@ -98,6 +97,7 @@ Table of Contents
    Appendix A.  MCP Usage Examples
      A.1.  Routing Protocol Troubleshooting using Embedded SLM Model
            and Natural Language Interface
+       A.1.1.  MCP Integration
      A.2.  Device Configuration using MCP+CLI
    Contributors
    Authors' Addresses
@@ -160,7 +160,7 @@ Table of Contents
    *  *MCP Client*: A built-in module within a host, specifically
       designed for interaction with the MCP server.
 
-   *  *MCP Server*: A component that exposes tools, resources, or
+   *  *MCP Server*: A dedicated entity that exposes tools, resources, or
       prompts to MCP clients.
 
    *  *CLI*: Command Line Interface
@@ -655,22 +655,6 @@ Table of Contents
     +------------+     +-------------+
    Network Element      Network Element
 
-7.5.  *Co-located Agent and MCP Server within a Network Element*
-
-   An agent and an MCP server can run on the same network element.  The
-   agent uses an MCP client to invoke local tools for device operations
-   or documentation retrieval.  A local HTTP deployment can bind the
-   server to the loopback address.  Binding to loopback limits network
-   exposure but does not establish the identity or permissions of local
-   callers.
-
-   The server can dispatch requests to local plugins.  A CLI plugin can
-   invoke a local command adapter, while a retrieval plugin queries a
-   documentation backend.  Device-internal communication remains behind
-   these plugins.  The client-server interface follows MCP; the plugin
-   interface and device-internal messages are implementation-specific.
-   Appendix A.3 illustrates this arrangement.
-
 8.  MCP architecture Design for Network Management
 
 8.1.  Encapsulating Device Operations into MCP Tools
@@ -970,6 +954,18 @@ A.1.  Routing Protocol Troubleshooting using Embedded SLM Model and
 
    Step 4.  The query is repeated until service operations get back to
    normal.
+
+A.1.1.  MCP Integration
+
+   The troubleshooting application and MCP server can run on the same
+   network element.  In Step 3, the application uses an MCP client to
+   invoke troubleshooting scripts exposed as tools by the server.  The
+   server executes the selected script and returns its result.
+
+   Scripts can access existing device CLI functions through a local
+   command adapter.  The client-server interface follows MCP; script
+   execution and device-internal communication are implementation-
+   specific.
 
 A.2.  Device Configuration using MCP+CLI
 
